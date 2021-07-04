@@ -18,29 +18,47 @@ Between 1970 and 1990 the public interest in automation and AI has decreased for
 	}
 	\label{fig:unimate}
 \end{figure}
-\addtocounter{footnote}{+1}\footnotetext{\cite{unimate}}
+\addtocounter{footnote}{+1}\footnotetext{\cite{malone2011unimate}}
 
 \section{Robots with human interaction}
-Nowadays the utilization of robots in workplaces has broadened to almost every branch and is accepted by employees and workers. In countries like japan robots are no longer seen as an threat to jobs. 
+Nowadays the utilization of robots in workplaces has broadened to almost every branch and is accepted by employees and workers. In countries like Japan, robots are no longer seen as a threat to jobs. 
 %noch ein sanfterer Übergang 
-Industrial robots are no longer used as simple construction tools, their safety and accuracy has improved so that collaborative robots (Cobots) are capable of working in close cooperation with humans. 
+Industrial robots are no longer used as simple construction tools, their safety and accuracy have improved so that collaborative robots (Cobots) are capable of working in close cooperation with humans. 
 Surgery robots used in the medical sector not only allow for much more accurate procedures but also enable remote specialists to work on patients without having to be in the same hospital. 
-In developed countries educational robots are used at school or at home to teach children topics in a playful and interesting way.
+In developed countries, educational robots are used at school or at home to teach children topics in a playful and interesting way.
 
 \section{Robots in hazardous environments}
-Robots do not only serve purpose in a close to user work environment, they also ensure human safety by performing dangerous tasks in unsafe surroundings. 
-Remotely controlled robots or drones can be used for inspecting mine shafts, collapsed buildings, pipelines or overhead power poles.
-Other applications of such robots are bomb or mine defusion, fire extinction or avalanche rescue.
+Robots do not only serve a purpose in a close-to-user work environment, they also ensure human safety by performing dangerous tasks in unsafe surroundings. 
+Remotely controlled robots or drones can be used for inspecting mine shafts, collapsed buildings, pipelines, or overhead power poles.
+Other applications of such robots are bomb or mine defusion, fire extinction, or avalanche rescue.
 
 \section{Autonomous robots}
-Implementing a autonomous robot system is a intricate task that proposes many challenging problems for research or development teams. Autonomy requires a system to continuously work in a dynamic environment without external controlling inputs and utilize perceived information about its surroundings in order to adapt to environmental change.\footcite{bekey2005autonomous}
+Implementing an autonomous robot system is an intricate task that proposes many challenging problems for research or development teams. Autonomy requires a system to continuously work in a dynamic environment without external controlling inputs and utilize perceived information about its surroundings to adapt to environmental change.\footcite{bekey2005autonomous}
 Despite their complexity in development autonomous systems, mobile or stationary, immensely facilitate the execution of a job for the human user.
-Such robots can be used to navigate and organize warehouses, construct parts in a assembly line or map large areas for comprehensive calculations.
-
+Such robots can be used to navigate and organize warehouses, constructing parts in an assembly line, or map large areas for comprehensive calculations.
 
 \section{3D Mapping}
 
-\section{Implementing open-source 3D Mapping}
+
+\section{Autonomous 3D Mapping}
+While 3D Mapping is a well-established and growing economy most applications require human interaction at some point during the mapping process. Products such as the Emesent Hovermap \footcite{hovermap2021} or Exyn Aero \footcite{exynAero2021} utilize the spatial flexibility of drones and high-end light detection and ranging (LiDAR) Sensors to facilitate autonomous mapping in GPS-denied areas without being within sight of the drone pilot. These solutions can be used to explore hazardous environments such as mineshafts in a human-safe manner.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/hovermap}
+	\caption{
+		Image of the Emesent Hovermap mapping a dangerous area within a mineshaft.\protect\footnotemark
+	}
+	\label{fig:hovermap}
+\end{figure}
+\footnotetext{\cite{hovermapIMG}}
+
+\section{Goals}
+The project associated with this thesis aims to implement a 3D-Mapping system similar to the aforementioned solutions with limited financial, personnel as well as temporal resources. This goal forces the project team to primarily maintain an open-source approach during development.
+
+The goal of this thesis is to document the challenges encountered and experiences gained by the project team during development to demonstrate how highly sophisticated industrial problems can be solved in a low-budget fashion. 
+%noch bisschen mit "wir machen das für jüngerere Schüler" flexen, etc...
+
 
 \section{Technical Objectives}
 
