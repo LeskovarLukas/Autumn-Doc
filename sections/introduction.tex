@@ -33,21 +33,22 @@ Remotely controlled robots or drones can be used for inspecting mine shafts, col
 Other applications of such robots are bomb or mine defusion, fire extinction, or avalanche rescue.
 
 \section{Autonomous robots}
-Implementing an autonomous robot system is an intricate task that proposes many challenging problems for research or development teams. Autonomy requires a system to continuously work in a dynamic environment without external controlling inputs and utilize perceived information about its surroundings to adapt to environmental change.\footcite{bekey2005autonomous}
+Implementing an autonomous robot system is an intricate task that proposes many challenging problems for research or development teams. Autonomy requires a system to continuously work in a dynamic environment without external controlling inputs and utilize perceived information about its surroundings to adapt to environmental change. \footcite[Pages 1-2]{bekey2005autonomous}
 Despite their complexity in development autonomous systems, mobile or stationary, immensely facilitate the execution of a job for the human user.
 Such robots can be used to navigate and organize warehouses, constructing parts in an assembly line, or map large areas for comprehensive calculations.
 
 \section{3D Mapping}
+%eigentlich möche ich noch den 3D Mapping Markt erwähnen
 
 
 \section{Autonomous 3D Mapping}
-While 3D Mapping is a well-established and growing economy most applications require human interaction at some point during the mapping process. Products such as the Emesent Hovermap \footcite{hovermap2021} or Exyn Aero \footcite{exynAero2021} utilize the spatial flexibility of drones and high-end light detection and ranging (LiDAR) Sensors to facilitate autonomous mapping in GPS-denied areas without being within sight of the drone pilot. These solutions can be used to explore hazardous environments such as mineshafts in a human-safe manner.
+While 3D Mapping is a well-established and growing economy most applications require human interaction at some point during the mapping process. Products such as the Emesent Hovermap \footcite{hovermap2021} or Exyn Aero \footcite{exynAero2021} utilize the spatial flexibility of drones and high-end light detection and ranging (LiDAR) Sensors to facilitate autonomous mapping in GPS-denied areas without being within sight of the drone pilot. These solutions are used to autonomously map building or explore hazardous environments such as mineshafts in a human-safe manner as seen in Fig. \ref{fig:hovermap}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{img/hovermap}
 	\caption{
-		Image of the Emesent Hovermap mapping a dangerous area within a mineshaft.\protect\footnotemark
+		The Emesent Hovermap mapping a dangerous area inside a mineshaft.\protect\footnotemark
 	}
 	\label{fig:hovermap}
 \end{figure}
@@ -60,7 +61,22 @@ The goal of this thesis is to document the challenges encountered and experience
 %noch bisschen mit "wir machen das für jüngerere Schüler" flexen, etc...
 
 
-\section{Technical Objectives}
+\section{Requirements}
+%noch besser formulieren nicht nur abschreiben vom Projektantrag
+In order to declare the project as successful the following criteria have to be implemented:
+\begin{itemize}
+	\item The system is capable of generating a 3D Point-cloud of its surroundings
+	\item All required hardware (e.g. sensors, computing boards, etc.) is mounted onto a drone-platform 
+	\item All calculations concerning the Map generation are run on a external server in direct communication with the drone
+	\item The Drone utilizes the Point-cloud to orientate in its surroundings and navigate one ore multiple waypoints
+	\item The Drone is capable of avoiding obstacles as it is moving through a unknown environment
+\end{itemize}
+
+The following criteria can be implemented but have no direct correlation to the success of the project:
+\begin{itemize}
+	\item A Web-App facilitating the usage of the system and enabling the user to create waypoints, monitor the drone and mapping algorithm as well as evaluate the Point-cloud
+	\item The system is replicated within the gazebo simulator to simplify future development without direct access to its hardware
+\end{itemize}
 
 
 \filbreak
