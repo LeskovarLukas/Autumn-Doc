@@ -23,11 +23,15 @@ The Community preserves the usability of ROS as new and useful packages and tool
 
 
 \section{Packages}
-Software in ROS is organized in packages containing nodes, libraries or any other piece of software providing functionality.\footcite{openSourceRoboticsFoundationPackageNodate} 
+Software in ROS is organized in packages containing nodes, libraries or any other piece of software providing functionality.
 
-In order to maintain reusability, atomicity and easy decoupling of functionality packages aim to be as slim as possible by implementing only a limited-set of features. This means that each package is develop to focus on one task alone and work together with other packages to deliver utility as a connected system.
+%noch ein bisschen trennen (atomic build item, ...)
+%der absatz gefällt mir nicht, eigentlich gehört da nur die atomicity hin
+%In order to maintain reusability, atomicity and easy decoupling of functionality packages aim to be as slim as possible by implementing only a limited-set of features. This means that each package is develop to focus on one task alone and work together with other packages to deliver utility as a connected system.
+Since packages are the atomic unit of build and release they aim to be a slim as possible my implementing only a limited set of features. 
+In other words packages should be implemented to provide minimal usability without being too large-scaled.\footcite{openSourceRoboticsFoundationPackageNodate} This means that each package is developed to work together with other packages to deliver utility as a connected system.  
 
-At file-system level packages simply refer to directories. It has to contain a package.xml and a CMakeLists.txt file describing build and meta-information about the package and its components.
+At file-system level packages simply refer to directories. While most subfolders and files within a package depend on its purpose, every package has to contain a package.xml and a CMakeLists.txt providing meta and build information.
 Packages can be build by utilizing rosbuild or catkin. \footcite{openSourceRoboticsFoundationBuildNodate}
 
 \subsubsection{Metapackages} 
@@ -37,9 +41,20 @@ They can be used to conveniently install a group of packages simultaneously. %na
 
 
 \section{Nodes}
+The goal of ROS is to promote code reusability and decoupling of functionality to aid the versatility and usability of the system. 
+Following this guideline every robotic system utilizing ROS consists of a fine-grained graph of processes called nodes. Each node provides computation on a single feature utilizing a ROS client library to communicate with others over a mesh-like peer-to-peer network. \footcite{openSourceRoboticsFoundationNodesNodate}
+
+Exemplary for such as system would be one node running a LiDAR sensor, one responsible for localization, one performing motion planning, one controlling motor drivers and motors as well as one node running the robots main control loop.
+
+This architecture allows for a much more fault safe and less complex applications in comparison to monolithic systems. \footcite[Page 94]{stephensBeginning2015}
+This means that development and debugging are facilitated since errors can be contained within a singular slim node rather than a larger program. 
+
+To facilitate the search process each node has a node type consisting of the package name it is located and as well as the executable needed to run such node. 
 
 \subsubsection{Services}
-
+The communication architecture in ROS utilizing a publisher-subscriber model is advantageous in most use-cases, however most distributed systems require remote procedure calls (RPC) which are not supported by default.
+%noch einen satz über rpc
+Services enable communication over RPC by defining a pair of messages, one for requests and one for replies. Such service can then be attached to a node and called by a client using the service name. \footcite{openSourceRoboticsFoundationServicesNodate}
 
 
 \section{Communication}
