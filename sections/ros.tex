@@ -6,21 +6,39 @@ This chapters objective is to describe the basic concepts of the Robot Operating
 
 
 \section{Conceptual Overview}
-The Robot Operating System can be divided into three conceptual levels each contributing a integral part to the utility of ROS. These different levels are described in the following sections. 
+The Robot Operating System can be divided into three conceptual levels each contributing a integral part to the utility of ROS. These different levels are described in the following sections. \footcite{openSourceRoboticsFoundationConceptsNodate}
 
 \subsubsection{File System}
-The File System Level mainly provides constraints and best practices for creating and structuring packages and their components. \footcite{openSourceRoboticsFoundationConceptsNodate}
+The File System Level mainly provides constraints and best practices for creating and structuring packages and their components. 
 ROS provides appropriate tools to facilitate file-system operations with and within packages.
 %operations such as searching for packages or file within packages
 %With appropriate tooling the ROS facilitates file-system operations within packages, messages or topics. 
 
 \subsubsection{Computational Graph}
-The Computational Graph provides crucial functionality to ROS as it refers to the peer-to-peer mesh network of processes (Nodes) each providing data to be utilized within the graph by publishing and subscribing to topics.\citereset\footcite{openSourceRoboticsFoundationConceptsNodate}
+The Computational Graph provides crucial functionality to ROS as it refers to the peer-to-peer mesh network of processes (nodes) each providing data to be utilized within the graph by publishing and subscribing to topics.
 The concepts and technologies powering the computational graph are described in later in this chapter.
 
 \subsubsection{Community}
 The Community preserves the usability of ROS as new and useful packages and tools are created as well as existing functionality is being maintained.
 
+\section{Naming}
+To aid the organization of programs, processes as well as resources ROS provides two naming schemes that are described in the following sections. \citereset\footcite{openSourceRoboticsFoundationConceptsNodate}
+
+\subsubsection{Graph Resource Names}
+Graph Resource Names utilize a hierarchical structure to organize nodes, services, topics or anything else within the computational graph. ROS defines four different types of names:
+%\begin{itemize}
+%	\item base names - Are resolved in the same fashion as relative names
+%	\item relative names - Are resolved relatively starting by the nodes name
+%	\item global names - Begin with a / and are considered fully resolved
+%	\item private names - Begin with a $\tilde{ }$ and convert the nodes name into a namespace
+%\end{itemize}
+
+\subsubsection{Package Resource Names}
+Package Resource Names are aim to facilitate the search process of resources at File System Level. These names usually consist of the packages name as well as the path to the desired resource within the package. 
+%Examples for such Names are:
+%\begin{itemize}
+%	\item 
+%\end{itemize}
 
 \section{Packages}
 Software in ROS is organized in packages containing nodes, libraries or any other piece of software providing functionality.
@@ -49,19 +67,39 @@ Exemplary for such as system would be one node running a LiDAR sensor, one respo
 This architecture allows for a much more fault safe and less complex applications in comparison to monolithic systems. \footcite[Page 94]{stephensBeginning2015}
 This means that development and debugging are facilitated since errors can be contained within a singular slim node rather than a larger program. 
 
-To facilitate the search process each node has a node type consisting of the package name it is located and as well as the executable needed to run such node. 
+Each node has a node type consisting of the package name it is located and as well as the nodes executable. 
 
-\subsubsection{Services}
-The communication architecture in ROS utilizing a publisher-subscriber model is advantageous in most use-cases, however most distributed systems require remote procedure calls (RPC) which are not supported by default.
-%noch einen satz über rpc
-Services enable communication over RPC by defining a pair of messages, one for requests and one for replies. Such service can then be attached to a node and called by a client using the service name. \footcite{openSourceRoboticsFoundationServicesNodate}
 
 
 \section{Communication}
 
-\subsection{Topics}
-
 \subsection{Messages}
+Messages are the medium of communication used in topics or services to transport data between nodes. 
+%They are used to send data between nodes over topics or through services. 
+
+\subsubsection{Message Description}
+A message is a simple data structure consisting of multiple type fields. These fields can be primitives, arrays, custom types as well as other message types. \footcite{openSourceRoboticsFoundationMessagesNodate}
+
+The message description language can be used to structure custom messages in
+\textit{.msg} files contained in the \textit{msg} directory of a package.
+
+\subsubsection{Message Types}
+Message types refer to package resource names consisting of the packages name as well as the name of the messages \textit{.msg} file.
+
+
+\subsection{Topics}
+The core component of communication in ROS are topics. They are unidirectional message streams enabling data transmission by utilizing the publisher-subscriber model 
+ %utilizing the publisher-subscriber model to establish data transmission in a many-to-many relationship.
+Furthermore the decoupling of functionality is facilitated by anonymously connecting nodes as producer and consumer of data. This means neither publisher nor subscriber of the topic need to know each other. 
+While ROS does not limit the amount of publishers and subscribers connected to a topic, it strictly enforces the usage of the exact message type specified for the topics communication to work properly.
+
+\subsection{Services}
+The communication architecture in ROS utilizing the publisher-subscriber model is advantageous in most use-cases, however most distributed systems require remote procedure calls (RPC) which are not supported by default.
+
+With RPCs a client sends a request to a server specifying the procedure to be called and its parameters. While the server executes the procedure the client awaits a reply. Once the procedures results are computed and sent to the client its workflow can be resumed.\footcite[Page 3]{rfc1831}
+
+Services enable communication over RPC by defining a pair of messages, one for requests and one for replies. Such service can then be attached to a node and called by a client using the service name. \footcite{openSourceRoboticsFoundationServicesNodate}
+
 
 
 
