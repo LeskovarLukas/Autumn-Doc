@@ -34,7 +34,7 @@ Graph Resource Names utilize a hierarchical structure to organize nodes, service
 %\end{itemize}
 
 \subsubsection{Package Resource Names}
-Package Resource Names are aim to facilitate the search process of resources at File System Level. These names usually consist of the packages name as well as the path to the desired resource within the package. 
+Package Resource Names aim to facilitate the search process of resources at File System Level. These names usually consist of the packages name as well as the path to the desired resource within the package. 
 %Examples for such Names are:
 %\begin{itemize}
 %	\item 
@@ -104,6 +104,15 @@ Services enable communication over RPC by defining a pair of messages, one for r
 
 
 \section{Master}
+One of the most important components of ROS is the Master. It tracks publishers and subscribers of topics as well as services and provides registration as well as name resolution to nodes. This means whenever a node wants to publish or subscribe to a specific topic or service it contacts the master first using XML-RPC. When a topic has at leat one subscriber and publisher the Master negotiates between the nodes so a peer-to-peer connection can be established using a Slave API provided by the nodes XML-RPC Server.\footcite{openSourceRoboticsFoundationMasterNodate} A simplified version of this procedure can be seen in Fig. \ref{fig:ros_master_reg}
+
+Besides registration and name resolution, the ROS Master also provides a Parameter Server used for globally storing static system parameters.\footcite{openSourceRoboticsFoundationParameterServerNodate}
+\begin{figure}[]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/ros_master_registration}
+	\caption{Diagram of the topic registration process in ROS at which the publishing node registers its topic before the subscriber tells the master its interest in the point-cloud topic. However a node can be registered as a subscriber to a specific topic without the topic existing yet.}
+		\label{fig:ros_master_reg}
+\end{figure}
 
 
 
