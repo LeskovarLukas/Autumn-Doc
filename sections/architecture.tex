@@ -1,0 +1,32 @@
+\chapter{System Architecture}
+
+\textbf{Author: Lukas Leskovar} 
+
+This chapter aims to provide a thorough overview of Autumns system architecture by describing its construction as well as logical and computational  structure. To this end, the difficulties faced during development and decisions made that affected the overall project are described.
+
+
+\section{Processing and power management}
+%In the past decades the computational power of microprocessors has dramatically increased to the point where the transistors contained in these processors cannot be built smaller thus limiting the overall computational power.
+
+%In the past decades research has pushed the limits of computational performance of processors further to its limits, all while performing a trade off concerning power requirements. Modern circuits can execute complex algorithms with high speed calculations but therefore have high energy requirements. 
+%This confrontation of performance and power is a major issue faced in most robotic applications and therefore affected the implementation of this diploma thesis. In order to perform 3D mapping and local navigation, Autumn requires to execute complex and load heavy algorithms that will be discussed in further detail in later sections. 
+
+In the past decades research has made vast improvements concerning the performance of processors whether they are used as stand-alone microprocessors, microcontrollers, embedded processors or digital signal processors. However these improvements come at the cost of higher power requirements. This trade-off is a major concern in many robotic applications that are powered by batteries or are restricted to low power inputs. Since Autumn is powered only by a drone battery this issue is groundbreaking during the development of this diploma thesis. 
+
+The central component of the system is a NVIDIA Jetson TX2 board equipped 2GHz NVIDIA Denver2 dual-core processor and a 2GHz Arm Cortex-A57 quad-core processor which at an idle state had an average power consumption 2.7 Watts (measured using NVIDIA Tegrastats). However while performing non optimized 3D mapping and navigation algorithms with both processors fully utilized the average power consumption surpassed the manufacturer maximum at 7.5W and reached 7.9W. %schreib drüber dass diese zahlen bedeuten dass das system komplett ausgelaset ist
+
+The algorithms used in this experiment and possible optimization solutions are discussed in chapter \ref{chapter:slam}
+
+\section{Solving processing limitations}
+When dealing with load heavy computations one way to solve quality issues is to use higher performance hardware, however due to aforementioned power constraints and drone payload requirements not suitable for this diploma thesis. 
+Another possible solution is to lower the computational load of the processors therefore improving result quality and lowering power consumption. 
+This approach was tested in the following two forms:
+\begin{itemize}
+%	\item Distributing high power computations to a remote host. For most applications out- sourcing computation to a cloud would be the optimal solution however the work en- vironment of Autumn does not allow for a sufficient internet connection. The only possible way to implement this approach was to bring a powerful computer on site and have it wirelessly communicate with the Autumn drone.
+	
+	\item Distributing high power computations to a remote host. This approach lowered the amount of computation on the drone but required to use a high performance computer on site to wirelessly communicate with the drone. Furthermore the wifi-range became another limiting factor since with increasing range the latency increased thus impairing the result quality again.
+	
+	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and providing odometry using a much more performant visual inertial odometry approach. To this end the drone was equipped with a Stereolabs ZED 2i stereo-camera which performed a hardware accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
+\end{itemize}
+
+\filbreak
