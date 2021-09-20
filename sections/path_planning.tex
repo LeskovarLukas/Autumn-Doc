@@ -13,9 +13,13 @@ The first proposed solution was the Dijkstra's Algorithm. However with steadily 
 
 \subsection{Sampling-based Algoritms}
 
-\subsection{Multiple Query}
+In motion planning Sampling-based Algorithms can be differentiated to other kinds of approaches, by the way they explore their environment. Sampling-based Algorithms such as the Probabilistic Road Map Algorithm or the Rapidly exploring Random Tree use a random point in their reference space and expand in that direction. This random point is considered a sample.
 
-\subsection{Single Query}
+\subsection{Multiple-Query and Single-Query}
+
+The term Multiple-Query refers, in connection with path planning Algorithms, to the feasibility of deriving variety of different paths, without the need of rerunning the algorithm. In Contrast Single-Query Algorithms are only able to compute one path at a time.\newline
+Use cases for Multiple-Query Algorithms would be unchanging environments. The reason for that, by generating an extensive grid of connections to be able to calculate a multitude of different start/goal combinations  more computational time is needed.\newline
+Single-Query approaches focus on performance instead of reuse-ability, which makes them ideal for dynamic domains. 
 
 \section{PRM}
 
