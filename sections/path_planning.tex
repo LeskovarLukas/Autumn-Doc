@@ -34,38 +34,37 @@ Upon finishing the initial construction phase of a roadmap, like the one depicte
 The actual path finding in the generated graph is handled by other non-sampling-based path finding methods such as A*.\newline
 With the PRM focusing on a multi-query approach it is possible to calculate a arbitrary number of different paths without the need to construct a new graph.
 
-\begin{figure}[]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/PRMRoadmap}
-	\caption{Example of a roadmap in two dimensional space constructed by the PRM algorithm}
-	\label{fig:ros_master_reg}
+	\caption{Example of a roadmap in two dimensional space constructed by the PRM algorithm.}
+	\label{fig:path_planning_prm}
 \end{figure}
 
 \section{RRT Algorithm}
 
-\subsection{Core Principles}
+Rapidly exploring random tree is a path planning algorithm, that can be categorized as sampling-based and single-query. In the field of sampling-based path finding algorithms is it considered together with the PRM the most influential. RRT works by constructing a tree of possible trajectories. Therefore it is first required to define an initial vertex, much like a root. After each following iteration a random sample is taken from the space that is considered free from obstacles. After generating a random vertex, the nearest neighboring point in the tree is search for. The closest node is than used as a pivot point and a new vertex is constructed a predefined distance away from the nearest node in the direction of the random sample. Thereafter it is attempted to connect the new vertex with the nearest. If this straight-line connection can exits without colliding with obstacles it is added to the set of edges. This procedure is depicted in figure 8.2. The algorithm end when a new node is within the predefined distance away from the goal point. 
+\footcite{Karaman2011}
 
-\subsection{How it works}
+The name rapidly exploring random tree stems from the tree like structure constructed, like the one you can see in figure 8.2, when exploring spaces This approach to path planning makes it possible to explore rapidly changing environments efficiently.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/rrtIteration}
+	\caption{Visualization of the first two iterations (a), (b) when an rrt algorithm is exploring a simple 2d space with an obstacle present. D referring to the predefined distance between vertices.\footcite{Zammit2018}}
+	\label{fig:path_planning_rrt}
+\end{figure}
 
 \section{A* Algorithm}
 
-\subsection{Core Principles}
-
-\subsection{How it works}
-
-\section{Comparison RRT with A*}
-
-\subsection{Purpose of RRT}
-
-\subsection{Purpose of A*}
-
-\subsection{Better choice for UAV application}
+\section{Comparison RRT with PRM and A*}
 
 \section{RRT* Algorithm}
 
-\subsection{Difference to RRT}
+\subsection{Improvements to RRT}
 
-\subsection{How it works}
+\subsection{Implementation in Autumn}
 
 \section{Other RRT Variants}
 
