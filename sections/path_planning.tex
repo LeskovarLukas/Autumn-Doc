@@ -70,7 +70,23 @@ With these properties it can be considered a informed Dijkstra search.
 	\label{fig:path_planning_Astar}
 \end{figure}
 
-\section{Comparison RRT with PRM and A*}
+\section{Evaluation}
+
+\subsection{Autumn Use-case}
+
+There are a number of criteria to be fulfilled, in order to be considered a working solution for the challenge of path planning faced by Autumn.
+As a means to using one of the aforementioned algorithms, they have to be suitable for a real-time, 3-dimensional application, like the one present in the project.
+When working with UAVs it is critical that an optimal path is calculated reliable and in a shortest amount of time possible. 
+
+\subsection{Comparison}
+
+In the following comparison we are going to look at the performance of the three different algorithms already mentioned in this chapter. Knowing that the PRM algorithm doesn't find a path on it's own, it is implied from here on out that the PRM works in combination with the A* algorithm and the A* on its own is only applied with grid-based environments.  
+
+\subsubsection{real-time feasibility}
+
+When talking about real-time in the Autumn project one understands it as being able to process a path, in a complex environment in an effort for the UAV to be able to continually stay in motion without any risk of colliding with obstacles. 
+
+\subsubsection{high dimensions}
 
 \section{RRT* Algorithm}
 
