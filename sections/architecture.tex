@@ -22,15 +22,15 @@ This prototype quickly demonstrated which part of the system needed to be improv
 
 In the past decades research has made vast improvements concerning the performance of processors whether they are used as stand-alone microprocessors, microcontrollers, embedded processors or digital signal processors. However these improvements come at the cost of higher power requirements. This trade-off is a major concern in many robotic applications that are powered by batteries or are restricted to low power inputs. Since Autumn is powered only by a drone battery this issue is groundbreaking during the development of this diploma thesis. 
 
-The central component of the system is a NVIDIA Jetson TX2 board equipped 2GHz NVIDIA Denver2 dual-core and a 2GHz Arm Cortex-A57 quad-core processors. \footcite{jetsonHardwarePageNoDate}
+The central component of the system is a NVIDIA Jetson TX2 board equipped with a 2GHz NVIDIA Denver2 dual-core and a 2GHz Arm Cortex-A57 quad-core processor. \footcite{jetsonHardwarePageNoDate}
 
 Using NVIDIA tegrastats \footcite{nvidiaTegrastatsNoDate} the average power consumption of the system at an idle state was measured at 2.7W. However while performing non optimized 3D mapping and navigation algorithms (Chapter \ref{chapter:slam}) with both processors fully utilized and Max-N power mode activated the average power consumption reached 7.9W. \footcite{jetsonPowerModesNoDate} 
 %schreib drüber dass diese zahlen bedeuten dass das system komplett ausgelaset ist
-Operating the system at such high stress does not only quickly drain the drones battery but also impairs the quality of the resulting 3D map as well as the drones navigation.
+Operating the system at such high stress does not only quickly drain the drones battery but also impairs the quality of the resulting 3D map as well as operating the drone.
 
 
 \section{Solving processing limitations}
-When dealing with load heavy computations one way to solve quality issues is to use higher performance hardware, however due to aforementioned power constraints and drone payload requirements not suitable for this diploma thesis. 
+When dealing with load heavy computations one way to solve quality issues is to use higher performance hardware, however due to aforementioned power constraints and drone payload requirements this approach is not suitable for this diploma thesis. 
 Another possible solution is to lower the computational load of the processors therefore improving result quality and lowering power consumption. 
 This approach was tested in the following two forms:
 \begin{itemize}
@@ -38,7 +38,7 @@ This approach was tested in the following two forms:
 	
 	\item Distributing high power computations to a remote host. This approach lowered the amount of computation on the drone but required to use a high performance computer on site to wirelessly communicate with the drone. Furthermore the wifi-range became another limiting factor since with increasing range the latency increased thus impairing the result quality again.
 	
-	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and providing odometry using a much more performant visual inertial odometry approach. To this end the drone was equipped with a Stereolabs ZED 2i stereo-camera which is benchmarked against other sensors ins section \ref{chapter:sensors}%which performed a hardware accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. %Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
+	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and providing odometry using a much more performant visual inertial odometry algorithm. To this end the drone was equipped with a Stereolabs ZED 2i stereo-camera which is benchmarked against other sensors in section \ref{chapter:sensors}%which performed a hardware accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. %Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
 \end{itemize}
 
 \section{Final Product}
