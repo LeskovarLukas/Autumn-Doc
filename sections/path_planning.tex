@@ -36,7 +36,7 @@ With the PRM focusing on a multi-query approach it is possible to calculate a ar
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/PRMRoadmap}
+	\includegraphics[width=0.7\linewidth]{img/PRMRoadmap}
 	\caption{Example of a roadmap in two dimensional space constructed by the PRM algorithm.}
 	\label{fig:path_planning_prm}
 \end{figure}
@@ -51,12 +51,24 @@ The name rapidly exploring random tree stems from the tree like structure constr
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/rrtIteration}
-	\caption{Visualization of the first two iterations (a), (b) when an rrt algorithm is exploring a simple 2d space with an obstacle present. D referring to the predefined distance between vertices.\footcite{Zammit2018}}
+	\includegraphics[width=0.9\linewidth]{img/rrtIteration}
+	\caption{Visualization of the first two iterations (a), (b) when an rrt algorithm is exploring a simple 2d space wihttps://robotics.stackexchange.com/questions/18433/difference-between-single-query-and-multiple-query-algorithmsth an obstacle present. D referring to the predefined distance between vertices.\footcite{Zammit2018}}
 	\label{fig:path_planning_rrt}
 \end{figure}
 
 \section{A* Algorithm}
+
+The A* algorithm is a simplistic and reliable method compared to other path-planning techniques. Therefor it is nowadays prevalently used in a variety of different applications.\footcite{Zammit2018}\newline
+It combines heuristic properties with formal virtues of the Dijkstra's algorithm. Whereas a purely heuristic approach would not guarantee that a path can be found even if a possible solution existed, the A* guarantees that the shortest path is found.\footcite{Sathyaraj2008}
+A* works by trying all possible combinations like the Dijkstra algorithm in a grid or graph based environment. With A* being based on the Dijkstra algorithm it favors nodes that are closer to the current position. Additionally it follows heuristic principles by putting a higher priority on nodes closer to the goal. An example of what an A* search algorithm looks like in a grid based environment is depicted in figure 8.3.\footcite{standfordAStarComparison1997}\newline
+With these properties it can be considered a informed Dijkstra search.
+  
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/AStarExample}
+	\caption{A* path finding around a concave obstacle in a grid-based environment.\footcite{standfordAStarComparison1997}}
+	\label{fig:path_planning_Astar}
+\end{figure}
 
 \section{Comparison RRT with PRM and A*}
 
