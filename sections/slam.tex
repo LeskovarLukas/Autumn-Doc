@@ -1,10 +1,23 @@
 \chapter{Simultaneous Localization and Mapping}
 \label{chapter:slam}
 
+\textbf{Author: Lukas Leskovar} 
+
+%frame of reference klingt nicht so gut
+The problem of localizing as well as navigating a system through a completely or partly unknown environment without any external coordinate system (i.e. GPS, Optical Tracking, etc.) has proven itself to be one of the most complex and yet fundamental topic in many scientific research fields with robotics being most prominent. The main approach to this problem is Simultaneous Localization and Mapping (SLAM) which dates back to the mid 1980s. Back then the first solutions based on Extended Kalman Filters or Rao-Blackwellised Filters were formulated. \footcite{durrantSlam2006}  \footcite{cadenaSlamFuture2016}
+
+To date the topic of SLAM has matured, algorithms have gotten more reliable and robust and are utilized in many industries. Applications for SLAM range from Navigating a Mars Rover over autonomous cars or warehouse robots to simple household appliances like vacuum cleaners. 
+
+As one major topic of this thesis is robot navigation in a GPS-denied area as well as mapping of such environment, different modern SLAM approaches and solutions utilized by the project team are discussed in this chapter.
+
 \section{Localization}
+State-Estimation aims to reconstruct the state of a system using interoceptive measurements (e.g. acceleration, velocity, etc.) as well as an exteroceptive model (e.g. position and orientation) of the system. \footcite{barfootStateEstimation2017}
+Put into the context of mobile robotics this means that in order to perform comprehensive localization of a mobile robot a sensor fusion between on-board sensors and a external coordinate system describing the robots pose needs to be performed. 
+Exemplary for such a robot would be a drone utilizing a Inertial Measurement Unit correcting GPS positional data to estimate its current position as well as its velocity.
 
 
 \section{Mapping}
+
 
 
 \section{Performing Localization and Mapping}
