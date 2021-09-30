@@ -5,7 +5,7 @@
 A crucial part of autonomy in robotics are means for planning ahead movements in a cooperative manner with the environment. Means to accomplish this are so called path planning algorithms. This chapter is going to focus on exploring the different kind of approaches to path planning and evaluate which approach is most fitting to be used in a real-time, high-dimensional use case present in the Autumn project.
 
 
-\section{Algorithm Variants}
+\section{Types of Path Planning}
 
 The problem of finding an optimal path between two points is an old one.
 The first proposed solution was the Dijkstra's Algorithm. However with steadily evolving computer science the challenges to be master by such Algorithms got harder and harder. That's the reason why over the last years the simple principle of the Dijkstra Algorithm has branched out specializing and excelling in certain real world applications.
@@ -90,12 +90,23 @@ When talking about real-time in the Autumn project one understands it as being a
 
 \section{RRT* Algorithm}
 
-\subsection{Improvements to RRT}
+\subsection{Concept behind RRT*}
 
 \subsection{Implementation in Autumn}
 
-\section{Other RRT Variants}
+\section{RRT* Variants}
 
-\subsection{RT-RRT}
+\subsection{RT-RRT*}
 
-\subsection{Smart-RRT}
+The RT-RRT* takes big focus in real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy it makes it possible to keep the previously sampled tree.
+The two core principles introduced with the RT-RRT*, are tree expansion and tree rewiring. 
+At first the Algorithm start by initializing a root node. After each following iterations the tree expands and rewires. This sampling last for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the amount of steps the path consists of. In this phase the agent is moved gradually towards the tree root. Thereafter, when path planning is finished an the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. With this approach it enables the agent to move without the time needed to compute the whole path.
+Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
+The rewiring is done in the default scenario done, because of newly added nodes having a smaller cost-to-reach than the parent of a certain node. In the second case rewiring is needed if the environment changes. Therefor a lager portion of the tree has to change. Hereby two different modes are utilized. The first one consisting of rewiring the tree in a circle centered around the tree node. For the second option both focused and uniform sampling are used, with the difference that it is not done for one node, but instead concentrates on patches.
+\footcite{Naderi2015}
+
+\subsubsection{RT-RRT* in Autumn}
+
+When applying the concept of the RT-RRT* to Autumn it would seem a good idea. Taking a closer look uncovers that the proposed RT-RRT* only works efficiently in environments with limited changes. Rewiring the tree, done in the case of an dynamic obstacle changing, doesn't make sense when the obstacle referred to covers a large portion of the space. With this being the case in Autumn, because contrary to the examples in the paper covering the RT-RRT* is the algorithm not educated about the environment. Only while moving are obstacles and boundaries discovered In general the RT-RRT* is using concepts of roadmaps like the one generated in the PRM algorithm and applying it to the RRT* algorithm.  
+
+\subsection{Smart-RRT*}
