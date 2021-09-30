@@ -11,8 +11,9 @@ To date the topic of SLAM has matured, algorithms have gotten more reliable and 
 As one major topic of this thesis is robot navigation in a GPS-denied area as well as mapping of such environment, different modern SLAM approaches and solutions utilized by the project team are discussed in this chapter.
 
 \section{Localization}
-State-Estimation aims to reconstruct the state of a system using interoceptive measurements (e.g. acceleration, velocity, etc.) as well as an exteroceptive model (e.g. position and orientation) of the system. \footcite{barfootStateEstimation2017}
-Put into the context of mobile robotics this means that in order to perform comprehensive localization of a mobile robot a sensor fusion between on-board sensors and an external coordinate system or map ought to be performed as solely relying on sensory input would result that the  calculated pose of the robot would quickly drift as measurement errors accumulate compared to reality.
+%state estimation beschreiben dass pose sowie andere informationen wie geschw. usw. erfasst werden. 
+Localization or state-Estimation aims to reconstruct the state of a system using interoceptive measurements (e.g. acceleration, velocity, etc.) as well as an exteroceptive model (e.g. position and orientation) of the system. \footcite{barfootStateEstimation2017}
+Put into the context of mobile robotics this means that in order to perform comprehensive localization of a mobile robot a sensor fusion between on-board sensors and an external coordinate system or map ought to be performed as solely relying on incremental sensors for odometry would quickly result in large accumulated errors.
 %Exemplary for such a robot would be a drone utilizing a Inertial Measurement Units (IMU) odometry as well as GPS positional data to estimate its current position.
 Exemplary for such a system would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
 
@@ -23,8 +24,13 @@ Mapping applications often combine technologies typically found in scientific fi
 Another example would be a drone computing camera images and GPS positional data with a photogrammetric algorithm to reconstruct a 3D-Model of a building. 
 
 
-\section{Performing Localization and Mapping}
+\section{Localization and Mapping}
+The aforementioned technologies are considered rather simplistic problems as either the environments map is given or reliable pose-estimation can be provided. While most applications meet either of these criteria with pre-built maps or GPS being available, in some environments such as indoors, mineshafts or outer space both the systems pose and environment remain uncertain and need to be determined simultaneously hence simultaneous localization and mapping. 
+To summarize, the main crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain. 
 
+In order to solve this dilemma SLAM incorporates loop closure to correct the global map as well as positional estimates provided by odometry. A loop closure event occurs when revisiting previously mapped landmarks and associating relations between features to adapt the global topology. Without loop closure a mobile robot would perceive its environment as a infinite corridor.
+
+\section{Map Representation}
 
 
 \section{Application Scenarios}
