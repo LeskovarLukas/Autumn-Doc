@@ -4,7 +4,7 @@
 \textbf{Author: Lukas Leskovar} 
 
 %frame of reference klingt nicht so gut
-The problem of localizing as well as navigating a system through a completely or partly unknown environment without any external coordinate system (i.e. GPS, Optical Beacon Tracking, etc.) has proven itself to be one of the most complex and yet fundamental topic in many scientific research fields with robotics being most prominent. The main approach to this problem is Simultaneous Localization and Mapping (SLAM) which dates back to the mid 1980s. Back then the first solutions based on Extended Kalman Filters or Rao-Blackwellised Filters were formulated. \footcite{durrantSlam2006}  \footcite{cadenaSlamFuture2016}
+The problem of localizing as well as navigating a system through a completely or partly unknown environment without any external coordinate system (i.e. GPS, Optical Beacon Tracking, etc.) has proven itself to be one of the most complex and yet fundamental topics in many scientific research fields with robotics being most prominent. The main approach to this problem is Simultaneous Localization and Mapping (SLAM) which dates back to the mid 1980s. Back then the first solutions based on Extended Kalman Filters or Rao-Blackwellised Filters were formulated. \footcite{durrantSlam2006}  \footcite{cadenaSlamFuture2016}
 
 To date the topic of SLAM has matured, algorithms have gotten more reliable and robust and are utilized in many industries. Applications for SLAM range from Navigating a Mars Rover over autonomous cars or warehouse robots to simple household appliances like vacuum cleaners. 
 
@@ -26,45 +26,87 @@ Another example would be a drone computing camera images and GPS positional data
 
 \section{Localization and Mapping}
 The aforementioned technologies are considered rather simplistic problems as either the environments map is given or reliable pose-estimation can be provided. While most applications meet either of these criteria with pre-built maps or GPS being available, in some environments such as indoors, mineshafts or outer space both the systems pose and environment remain uncertain and need to be determined simultaneously hence simultaneous localization and mapping. 
-To summarize, the main crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain. 
+To summarize, the crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain. 
 
-In order to solve this dilemma SLAM incorporates loop closure to correct the global map as well as positional estimates provided by odometry. A loop closure event occurs when revisiting previously mapped landmarks and associating relations between features to adapt the global topology. Without loop closure a mobile robot would perceive its environment as a infinite corridor.
+To approach this problem in a structured way a SLAM system usually comprises two main components:
+\begin{itemize}
+	\item A front-end in charge of abstracting sensory input to be used in the back-end by performing feature extraction as well as data association. 
+	%Furthermore it is responsible for associating corresponding features over multiple measurements, which is typically referred to as short-term data association. Long-term data association or loop closure therefore aims to link current measurements to previously observed features thus  correcting accumulated odometry errors as well as adapting the global topology. 
+	\item A back-end performing probabilistic estimation based on the abstracted data fed in by the front-end. The back-end also provides information to the front-end supporting loop closure detection. 
+\end{itemize}
+
+The following sections will mainly focus on the SLAM back-end and dissect the problem by reviewing different probabilistic approaches. 
+
+
+%In order to partially solve this dilemma SLAM incorporates loop closure to correct the global map as well as positional estimates provided by odometry. A loop closure event occurs when revisiting previously mapped landmarks and associating relations between features to adapt the global topology. %Without loop closure a mobile robot would perceive its environment as a infinite corridor.
+
+
+\section{Data Association}
+While many aspects of the front-end remain application specific each SLAM system typically contains modules for data association in the following ways.
+Short-term data association or feature tracking is responsible for associating corresponding features over multiple measurements while long-term data association aims to detect and link similarities between current measurements and previously observed features. These loops help correcting accumulated odometry errors as well as optimizing the global topology. 
+A loop closure typically event occurs when revisiting previously mapped landmarks.
 
 \section{Map Representation}
+The way a robot perceives its environment and maintains a accurate map of its environment is directly dependant on many criteria such as complexity of tasks, size of its environment as well as measurement quality mainly influenced by sensor noise. 
+Tailoring to benefit some of the aforementioned criteria most robotic mapping systems utilize either of two paradigms, metric or topological, each proposing their respective strengths and weaknesses.
+
+Metric or grid-based maps build a map of the robots environment as occupancy grids, with each grid cell indicating the presence of an obstacle. The main benefit using metric maps is the facilitated construction of large-scale mappings as well as non-ambiguous determination of places. However such maps have significant drawbacks concerning space as well as time complexity and require accurate pose estimation of the robot.
+
+Topological or feature-based maps reconstruct their environment as graphs with each node representing a feature or landmark perceived by the robots sensors. In contrast to metric maps they allow for comprehensive path planning and are significantly more compact as its resolution is directly proportional to the environments complexity. \footcite{thrunMaps1998}
+
+ 
 
 
-\section{Application Scenarios}
-
-\subsection{Map Acquisition}
-
-\subsection{Black-Box Localization}
-
-\subsection{Continuos Map Exploration}
 
 
-\section{2D SLAM}
 
-\subsection{Evidence Grid-based SLAM}
-
-\subsection{Graph-based SLAM}
-
-\subsection{Feature-based SLAM}
+\section{Problem Definition}
 
 
-\section{3D SLAM}
+\section{Solution Paradigms} 
 
-\subsection{Visual SLAM}
+\subsection{Kalman Filter}
 
-\subsection{Graph-based SLAM}
+\subsection{Particle Filter}
+
+\subsection{Graph-based}
 
 
-\section{Obtaining Odometry}
+\section{Visual SLAM}
 
-\subsection{Wheel Encoder Odometry}
 
-\subsection{Visual Odometry}
-
-\subsection{Visual Inertial Odometry}
+%\section{Application Scenarios}
+%
+%\subsection{Map Acquisition}
+%
+%\subsection{Black-Box Localization}
+%
+%\subsection{Continuos Map Exploration}
+%
+%
+%\section{2D SLAM}
+%
+%\subsection{Evidence Grid-based SLAM}
+%
+%\subsection{Graph-based SLAM}
+%
+%\subsection{Feature-based SLAM}
+%
+%
+%\section{3D SLAM}
+%
+%\subsection{Visual SLAM}
+%
+%\subsection{Graph-based SLAM}
+%
+%
+%\section{Obtaining Odometry}
+%
+%\subsection{Wheel Encoder Odometry}
+%
+%\subsection{Visual Odometry}
+%
+%\subsection{Visual Inertial Odometry}
 
 
 \section{Loop Closure for Visual SLAM}
@@ -75,6 +117,8 @@ In order to solve this dilemma SLAM incorporates loop closure to correct the glo
 
 
 \section{Map optimization}
+
+\subsection{Bundle Adjustment}
 
 
 
