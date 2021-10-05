@@ -54,18 +54,26 @@ Metric or grid-based maps build a map of the robots environment as occupancy gri
 
 Topological or feature-based maps reconstruct their environment as graphs with each node representing a feature or landmark perceived by the robots sensors. In contrast to metric maps they allow for comprehensive path planning and are significantly more compact as its resolution is directly proportional to the environments complexity. \footcite{thrunMaps1998}
 
- 
 
+\section{Probabilistic Definition}
+To describe probabilistic SLAM lets assume a robot is moving through an environment observing different landmarks at different times. 
+The goal is that, for any time instant $ k $, the robots state vector $ x_{k} $ and set of all landmark positions $ m $ given the landmark observations $ Z_{0:k}$, controls $ U_{0:k} $ and initial state $ x_{0} $ are computed.
 
+\begin{equation}\label{fullSLAM}
+	P(x_{k:0}, m | Z_{0:k}, U_{0:k}, x_{0})
+\end{equation}
 
+In \ref{fullSLAM}, which is often referred to as "Full-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated.
 
+\begin{equation}\label{onlineSLAM}
+	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0})
+\end{equation}
 
-\section{Problem Definition}
-
+The pendant to this is "Online-SLAM" which aims to calculate only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}.
 
 \section{Solution Paradigms} 
 
-\subsection{Kalman Filter}
+\subsection{Extended Kalman Filter}
 
 \subsection{Particle Filter}
 
