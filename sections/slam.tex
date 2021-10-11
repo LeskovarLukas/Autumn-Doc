@@ -57,23 +57,55 @@ Topological or feature-based maps reconstruct their environment as graphs with e
 
 \section{Probabilistic Definition}
 To describe probabilistic SLAM lets assume a robot is moving through an environment observing different landmarks at different times. 
-The goal is that, for any time instant $ k $, the robots state vector $ x_{k} $ and set of all landmark positions $ m $ given the landmark observations $ Z_{0:k}$, controls $ U_{0:k} $ and initial state $ x_{0} $ are computed.
+The goal is that, for any time instant $ k $, the robots state vector $ x_{k} $ and time invariant set of all landmark positions $ m $ given the landmark observations $ Z_{0:k}$, controls $ U_{0:k} $ and known initial location $ x_{0} $ are computed.
 
 \begin{equation}\label{fullSLAM}
 	P(x_{k:0}, m | Z_{0:k}, U_{0:k}, x_{0})
 \end{equation}
 
-In \ref{fullSLAM}, which is often referred to as "Full-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated.
+In \ref{fullSLAM}, which is often referred to as "Full-SLAM" or "Offline-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated. In other words, this formulation of the problem aims to recover the whole robot trajectory as well as the map given the observation sets $ Z $ and $ U $. 
 
 \begin{equation}\label{onlineSLAM}
 	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0})
 \end{equation}
 
-The pendant to this is "Online-SLAM" which aims to calculate only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}.
+The pendant to this is "Online-SLAM" which aims to calculate the whole map but only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this approach typically compute the probability distribution incrementally. 
+
+To compute either problem a mathematical model representing the robots state transition and a model describing observations need to be defined:
+
+\begin{equation}\label{motionModel}
+	P(x_{k} | x_{k-1}, u_{k})
+\end{equation}
+
+\begin{equation}\label{observationModel}
+	P(z_{k} | x_{k}, m)
+\end{equation}
+
+The motion model \ref{motionModel} describes the robots location at time $ k $ given the known previous location $ x_{k-1} $ and odometry $ u_{k} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
+\ref{observationModel} calculates the probability of observing a landmark $ z_{k} $ when the robots location $ x_{k} $ and environment $ m $ are known.
+
+%The joint posterior is then implemented in a recursive prediction and correction form which is often described as time-update and measurement-update:
+
+For filtering approaches which are discussed later in this chapter, the joint posterior is then implemented in a recursive prediction and correction form which is often described as time-update and measurement-update:
+
+\begin{equation}\label{timeUpdate}
+	P(x_{k}, m | Z_{0:k-1}, U_{0:k}, x_{0}) = \int P(x_{k} | x_{k-1}, u_{k}) * P(x_{k-1}, m | Z_{0:k-1}, U_{0:k-1}, x_{0}) dx_{k-1}
+\end{equation}
+
+
+\begin{equation}\label{measurementUpdate}
+	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0}) = \frac{P(z_{k} | x_{k}, m) * P(x_{k}, m | Z_{0:k-1}, U_{0:k}, x_{0}))}{P(z_{k} | Z_{0:k-1}, U_{0:k})}
+\end{equation}
+
+The time update in \ref{timeUpdate} calculates an believe of the robots state using a previously known state at $ k - 1 $ and state-transition given the newest control $ u_{k} $.
+In the next, the measurement update \ref{measurementUpdate}, step a observation $z_{k} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
 
 \section{Solution Paradigms} 
+Over time many different approaches to the SLAM problem have been developed which can be categorized into either of three paradigms. The two mature ones are based on recursive filtering techniques while the modern graph-based solutions perform non-linear sparse optimization.
 
 \subsection{Extended Kalman Filter}
+The Extended Kalman Filter (EKF) is one implementation of a Bayes Filter for non-linear problems and one of the earliest approaches to the SLAM problem. The author recommends thorough knowledge about Bayes Filters\footcite{tipaldiBayes2020}, the vanilla Kalman Filter and the EKF\footcite{tipaldiEKF2020} before reading this section about its application in SLAM. 
+
 
 \subsection{Particle Filter}
 
