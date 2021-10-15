@@ -18,16 +18,18 @@ Put into the context of mobile robotics this means that in order to perform comp
 Exemplary for such a system would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
 
 \section{Mapping}
-Contrary to localization and state-estimation, the current pose of the system is known while its environment remains uncharted.
+Contrary to localization or state-estimation, in mapping problems the current pose of the system is known while its environment remains uncharted.
 Therefore stand-alone mapping aims to generate a model of its environment by evaluating sensor readings of environmental features as well as the systems pose to reconstruct aforementioned features in a global reference frame. 
-Mapping applications often combine technologies typically found in scientific fields such as photogrammetry, computer vision or robotics. 
+Mapping applications often combine technologies typically found in other scientific fields such as photogrammetry or computer vision.
 Another example would be a drone computing camera images and GPS positional data with a photogrammetric algorithm to reconstruct a 3D-Model of a building. 
 
 
 \section{Localization and Mapping}
-The aforementioned technologies are considered rather simplistic problems as either the environments map is given or reliable pose-estimation can be provided. While most applications meet either of these criteria with pre-built maps or GPS being available, in some environments such as indoors, mineshafts or outer space both the systems pose and environment remain uncertain and need to be determined simultaneously hence simultaneous localization and mapping. 
+The aforementioned technologies on their own are considered rather simplistic problems as either the environments map is given or reliable pose-estimation can be provided. While most applications meet either of these criteria with pre-built maps or GPS being available, in some environments such as indoors, mineshafts or outer space both the systems pose and environment remain uncertain and need to be determined simultaneously hence the name Simultaneous Localization and Mapping. 
 To summarize, the crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain. 
 
+
+%!!!!!! Front-End Backend Trennung ist nur bei graph based der Fall
 To approach this problem in a structured way a SLAM system usually comprises two main components:
 \begin{itemize}
 	\item A front-end in charge of abstracting sensory input to be used in the back-end by performing feature extraction as well as data association. 
@@ -42,8 +44,8 @@ The following sections will mainly focus on the SLAM back-end and dissect the pr
 
 
 \section{Data Association}
-While many aspects of the front-end remain application specific each SLAM system typically contains modules for data association in the following ways.
-Short-term data association or feature tracking is responsible for associating corresponding features over multiple measurements while long-term data association aims to detect and link similarities between current measurements and previously observed features. These loops help correcting accumulated odometry errors as well as optimizing the global topology. 
+While many aspects of the front-end remain application specific each SLAM system typically contains modules for data association in the two ways.
+Short-term data association or feature tracking is responsible for associating corresponding features over multiple measurements while long-term data association or loop-closure aims to detect and link similarities between current measurements and previously observed features. These loops help correcting accumulated odometry errors as well as optimizing the global topology. 
 A loop closure typically event occurs when revisiting previously mapped landmarks.
 
 \section{Map Representation}
@@ -56,20 +58,29 @@ Topological or feature-based maps reconstruct their environment as graphs with e
 
 
 \section{Probabilistic Definition}
-To describe probabilistic SLAM lets assume a robot is moving through an environment observing different landmarks at different times. 
-The goal is that, for any time instant $ k $, the robots state vector $ x_{k} $ and time invariant set of all landmark positions $ m $ given the landmark observations $ Z_{0:k}$, controls $ U_{0:k} $ and known initial location $ x_{0} $ are computed.
+To describe probabilistic SLAM lets assume a robot is moving through an environment observing multiple landmarks at different times. 
+The goal is that, for any time instant $ k $, the robots state vector 
+\[ x_{k} = 
+\begin{pmatrix}
+	x \\
+	y \\
+	\theta \\
+\end{pmatrix}
+\] describing its position and orientation as well as a time invariant set of all absolute landmark positions 
+$ m = \{ m_{1}, m_{2}, ..., m_{n} \}$ 
+is computed, given uncertain relative landmark observations $ Z_{0:k} = \{z_{0}, z_{1}, ..., z_{k}\}$, controls $ U_{0:k} = \{u_{0}, u_{1}, ..., u_{k}\}$ and known initial location $ x_{0} $.
 
 \begin{equation}\label{fullSLAM}
 	P(x_{k:0}, m | Z_{0:k}, U_{0:k}, x_{0})
 \end{equation}
 
-In \ref{fullSLAM}, which is often referred to as "Full-SLAM" or "Offline-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated. In other words, this formulation of the problem aims to recover the whole robot trajectory as well as the map given the observation sets $ Z $ and $ U $. 
+In \ref{fullSLAM}, which is often referred to as "Full-SLAM" or "Offline-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated. In other words, this formulation of the problem aims to recover the whole robot trajectory.
 
 \begin{equation}\label{onlineSLAM}
 	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0})
 \end{equation}
 
-The pendant to this is "Online-SLAM" which aims to calculate the whole map but only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this approach typically compute the probability distribution incrementally. 
+The pendant to this is "Online-SLAM" which aims estimate only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this online approach typically compute the probability distribution incrementally. 
 
 To compute either problem a mathematical model representing the robots state transition and a model describing observations need to be defined:
 
@@ -81,8 +92,8 @@ To compute either problem a mathematical model representing the robots state tra
 	P(z_{k} | x_{k}, m)
 \end{equation}
 
-The motion model \ref{motionModel} describes the robots location at time $ k $ given the known previous location $ x_{k-1} $ and odometry $ u_{k} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
-\ref{observationModel} calculates the probability of observing a landmark $ z_{k} $ when the robots location $ x_{k} $ and environment $ m $ are known.
+The motion model \ref{motionModel} describes the robots location at time $ k $ given a known previous location $ x_{k-1} $ and odometry $ u_{k} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
+\ref{observationModel} calculates the probability of observing a landmark $ z_{k} $ when the robots location $ x_{k} $ and environment $ m $ are known. For aforementioned reasons in SLAM the map is not known to the system, therefore many formulations omit the map in the observation model.
 
 %The joint posterior is then implemented in a recursive prediction and correction form which is often described as time-update and measurement-update:
 
@@ -97,14 +108,76 @@ For filtering approaches which are discussed later in this chapter, the joint po
 	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0}) = \frac{P(z_{k} | x_{k}, m) * P(x_{k}, m | Z_{0:k-1}, U_{0:k}, x_{0}))}{P(z_{k} | Z_{0:k-1}, U_{0:k})}
 \end{equation}
 
-The time update in \ref{timeUpdate} calculates an believe of the robots state using a previously known state at $ k - 1 $ and state-transition given the newest control $ u_{k} $.
-In the next, the measurement update \ref{measurementUpdate}, step a observation $z_{k} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
+The time update in \ref{timeUpdate} calculates an estimate of the robots state using a previously known state at $ k - 1 $ and state-transition given the newest control $ u_{k} $.
+In the next step, the measurement update \ref{measurementUpdate}, a observation $z_{k} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
+
+To make the the recursive structure of such filtering approaches more apparent the equations \ref{timeUpdate} and \ref{measurementUpdate} can also be described in Bayesian form as follows:
+
+\begin{equation}\label{timeUpdateBayes}
+	\overline{\rm bel}(x_{k}) = \int P(x_{k} | x_{k-1}, u_{k}) * bel(x_{k-1}) dx_{k-1}
+\end{equation}
+
+
+\begin{equation}\label{measurementUpdateBayes}
+	bel(x_{k}) = \eta * P(z_{k} | x_{k}) * \overline{\rm bel}(x_{k-1})
+\end{equation}
 
 \section{Solution Paradigms} 
 Over time many different approaches to the SLAM problem have been developed which can be categorized into either of three paradigms. The two mature ones are based on recursive filtering techniques while the modern graph-based solutions perform non-linear sparse optimization.
 
 \subsection{Extended Kalman Filter}
-The Extended Kalman Filter (EKF) is one implementation of a Bayes Filter for non-linear problems and one of the earliest approaches to the SLAM problem. The author recommends thorough knowledge about Bayes Filters\footcite{tipaldiBayes2020}, the vanilla Kalman Filter and the EKF\footcite{tipaldiEKF2020} before reading this section about its application in SLAM. 
+The Extended Kalman Filter (EKF) is one of the first approaches to the Online-SLAM problem and similar to the standard Kalman Filter one implementation of a Bayes Filter. Contrary to the Kalman Filter it is applicable to non-linear systems and non-Gaussian distributions by performing local linearization.
+
+%The Extended Kalman Filter (EKF) is one implementation of a Bayes Filter for non-linear problems and was one of the first approaches to the Online-SLAM problem. The author recommends preliminary knowledge about Bayes Filters\footcite{tipaldiBayes2020}, the vanilla Kalman Filter and the EKF\footcite{tipaldiEKF2020} before reading this section about its application in SLAM. 
+
+The Kalman Filter assumes a metric environment in which landmarks can be fully represented as points within the coordinate frame. The earlier introduced state-vector $ x $ is extended to a state-space vector with dimensions $ 3 + 2N$
+\[ \mu = 
+\begin{pmatrix}
+	x \\
+	m \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+	x & y & \theta & m_{1, x} & m_{1, y} & \dots & m_{n, x} & m_{n, y} 
+\end{pmatrix} ^{T}
+\] 
+to incorporate the landmark locations $ m_{i, x} $ and $ m_{i, y} $. 
+
+Furthermore a covariance matrix 
+$ \Sigma = 
+\begin{pmatrix}
+	\Sigma_{xx} & \Sigma_{xm} \\
+	\Sigma_{mx} & \Sigma_{mm} \\
+\end{pmatrix} $ 
+is introduced which specifies the state $ x $ and landmark $ m $ uncertainties as well as correlations between landmarks and robot pose. 
+
+The motion and observation models are defined as non-linear functions $  g(u_{k}, \mu_{k - 1}) $ and $ h(x_{l}, m) $ which are linearized by performing first order taylor expansion. This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step algorithm:
+
+
+%to do: noch vorher variablen wie G, H, ... definieren
+
+\begin{lstlisting}[mathescape=true, language=Python, caption={Kalman-filter algorithm described in pseude-code.},captionpos=b,label={lst:kalman_filter}]
+	def extended_kalman_filter($\mu_{k-1}$, $\Sigma_{k-1}$, $u_{k}$, $z_{k}$):
+	$\overline{\mu}_{k} = g(u_{k}, \mu_{k-1})$				# state-prediction given newest control measurements
+	$\overline{\Sigma}_{k} = G_{k}\Sigma_{k-1}G_{k-1}^{T} + R_{k}$				# measurement prediction 	 		
+	
+	$K_{k} = \overline{\Sigma}_{k}H_{k}^{T}(H_{k}\overline{\Sigma}_{k}H_{k}^{T} + Q_{k})^{-1}$				# measurement of actual landmark position
+	$\mu_{k} = \overline{\mu}_{k} + K_{k}(z_{k}-h(\overline{\mu}_{k}))$				# data association 
+	$\Sigma_{k} = (I - K_{k}H_{k})\overline{\Sigma_{k}}$				# update of state-space vector as well as covariance matrix 
+	
+	return $\mu_{k}, \Sigma_{t}$
+\end{lstlisting}
+
+
+%\begin{itemize}
+%	\item State Prediction: The next state $ \mu_{k} $ is predicted given the controls $ u_{k} $ and previous state $ \mu_{k-1} $.
+%	\item Measurement Prediction: A prediction of the next measurement is made propagating the uncertainty introduced by the state-transition.
+%	\item Measurement: A new measurement is taken.
+%	\item Data Association: The error between the prediction and actual measurement is calculated.
+%	\item Update: The state-space vector as well as covariance matrix is updated given the previously calculated error. This update then reduces the uncertainty of both robot state and landmark locations.
+%\end{itemize} 
+
+
 
 
 \subsection{Particle Filter}
