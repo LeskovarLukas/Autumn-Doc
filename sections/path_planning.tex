@@ -92,15 +92,65 @@ When talking about real-time in the Autumn project one understands it as being a
 
 \subsection{Concept behind RRT*}
 
-A problem that arises when using the RRT algorithm is that finding an optimal path is impossible due to the lack of rewiring options.
+A problem that arises when using the RRT algorithm is that finding an optimal path is impossible due to the lack of rewiring options. Therefor the RRT* algorithm was invented. 
+The improved algorithm works differently when connecting a newly sampled node into the existing tree structure, which in the RRT is done by connecting the new node to its nearest neighbor. In case of the RRT*, it calculates the cost of other possible connections stemming from the root node. Hereby a set of nodes closest to the newly sampled vertex are used as possible connection candidates. By rewiring the tree after each new node is sampled it makes it possible for an near-optimal path to be found.
+
+\subsection{Base RRT* Algorithm}
+
+The RRT* works at first the same as the RRT algorithm, it first defines a set of vertices, $V$ with the start node and an empty set of Edges, $E$. In contrast to the RRT algorithm is the runtime of the RRT* algorithm not dependent on how fast the goal node is reach, but instead of the degree of optimization for the calculated path.
+Line four to six in Algorithm 1, are the same as the base algorithm. Hereby is a random node sampled, the nearest node in relation to the random node is calculated and a new node generated. After checking if a straight line connection is possible between $x_{nearest}$ and $x_{new}$, a set of neighboring vertices, $X_{near}$ is initialized.
+$X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{new}$. Thereafter $x_{new}$ gets added to the $V$. In line 9 to 13, the cost of paths connecting the nodes of $X_{near}$ with $x_{new}$ get calculated and an edge between the node with the cheapest path, $x_{min}$ and $x_{new}$ gets added to $E$. The final stage of the RRT* is to rewire all neighboring nodes in $X_{near}$, if the path connecting to $x_{new}$ is cheaper than the original path to the root vertex. 
+
+\begin{algorithm}[H]
+	\caption{RRT* 2011\footcite{Karaman2011}}
+	\SetKwFunction{FObstacleFree}{ObstacleFree}
+	\SetKwFunction{FSampleFree}{SampleFree}
+	\SetKwFunction{FNearest}{Nearest}
+	\SetKwFunction{FNear}{Near}
+	\SetKwFunction{FCost}{Cost}
+	\SetKwFunction{FCollisionFree}{CollisionFree}
+	\SetKwFunction{FSteer}{Steer}
+	\SetKwFunction{FLine}{Line}
+	$V \gets \{x_{init}\}$\;
+	$E \gets 0$\;
+	\For{$i \gets 1$ \textbf{to} $n$} {
+		$x_{rand} \gets \FSampleFree()$\;
+		$x_{nearest} \gets \FNearest(G = (V, E), x_{rand})$\;
+		$x_{new} \gets \FSteer(x_{nearest}, x_{rand}, D)$\;
+		\If{\FObstacleFree($x_{nearest}$, $x_{new}$)}{
+			$X_{near} \gets \FNear(G = (V, E), x_{new}, D)$\;
+			$V \gets V \cup \{x_{new}\}$\;
+			$x_{min} \gets x_{nearest}$\;
+			$c_{min} \gets \FCost(x_{nearest}) + c(\FLine(x_{nearest}, x_{new}))$\;
+			\ForEach{$x_{near} \in X_{near}$} {
+				\If{\FCollisionFree($x_{near}$, $x_{new}$) $\land$ \FCost($x_{near}$) + $c(\FLine(x_{near}, x_{new})) < c_{min}$}{
+					$x_{min} \gets x_{near}$\;
+					$c_{min} \gets \FCost(x_{near}) + c(\FLine(x_{near}, x_{new}))$\;
+				}
+			}
+			$E \gets E \cup \{(x_{min}, x_{new})\}$\;
+			\ForEach{$x_{near} \in X_{near}$} {
+				\If{\FCollisionFree($x_{near}$, $x_{new}$) $\land$ \FCost($x_{new}$) + $c(\FLine(x_{near}, x_{new})) < c_{near}$}{
+					$x_{parent} \gets Parent(x_{near})$\;
+				}
+				$E \gets (E \backslash \{(x_{parent}, x_{near})\} \cup \{(x_{new}, x_{near})\})$\;
+			}
+		}
+	}
+	\Return G = (V, E);
+\end{algorithm}
 
 \subsection{Implementation in Autumn}
+
+\subsubsection{2 dimensional}
+
+\subsubsection{3 dimensional}
 
 \section{RRT* Variants}
 
 \subsection{RT-RRT*}
 
-The RT-RRT* takes big focus in real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy it makes it possible to keep the previously sampled tree.
+The RT-RRT* takes focus in real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy it makes it possible to keep the previously sampled tree.
 The two core principles introduced with the RT-RRT*, are tree expansion and tree rewiring. 
 At first the Algorithm start by initializing a root node. After each following iterations the tree expands and rewires. This sampling last for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the amount of steps the path consists of. In this phase the agent is moved gradually towards the tree root. Thereafter, when path planning is finished an the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. With this approach it enables the agent to move without the time needed to compute the whole path.
 Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
