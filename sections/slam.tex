@@ -26,7 +26,7 @@ Another example would be a drone computing camera images and GPS positional data
 
 \section{Localization and Mapping}
 The aforementioned technologies on their own are considered rather simplistic problems as either the environments map is given or reliable pose-estimation can be provided. While most applications meet either of these criteria with pre-built maps or GPS being available, in some environments such as indoors, mineshafts or outer space both the systems pose and environment remain uncertain and need to be determined simultaneously hence the name Simultaneous Localization and Mapping. 
-To summarize, the crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain. 
+To summarize, the crux of the SLAM problem is that localizations requires a map and mapping depends on pose estimates however neither are certain as described in Fig. \ref{fig:slamOverview}.
 
 
 %!!!!!! Front-End Backend Trennung ist nur bei graph based der Fall
@@ -41,6 +41,16 @@ The following sections will mainly focus on the SLAM back-end and dissect the pr
 
 
 %In order to partially solve this dilemma SLAM incorporates loop closure to correct the global map as well as positional estimates provided by odometry. A loop closure event occurs when revisiting previously mapped landmarks and associating relations between features to adapt the global topology. %Without loop closure a mobile robot would perceive its environment as a infinite corridor.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/slamOverview}
+	\caption{
+		The figure above depicts the different tasks contributing to the SLAM problem. Panel a) shows a robot moving trough a known environment while the pose and path remain uncertain. In panel b) the robots pose is certain while the landmark locations need to be determined. Panel c) composes both previous problems where neither the robot state nor the landmark locations are certain.
+	}
+	\label{fig:slamOverview}
+\end{figure}
 
 
 \section{Data Association}
@@ -68,7 +78,7 @@ The goal is that, for any time instant $ k $, the robots state vector
 \end{pmatrix}
 \] describing its position and orientation as well as a time invariant set of all absolute landmark positions 
 $ m = \{ m_{1}, m_{2}, ..., m_{n} \}$ 
-is computed, given uncertain relative landmark observations $ Z_{0:k} = \{z_{0}, z_{1}, ..., z_{k}\}$, controls $ U_{0:k} = \{u_{0}, u_{1}, ..., u_{k}\}$ and known initial location $ x_{0} $.
+is computed, given uncertain relative landmark observations $ Z_{0:k} = \{z_{0}, z_{1}, ..., z_{k}\}$, controls $ U_{0:k} = \{u_{0}, u_{1}, ..., u_{k}\}$ and known initial location $ x_{0} $. Fig. \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
 
 \begin{equation}\label{fullSLAM}
 	P(x_{k:0}, m | Z_{0:k}, U_{0:k}, x_{0})
@@ -81,6 +91,15 @@ In \ref{fullSLAM}, which is often referred to as "Full-SLAM" or "Offline-SLAM", 
 \end{equation}
 
 The pendant to this is "Online-SLAM" which aims estimate only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this online approach typically compute the probability distribution incrementally. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/SlamGraphical}
+	\caption{
+		A Bayes network graph depicting the causal relationships between sensor measurements (shaded circles) and uncertain variables (blank circles). It is made apparent how the relative measurements by odometry or landmark observation influence the robot state as well as landmark locations. 
+	}
+	\label{fig:slamGraphical}
+\end{figure}
 
 To compute either problem a mathematical model representing the robots state transition and a model describing observations need to be defined:
 
@@ -126,11 +145,11 @@ To make the the recursive structure of such filtering approaches more apparent t
 Over time many different approaches to the SLAM problem have been developed which can be categorized into either of three paradigms. The two mature ones are based on recursive filtering techniques while the modern graph-based solutions perform non-linear sparse optimization.
 
 \subsection{Extended Kalman Filter}
-The Extended Kalman Filter (EKF) is one of the first approaches to the Online-SLAM problem and similar to the standard Kalman Filter one implementation of a Bayes Filter. Contrary to the Kalman Filter it is applicable to non-linear systems and non-Gaussian distributions by performing local linearization.
+The Extended Kalman Filter (EKF) is one of the first approaches to the Online-SLAM problem and similar to the standard Kalman Filter one implementation of a Bayes Filter. Contrary to the Kalman Filter it is applicable to non-linear systems by performing linear approximation.
 
 %The Extended Kalman Filter (EKF) is one implementation of a Bayes Filter for non-linear problems and was one of the first approaches to the Online-SLAM problem. The author recommends preliminary knowledge about Bayes Filters\footcite{tipaldiBayes2020}, the vanilla Kalman Filter and the EKF\footcite{tipaldiEKF2020} before reading this section about its application in SLAM. 
 
-The Kalman Filter assumes a metric environment in which landmarks can be fully represented as points within the coordinate frame. The earlier introduced state-vector $ x $ is extended to a state-space vector with dimensions $ 3 + 2N$
+The Kalman Filter assumes a environment in which landmarks can be fully represented as points within the coordinate frame. The earlier introduced state-vector $ x $ is extended to a state-space vector with dimensions $ 3 + 2N$
 \[ \mu = 
 \begin{pmatrix}
 	x \\
@@ -151,23 +170,22 @@ $ \Sigma =
 \end{pmatrix} $ 
 is introduced which specifies the state $ x $ and landmark $ m $ uncertainties as well as correlations between landmarks and robot pose. 
 
-The motion and observation models are defined as non-linear functions $  g(u_{k}, \mu_{k - 1}) $ and $ h(x_{l}, m) $ which are linearized by performing first order taylor expansion. This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step algorithm:
+The motion and observation models are defined as non-linear Gaussian distributions $ \mathcal{N}(g(u_{k}, \mu_{k - 1}), R_{k}) $ and $ \mathcal{N}(h(x_{k}, m), Q_{k}) $ with $ R_{k} $ and $ Q_{k} $ representing zero-mean additive Gaussian noise.
+To still calculate the state transition as well as measurement update these functions are linearized by calculating their Jacobian matrices $ G_{k} $ and $ H_{k} $.
 
+This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step algorithm:
 
-%to do: noch vorher variablen wie G, H, ... definieren
-
-\begin{lstlisting}[mathescape=true, language=Python, caption={Kalman-filter algorithm described in pseude-code.},captionpos=b,label={lst:kalman_filter}]
+\begin{lstlisting}[mathescape=true, caption={Pseudo-Code describing the filter cycle of a Extenden Kalman Filter},captionpos=b,label={lst:kalman_filter}]
 	def extended_kalman_filter($\mu_{k-1}$, $\Sigma_{k-1}$, $u_{k}$, $z_{k}$):
 	$\overline{\mu}_{k} = g(u_{k}, \mu_{k-1})$				# state-prediction given newest control measurements
 	$\overline{\Sigma}_{k} = G_{k}\Sigma_{k-1}G_{k-1}^{T} + R_{k}$				# measurement prediction 	 		
 	
 	$K_{k} = \overline{\Sigma}_{k}H_{k}^{T}(H_{k}\overline{\Sigma}_{k}H_{k}^{T} + Q_{k})^{-1}$				# measurement of actual landmark position
 	$\mu_{k} = \overline{\mu}_{k} + K_{k}(z_{k}-h(\overline{\mu}_{k}))$				# data association 
-	$\Sigma_{k} = (I - K_{k}H_{k})\overline{\Sigma_{k}}$				# update of state-space vector as well as covariance matrix 
+	$\Sigma_{k} = (I - K_{k}H_{k})\overline{\Sigma}_{k}$				# update of state-space vector as well as covariance matrix 
 	
 	return $\mu_{k}, \Sigma_{t}$
 \end{lstlisting}
-
 
 %\begin{itemize}
 %	\item State Prediction: The next state $ \mu_{k} $ is predicted given the controls $ u_{k} $ and previous state $ \mu_{k-1} $.
@@ -178,9 +196,39 @@ The motion and observation models are defined as non-linear functions $  g(u_{k}
 %\end{itemize} 
 
 
-
+%wenn noch platz bleibt darüber schreiben dass taylor expansion nicht so gut ist
 
 \subsection{Particle Filter}
+One major problem with the EKF paradigm is that it lacks the ability to perform estimations under non-Gaussian distributions. 
+To this end particle filters estimate a specific probability distribution by proposing multiple possible hypothesis which get continuously more accurate as the algorithm progresses. 
+Particle filtering for SLAM with algorithms like FastSLAM, share many similarities with Monte-Carlo localization which is roughly described in the following steps:
+\begin{itemize}
+	\item For each state $ x_{k} $ a set of $J$ particles or hypothesis 
+	$ x_{k}^{[j]} $ with random state vectors is generated from a proposal distribution. 
+	\item The probability for each particle to be representing the true state is calculated by comparing its estimation with a measurement thus yielding in each particles importance weight $ \omega^{[j]} $.
+	\item The last step of a particle filter is to remove samples with a lower likely-hood of being correct and add more samples in regions with higher importance weights, this process is called resampling and shares many similarities with survival of the fittest algorithms.
+\end{itemize}
+
+%nur kleiner satz der mir eingefallen ist
+Because the number of particles greatly affects the performance of a particle filter, such approaches perform best in low dimension spaces. To this end the FastSLAM algorithm utilizes Rao-Blackwellization, see Equation \ref{RaoBlackwellization}, to separate the joint probability of robot state and map into individual distributions which can be computed with much more ease.
+This means that given the robots poses all landmarks are independent, which is described in Fig. \ref{fig:fastSlamGraphical}.
+
+\begin{equation}\label{RaoBlackwellization}
+	P(x_{0:k}, m | Z_{0:k}, U_{0:k}) = P(x_{0:k} | Z_{0:k}, U_{0:k}) P(m | x_{0:k}, Z_{0:k})
+\end{equation}
+
+Following this approach the robots path is estimated by performing a Monte-Carlo localization drawing samples from the robots motion model $x_{t}^{[j]} \sim P(x_{k} | x_{k-1}^{[j]}, u_{k}) $. Besides the state information each particle maintains a set of landmarks, each represented as a EKF $  \omega^{[j]} \sim P(z_{k} | x_{k}^{[j]}, \overline{z}_{k}) $ therefore the importance weight for each particle corresponds to the joint accuracy of all landmark estimations. 
+The final algorithm functions exactly as described with the exception that it incorporates the aforementioned EKF estimating the landmark locations and utilizing the error to determine the importance weight. 
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/FastSlamGraphical}
+	\caption{
+		This graphical description of the SLAM problem shows the assumption that the landmark estimates are all mediated through the robot path thus allowing for easier implementation by using smaller Gaussians for each landmark rather than a larger state-space vector as in EKF SLAM.
+	}
+	\label{fig:fastSlamGraphical}
+\end{figure}
 
 \subsection{Graph-based}
 
