@@ -19,13 +19,25 @@ When working with the principle of fast prototyping, the drawback of first appro
 \subsubsection{Problems without a Mount}
 
 After a period of testing with a prototype problems arise with the need of correction. In case of an, what most people consider a work-around rather than a solution to the problem of mounting a camera, they can be, in case of this application, divided in two categories.
-The first aspect to consider when mounting a camera to a drone is its field of view. With UAVs hovering above ground an angle is needed in order to be able to capture details close to the ground.  
+\newline The first aspect to consider when mounting a camera to a drone is its field of view. With UAVs hovering above ground an downward pointing angle is needed in order to be able to capture details close to the ground.  
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/FieldOfView}
 	\caption{Depiction of the FOV for cameras mounted at different angles on a drone.\newline A: camera mounted vertically, B: camera mounted with a downward pointing angle.}
 	\label{fig:custom_parts_FOV}
+\end{figure}
+
+Using zip ties results in the camera being mounted parallel to the ground. This leads to overlooking obstacles located below the field of view. This can be seen in figure 11.1 A. Adjusting the angle to be able to see as much as needed directly in front of the drone an the larger portion whats below the drone. Having the ability to capture obstacles directly in front of the drone is necessary, when wanting to be able to successfully let the drone navigate an environment autonomously. Therefor is a zip-tie solution valid, but far from optimal. A result of having a camera mounted parallel to the ground is the need to hover at a closer distance to the ground, which is potentially dangerous considering that in autumn we are not able to capture obstacles directly below the drone.
+
+The second problem that arises when not using a mount fitted for use with, in case of autumn the ZED2i, is that the camera is not perfectly leveled. This portraits a major flaw when using a uneven camera together with a slam algorithm. Slam uses odometry data for localization and alignment of the ground plane. If the camera is slightly tilted when starting the algorithm and without manuel adjustment the ground plane is going to be offset on one or multiple rotational axis. This results in the 3D model being a incorrect representation of reality. misaligned
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/MisalignedOdom}
+	\caption{Resulting point cloud of unleveled camera with invalid odometry start data.\newline A: real life footage of the obstacle, B: titled scan of the obstacle}
+	\label{fig:custom_parts_misalignedOdom}
 \end{figure}
 
 \subsubsection{How the mount was made}
