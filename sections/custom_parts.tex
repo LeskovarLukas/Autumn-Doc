@@ -64,6 +64,20 @@ Fusion 360 additionally comes with the capability of rendering the resulting mod
 
 \subsubsection{Manufacturing}
 
+For the purpose of converting the 3D-model to an physical object, the simplest and most time efficient method is to utilize 3D-printing. Nowadays 3D-printing is a wide spread technique to make ideas reality with little time and money. Therefor it is an optimal solution for the autumn project. 
+When going from a 3D-modeled design to an 3D-print a slicer is needed to convert the 3D-object to code the printer understands. With most 3D-printers printing in 2.5 dimensions, meaning that only the x and y axis move freely while the z only adjusts its height once a layer is finished. This principle is reflected in the resulting file once a 3D-model is sliced. The gcode consits of an header, defining settings for the print and a sequence of lines following it. A line of this gcode file would look like this: 
+\[G1\ X120.95\ Y101.653\ E1.17355\]
+The first part consisting of the identifier $G$ and a number, marks which command should be executed. In case of $G1$ it's "move in a straight line". Following the command specifier are parameters, for this example the x and y end position is needed to draw a line. Additionally marked with the identifier $E$, is the flow rate defining how much filament is going to be extruded when moving to the given position.
+
+The final step to attaining the physical form of a gcode file, is printing it using a suitable 3D-printer. Autumn uses an Creality Ender 5, because of it's readability and print quality. Furthermore the choice of the correct filament for an successful 3D-print is needed. For a part, like the camera mount, which isn't under big stresses and no large forces are applied to it, filament like acrylonitrile butadiene styrene, commonly known as ABS, isn't needed. Therefor the most widely used filament, polylactide is most fitted for this print.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/MountPrint}
+	\caption{3D-printed camera mount for the purpose of attaching the ZED2i to the Matrice 100. On top of the mount is the connection plate attaching on the drone.}
+	\label{fig:custom_parts_mountPrint}
+\end{figure}
+
 \section{CAD Software}
 
 \subsubsection{Fusion 360}
