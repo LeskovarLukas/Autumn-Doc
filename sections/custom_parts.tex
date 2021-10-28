@@ -30,17 +30,39 @@ After a period of testing with a prototype problems arise with the need of corre
 
 Using zip ties results in the camera being mounted parallel to the ground. This leads to overlooking obstacles located below the field of view. This can be seen in figure 11.1 A. Adjusting the angle to be able to see as much as needed directly in front of the drone an the larger portion whats below the drone. Having the ability to capture obstacles directly in front of the drone is necessary, when wanting to be able to successfully let the drone navigate an environment autonomously. Therefor is a zip-tie solution valid, but far from optimal. A result of having a camera mounted parallel to the ground is the need to hover at a closer distance to the ground, which is potentially dangerous considering that in autumn we are not able to capture obstacles directly below the drone.
 
-The second problem that arises when not using a mount fitted for use with, in case of autumn the ZED2i, is that the camera is not perfectly leveled. This portraits a major flaw when using a uneven camera together with a slam algorithm. Slam uses odometry data for localization and alignment of the ground plane. If the camera is slightly tilted when starting the algorithm and without manuel adjustment the ground plane is going to be offset on one or multiple rotational axis. This results in the 3D model being a incorrect representation of reality. misaligned
-
+The second problem that arises when not using a mount fitted for use with, in case of autumn the ZED2i, is that the camera is not perfectly leveled. This portraits a major flaw when using a uneven camera together with a slam algorithm. Slam uses odometry data for localization and alignment of the ground plane. If the camera is slightly tilted when starting the algorithm and without manual adjustment the ground plane is going to be offset on one or multiple rotational axis. This results in the 3D model being a incorrect representation of reality. This phenomenon can be observed in Figure 11.2.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\linewidth]{img/MisalignedOdom}
-	\caption{Resulting point cloud of unleveled camera with invalid odometry start data.\newline A: real life footage of the obstacle, B: titled scan of the obstacle}
+	\caption{Resulting point cloud of unleveled camera with invalid odometry start data.\newline A: real life footage of the obstacle, B: tilted scan of the obstacle}
 	\label{fig:custom_parts_misalignedOdom}
 \end{figure}
 
-\subsubsection{How the mount was made}
+\subsubsection{Design Process}
+
+The solution to the aforementioned problems being a mount securing the ZED2i to the Matrice 100. Additionally to the specific characteristics the mount has to fulfill, the ZED2i is the newest model with commercial products like mounts not being available. Therefor, to attain this custom mount design and manufacturing methods have to be used. 
+The design portion is done with the help of a CAD Software. CAD standing for Computer Aided Design, meaning that rather complex designs can be realized in a short amount of time and less effort than doing it the traditional way. The software used in the autumn project is Fusion360, due to its option for a free license and previously acquired knowledge working with this software. 
+The mount had to perfectly fit the camera to ensure the safety of camera and drone. Therefor it is necessary to take measurements, which then are used to shape the design of the 3D-model. In Fusion360 this can be best realized using parameterized design. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/Parameter}
+	\caption{Excerpt of parameters used for the autumn camera mount design}
+	\label{fig:custom_parts_parameter}
+\end{figure}
+
+Figure 11.3 depicts this concept of making the design dependent on parameters which can be easily adjusted. This allows for corrections to be made after the design processed is finished. Without linking sketches to parameters alterations would be time consuming and would result in an model clouded with sketches overriding previous adjustments. Furthermore changes affecting complex areas in the part lead to artifacts, which when removed take more time than redesigning the part in when applied to simple, one component models, like the mount in autumn. An important property in case of the autumn camera mount is the angle of the camera relative to the drone. This design principle makes it possible that changing the angle only means changing a number in a text-field, which implies the change of a number of different dimensions of the part. 
+Fusion 360 additionally comes with the capability of rendering the resulting model, in order to get a feel for how it would look in physical form.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/MountRender}
+	\caption{Render of the 3D-model for the camera mount attaching the ZED2i, also modeled and visible in the render, to the Matrice 100.}
+	\label{fig:custom_parts_mountRender}
+\end{figure}
+
+\subsubsection{Manufacturing}
 
 \section{CAD Software}
 
