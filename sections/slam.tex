@@ -54,8 +54,8 @@ Topological or feature-based maps reconstruct their environment as graphs with e
 
 \section{Probabilistic Definition}
 To describe probabilistic SLAM lets assume a robot is moving through an environment observing multiple landmarks at different times. 
-The goal is that, for any time instant $ k $, the robots state vector 
-\[ x_{k} = 
+The goal is that, for any time instant $ t $, the robots state vector 
+\[ x_{t} = 
 \begin{pmatrix}
 	x \\
 	y \\
@@ -63,19 +63,19 @@ The goal is that, for any time instant $ k $, the robots state vector
 \end{pmatrix}
 \] describing its position and orientation as well as a time invariant set of all absolute landmark positions 
 $ m = \{ m_{1}, m_{2}, ..., m_{i} \}$ 
-is computed, given uncertain relative landmark observations $ Z_{0:k} = \{z_{0}, z_{1}, ..., z_{k}\}$, controls $ U_{0:k} = \{u_{0}, u_{1}, ..., u_{k}\}$ and known initial location $ x_{0} $. Fig. \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
+is computed, given uncertain relative landmark observations $ Z_{0:t} = \{z_{0}, z_{1}, ..., z_{t}\}$, controls $ U_{0:t} = \{u_{0}, u_{1}, ..., u_{t}\}$ and known initial location $ x_{0} $. Fig. \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
 
 \begin{equation}\label{fullSLAM}
-	P(x_{k:0}, m | Z_{0:k}, U_{0:k}, x_{0})
+	P(x_{0:t}, m | Z_{0:t}, U_{0:t}, x_{0})
 \end{equation}
 
 In \ref{fullSLAM}, which is often referred to as "Full-SLAM" or "Offline-SLAM", the joint posterior density of the robots trajectory and landmark locations is estimated. In other words, this formulation of the problem aims to recover the whole robot trajectory.
 
 \begin{equation}\label{onlineSLAM}
-	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0})
+	P(x_{t}, m | Z_{0:t}, U_{0:t}, x_{0})
 \end{equation}
 
-The pendant to this is "Online-SLAM" which aims estimate only the robots latest location at time instant $ k $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this online approach typically compute the probability distribution incrementally. 
+The pendant to this is "Online-SLAM" which aims estimate only the robots latest location at time instant $ t $, as seen in \ref{onlineSLAM}. In contrast to "Full-SLAM", performing batch computation on the whole data, algorithms pursuing this online approach typically compute the probability distribution incrementally. 
 
 \begin{figure}
 	\centering
@@ -89,41 +89,41 @@ The pendant to this is "Online-SLAM" which aims estimate only the robots latest 
 To compute either problem a mathematical model representing the robots state transition and a model describing observations need to be defined:
 
 \begin{equation}\label{motionModel}
-	P(x_{k} | x_{k-1}, u_{k})
+	P(x_{t} | x_{t-1}, u_{t})
 \end{equation}
 
 \begin{equation}\label{observationModel}
-	P(z_{k} | x_{k}, m)
+	P(z_{t} | x_{t}, m)
 \end{equation}
 
-The motion model \ref{motionModel} describes the robots location at time $ k $ given a known previous location $ x_{k-1} $ and odometry $ u_{k} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
-\ref{observationModel} calculates the probability of observing a landmark $ z_{k} $ when the robots location $ x_{k} $ and environment $ m $ are known. For aforementioned reasons in SLAM the map is not known to the system, therefore many formulations omit the map in the observation model.
+The motion model \ref{motionModel} describes the robots location at time $ t $ given a known previous location $ x_{t-1} $ and odometry $ u_{t} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
+\ref{observationModel} calculates the probability of observing a landmark $ z_{t} $ when the robots location $ x_{t} $ and environment $ m $ are known. For aforementioned reasons in SLAM the map is not known to the system, therefore many formulations omit the map in the observation model.
 
 %The joint posterior is then implemented in a recursive prediction and correction form which is often described as time-update and measurement-update:
 
 For filtering approaches which are discussed later in this chapter, the joint posterior is then implemented in a recursive prediction and correction form which is often described as time-update and measurement-update:
 
 \begin{equation}\label{timeUpdate}
-	P(x_{k}, m | Z_{0:k-1}, U_{0:k}, x_{0}) = \int P(x_{k} | x_{k-1}, u_{k}) * P(x_{k-1}, m | Z_{0:k-1}, U_{0:k-1}, x_{0}) dx_{k-1}
+	P(x_{t}, m | Z_{0:t-1}, U_{0:t}, x_{0}) = \int P(x_{t} | x_{t-1}, u_{t}) P(x_{t-1}, m | Z_{0:t-1}, U_{0:t-1}, x_{0}) dx_{t-1}
 \end{equation}
 
 
 \begin{equation}\label{measurementUpdate}
-	P(x_{k}, m | Z_{0:k}, U_{0:k}, x_{0}) = \frac{P(z_{k} | x_{k}, m) * P(x_{k}, m | Z_{0:k-1}, U_{0:k}, x_{0}))}{P(z_{k} | Z_{0:k-1}, U_{0:k})}
+	P(x_{t}, m | Z_{0:t}, U_{0:t}, x_{0}) = \frac{P(z_{t} | x_{t}, m) P(x_{t}, m | Z_{0:t-1}, U_{0:t}, x_{0}))}{P(z_{t} | Z_{0:t-1}, U_{0:t})}
 \end{equation}
 
-The time update in \ref{timeUpdate} calculates an estimate of the robots state using a previously known state at $ k - 1 $ and state-transition given the newest control $ u_{k} $.
-In the next step, the measurement update \ref{measurementUpdate}, a observation $z_{k} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
+The time update in \ref{timeUpdate} calculates an estimate of the robots state using a previously known state at $ t - 1 $ and state-transition given the newest control $ u_{t} $.
+In the next step, the measurement update \ref{measurementUpdate}, a observation $z_{t} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
 
 To make the the recursive structure of such filtering approaches more apparent the equations \ref{timeUpdate} and \ref{measurementUpdate} can also be described in Bayesian form as follows:
 
 \begin{equation}\label{timeUpdateBayes}
-	\overline{\rm bel}(x_{k}) = \int P(x_{k} | x_{k-1}, u_{k}) * bel(x_{k-1}) dx_{k-1}
+	\overline{\rm bel}(x_{t}) = \int P(x_{t} | x_{t-1}, u_{t}) * bel(x_{t-1}) dx_{t-1}
 \end{equation}
 
 
 \begin{equation}\label{measurementUpdateBayes}
-	bel(x_{k}) = \eta * P(z_{k} | x_{k}) * \overline{\rm bel}(x_{k-1})
+	bel(x_{t}) = \eta * P(z_{t} | x_{t}) * \overline{\rm bel}(x_{t-1})
 \end{equation}
 
 \section{Solution Paradigms} 
@@ -155,21 +155,21 @@ $ \Sigma =
 \end{pmatrix} $ 
 is introduced which specifies the state $ x $ and landmark $ m $ uncertainties as well as correlations between landmarks and robot pose. 
 
-The motion and observation models are defined as non-linear Gaussian distributions $ \mathcal{N}(g(u_{k}, \mu_{k - 1}), R_{k}) $ and $ \mathcal{N}(h(x_{k}, m), Q_{k}) $ with $ R_{k} $ and $ Q_{k} $ representing zero-mean additive Gaussian noise.
-To still calculate the state transition as well as measurement update these functions are linearized by calculating their Jacobian matrices $ G_{k} $ and $ H_{k} $.
+The motion and observation models are defined as non-linear Gaussian distributions $ \mathcal{N}(g(u_{t}, \mu_{t - 1}), R_{t}) $ and $ \mathcal{N}(h(x_{t}, m), Q_{t}) $ with $ R_{t} $ and $ Q_{t} $ representing zero-mean additive Gaussian noise.
+To still calculate the state transition as well as measurement update these functions are linearized by calculating their Jacobian matrices $ G_{t} $ and $ H_{t} $.
 
 This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step procedure:
 
 \begin{lstlisting}[mathescape=true, caption={Pseudo-Code describing the filter cycle of a Extenden Kalman Filter},captionpos=b,label={lst:kalman_filter}]
-	def extended_kalman_filter($\mu_{k-1}$, $\Sigma_{k-1}$, $u_{k}$, $z_{k}$):
-	$\overline{\mu}_{k} = g(u_{k}, \mu_{k-1})$				# state-prediction given newest control measurements
-	$\overline{\Sigma}_{k} = G_{k}\Sigma_{k-1}G_{k-1}^{T} + R_{k}$				# measurement prediction 	 		
+	def extended_kalman_filter($\mu_{t-1}$, $\Sigma_{t-1}$, $u_{t}$, $z_{t}$):
+	$\overline{\mu}_{t} = g(u_{t}, \mu_{t-1})$				# state-prediction given newest control measurements
+	$\overline{\Sigma}_{t} = G_{t}\Sigma_{t-1}G_{t-1}^{T} + R_{t}$				# measurement prediction 	 		
 	
-	$K_{k} = \overline{\Sigma}_{k}H_{k}^{T}(H_{k}\overline{\Sigma}_{k}H_{k}^{T} + Q_{k})^{-1}$				# measurement of actual landmark position
-	$\mu_{k} = \overline{\mu}_{k} + K_{k}(z_{k}-h(\overline{\mu}_{k}))$				# data association 
-	$\Sigma_{k} = (I - K_{k}H_{k})\overline{\Sigma}_{k}$				# update of state-space vector as well as covariance matrix 
+	$K_{t} = \overline{\Sigma}_{t}H_{t}^{T}(H_{t}\overline{\Sigma}_{t}H_{t}^{T} + Q_{t})^{-1}$				# measurement of actual landmark position
+	$\mu_{t} = \overline{\mu}_{t} + K_{t}(z_{t}-h(\overline{\mu}_{t}))$				# data association 
+	$\Sigma_{t} = (I - K_{t}H_{t})\overline{\Sigma}_{t}$				# update of state-space vector as well as covariance matrix 
 	
-	return $\mu_{k}, \Sigma_{t}$
+	return $\mu_{t}, \Sigma_{t}$
 \end{lstlisting}
 
 %\begin{itemize}
@@ -188,13 +188,13 @@ One major problem with the EKF paradigm is its inability to perform estimations 
 To this end particle filters estimate a specific probability distribution by proposing multiple possible hypothesis which get continuously more accurate as the algorithm proceeds. 
 Particle filtering for SLAM with algorithms like FastSLAM, shares many similarities with Monte-Carlo localization which is roughly described in the following steps:
 \begin{itemize}
-	\item For each state $ x_{k} $ a set 
+	\item For each state $ x_{t} $ a set 
 	$
 	\mathcal{X} = 
 	\{ 
 	\langle
 	\begin{matrix}
-		 x_{k}^{[j]},  \omega^{[j]}
+		 x_{t}^{[j]},  \omega^{[j]}
 	\end{matrix}
 	\rangle
 	, ...
@@ -212,10 +212,10 @@ Because the number of particles greatly affects the performance of a particle fi
 This means that given the robots poses all landmarks are independent, which is described in Fig. \ref{fig:fastSlamGraphical}.
 
 \begin{equation}\label{RaoBlackwellization}
-	P(x_{0:k}, m | Z_{0:k}, U_{0:k}) = P(x_{0:k} | Z_{0:k}, U_{0:k}) P(m | x_{0:k}, Z_{0:k})
+	P(x_{0:t}, m | Z_{0:t}, U_{0:t}) = P(x_{0:t} | Z_{0:t}, U_{0:t}) P(m | x_{0:t}, Z_{0:t})
 \end{equation}
 
-Following this approach the robots path is estimated by performing a Monte-Carlo localization drawing samples from the robots motion model $x_{t}^{[j]} \sim P(x_{k} | x_{k-1}^{[j]}, u_{k}) $. Besides the state information each particle maintains a set of landmarks, each represented as a low dimensional EKF. Therefore the importance weight for each particle corresponds to the accuracy between expected measurement and observation as $ \omega^{[j]} \sim P(z_{k} | x_{k}^{[j]}, \overline{z}_{k}) $.
+Following this approach the robots path is estimated by performing a Monte-Carlo localization drawing samples from the robots motion model $x_{t}^{[j]} \sim P(x_{t} | x_{t-1}^{[j]}, u_{t}) $. Besides the state information each particle maintains a set of landmarks, each represented as a low dimensional EKF. Therefore the importance weight for each particle corresponds to the accuracy between expected measurement and observation as $ \omega^{[j]} \sim P(z_{t} | x_{t}^{[j]}, \overline{z}_{t}) $.
 % therefore the importance weight for each particle corresponds to the joint accuracy of all landmark estimations. 
 The final algorithm functions exactly as described with the exception that it incorporates the aforementioned EKF to estimate the landmark locations and compute the particle weight before updating its belief on landmark locations and initiating the resampling process. 
 
@@ -231,7 +231,7 @@ The final algorithm functions exactly as described with the exception that it in
 
 \subsection{Graph-based}
 The newest paradigm to solve the offline SLAM problem are graph-based methods that essentially use a non-linear least-squares approach to compute the graph of poses best fitting the measurements. 
-To this end the SLAM posterior is described as a graph of robot poses $ x_{i} $ at time $ k_{i} $ as nodes connected by soft constraints that correspond to spatial measurements between two states.
+To this end the SLAM posterior is described as a graph of robot poses $ x_{i} $ at time $ t_{i} $ as nodes connected by soft constraints that correspond to spatial measurements between two states.
 These edges are generated in the following two cases:
 
 \begin{equation}\label{odometryEdge}
@@ -250,7 +250,7 @@ The more interesting case is when an observation of a previously captured area o
 	\centering
 	\includegraphics[width=0.6\linewidth]{img/PoseGraphTransformation}
 	\caption{
-		The graph of robot poses connected to each other by odometry measurements. To calculate the relative movement between two nodes each node is represented as a matrix $X_{i}$ describing how it is transformed relative to the global coordinate frame. 
+		The graph of robot poses connected to each other by odometry measurements. To calculate the relative movement between two nodes each node can be represented as a matrix $X_{i}$ describing how it is transformed relative to the global coordinate frame.
 	}
 	\label{fig:poseGraphTransformation}
 \end{figure}
@@ -279,7 +279,7 @@ Once the optimal pose-graph is constructed the map data is rendered given known 
 	\centering
 	\includegraphics[width=0.4\linewidth]{img/PoseGraphOptimization}
 	\caption{
-		This pose-graph with two nodes describes how any pair of nodes are related to each other given a measurement. The measurement $ z_{ij} $ corresponds to how the node $x_{j}$ should be placed relative to node $x_{i}$ given that each of them share a similar observation. As seen in the figure this is not the case, thus demanding for the error $e_{ij}$ to be minimized. In other words, by moving the node $x_{j}$ closer to the optimum minimizes the error and corrects the robot state. 
+		This pose-graph with two nodes describes how any pair of nodes are related to each other given a measurement. The measurement $ z_{ij} $ corresponds to how the node $x_{j}$ should be placed relative to node $x_{i}$ given that each of them share a similar observation. As seen in the figure this is not the case, thus demanding for the error $e_{ij}$ to be minimized. In other words, by moving the node $x_{j}$ closer to the optimum minimizes the error and corrects the pose-graph. 
 	}
 	\label{fig:poseGraphOptimization}
 \end{figure}
@@ -289,22 +289,24 @@ Once the optimal pose-graph is constructed the map data is rendered given known 
 %!!!!!! Front-End Backend Trennung ist nur bei graph based der Fall
 Most modern graph-based SLAM systems are partitioned into the following modules:
 \begin{itemize}
-	\item A front-end in charge of abstracting sensory input by performing feature extraction as well as data association, see Section \ref{dataAssociation}. Essentially it will construct the pose-graph and feed it into the back-end.
+	\item A front-end in charge of abstracting sensory input by performing feature extraction as well as data association, see Section \ref{dataAssociation}. Essentially it constructs the pose-graph and feeds it into the back-end.
 	%Furthermore it is responsible for associating corresponding features over multiple measurements, which is typically referred to as short-term data association. Long-term data association or loop closure therefore aims to link current measurements to previously observed features thus  correcting accumulated odometry errors as well as adapting the global topology. 
 	\item A back-end performing pose-graph optimization based on the abstracted data fed in by the front-end. The back-end also provides positional information about nodes to the front-end thus supporting loop closure detection. 
 \end{itemize}
 
-While the back-end can be generalized for many different nuances of the SLAM problem, the front-end remains application specific as the data abstraction depends on the sensors utilized by the robot.
+While few established back-end algorithms can be used in many different scenarios of the SLAM problem, the front-end remains application specific as the data abstraction depends on the sensors utilized by the robot.
 
 %and is implemented by least-square solving algorithms such as gradient decent 
 
 %auch in section graph based schieben
 \section{Data Association}\label{dataAssociation}
 %While many aspects of the front-end remain application specific each SLAM system typically contains modules for data association in the two ways.
-Short-term data association or feature tracking is responsible for associating corresponding features over multiple measurements while long-term data association or loop-closure aims to detect and link similarities between current measurements and previously observed features. These loops help correcting accumulated odometry errors as well as optimizing the global topology. 
-A loop closure typically event occurs when revisiting previously mapped landmarks and is computed by scan-matching algorithms.
+One key trait that all SLAM paradigms posses is to recognise similarities in measurements and correct the incremental odometry error after revisiting previously mapped areas. This process is referred to as loop-closing or long-term data-association and reduces the uncertainty of pose and map estimates thus qualifying it as a integral part of any SLAM problem. 
 
-\section{Visual SLAM}
+While loop-closures aim to detect large correspondences in the global map, short-term data-association is responsible for associating corresponding features over multiple measurements which helps establishing the pose-graph. 
+
+\section{Pose-Graph Optimization}
+While building the pose-graph can be computed with relatively low effort, performing loop-closures is a computational heavy process. Which makes graph-based online SLAM solutions difficult to implement as robot state and map need to be estimated in real-time scenarios. To facilitate the data association process, the global map is partitioned into sub-maps thus allowing data-associations to be calculated only in parts of the graph the robot is currently present. 
 
 
 %\section{Application Scenarios}
