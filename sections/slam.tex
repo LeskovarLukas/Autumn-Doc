@@ -15,13 +15,13 @@ As one major topic of this thesis is robot navigation in a GPS-denied area as we
 Localization or state-Estimation aims to reconstruct the state of a system using interoceptive measurements (e.g. acceleration, velocity, etc.) as well as an exteroceptive model (e.g. position and orientation) of the system. \footcite{barfootStateEstimation2017}
 Put into the context of mobile robotics this means that in order to perform comprehensive localization of a mobile robot a sensor fusion between on-board sensors and an external coordinate system or map ought to be performed as solely relying on incremental sensors for odometry would quickly result in large accumulated errors.
 %Exemplary for such a robot would be a drone utilizing a Inertial Measurement Units (IMU) odometry as well as GPS positional data to estimate its current position.
-Exemplary for such a system would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
+An for this exemplary system would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
 
 \section{Mapping}
 Contrary to localization or state-estimation, in mapping problems the current pose of the system is known while its environment remains uncharted.
 Therefore stand-alone mapping aims to generate a model of its environment by evaluating sensor readings of environmental features as well as the systems pose to reconstruct aforementioned features in a global reference frame. 
 Mapping applications often combine technologies typically found in other scientific fields such as photogrammetry or computer vision.
-Another example would be a drone computing camera images and GPS positional data with a photogrammetric algorithm to reconstruct a 3D-Model of a building. 
+An example for such a system would be a drone computing camera images and GPS positional data with a photogrammetric algorithm to reconstruct a 3D-Model of a building. 
 
 
 \section{Localization and Mapping}
@@ -53,6 +53,7 @@ Topological or feature-based maps reconstruct their environment as graphs with e
 
 
 \section{Probabilistic Definition}
+One of the first 
 To describe probabilistic SLAM lets assume a robot is moving through an environment observing multiple landmarks at different times. 
 The goal is that, for any time instant $ t $, the robots state vector 
 \[ x_{t} = 
@@ -93,7 +94,7 @@ To compute either problem a mathematical model representing the robots state tra
 \end{equation}
 
 \begin{equation}\label{observationModel}
-	P(z_{t} | x_{t}, m)
+	P(z_{t} | x_{t})
 \end{equation}
 
 The motion model \ref{motionModel} describes the robots location at time $ t $ given a known previous location $ x_{t-1} $ and odometry $ u_{t} $ assuming the state-transition is a Markov process \footcite{haeneltMarvoModel2006}.
@@ -113,17 +114,17 @@ For filtering approaches which are discussed later in this chapter, the joint po
 \end{equation}
 
 The time update in \ref{timeUpdate} calculates an estimate of the robots state using a previously known state at $ t - 1 $ and state-transition given the newest control $ u_{t} $.
-In the next step, the measurement update \ref{measurementUpdate}, a observation $z_{t} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem. 
+In the next step, the measurement update \ref{measurementUpdate}, a observation $z_{t} $ is taken and the previously calculated estimate is corrected using Bayes-Theorem\footcite{durrantSlam2006}. 
 
-To make the the recursive structure of such filtering approaches more apparent the equations \ref{timeUpdate} and \ref{measurementUpdate} can also be described in Bayesian form as follows:
+To make the the recursive structure of such filtering approaches more apparent the equations \ref{timeUpdate} and \ref{measurementUpdate} can be compared to the Bayes filter, commonly used as a base algorithm for further state-estimation problems\footcite[Page 23]{thrun2002probabilisticRobotics}.
 
 \begin{equation}\label{timeUpdateBayes}
-	\overline{\rm bel}(x_{t}) = \int P(x_{t} | x_{t-1}, u_{t}) * bel(x_{t-1}) dx_{t-1}
+	\overline{\rm bel}(x_{t}) = \int P(x_{t} | x_{t-1}, u_{t})  bel(x_{t-1}) dx_{t-1}
 \end{equation}
 
 
 \begin{equation}\label{measurementUpdateBayes}
-	bel(x_{t}) = \eta * P(z_{t} | x_{t}) * \overline{\rm bel}(x_{t-1})
+	bel(x_{t}) = \eta  P(z_{t} | x_{t})  \overline{\rm bel}(x_{t-1})
 \end{equation}
 
 \section{Solution Paradigms} 
@@ -155,8 +156,20 @@ $ \Sigma =
 \end{pmatrix} $ 
 is introduced which specifies the state $ x $ and landmark $ m $ uncertainties as well as correlations between landmarks and robot pose. 
 
-The motion and observation models are defined as non-linear Gaussian distributions $ \mathcal{N}(g(u_{t}, \mu_{t - 1}), R_{t}) $ and $ \mathcal{N}(h(x_{t}, m), Q_{t}) $ with $ R_{t} $ and $ Q_{t} $ representing zero-mean additive Gaussian noise.
-To still calculate the state transition as well as measurement update these functions are linearized by calculating their Jacobian matrices $ G_{t} $ and $ H_{t} $.
+The motion and observation models are implemented as non-linear functions $x_{t} = g(u_{t}, x_{t - 1} + \epsilon_{t}$ and $z_{t} = h(x_{t}) + \delta_{t}$ with $\epsilon_{t}$ and $\delta_{t}$ defined as random noise variables commonly based on zero-mean additive Gaussian noise.
+
+%defined as non-linear Gaussian distributions $ \mathcal{N}(g(u_{t}, x_{t - 1}), R_{t}) $ and $ \mathcal{N}(h(x_{t}), Q_{t}) $ based on non-linear functions $g$ and $h$ with $ R_{t} $ and $ Q_{t} $ representing zero-mean additive Gaussian noise.
+To still calculate the state transition as well as measurement update these functions are linearized by performing first order Taylor Expansion as follows\footcite[Pages 33-51]{thrun2002probabilisticRobotics}:
+
+\begin{equation}
+	g(u_{t}, x_{t - 1}) \approx g(u_{t}, \mu_{t - 1}) + g'(u_{t}, \mu_{t - 1})(x_{t - 1} - \mu_{t - 1}) 
+	= g(u_{t}, \mu_{t - 1}) + G_{t}(x_{t - 1} - \mu_{t - 1})
+\end{equation}
+
+\begin{equation}
+	h(x_{t}) \approx h(\overline{\mu}_{t}) + h'(\overline{\mu}_{t})(x_{t} - \overline{\mu}_{t}) 
+	= h(\overline{\mu}_{t}) + H_{t}(x_{t} - \overline{\mu}_{t})
+\end{equation}
 
 This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step procedure:
 
@@ -171,6 +184,8 @@ This allows for the functions to be incorporated in the vanilla Kalman Filter Al
 	
 	return $\mu_{t}, \Sigma_{t}$
 \end{lstlisting}
+
+Notice that the Jacobian matrices $G_{t}$ and $H_{t}$ containing all partial derivatives of $g$ and $h$ are utilized describing the transformation of robot state as well as observations based on the pose.
 
 %\begin{itemize}
 %	\item State Prediction: The next state $ \mu_{k} $ is predicted given the controls $ u_{k} $ and previous state $ \mu_{k-1} $.
@@ -217,7 +232,7 @@ This means that given the robots poses all landmarks are independent, which is d
 
 Following this approach the robots path is estimated by performing a Monte-Carlo localization drawing samples from the robots motion model $x_{t}^{[j]} \sim P(x_{t} | x_{t-1}^{[j]}, u_{t}) $. Besides the state information each particle maintains a set of landmarks, each represented as a low dimensional EKF. Therefore the importance weight for each particle corresponds to the accuracy between expected measurement and observation as $ \omega^{[j]} \sim P(z_{t} | x_{t}^{[j]}, \overline{z}_{t}) $.
 % therefore the importance weight for each particle corresponds to the joint accuracy of all landmark estimations. 
-The final algorithm functions exactly as described with the exception that it incorporates the aforementioned EKF to estimate the landmark locations and compute the particle weight before updating its belief on landmark locations and initiating the resampling process. 
+The final algorithm functions exactly as described with the exception that it incorporates the aforementioned EKF to estimate the landmark locations and compute the particle weight before updating its belief on landmark locations and initiating the resampling process \footcite[Pages 1159-1162]{stachniss2016simultaneous}. 
 
 
 \begin{figure}
@@ -268,7 +283,7 @@ $
 $, with the information matrix $\Omega_{ij}$ describing the measurement noise.
 
 Equation \ref{leastSquares} describes this optimization process, with the error function $e_{ij}$ defined as any non-linear function essentially calculating the difference between estimate and true measurement for any pair of nodes. 
-Once the optimal pose-graph is constructed the map data is rendered given known poses thus reducing the problem to simple mapping.
+Once the optimal pose-graph is constructed the map data is rendered given known poses thus reducing the problem to simple mapping\footcite{grisetti2010graphSLAM}.
 
 \begin{equation}\label{leastSquares}
 	x* = argmin_{x} \sum_{ij}e_{ij}^{T} \Omega_{ij} e_{ij}
@@ -307,6 +322,10 @@ While loop-closures aim to detect large correspondences in the global map, short
 
 \section{Pose-Graph Optimization}
 While building the pose-graph can be computed with relatively low effort, performing loop-closures is a computational heavy process. Which makes graph-based online SLAM solutions difficult to implement as robot state and map need to be estimated in real-time scenarios. To facilitate the data association process, the global map is partitioned into sub-maps thus allowing data-associations to be calculated only in parts of the graph the robot is currently present. 
+
+\section{Comparing SLAM Paradigms}
+
+\section{SLAM in Autumn}
 
 
 %\section{Application Scenarios}
