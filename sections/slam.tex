@@ -323,7 +323,15 @@ While loop-closures aim to detect large correspondences in the global map, short
 \section{Pose-Graph Optimization}
 While building the pose-graph can be computed with relatively low effort, performing loop-closures is a computational heavy process. Which makes graph-based online SLAM solutions difficult to implement as robot state and map need to be estimated in real-time scenarios. To facilitate the data association process, the global map is partitioned into sub-maps thus allowing data-associations to be calculated only in parts of the graph the robot is currently present. 
 
-\section{Comparing SLAM Paradigms}
+\section{Comparison of SLAM Paradigms}
+The previous sections explained the basic structure of the three main approaches to the SLAM problem with the Extended Kalman Filter being the most mature. 
+
+In its basic implementation the algorithmic complexity of EKF-SLAM is tightly coupled to the size of the covariance matrix which grows quadratically as more landmarks are observed. Furthermore local linearization as utilized in this approach has many disadvantages as results can be very inconsistent. To solve this efficiency problem many optimization approaches have been implemented in the past years\footcite{bailey2006simultaneous}.
+
+Particle filtering methods such as Fast-SLAM solve many issues found in the EKF as they directly incorporate a non-linear process model instead of performing linearization beforehand. Although the number of particles needed may increase dramatically Fast-SLAM still performs well with linear  time-complexity which may even be improved by implementing a balanced binary tree to organize particles as Montemerlo\footcite{montemerlo2002fastslam} suggests. 
+
+Contrary the relatively modern graph-based approach inherently aims to solve the Full-SLAM problem as it performs pose-graph optimization on the whole graph. The main benefit of this solution is the decoupling of front- and back-end which allows it to be used in many different scenarios. 
+Although its basic implementation performs offline many newer approaches adjust the pose-graph in real-time which makes such solutions relatively similar to EKF-SLAM. 
 
 \section{SLAM in Autumn}
 
