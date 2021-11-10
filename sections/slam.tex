@@ -201,7 +201,7 @@ Notice that the Jacobian matrices $G_{t}$ and $H_{t}$ containing all partial der
 \subsection{Particle Filter}
 One major problem with the EKF paradigm is its inability to perform estimations under non-Gaussian distributions. 
 To this end particle filters estimate a specific probability distribution by proposing multiple possible hypothesis which get continuously more accurate as the algorithm proceeds. 
-Particle filtering for SLAM with algorithms like FastSLAM, shares many similarities with Monte-Carlo localization which is roughly described in the following steps:
+Particle filtering for SLAM with algorithms like Fast-SLAM, shares many similarities with Monte-Carlo Localization (MCL) which is roughly described in the following steps:
 \begin{itemize}
 	\item For each state $ x_{t} $ a set 
 	$
@@ -223,7 +223,7 @@ Particle filtering for SLAM with algorithms like FastSLAM, shares many similarit
 \end{itemize}
 
 %nur kleiner satz der mir eingefallen ist
-Because the number of particles greatly affects the performance of a particle filter, such approaches perform best in low dimension spaces. To this end the FastSLAM algorithm utilizes Rao-Blackwellization, see Equation \ref{RaoBlackwellization}, to separate the joint probability of robot state and map into individual distributions which can be computed with much more ease.
+Because the number of particles greatly affects the performance of a particle filter, such approaches perform best in low dimension spaces. To this end the Fast-SLAM algorithm utilizes Rao-Blackwellization, see Equation \ref{RaoBlackwellization}, to separate the joint probability of robot state and map into individual distributions which can be computed with much more ease.
 This means that given the robots poses all landmarks are independent, which is described in Fig. \ref{fig:fastSlamGraphical}.
 
 \begin{equation}\label{RaoBlackwellization}
@@ -309,7 +309,7 @@ Most modern graph-based SLAM systems are partitioned into the following modules:
 	\item A back-end performing pose-graph optimization based on the abstracted data fed in by the front-end. The back-end also provides positional information about nodes to the front-end thus supporting loop closure detection. 
 \end{itemize}
 
-While few established back-end algorithms can be used in many different scenarios of the SLAM problem, the front-end remains application specific as the data abstraction depends on the sensors utilized by the robot.
+While the front-end remains application specific as the data abstraction depends on the sensors utilized by the robot, the same back-end can be applied for many different scenarios as the pose-graph optimization essentially represents a squared-error minimization and many elaborated algorithms such as Gauss-Newton.
 
 %and is implemented by least-square solving algorithms such as gradient decent 
 
@@ -320,18 +320,44 @@ One key trait that all SLAM paradigms posses is to recognise similarities in mea
 
 While loop-closures aim to detect large correspondences in the global map, short-term data-association is responsible for associating corresponding features over multiple measurements which helps establishing the pose-graph. 
 
-\section{Pose-Graph Optimization}
+\section{Hierarchical Pose-Graphs}
 While building the pose-graph can be computed with relatively low effort, performing loop-closures is a computational heavy process. Which makes graph-based online SLAM solutions difficult to implement as robot state and map need to be estimated in real-time scenarios. To facilitate the data association process, the global map is partitioned into sub-maps thus allowing data-associations to be calculated only in parts of the graph the robot is currently present. 
 
 \section{Comparison of SLAM Paradigms}
-The previous sections explained the basic structure of the three main approaches to the SLAM problem with the Extended Kalman Filter being the most mature. 
+%The previous sections explained the basic structure of the three main approaches to the SLAM problem with the Extended Kalman Filter being the most mature. 
 
-In its basic implementation the algorithmic complexity of EKF-SLAM is tightly coupled to the size of the covariance matrix which grows quadratically as more landmarks are observed. Furthermore local linearization as utilized in this approach has many disadvantages as results can be very inconsistent. To solve this efficiency problem many optimization approaches have been implemented in the past years\footcite{bailey2006simultaneous}.
+%In its basic implementation the algorithmic complexity of EKF-SLAM is tightly coupled to the size of the covariance matrix which grows quadratically as more landmarks are observed. Furthermore local linearization as utilized in this approach has many disadvantages as results can be very inconsistent. To solve this efficiency problem many optimization approaches have been implemented in the past years\footcite{bailey2006simultaneous}.
 
-Particle filtering methods such as Fast-SLAM solve many issues found in the EKF as they directly incorporate a non-linear process model instead of performing linearization beforehand. Although the number of particles needed may increase dramatically Fast-SLAM still performs well with linear  time-complexity which may even be improved by implementing a balanced binary tree to organize particles as Montemerlo\footcite{montemerlo2002fastslam} suggests. 
+%Particle filtering methods such as Fast-SLAM solve many issues found in the EKF as they directly incorporate a non-linear process model instead of performing linearization beforehand. Although the number of particles needed may increase dramatically Fast-SLAM still performs well with linear  time-complexity which may even be improved by implementing a balanced binary tree to organize particles as Montemerlo\footcite{montemerlo2002fastslam} suggests. 
 
-Contrary the relatively modern graph-based approach inherently aims to solve the Full-SLAM problem as it performs pose-graph optimization on the whole graph. The main benefit of this solution is the decoupling of front- and back-end which allows it to be used in many different scenarios. 
-Although its basic implementation performs offline many newer approaches adjust the pose-graph in real-time which makes such solutions relatively similar to EKF-SLAM. 
+%Contrary the relatively modern graph-based approach inherently aims to solve the Full-SLAM problem as it performs pose-graph optimization on the whole graph. The main benefit of this solution is the decoupling of front- and back-end which allows it to be used in many different scenarios. 
+%Although its basic implementation performs offline many newer approaches adjust the pose-graph in real-time which makes such solutions relatively similar to EKF-SLAM. 
+
+
+The Extended Kalman Filter is a mature approach to the SLAM problem and has been implemented many times in different types of applications. However it does not only lack computational efficiency in its original implementation, see. Tab. \ref{tab:slamComparison}, but also has shown to be very problematic concerning consistent solution and robust data-association. 
+These problems stem from the algorithm definition itself, firstly as local-linearization of non-linear problem impairs the system to reach complete convergence, e.g. all landmark uncertainties converging to zero. Secondly the data-association model of EKF assumes all landmarks to be fully identifiable from any point of view, which cannot be guaranteed in most real-life scenarios and renders data-association very fragile.
+Fortunately the EKF has been improved and optimized to address some of the aforementioned issues\footcite{bailey2006simultaneous}.
+
+Another paradigm proposed was Particle Filtering which essentially applies a survival of the fittest model to the robot poses. Solutions like Fast-SLAM optimize MCL algorithm by decoupling landmarks and estimating through individual EKFs. 
+The main benefit of this solution is the utilization of a non-linear model and ability to perform even with non-Gaussian distributions. 
+Although its computationally more efficient compared to the previous approach, one problem is the need for large amounts of particles to achieve high accuracy. Montemerlo\footcite{montemerlo2002fastslam} suggest implementing a balanced binary tree to store and organize particles which improves the complexity of the algorithm to $O(j log m)$ with $j$ representing the amount of particles and $m$ being the number of landmarks.
+
+Lastly mentioned was the graph-based approach to SLAM which has grown significant popularity due to its versatility and reusability in different applications. The robot posterior is modelled as a sparse pose-graph which is optimized using a least-squares algorithm and is solved offline after the whole robot path has been captured. Some newer algorithms try to manipulate in real-time to establish a graph-based online SLAM solution\footcite{stachniss2016simultaneous}.
+
+
+\begin{table}[]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		\textbf{Approach}  & \textbf{Problem} & \textbf{Solution}                      & \textbf{Time Complexity} \\ \hline
+		\textbf{EKF}       & online SLAM      & KF with local linearization & $O(m^{2})$               \\ \hline
+		\textbf{Fast-SLAM} & full \& online SLAM      & Based on MCL     & $O(j*m)$                 \\ \hline
+		\textbf{Graph SLAM} & full  SLAM & Least-Squares optimization & $O(|V| + |N|)$ \\ \hline
+	\end{tabular}
+	\caption{A comparison of the three main SLAM Paradigms concerning what problem is solved in which manner and how efficient the algorithm solves it. The EKF is the most inefficient algorithm as the covariance matrix grows quadratically as the number of landmarks $m$ increases. 
+	On the contrary the un-optimized Fast-SLAM approach performs better 
+}
+	\label{tab:slamComparison}
+\end{table}
 
 \section{SLAM in Autumn}
 
