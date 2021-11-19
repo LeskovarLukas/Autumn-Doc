@@ -342,7 +342,7 @@ Another paradigm proposed was Particle Filtering which essentially applies a sur
 The main benefit of this solution is the utilization of a non-linear model and ability to perform even with non-Gaussian distributions. 
 Although its computationally more efficient compared to the previous approach, one problem is the need for large amounts of particles to achieve high accuracy. Montemerlo\footcite{montemerlo2002fastslam} suggest implementing a balanced binary tree to store and organize particles which improves the complexity of the algorithm to $O(j log m)$ with $j$ representing the amount of particles and $m$ being the number of landmarks.
 
-Lastly mentioned was the graph-based approach to SLAM which has grown significant popularity due to its versatility and reusability in different applications. The robot posterior is modelled as a sparse pose-graph which is optimized using a least-squares algorithm and is solved offline after the whole robot path has been captured. Some newer algorithms try to manipulate in real-time to establish a graph-based online SLAM solution\footcite{stachniss2016simultaneous}.
+Lastly mentioned was the graph-based approach to SLAM which has grown significant popularity due to its versatility and reusability in different applications. The robot posterior is modelled as a sparse pose-graph which is optimized using a least-squares algorithm and is solved offline after the whole robot path has been captured. Some newer algorithms try to manipulate the pose-graph in real-time to establish a graph-based online SLAM solution\footcite{stachniss2016simultaneous}.
 
 
 \begin{table}[]
@@ -350,17 +350,33 @@ Lastly mentioned was the graph-based approach to SLAM which has grown significan
 		\hline
 		\textbf{Approach}  & \textbf{Problem} & \textbf{Solution}                      & \textbf{Time Complexity} \\ \hline
 		\textbf{EKF}       & online SLAM      & KF with local linearization & $O(m^{2})$               \\ \hline
-		\textbf{Fast-SLAM} & full \& online SLAM      & Based on MCL     & $O(j*m)$                 \\ \hline
+		\textbf{Fast-SLAM} & full \& online SLAM      & Based on MCL     & $O(j m)$                 \\ \hline
 		\textbf{Graph SLAM} & full  SLAM & Least-Squares optimization & $O(|V| + |N|)$ \\ \hline
 	\end{tabular}
-	\caption{A comparison of the three main SLAM Paradigms concerning what problem is solved in which manner and how efficient the algorithm solves it. The EKF is the most inefficient algorithm as the covariance matrix grows quadratically as the number of landmarks $m$ increases. 
-	On the contrary the un-optimized Fast-SLAM approach performs better 
+	\caption{The three main SLAM solution paradigms in basic implementation compared by their computational complexity. Note that the quadratic time complexity of the EKF approach is caused by quadratically extending the covariance matrix as landmarks $m$ are added and updated throughout mapping.
+	For Fast-SLAM the complexity concerning just the particles $j$ stays linear, however during every resampling step each particle including all landmark estimate $m$ contained within need to be copied. 
+	Lastly the back-end for most graph SLAM solution is based on least-squares error minimization of the pose graph with $|N|$ nodes as robot poses and $|V|$ vertices as measurements between nodes thus rendering the computational complexity to be  $O(|V| + |N|)$ without utilized hierarchical pose-graphs as studied by Korovko and Robustov\footcite{korovko2021partial}.
 }
 	\label{tab:slamComparison}
 \end{table}
 
 \section{SLAM in Autumn}
+As localization and mapping data is utilized to perform real-time path-planning as well as drone control these modules are a crucial part of the Autumn Drone, thus requiring a algorithm that solves the online SLAM problem in a efficient manner while remaining compatibility to the hardware in use. This restraints the solution in question to perform visual SLAM supporting stereo images and 6DoF-Odometry. 
+While remaining within the package-space of ROS this reduces the number of potential algorithms to the following graph-based SLAM solutions:
+\begin{itemize}
+	\item ORB-SLAM2
+	\item S-PTAM
+	\item RTAB-Map
+	\item RGBDSLAMv2
+\end{itemize}
 
+ORB-SLAM2 and S-PTAM where not selected as both approaches do not provide online occupancy grids as ROS-Topics which makes them infeasible to use and incorporate with the path-planning module of Autumn. Furthermore they do not propose a memory-management strategy thus potentially making loop-closure processing within large maps cumbersome. 
+
+The algorithm chosen to be used for Autumn was RTAB-Map as incorporating stereo-images and external odometry is supported out-of-the-box and a variety of outputs such as 2D and 3D occupancy grids as well as a dense point cloud are offered. 
+As loop-closure detection algorithm with memory management was the primary goal of RTAB-Map, it qualifies for usage in large-scale environments during long mapping sessions.
+Since its publication in 2013 this algorithm has been extended and improved to support stereo- or RGBD-footage, 2D as well as 3D Lidar data and provides nodes for processing visual or lidar based odometry if no other external topic is available. 
+
+Although RGBDSLAMv2 does not fully qualify to be considered in this project as it only works with RGBD-Cameras like the XBOX Kinect or Intel RealSense it is worth mentioning as it provides a 3D occupancy grid and a dense point-cloud similar to RTAB-Map.\footcite{labbe2019rtab}
 
 %\section{Application Scenarios}
 %
