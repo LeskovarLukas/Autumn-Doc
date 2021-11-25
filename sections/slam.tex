@@ -361,13 +361,24 @@ Lastly mentioned was the graph-based approach to SLAM which has grown significan
 \end{table}
 
 \section{SLAM in Autumn}
-As localization and mapping data is utilized to perform real-time path-planning as well as drone control these modules are a crucial part of the Autumn Drone, thus requiring a algorithm that solves the online SLAM problem in a efficient manner while remaining compatibility to the hardware in use. This restraints the solution in question to perform visual SLAM supporting stereo images and 6DoF-Odometry. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/airlabMap}
+	\caption{
+		Occupancy grid of the AIRLab at the HTBLuVA Wiener Neustadt including the path pursued by the drone as it got carried through the laboratory. The map as seen above is of low quality including many artefacts, sensor noise as well as misaligned proportions.
+		Although the main room is poorly mapped with many error, the smaller workshop at the top is depicted relatively accurate.
+	}
+	\label{fig:AirLABmap}
+\end{figure}
+
+As localization and mapping data is utilized to perform real-time path-planning as well as drone control these modules are a crucial part of the Autumn Drone, thus requiring a algorithm that solves the online SLAM problem in a efficient manner while maintaining compatibility to the hardware in use. This restraints the solution in question to perform visual SLAM supporting stereo images and 6DoF-Odometry. 
 While remaining within the package-space of ROS this reduces the number of potential algorithms to the following graph-based SLAM solutions:
 \begin{itemize}
-	\item ORB-SLAM2
-	\item S-PTAM
-	\item RTAB-Map
-	\item RGBDSLAMv2
+	\item \href{https://github.com/raulmur/ORB_SLAM2}{ORB-SLAM2}
+	\item \href{https://github.com/lrse/sptam}{S-PTAM}
+	\item \href{http://introlab.github.io/rtabmap/}{RTAB-Map}
+	\item \href{https://felixendres.github.io/rgbdslam_v2/}{RGBDSLAMv2}
 \end{itemize}
 
 ORB-SLAM2 and S-PTAM where not selected as both approaches do not provide online occupancy grids as ROS-Topics which makes them infeasible to use and incorporate with the path-planning module of Autumn. Furthermore they do not propose a memory-management strategy thus potentially making loop-closure processing within large maps cumbersome. 
@@ -375,6 +386,7 @@ ORB-SLAM2 and S-PTAM where not selected as both approaches do not provide online
 The algorithm chosen to be used for Autumn was RTAB-Map as incorporating stereo-images and external odometry is supported out-of-the-box and a variety of outputs such as 2D and 3D occupancy grids as well as a dense point cloud are offered. 
 As loop-closure detection algorithm with memory management was the primary goal of RTAB-Map, it qualifies for usage in large-scale environments during long mapping sessions.
 Since its publication in 2013 this algorithm has been extended and improved to support stereo- or RGBD-footage, 2D as well as 3D Lidar data and provides nodes for processing visual or lidar based odometry if no other external topic is available. 
+For Autumn this approach was implemented by providing the stereo-image stream as well as visual odometry data from the Stereolabs ZED2i thus yielding in multiple occupancy grids, robot paths as visualized in Fig. \ref{fig:AirLABmap}.
 
 Although RGBDSLAMv2 does not fully qualify to be considered in this project as it only works with RGBD-Cameras like the XBOX Kinect or Intel RealSense it is worth mentioning as it provides a 3D occupancy grid and a dense point-cloud similar to RTAB-Map.\footcite{labbe2019rtab}
 
@@ -411,17 +423,17 @@ Although RGBDSLAMv2 does not fully qualify to be considered in this project as i
 %
 %\subsection{Visual Inertial Odometry}
 
+\section{Topics not mentioned in this Chapter}
+The SLAM problem is a highly diversified field of study with many different concepts not only concerning one paradigms adaption to other use cases than originally mentioned but also diving into the exact implementations of any of its component. Due to this abundance of concepts and algorithms it would be unfeasible to characterize every one of them. 
+However for the intrigued reader the author suggests the following topics and resources for further reading:
+\begin{itemize}
+	\item Particle Filtering for grid-based SLAM\footcite{grisetti2005ParticleGrid}
+	\item Visual SLAM approaches. A wide range of literature on this topic is provided by the \href{https://vision.in.tum.de/research/vslam}{Technical University in Munich (TUM)}, Germany.
+	\item Graph-SLAM frontends using different data association approaches for visual SLAM such as feature based matching like RANSAC\footcite{Jia2018FeatureMatching} or point-to-point matching like ICP\footcite{Horn1988ICP}. 
+	\item Mapping in dynamic environments capable of comprehending moving obstacles within the environment\footcite{wang2003dynSLAM}
+	\item SLAM with multiple robots\footcite{gutmann2003IncrMapping}
+\end{itemize} 
 
-\section{Loop Closure for Visual SLAM}
-
-\subsection{Appearance-based}
-
-\subsection{Deep Learning}
-
-
-\section{Map optimization}
-
-\subsection{Bundle Adjustment}
 
 
 
