@@ -131,8 +131,19 @@ When considering using 3D-printing in any kind of project, it is important to th
 
 \subsubsection{FDM-Printing}
 
-Fused Deposition Modeling is the conventional method of 3d-printing. FDM-Printing is characterized by the use of a filament, which is extruded, in order to build up the model layer by layer. The print-head consisting of an extruder, hot-end and nozzle, is moved in the x and y . Filament is fed to the hot-end via the extruder, where it is heated to its melting point and pushed through a nozzle which specifies the flow rate by constricting the flow. 
-This simple approach enables an easy and fast realization of concepts and ideas. 
-Drawbacks of this methods consist of decreased structural integrity in the z-direction of the print. 
+Fused Deposition Modeling is the most commonly and wide spread method of 3D-printing. The principle behind FDM comprises using an extrusion device to eject a thermoplastic polymer. This polymer is heated to the point of its glass transition and consequentially extruded along a predefined path.\newline Movement capabilities of 3D-printers differ between two different approaches. Most desktop 3D-printers are Cartesian-style 3D-printers, which means it moves linearly in the x, y and z dimension.
+Which parts of the printer move depend on the printer itself, commonly the print-bed moves in the y dimension, while the print-head covers x and the vertical z movement. In Contrast the delta-printing method uses three vertical rods aligned in a triangle shape, to support the print-head and move it per individual movement of sleds, on the vertical rods, connected to the print-head.\footcite{all3dpFDM3DPrinting2020}\newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/cartesianDeltaPrinting}
+	\caption{Portrayal of Cartesian-style and Delta-style 3D-printing.\footcite{Schmitt2017}}
+	\label{fig:custom_parts_printerMovement}
+\end{figure}
+
+Cartesian-style and Delta-style printers fundamentally contain the same parts. Both printer variants include a print-bed, print-head and stepper-motors, the difference is how they are arranged. Therefor the performance of these printing styles is similar and are more depend on other factors than the movement system. The reason Cartesian-style printers are as popular as they are, is due to the fact that the simpler Cartesian approach is user friendlier and consumes less space, then its delta-style equivalent.\newline
+In order to be able to distribute the filament in according to the predefined path, calculated by the slicing software, components are needed, namely an extruder, hot-end, and nozzle. The extruder is used the feed the polymer to the print-head. The print-head itself consists of an hot-end and a nozzle, the hot-end is used to heat the thermoplastic polymer to the state of glass transition, after which it is forced through a nozzle an applied to either the print-bed directly or on top another layer.
+The aspect of the filament used for a print, heavily influences the success and usability of a part. The most common filaments include PLA, ABS and Nylon. PLA being the easiest to work with, it is the most frequently used, when needing a more robust material then PLA a suitable polymer would be ABS. Cases where Nylon is used are when highly flexible parts are desired.\footcite{hubsIntroToFDM3DPrintingNoDate}
+
 
 \subsubsection{SLA-Printing}
