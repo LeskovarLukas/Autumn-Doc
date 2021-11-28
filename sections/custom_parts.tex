@@ -120,18 +120,19 @@ With Fusion 360 offering a non-commercial, free license option with limited func
 When comparing the two CAD solution, that are possibilities to be used in the autumn project, the most important characteristic is the user friendliness in respect to the state of knowledge the user already has. Both SolidWorks and Fusion 360 offer more than enough functionality to fulfill the needs of autumn. When looking at the monetary dimension, where for the needed functionality Fusion has no competition with its free license for personal use. Furthermore is the Fusion 360 workflow tailored to simple application, with a small amount of components. SolidWorks follows a assembly based principle, in contrast Fusion 360 is based on a multi-component architecture.\newline
 In conclusion due to the limited amount of functionality required from a CAD software in the autumn project, Fusion 360 is being used.
 
-\section{Manufacturing Process}
+\section{3D-Printing}
 
-This section is going to focus on manufacturing methods available in the autumn project and compare them. Nowadays easy and fast prototyping is made possible with use of 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept, to an widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.
-
-\subsection{3D-Printing}
-
+This section is going to focus on manufacturing methods available in the autumn project and compare them. Nowadays easy and fast prototyping is made possible with use of 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept, to an widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.\newline
 Autumn having an area of competence, split between skills when working with soft- and hardware, it is important to have the means to manufacture custom parts, tailored to the needs of the project. With 3D-Printing being an affordable and accurate technology, in terms of translating virtual concepts to physical object, it is an obvious choice to use for autumn.
 When considering using 3D-printing in any kind of project, it is important to think about which method is best fitted for the application.
 
-\subsubsection{FDM-Printing}
+\subsection{Fused Deposition Modeling}
 
-Fused Deposition Modeling is the most commonly and wide spread method of 3D-printing. The principle behind FDM comprises using an extrusion device to eject a thermoplastic polymer. This polymer is heated to the point of its glass transition and consequentially extruded along a predefined path.\newline Movement capabilities of 3D-printers differ between two different approaches. Most desktop 3D-printers are Cartesian-style 3D-printers, which means it moves linearly in the x, y and z dimension.
+FDM-printing is the most commonly and wide spread method of 3D-printing. The principle behind fused deposition modeling comprises using an extrusion device to eject a thermoplastic polymer. This polymer is heated to the point of its glass transition and consequentially extruded along a predefined path.\newline
+
+\subsubsection{Movement Variants}
+
+Movement capabilities of 3D-printers differ between two different approaches. Most desktop 3D-printers are Cartesian-style 3D-printers, which means it moves linearly in the x, y and z dimension.
 Which parts of the printer move depend on the printer itself, commonly the print-bed moves in the y dimension, while the print-head covers x and the vertical z movement. In Contrast the delta-printing method uses three vertical rods aligned in a triangle shape, to support the print-head and move it per individual movement of sleds, on the vertical rods, connected to the print-head.\footcite{all3dpFDM3DPrinting2020}\newline
 
 \begin{figure}[h]
@@ -142,8 +143,23 @@ Which parts of the printer move depend on the printer itself, commonly the print
 \end{figure}
 
 Cartesian-style and Delta-style printers fundamentally contain the same parts. Both printer variants include a print-bed, print-head and stepper-motors, the difference is how they are arranged. Therefor the performance of these printing styles is similar and are more depend on other factors than the movement system. The reason Cartesian-style printers are as popular as they are, is due to the fact that the simpler Cartesian approach is user friendlier and consumes less space, then its delta-style equivalent.\newline
-In order to be able to distribute the filament in according to the predefined path, calculated by the slicing software, components are needed, namely an extruder, hot-end, and nozzle. The extruder is used the feed the polymer to the print-head. The print-head itself consists of an hot-end and a nozzle, the hot-end is used to heat the thermoplastic polymer to the state of glass transition, after which it is forced through a nozzle an applied to either the print-bed directly or on top another layer.
+
+\subsubsection{Main Parts}
+
+In order to be able to distribute the filament in according to the predefined path, calculated by the slicing software, components are needed, namely an extruder, hot-end, and nozzle. The extruder is used the feed the polymer to the print-head. The print-head itself consists of an hot-end and a nozzle, the hot-end is used to heat the thermoplastic polymer to the state of glass transition, after which it is forced through a nozzle an applied to either the print-bed directly or on top another layer.\footcite{all3dpFDM3DPrinting2020}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/FDM_Principle}
+	\caption{Depiction of FDM printer parts, in an Cartesian-style design. \footcite{druckwegeFusedDepositionModelling}}
+	\label{fig:custom_parts_fdm_parts}
+\end{figure}
+
+\subsubsection{Filament}
+
 The aspect of the filament used for a print, heavily influences the success and usability of a part. The most common filaments include PLA, ABS and Nylon. PLA being the easiest to work with, it is the most frequently used, when needing a more robust material then PLA a suitable polymer would be ABS. Cases where Nylon is used are when highly flexible parts are desired.\footcite{hubsIntroToFDM3DPrintingNoDate}
 
 
-\subsubsection{SLA-Printing}
+\subsection{Stereolithography}
+
