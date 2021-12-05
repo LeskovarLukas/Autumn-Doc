@@ -96,7 +96,7 @@ In this equation, the variable $b$ is the branching factor and describes the num
 
 Comparing the RRT to the A* highlights the benefits of a sampling-based approach. While the A* looks at direct neighbours to continue the search, RRT has a step range as a predefined constant. Therefore the RRT explores with a faster pace due to a rougher coverage of the space. This means in relation to higher dimensional spaces it converges more efficiently than the A*.
 
-\subsection{Collusion}
+\subsection{Conclusion}
 
 By evaluating the potential algorithms to be used in the autumn project, the RRT came out on top. With each algorithm providing unique features best fitted for the use-case they are designed for, the problems the RRT algorithm tries to solve are the same encountered in autumn. Properties like space complexity and path quality were neglected in this comparison, due to the low importance of the project. By shifting the computation away from the drone the importance of minimum time far outweighs the required space. Furthermore, the need for an optimal path isn't required on account of the goal being to cover the whole space eventually. That being said a big drawback of the base RRT algorithm is the incapability to provide the possibility to improve on an existing path by rewiring the graph. For that, we are going to take a look at a variant of RRT the RRT* that solves this exact problem.
 
