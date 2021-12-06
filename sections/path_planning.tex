@@ -1,0 +1,180 @@
+\chapter{Path Planning}
+
+\textbf{Author: Fabian Kleinrad} 
+
+A crucial part of autonomy in robotics are the means for planning ahead movements in a cooperative manner with the environment. Methods to accomplish this, are generally referred to as path planning algorithms. This chapter is going to focus on exploring different kinds of approaches to path planning and evaluate which approach is most fitting to be used in a real-time, high-dimensional use case present in the autumn project.
+
+
+\section{Types of Path Planning}
+
+The problem of finding an optimal path between two points is an old one.
+The first proposed solution was the Dijkstra's algorithm. However, with steadily evolving computer science the challenges to be mastered by such algorithms got harder and harder. That's the reason why over the last years the simple principle of the Dijkstra algorithm has branched out specializing and excelling in certain real-world applications.
+\footcite{Pan2020}
+
+\subsection{Sampling-based Algoritms}
+
+In motion planning, sampling-based algorithms can be differentiated to other kinds of approaches, by the way, they explore their environment. sampling-based algorithms such as the probabilistic road map algorithm or the rapidly exploring random tree use a random point in their reference space and expand in that direction. This random point is considered a sample.
+
+\subsection{Multiple-Query and Single-Query}
+
+The term multiple-query refers, in connection with path planning Algorithms, to the feasibility of deriving a variety of different paths, without the need of rerunning the algorithm. In contrast, single-query algorithms are only able to compute one path at a time.\newline
+Use cases for Multiple-Query Algorithms would be unchanging environments. The reason for that, by generating an extensive grid of connections to be able to calculate a multitude of different start/goal combinations  more computational time is needed.\newline
+Single-Query approaches focus on performance instead of reuse-ability, which makes them ideal for dynamic domains. 
+\footcite{Bekris2003}
+\footcite{stackexchangeMultiSingleQuery2019}
+
+\section{PRM}
+
+Probabilistic RoadMap is a path planning algorithm tailored to multi-query applications. It is considered one of the most influential sampling-based path planning algorithms. 
+
+The algorithm can be broken down into two phases. The first phase, which is referred to as the pre-processing phase, starts with an empty graph. At first, it samples n random points and adds them to a set of vertices if they are located in space free from obstacles. After constructing a set of n vertices, it attempts connections between a random vertex and its neighboring nodes in a predefined radius. This connecting of to vertices is realized with a simple straight-line connection. All collision-free connections between vertices and their respective neighbors are added to a set of edges. The result of this pre-processing phase is a roadmap, with the number of sampled points determining the quality of to be calculated paths. 
+\footcite{Karaman2011}
+
+Upon finishing the initial construction phase of a roadmap, like the one depicted in figure 8.1, start/goal combinations can be processed. 
+The actual path finding in the generated graph is handled by other non-sampling-based path finding methods such as A*.\newline
+With the PRM focusing on a multi-query approach it is possible to calculate an arbitrary number of different paths without the need to construct a new graph.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/PRMRoadmap}
+	\caption{Example of a roadmap in two dimensional space constructed by the PRM algorithm.}
+	\label{fig:path_planning_prm}
+\end{figure}
+
+\section{RRT Algorithm}
+
+Rapidly exploring random tree is a path planning algorithm, that can be categorized as sampling-based and single-query. In the field of sampling-based path-finding algorithms is it considered together with the PRM the most influential. RRT works by constructing a tree of possible trajectories. Therefore it is first required to define an initial vertex, much like a root. After each following iteration, a random sample is taken from the space that is considered free from obstacles. After generating a random vertex, the nearest neighboring point in the tree is searched for. The closest node is then used as a pivot point and a new vertex is constructed a predefined distance away from the nearest node in the direction of the random sample. Thereafter it is attempted to connect the new vertex with the nearest. If this straight-line connection can exit without colliding with obstacles it is added to the set of edges. This procedure is depicted in figure 8.2. The algorithm ends when a new node is within the predefined distance away from the goal point. 
+\footcite{Karaman2011}
+
+The name rapidly exploring random tree stems from the tree-like structure constructed, like the one you can see in figure 8.2 when exploring spaces This approach to path planning makes it possible to explore rapidly changing environments efficiently.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/rrtIteration}
+	\caption{Visualization of the first two iterations (a), (b) when an rrt algorithm is exploring a simple 2d space wihttps://robotics.stackexchange.com/questions/18433/difference-between-single-query-and-multiple-query-algorithmsth an obstacle present. D referring to the predefined distance between vertices.\footcite{Zammit2018}}
+	\label{fig:path_planning_rrt}
+\end{figure}
+
+\section{A* Algorithm}
+
+The A* algorithm is a simplistic and reliable method compared to other path-planning techniques. Therefore it is nowadays prevalently used in a variety of different applications.\footcite{Zammit2018}\newline
+It combines heuristic properties with formal virtues of Dijkstra's algorithm. Whereas a purely heuristic approach would not guarantee that a path can be found even if a possible solution existed, the A* guarantees that the shortest path is found.\footcite{Sathyaraj2008}
+A* works by trying all possible combinations like the Dijkstra algorithm in a grid or graph-based environment. With A* being based on the Dijkstra algorithm it favors nodes that are closer to the current position. Additionally, it follows heuristic principles by putting a higher priority on nodes closer to the goal. An example of what an A* search algorithm looks like in a grid-based environment is depicted in figure. 8.3.\footcite{standfordAStarComparison1997}\newline
+With these properties, it can be considered an informed Dijkstra search.
+  
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/AStarExample}
+	\caption{A* path finding around a concave obstacle in a grid-based environment.\footcite{standfordAStarComparison1997}}
+	\label{fig:path_planning_Astar}
+\end{figure}
+
+\section{Evaluation}
+
+This section is going to cover the reasons behind the selection of the path-planning algorithm used in autumn. Therefor we are going to theoretically evaluate the performance of each algorithm in relation to the environment provided by the project. Additionally, we are going to focus on properties essential for accomplishing the goal set in the autumn project.
+
+\subsection{Autumn Use-case}
+
+There are several criteria to be fulfilled, in order to be considered a working solution for the challenge of path planning faced by Autumn.
+As a means to use one of the aforementioned algorithms, they have to be suitable for a real-time, 3-dimensional application, like the one present in the project.
+When working with UAVs it is critical that an optimal path is calculated reliable and in the shortest amount of time possible. 
+
+\subsection{Comparison}
+
+In the following comparison, we are going to look at the performance of the three different algorithms already mentioned in this chapter. Knowing that the PRM algorithm doesn't find a path on its own, it is implied from here on out that the PRM works in combination with the A* algorithm and the A* on its own is only applied with grid-based environments.  
+
+\subsubsection{Computational time requirement}
+
+An important requirement to be fulfilled by the path planning algorithm of the Autumn project is to require as little computational time as possible. Taking a look at the PRM algorithm, with its principle of reusing the generated graph, as a road-map, resulting in a short runtime of the algorithm, when looking at the computation of multiple paths. The best-case scenario for the PRM in this configuration would be, an A* algorithm running in a graph-based environment, with the PRM only having to do generate the graph and improve it progressively. A problem that arises is that this best-case scenario is impossible to happen in the Autumn project. Starting uneducated about the environment, like in Autumn, is the worst case for the PRM. At first, the PRM algorithm would generate a road-map in an environment where most of the obstacles are still unknown. Thereafter when the drone gets its first path to its destination it detects obstacles and expands the known space for the algorithm. With the environment changing as much as in Autumn it would be far too expensive to rewire the existing road-map around new obstacles. A* is the best-case scenario in a graph-based environment for the PRM, but what about running the A* standalone now in a grid-based environment. Grid-based environments tend to be very resource-intensive, with full coverage of the entire space. To preclude the possibility of large portions of the search being dissipated, the A* is biased towards the goal. When comparing the A* to the PRM in terms of computational speed in Autumn, A* would be superior, because of the substantial amount of time the PRM takes to generate a road-map only to discard it a few iterations later. That being said, the A* still needs to cover a vast grid, depending on the granularity of the grid. Know knowing that both the A* and PRM algorithms aren't the most efficient in the matter of short runtime, let's cover the RRT algorithm. With RRT following a graph-based and sampling-based approach like the PRM, it covers the space to be explored within a short time frame. The RRT, in contrast to the PRM, doesn't take time to construct the graph and then start to find a path. RRT searches for a path while constructing the tree-like structure. This results in the fastest computational time of all other mentioned algorithms when looking at one-time path planning. With the reference space of the algorithm in Autumn being drastically and continuously changing, it resembles a one-time use path perfectly fitted to be determined by a single-query path planning algorithm like the RRT.
+
+\subsubsection{Scalability for high-dimensional spaces}
+
+Thus far the application of proposed algorithms happened in a two-dimensional environment. When working with UAVs, there is the added challenge of a third dimension to be covered, in contrast to using ground-based vehicles. This added dimension imposes new challenges that the whole system has to handle, with the means to plan a path being one of the most affected.
+Additional time complexity being the most crucial change when working in a higher dimension, it is essential to be as efficient as possible. The last point covered the time required for each algorithm. With most path-planning algorithms having a time complexity of \(O\left(b^d\right)\)\footcite{stackexchangeAstarTimeComplexity2019}. With A* being one of the most time-intensive.
+In this equation, the variable $b$ is the branching factor and describes the number of descendants of a parent node. $d$ refers to the depth of the goal node. The worst-case scenario would be \(O\left(|V|\right)\), meaning that every vertex of the reference space has to be checked. Looking at the problem of three dimensions where the added dimension increases the number of vertices exponentially. A* being a simple approach with brute force characteristics isn't suitable for application in high dimensional spaces. 
+
+Comparing the RRT to the A* highlights the benefits of a sampling-based approach. While the A* looks at direct neighbours to continue the search, RRT has a step range as a predefined constant. Therefore the RRT explores with a faster pace due to a rougher coverage of the space. This means in relation to higher dimensional spaces it converges more efficiently than the A*.
+
+\subsection{Collusion}
+
+By evaluating the potential algorithms to be used in the autumn project, the RRT came out on top. With each algorithm providing unique features best fitted for the use-case they are designed for, the problems the RRT algorithm tries to solve are the same encountered in autumn. Properties like space complexity and path quality were neglected in this comparison, due to the low importance of the project. By shifting the computation away from the drone the importance of minimum time far outweighs the required space. Furthermore, the need for an optimal path isn't required on account of the goal being to cover the whole space eventually. That being said a big drawback of the base RRT algorithm is the incapability to provide the possibility to improve on an existing path by rewiring the graph. For that, we are going to take a look at a variant of RRT the RRT* that solves this exact problem.
+
+
+\section{RRT* Algorithm}
+
+This section is going to cover the improved version of the RRT algorithm, mentioned above. The RRT* algorithm is being used in the Autumn project as the path planning algorithm. The rationale for this decision is covered in the evaluation section. 
+
+\subsection{Concept behind RRT*}
+
+A problem that arises when using the RRT algorithm is that finding an optimal path is impossible due to the lack of rewiring options. Therefore the RRT* algorithm was invented. 
+The improved algorithm works differently when connecting a newly sampled node into the existing tree structure, which in the RRT is done by connecting the new node to its nearest neighbour. In the case of the RRT*, it calculates the cost of other possible connections stemming from the root node. Hereby a set of nodes closest to the newly sampled vertex are used as possible connection candidates. By rewiring the tree after each new node is sampled it makes it possible for a near-optimal path to be found.
+
+\subsection{Algorithm}
+
+The RRT* works at first the same as the RRT algorithm, it first defines a set of vertices, $V$ with the start node and an empty set of Edges, $E$. In contrast to the RRT algorithm is the runtime of the RRT* algorithm is not dependent on how fast the goal node is reached, but instead on the degree of optimization for the calculated path.
+Line four to six in Algorithm 1, are the same as the base algorithm. Hereby is a random node sampled, the nearest node in relation to the random node is calculated and a new node generated. After checking if a straight-line connection is possible between $x_{nearest}$ and $x_{new}$, a set of neighbouring vertices, $X_{near}$ is initialized.
+$X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{new}$. Thereafter $x_{new}$ gets added to the $V$. In lines 9 to 13, the cost of paths connecting the nodes of $X_{near}$ with $x_{new}$ get calculated and an edge between the node with the cheapest path, $x_{min}$ and $x_{new}$ gets added to $E$. The final stage of the RRT* is to rewire all neighbouring nodes in $X_{near}$, if the path connecting to $x_{new}$ is cheaper than the original path to the root vertex. 
+
+\begin{algorithm}[H]
+	\caption{RRT* 2011\footcite{Karaman2011}}
+	\SetKwFunction{FObstacleFree}{ObstacleFree}
+	\SetKwFunction{FSampleFree}{SampleFree}
+	\SetKwFunction{FNearest}{Nearest}
+	\SetKwFunction{FNear}{Near}
+	\SetKwFunction{FCost}{Cost}
+	\SetKwFunction{FCollisionFree}{CollisionFree}
+	\SetKwFunction{FSteer}{Steer}
+	\SetKwFunction{FLine}{Line}
+	$V \gets \{x_{init}\}$\;
+	$E \gets 0$\;
+	\For{$i \gets 1$ \textbf{to} $n$} {
+		$x_{rand} \gets \FSampleFree()$\;
+		$x_{nearest} \gets \FNearest(G = (V, E), x_{rand})$\;
+		$x_{new} \gets \FSteer(x_{nearest}, x_{rand}, D)$\;
+		\If{\FObstacleFree($x_{nearest}$, $x_{new}$)}{
+			$X_{near} \gets \FNear(G = (V, E), x_{new}, D)$\;
+			$V \gets V \cup \{x_{new}\}$\;
+			$x_{min} \gets x_{nearest}$\;
+			$c_{min} \gets \FCost(x_{nearest}) + c(\FLine(x_{nearest}, x_{new}))$\;
+			\ForEach{$x_{near} \in X_{near}$} {
+				\If{\FCollisionFree($x_{near}$, $x_{new}$) $\land$ \FCost($x_{near}$) + $c(\FLine(x_{near}, x_{new})) < c_{min}$}{
+					$x_{min} \gets x_{near}$\;
+					$c_{min} \gets \FCost(x_{near}) + c(\FLine(x_{near}, x_{new}))$\;
+				}
+			}
+			$E \gets E \cup \{(x_{min}, x_{new})\}$\;
+			\ForEach{$x_{near} \in X_{near}$} {
+				\If{\FCollisionFree($x_{near}$, $x_{new}$) $\land$ \FCost($x_{new}$) + $c(\FLine(x_{near}, x_{new})) < c_{near}$}{
+					$x_{parent} \gets Parent(x_{near})$\;
+				}
+				$E \gets (E \backslash \{(x_{parent}, x_{near})\} \cup \{(x_{new}, x_{near})\})$\;
+			}
+		}
+	}
+	\Return G = (V, E);
+\end{algorithm}
+
+\section{RRT* Variants}
+
+\subsection{RT-RRT*}
+
+The RT-RRT* takes focus on real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy makes it possible to keep the previously sampled tree.
+The two core principles introduced with the RT-RRT*, are tree expansion and tree rewiring. 
+At first, the Algorithm starts by initializing a root node. After each following iterations, the tree expands and rewires. This sampling lasts for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the number of steps the path consists of. In this phase, the agent is moved gradually towards the tree root. Thereafter, when path planning is finished and the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. This approach enables the agent to move without the time needed to compute the whole path.
+Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
+The rewiring is done in the default scenario done because newly added nodes have a smaller cost-to-reach than the parent of a certain node. In the second case, rewiring is needed if the environment changes. Therefore a larger portion of the tree has to change. Hereby two different modes are utilized. The first one consists of rewiring the tree in a circle centered around the tree node. For the second option, both focused and uniform sampling is used, with the difference that it is not done for one node, but instead concentrates on patches.
+\footcite{Naderi2015}
+
+\subsubsection{RT-RRT* in Autumn}
+
+When applying the concept of the RT-RRT* to Autumn it would seem a good idea. Taking a closer look uncovers that the proposed RT-RRT* only works efficiently in environments with limited changes. Rewiring the tree, done in the case of a dynamic obstacle changing, doesn't make sense when the obstacle referred to covers a large portion of the space. This being the case in Autumn, because contrary to the examples in the paper covering the RT-RRT* is the algorithm not educated about the environment. Only while moving are obstacles and boundaries discovered In general the RT-RRT* is using concepts of road-maps like the one generated in the PRM algorithm and applying it to the RRT* algorithm.  
+
+\subsection{Smart-RRT*}
+
+Smart-RRT* focuses on solving the problem imposed when using the RRT* algorithm. With the slow convergence rate of the RRT* towards an ideal path, it takes up to an infinite amount of time to reach the most optimal path. Therefore Smart-RRT* utilizes two techniques, path optimization and intelligent sampling, in an effort of accelerating the rate of convergence. 
+It works the same as the base algorithm till the first path is found. From there on out it applies path optimization and intelligent sampling. Path optimization works by interconnecting nodes in the found path that are directly visible. This leads based on triangular inequality to a shorter path. The reconnected nodes are then used as biased points for intelligent sampling. Intelligent sampling samples new points based on a bias generated from finding a shorter path. The result is a greater node density in the area of critical points on the path, mostly located around obstacles. 
+\footcite{Islam2012}
+
+\subsubsection{Smart-RRT* in Autumn}
+Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 

@@ -169,6 +169,129 @@
 	author = {{The Graphviz Authors}}
 }
 
+@article{Pan2020,
+	abstract = {In daily travel and activities, pathfinding is a significant process. They are often used in transportation routes calculation. They have now evolved to be able to solve most situations of the pathfinding and its related problems. This review describes previous and recent studies on the pathfinding algorithms. It reviews the development of pathfinding algorithms in a classification base on their usage. The aim is to summarize the application of the pathfinding algorithms for the readers interested in the subject that can be used as a supplement.},
+	author = {Pan, Tong and {Ching Pun-Cheng}, Shuk},
+	doi = {10.20944/preprints202008.0627.v1},
+	file = {:C\:/Users/fabia/OneDrive - HTBLuVA Wiener Neustadt/4BHIF/Dokumente/daPapers/preprints202008.0627.v1.pdf:pdf},
+	keywords = {algorithms,multi-criteria,multi-modal,multi-network,pathfinding,transportation},
+	number = {August},
+	pages = {1--20},
+	title = {{A Discussion on the Evolution of the Pathfinding Algorithms}},
+	url = {www.preprints.org},
+	year = {2020}
+}
+
+@article{Bekris2003,
+	abstract = {We propose a combination of techniques that solve multiple queries for motion planning problems with single query planners. Our implementation uses a probabilistic roadmap method (PRM) with bidirectional rapidly exploring random trees (BI-RRT) as the local planner. With small modifications to the standard algorithms, we obtain a multiple query planner which is significantly faster and more reliable than its component parts. Our method provides a smooth spectrum between the PRM and BI-RRT techniques and obtains the advantages of both. We observed that the performance differences are most notable in planning instances with several rigid nonconvex robots in a scene with narrow passages. Our work is in the spirit of non-uniform sampling and refinement techniques used in earlier work on PRM.},
+	author = {Bekris, Kostas E. and Chen, Brian Y. and Ladd, Andrew M. and Plaku, Erion and Kavraki, Lydia E.},
+	doi = {10.1109/iros.2003.1250704},
+	file = {:D\:/Downloads/bekris-chen2003multiple-query-probabilistic.pdf:pdf},
+	journal = {IEEE International Conference on Intelligent Robots and Systems},
+	number = {March 2018},
+	pages = {656--661},
+	title = {{Multiple Query Probabilistic Roadmap Planning using Single Query Planning Primitives}},
+	volume = {1},
+	year = {2003}
+}
+
+@misc{stackexchangeMultiSingleQuery2019,
+	title = {Difference between Single-Query and Multiple Query Algorithms?},
+	url = {https://robotics.stackexchange.com/questions/18433/difference-between-single-query-and-multiple-query-algorithms},
+	language = {en},
+	urldate = {2021-09-20},
+	author = {{Adwait Naik}}
+}
+
+@article{Karaman2011,
+	abstract = {During the last decade, incremental sampling-based motion planning algorithms, such as the Rapidly-exploring Random Trees (RRTs), have been shown to work well in practice and to possess theoretical guarantees such as probabilistic completeness. However, no theoretical bounds on the quality of the solution obtained by these algorithms, e.g., in terms of a given cost function, have been established so far. The purpose of this paper is to fill this gap, by designing efficient incremental sampling-based algorithms with provable optimality properties. The first contribution of this paper is a negative result: it is proven that, under mild technical conditions, the cost of the best path returned by RRT converges almost surely to a non-optimal value, as the number of samples increases. Second, a new algorithm is considered, called the Rapidly-exploring Random Graph (RRG), and it is shown that the cost of the best path returned by RRG converges to the optimum almost surely. Third, a tree version of RRG is introduced, called RRT∗, which preserves the asymptotic optimality of RRG while maintaining a tree structure like RRT. The analysis of the new algorithms hinges on novel connections between sampling-based motion planning algorithms and the theory of random geometric graphs. In terms of computational complexity, it is shown that the number of simple operations required by both the RRG and RRT∗ algorithms is asymptotically within a constant factor of that required by RRT.},
+	archivePrefix = {arXiv},
+	arxivId = {1005.0416},
+	author = {Karaman, Sertac and Frazzoli, Emilio},
+	doi = {10.15607/rss.2010.vi.034},
+	eprint = {1005.0416},
+	file = {:C\:/Users/fabia/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Karaman, Frazzoli - 2011 - Incremental sampling-based algorithms for optimal motion planning.1186v1:1186v1},
+	isbn = {9780262516815},
+	issn = {2330765X},
+	journal = {Robotics: Science and Systems},
+	keywords = {motion planning,optimal path planning,random geometric graphs,sampling-based algorithms},
+	pages = {267--274},
+	title = {{Incremental sampling-based algorithms for optimal motion planning}},
+	volume = {6},
+	year = {2011}
+}
+
+@article{Zammit2018,
+	abstract = {Unmanned Aerial Vehicles (UAVs) are being integrated into a wide range of indoor and outdoor applications. In this light, robust and efficient path planning is paramount. An extensive literature review showed that the A* and Rapidly Exploring Random Tree (RRT) algorithms and their variants are the most promising path planning algorithms candidates for 3D UAV scenarios. These two algorithms are tested in different complexity 3D scenarios consisting of a box and a combination of vertical and horizontal plane obstacles with apertures. The path length and generation time are considered as the performance measures. The A* with a spectrum of resolutions, the standard RRT with different step size constraints, RRT without step size constraints and the Multiple RRT (MRRT) with various seeds are implemented and their performance measures compared. Results confirm that all algorithms are able to generate a path in all scenarios for all resolutions, step sizes and seeds considered, respectively. Overall A*‘s path length is more optimal and generation time is shorter than RRT projecting A* as a better candidate for online 3D path planning of UAVs.},
+	author = {Zammit, Christian and van Kampen, Erik Jan},
+	doi = {10.2514/6.2018-1846},
+	file = {:C\:/Users/fabia/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Zammit, van Kampen - 2018 - Comparison between A and RRT algorithms for UAV path planning(2).pdf:pdf},
+	isbn = {9781624105265},
+	journal = {AIAA Guidance, Navigation, and Control Conference, 2018},
+	number = {210039},
+	title = {{Comparison between A* and RRT algorithms for UAV path planning}},
+	year = {2018}
+}
+
+@article{Sathyaraj2008,
+	abstract = {Unmanned aerial vehicles (UAVs) are used in team for detecting targets and keeping them in its sensor range. There are various algorithms available for searching and monitoring targets. The complexity of the search algorithm increases if the number of nodes is increased. This paper focuses on multi UAVs path planning and Path Finding algorithms. Number of Path Finding and Search algorithms was applied to various environments, and their performance compared. The number of searches and also the computation time increases as the number of nodes increases. The various algorithms studied are Dijkstra's algorithm, Bellman Ford's algorithm, Floyd-Warshall's algorithm and the AStar algorithm. These search algorithms were compared. The results show that the AStar algorithm performed better than the other search algorithms. These path finding algorithms were compared so that a path for communication can be established and monitored. {\textcopyright} 2008 Springer Science+Business Media, LLC.},
+	author = {Sathyaraj, B. Moses and Jain, L. C. and Finn, A. and Drake, S.},
+	doi = {10.1007/s10700-008-9035-0},
+	file = {:C\:/Users/fabia/OneDrive - HTBLuVA Wiener Neustadt/4BHIF/Dokumente/daPapers/Sathyaraj_2008.pdf:pdf},
+	issn = {15684539},
+	journal = {Fuzzy Optimization and Decision Making},
+	keywords = {AStar,Dijkstra,Distance vector algorithms,Pathfinding},
+	number = {3},
+	pages = {257--267},
+	title = {{Multiple UAVs path planning algorithms: A comparative study}},
+	volume = {7},
+	year = {2008}
+}
+
+@misc{standfordAStarComparison1997,
+	title = {Introduction to A*},
+	url = {http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html},
+	language = {en},
+	urldate = {2021-09-25},
+	author = {{Amit Patel}}
+}
+
+@misc{stackexchangeAstarTimeComplexity2019,
+	title = {A* graph search time-complexity},
+	url = {https://cs.stackexchange.com/questions/56176/a-graph-search-time-complexity},
+	language = {en},
+	urldate = {2021-10-21},
+	author = {{D.W.}}
+}
+
+@article{Naderi2015,
+	abstract = {This paper presents a novel algorithm for real-time path-planning in a dynamic environment such as a computer game. We utilize a realtime sampling approach based on the Rapidly Exploring Random Tree (RRT) algorithm that has enjoyed wide success in robotics. More specifically, our algorithm is based on the RRT∗ and informed RRT∗ variants. We contribute by introducing an online tree rewiring strategy that allows the tree root to move with the agent without discarding previously sampled paths. Our method also does not have to wait for the tree to be fully built, as tree expansion and taking actions are interleaved. To our knowledge, this is the first real-time variant of RRT∗. We demonstrate our method, dubbed Real-Time RRT∗ (RT-RRT∗), in navigating a maze with moving enemies that the controlled agent is required to avoid within a predefined radius. Our method finds paths to new targets considerably faster when compared to CL-RRT, a previously proposed real-time RRT variant.},
+	author = {Naderi, Kourosh and Rajamaki, Joose and Hamalainen, Perttu},
+	doi = {10.1145/2822013.2822036},
+	file = {:C\:/Users/fabia/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Naderi, Rajamaki, Hamalainen - 2015 - RT-RRT∗ A real-time path planning algorithm based on RRT∗.pdf:pdf},
+	isbn = {9781450339919},
+	journal = {Proceedings of the 8th ACM SIGGRAPH Conference on Motion in Games, MIG 2015},
+	keywords = {Dynamic environment,Multiple-query planning,RRT∗,Real-time path planning},
+	number = {July 2019},
+	pages = {113--118},
+	title = {{RT-RRT∗: A real-time path planning algorithm based on RRT∗}},
+	year = {2015}
+}
+
+@article{Islam2012,
+	abstract = {Rapidly Exploring Random Tree (RRT) is one of the quickest and the most efficient obstacle free path finding algorithm. However, it cannot guarantee finding the most optimal path. A recently proposed extension of RRT, known as Rapidly Exploring Random Tree Star (RRT*), claims to achieve convergence towards the optimal solution but has been proven to take an infinite time to do so and with a slow convergence rate. To overcome these limitations, we propose an extension of RRT*, called RRT*-Smart, which aims to accelerate its rate of convergence and to reach an optimum or near optimum solution at a much faster rate and at a reduced execution time. Our novel algorithm inculcates two new techniques in RRT*: these are path optimization and intelligent sampling. Simulation results presented in various obstacle cluttered environments confirm the efficiency of RRT*-Smart. {\textcopyright} 2012 IEEE.},
+	author = {Islam, Fahad and Nasir, Jauwairia and Malik, Usman and Ayaz, Yasar and Hasan, Osman},
+	doi = {10.1109/ICMA.2012.6284384},
+	file = {:C\:/Users/fabia/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Islam et al. - 2012 - RRT-Smart Rapid convergence implementation of RRT towards optimal solution.pdf:pdf},
+	isbn = {9781467312776},
+	journal = {2012 IEEE International Conference on Mechatronics and Automation, ICMA 2012},
+	keywords = {Intelligent Sampling,RRTStar,Rapid Convergence},
+	pages = {1651--1656},
+	title = {{RRT*-Smart: Rapid convergence implementation of RRT* towards optimal solution}},
+	url = {http://save.seecs.nust.edu.pk/pubs/ICMA2012.pdf},
+	year = {2012}
+}
+
 @misc{jetsonHardwarePageNoDate,
 	title = {NVIDIA Jetson Hardware Page},
 	url = {https://developer.nvidia.com/embedded/jetson-modules},
@@ -192,6 +315,7 @@
 	urldate = {2021-09-19},
 	author = {{NVIDIA Corporation}}
 }
+
 
 @article{cadenaSlamFuture2016,
 	author = {Cadena, Cesar and Carlone, Luca and Carrillo, Henry and Latif, Yasir and Scaramuzza, Davide and Neira, José and Reid, Ian and Leonard, John J.},
@@ -380,4 +504,4 @@
 	pages = {},
 	title = {Incremental Mapping of Large Cyclic Environments},
 	doi = {10.1109/CIRA.1999.810068}
-}
+}
