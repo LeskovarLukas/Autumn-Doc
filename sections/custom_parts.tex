@@ -122,18 +122,18 @@ In conclusion, due to the limited amount of functionality required from CAD soft
 
 \section{3D-Printing}
 
-This section is going to focus on manufacturing methods available in the autumn project and compare them. Nowadays easy and fast prototyping is made possible with use of 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept, to an widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.\newline
-Autumn having an area of competence, split between skills when working with soft- and hardware, it is important to have the means to manufacture custom parts, tailored to the needs of the project. With 3D-Printing being an affordable and accurate technology, in terms of translating virtual concepts to physical object, it is an obvious choice to use for autumn.
-When considering using 3D-printing in any kind of project, it is important to think about which method is best fitted for the application.
+This section is going to focus on manufacturing methods available in the autumn project and compare them. Nowadays easy and fast prototyping is made possible with the use of 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept, to a widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.\newline
+Autumn having an area of competence, split between skills when working with soft- and hardware, it is important to have the means to manufacture custom parts, tailored to the needs of the project. With 3D-Printing being an affordable and accurate technology, in terms of translating virtual concepts to a physical object, it is an obvious choice to use for autumn.
+When considering using 3D printing in any kind of project, it is important to think about which method is best fitted for the application.
 
 \subsection{Fused Deposition Modeling}
 
-FDM-printing is the most commonly used and wide spread method of 3D-printing. The principle behind fused deposition modeling comprises using an extrusion device to eject a thermoplastic polymer. This polymer is heated to the point of its glass transition and consequentially extruded along a predefined path.
+FDM printing is the most commonly used and widespread method of 3D printing. The principle behind fused deposition modelling comprises using an extrusion device to eject a thermoplastic polymer. This polymer is heated to the point of its glass transition and consequentially extruded along a predefined path.
 
 \subsubsection{Movement Variants}
 
-Movement capabilities of 3D-printers differ between two different approaches. Most desktop 3D-printers are Cartesian-style 3D-printers, which means it moves linearly in the x, y and z dimension.
-Which parts of the printer move depend on the printer itself, commonly the print-bed moves in the y dimension, while the print-head covers x and the vertical z movement. In Contrast the delta-printing method uses three vertical rods aligned in a triangle shape, to support the print-head and move it per individual movement of sleds, on the vertical rods, connected to the print-head.\footcite{all3dpFDM3DPrinting2020}\newline
+The movement capabilities of 3D printers differ between two different approaches. Most desktop 3D printers are Cartesian-style 3D printers, which means it moves linearly in the x, y and z dimension.
+Which parts of the printer move depend on the printer itself, commonly the print-bed moves in the y dimension, while the print-head covers x and the vertical z movement. In Contrast, the delta-printing method uses three vertical rods aligned in a triangle shape, to support the print-head and move it per individual movement of sledges, on the vertical rods, connected to the print-head.\footcite{all3dpFDM3DPrinting2020}\newline
 
 \begin{figure}[h]
 	\centering
@@ -142,11 +142,11 @@ Which parts of the printer move depend on the printer itself, commonly the print
 	\label{fig:custom_parts_printerMovement}
 \end{figure}
 
-Cartesian-style and Delta-style printers fundamentally contain the same parts. Both printer variants include a print-bed, print-head and stepper-motors, the difference is how they are arranged. Therefor the performance of these printing styles is similar and are more depend on other factors than the movement system. The reason Cartesian-style printers are as popular as they are, is due to the fact that the simpler Cartesian approach is user friendlier and consumes less space, then its delta-style equivalent.\newline
+Cartesian-style and Delta-style printers fundamentally contain the same parts. Both printer variants include a print-bed, print-head and stepper-motors, the difference is how they are arranged. Therefore the performance of these printing styles is similar and are more dependent on other factors than the movement system. The reason Cartesian-style printers are as popular as they are is due to the fact that the simpler Cartesian approach is user-friendlier and consumes less space, than its delta-style equivalent.\newline
 
 \subsubsection{Main Parts}
 
-In order to be able to distribute the filament in according to the predefined path, calculated by the slicing software, components are needed, namely an extruder, hot-end, and nozzle. The extruder is used the feed the polymer to the print-head. The print-head itself consists of an hot-end and a nozzle, the hot-end is used to heat the thermoplastic polymer to the state of glass transition, after which it is forced through a nozzle an applied to either the print-bed directly or on top another layer.\footcite{all3dpFDM3DPrinting2020}
+In order to be able to distribute the filament according to the predefined path, calculated by the slicing software, components are needed, namely an extruder, hot-end, and nozzle. The extruder is used the feed the polymer to the print-head. The print-head itself consists of a hot-end and a nozzle, the hot-end is used to heat the thermoplastic polymer to the state of glass transition, after which it is forced through a nozzle and applied to either the print-bed directly or on top of another layer.\footcite{all3dpFDM3DPrinting2020}
 
 
 \begin{figure}[h]
@@ -158,24 +158,24 @@ In order to be able to distribute the filament in according to the predefined pa
 
 \subsubsection{Filament}
 
-The aspect of the filament used for a print, heavily influences the success and usability of a part. The most common filaments include PLA, ABS and Nylon. PLA being the easiest to work with, it is the most frequently used, when needing a more robust material then PLA a suitable polymer would be ABS. Cases where Nylon is used are when highly flexible parts are desired.\footcite{hubsIntroToFDM3DPrintingNoDate}
+The aspect of the filament used for a print heavily influences the success and usability of a part. The most common filaments include PLA, ABS and Nylon. PLA is the easiest to work with, it is the most frequently used, when needing a more robust material than PLA a suitable polymer would be ABS. Cases, where Nylon is used, are when highly flexible parts are desired.\footcite{hubsIntroToFDM3DPrintingNoDate}
 
 
 \subsection{Stereolithography}
 
-SLA is known for its accuracy and detail in conjunction with 3D-printing. SLA-printers use a photosensitive resin in combination with a laser to build a part. This allows printers using this method to keep mechanical components to a minimum. In contrast to FDM printing, SLA uses thermoset polymers, which leads to parts being irreversible once printed. FDM printed parts will melt, when exposed to heat, SLA printed parts don't turn back to liquid, instead they start to burn.\footcite{hubsSLA3DPrintingNoDate}
+SLA is known for its accuracy and detail in conjunction with 3D printing. SLA-printers use a photosensitive resin in combination with a laser to construct a part. This allows printers using this method to keep mechanical components to a minimum. In contrast to FDM printing, SLA uses thermoset polymers, which leads to parts being irreversible once printed. FDM printed parts will melt, when exposed to heat, SLA printed parts don't turn back to liquid, instead they start to burn.\footcite{hubsSLA3DPrintingNoDate}
 
 \subsubsection{Printing process}
 
-At the start of every print, depending on the printer design, the build-plate is positioned, so that one layer height of resin is present between the build-plate and laser. Thereafter the beam from the UV laser is redirected to cure the a layer according to the information given by the slicer. In order to add the third dimension the build plate moves a distance of one layer height every time a layer is finished. This process is repeated until the final layer.\newline
-After the part is finished, it is still in a not fully cured state. To fully cure a part further exposure to UV light is needed, this step is happening in a so called curing station. \footcite{hubsSLA3DPrintingNoDate} 
+At the start of every print, depending on the printer design, the build-plate is positioned, so that one layer height of resin is present between the build-plate and laser. Thereafter the beam from the UV laser is redirected to cure a layer according to the information given by the slicer. In order to add the third dimension, the build plate moves a distance of one layer height every time a layer is finished. This process is repeated until the final layer.\newline
+After the part is finished, it is in a still not fully cured state. To fully cure a part further exposure to UV light is needed, this step is happening in a so-called curing station. \footcite{hubsSLA3DPrintingNoDate} 
 
 \subsubsection{Design Variants}
 
-SLA printers are divided into two different designs. For desktop use printers are build with a bottom-up architecture, which means the build-plate is attached on an so-called elevator. Therefor the light-source placed below the vat containing the resin. This design allows for affordable prices, by sacrificing build volume.\newline
-In industrial applications top-down designs are used. By placing the build plate into vat, it enables larger build volumes.\footcite{hubsSLA3DPrintingNoDate}
+SLA printers are divided into two different designs. For desktop use printers are built with a bottom-up architecture, which means the build-plate is attached to a so-called elevator. Therefore the light source is placed below the vat containing the resin. This design allows for affordable prices, by sacrificing build volume.\newline
+In industrial applications, top-down designs are used. By placing the build plate into the vat, it enables larger build volumes.\footcite{hubsSLA3DPrintingNoDate}
 
 \subsection{Autumn choice}
 
-In Autumn parts are designed to be practical, which entails a simple geometry. Therefor in term of accuracy it wouldn't be advantageous to use an SLA printing method. Furthermore, in regard to structural integrity, both parts printed with FDM and SLA printers are sufficient for the stresses parts are exposed to in the Autumn use-case. With Autumn being focused on fast prototyping and fast iteration, SLA with its extensive curing process, would be unfit with no benefits gained from using a Stereolithography style printer. 
+In Autumn parts are designed to be practical, which entails a simple geometry. Therefore in terms of accuracy, it wouldn't be advantageous to use an SLA printing method. Furthermore, in regard to structural integrity, both parts printed with FDM and SLA printers are sufficient for the stresses parts are exposed to in the Autumn use case. With Autumn being focused on fast prototyping and fast iteration, SLA with its extensive curing process would be unfit with no benefits gained from using a Stereolithography style printer. 
 
