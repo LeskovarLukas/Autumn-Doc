@@ -22,15 +22,15 @@ When performing linear odometry, e.g. without taking orientation changes into co
 Other systems however utilize wheel encoders to count the number of wheel rotations thus allowing for rather precise estimation of distance. 
 
 With non-linear motion the distances $d_{l}$ and $d_{r}$ moved by the left and right wheel are unequal which requires the calculation of both updated position and bearing of the robot. 
-Lets suppose a robot moved from position $\begin{pmatrix} x & y & \theta \end{pmatrix}$ to $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}$ with a slight left turn caused by the right wheel turning faster than the left one. 
-This scenario is depicted in Fig. \ref{fig:odom} with $\phi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and center to point P, the origin of the turn. 
+Lets suppose a robot moved from position $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$ to $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$ with a slight left turn caused by the right wheel turning faster than the left one. 
+This scenario is depicted in Fig. \ref{fig:odom} with $\phi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and center to point $P$, the origin of the turn. 
 
 For small angles these radii are approximately the same length as the distances $d_{l}, d_{c}$ and $d_{r}$, which allows for the turn angle to be calculated as follows:
 \begin{align*}
 	\phi &= \frac{d_{i}}{r_{i}}, & i &= l, r, c  
 \end{align*}
 
-However in practical scenarios these radii and the point P are unknown $\phi$ has to be calculated only using $d_{l}$, $d_{r}$ and b which corresponds to the distance between both robot wheels.
+However in practical scenarios where these radii and the point P are unknown, $\phi$ has to be calculated only using $d_{l}$, $d_{r}$ and $b$ which corresponds to the distance between both robot wheels.
 
 \begin{equation*}
 	\begin{split}
@@ -52,27 +52,28 @@ The final pose is calculated as follows:
 \begin{equation*}
 	\begin{pmatrix}
 		x' & y' & \theta'
-	\end{pmatrix}
+	\end{pmatrix}^{T}
 	= 
 	\begin{pmatrix}
 		-d_{c} \sin \phi & d_{c} \cos \phi & \theta + \phi
-	\end{pmatrix}
+	\end{pmatrix}^{T}
 \end{equation*}
 
-Because the assumptions above only apply for small distances in any real-world systems such computations ought to be performed continuously. However due to uncertain measurements these calculations inherit some error which is added up over multiple iterations thus causing a slight drift in the output. This drift can be corrected using techniques discussed in Chapter \ref{chapter:slam}.
+Because the assumptions above only apply for small distances in any real-world systems such computations ought to be performed continuously. However due to uncertain measurements these calculations inherit some margin of error which is integrated up over multiple iterations thus causing a slight drift in the output. This drift can be corrected using techniques discussed in Chapter \ref{chapter:slam}.
 
+% nicht vergessen theta auf phi ändern
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/odom}
 	\caption{
-		This diagram shows the geometry of how a slight turning can be calculated only using the distances $d_{l}$, $d_{r}$ and wheel offset b.
+		This diagram shows the geometry of how a slight turning motion can be calculated only using the distances $d_{l}$, $d_{r}$ and wheel offset $b$.
 		The robot pose 
 		$
 			\begin{pmatrix}
 				x &
 				y &
 				\theta 
-			\end{pmatrix}
+			\end{pmatrix}^{T}
 		$
 		is associated with the center of the robot.
 	}
@@ -81,6 +82,43 @@ Because the assumptions above only apply for small distances in any real-world s
 
 
 \subsection{Inertial Measurement}
+Another way of modelling motion usually utilized when a is not equipped with wheel encoder nor wheels is based on velocities influencing the vehicle. These velocities $v$ and $\omega$ as the translational, linear and angular velocity are referred to as controls for the system. In contrast to odometry which can only be calculated after a movement has been performed these control allow for prior calculation of the motion. 
+
+If these velocities stay fixed for the entire duration $\Delta t$ of the motion from 
+$\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$
+to
+$\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$
+the robot moves in a circle with radius $r$ as seen in Fig. \ref{fig:inertial}. The center $P$ of this circle with coordinates 
+$
+\begin{pmatrix}
+	x_{P}, y_{P}
+\end{pmatrix}
+^{T}
+$
+can be evaluated as follows:
+
+\begin{equation}
+	\begin{split}
+		x_{P} = x - \frac{v}{\omega} \sin \theta \\
+		y_{P} = y + \frac{v}{\omega} \cos \theta
+	\end{split}
+\end{equation}
+
+This allows for the new position to be calculated: 
+
+\begin{equation}
+	\begin{pmatrix}
+		x' \\
+		y' \\
+		\theta'
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		x_{P} + \frac{v}{\omega} \sin(\theta + \omega \Delta t) \\
+		y_{P} - \frac{v}{\omega} \cos(\theta + \omega \Delta t) \\
+		\theta + \omega \Delta t
+	\end{pmatrix}
+\end{equation}
 
 \subsection{Visual Inertial Odometry}
 
