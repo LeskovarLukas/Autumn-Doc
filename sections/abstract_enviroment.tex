@@ -6,12 +6,13 @@ This chapter is going to concern itself with the critical intersection of physic
 
 \section{Abstract Environments}
 
-\["The\ situation\ in\ which\ a\ subject\ is\ very\ general \ and\ not\ based\ on\ real\ situations"\]
-Abstraction being the process of reducing an Object to the information needed for further processing. 
+Abstraction being the process of reducing an Object to the information needed for further processing. In conjunction with autonomous navigation this principle is ubiquitous. Due to restriction in terms of computational space and time, a simplification of complex compounds is needed. Such a loss of information naturally happens when using equivalent hardware to process ones surroundings.\newline
+In order for autonomous navigation to work it is necessary for the computer to know the existence and position of objects surrounding the to be navigated vessel. This information can be provided or in case of using a SLAM algorithm self-taught. SLAM reduces the environment to positions in a 2 or 3 dimensional space. The algorithm is then left with an assortment of positions relative to the starting point, which is represented by the coordinate origin. To make use of this information is imperative to know the position of the robot in this abstracted space.\newline
+With this approach to let the of letting the algorithm perceive the environment it guarantees an efficient and cost effective computation. By reducing obstacles to only the properties needed to avoid them unnecessary complexity is being circumvented.      
 
-\subsection{Abstraction Levels}
-
-\section{Abstraction Methods in Autumn}
+\section{Representation in Autumn}
+To be able to utilize the information provided, there need to be the capability of bundling data into a tried and tested format, that enables easy access and reliable accuracy.\newline
+Autumn uses the occupancy grid and point cloud as means to represent the data acquired in the mapping stage. The occupancy grid serves its purpose in a 2 dimensional environment, where as on the contrary the point cloud is utilized in 3 dimensional use cases.  
 
 \subsection{Occupancy Grid}
 
