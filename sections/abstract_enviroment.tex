@@ -24,7 +24,12 @@ An occupancy grid is used for a 2-dimensional representation of the environment.
 	\label{fig:abstract_environments_occupancyCells}
 \end{figure}
 
-To add to the simplicity of the data structure and lower the time needed to update, two additional assumptions are made. The occupancy grid as well as many other assume a static world, which entails that occupied cells stay that way as well as their unoccupied equivalent. Secondly cells are viewed as individuals with know influence to their neighboring cells. This simplifies the calculations of probabilities, because of it the probability is the product of probability of single sensor readings.     
+To add to the simplicity of the data structure and lower the time needed to update, two additional assumptions are made. The occupancy grid as well as many other assume a static world, which entails that occupied cells stay that way as well as their unoccupied equivalent. Secondly cells are viewed as individuals with know influence to their neighboring cells. This simplifies the calculations of probabilities, because of it the probability is the product of probability of single sensor readings.\newline
+
+\subsection{Voxel Grids}
+
+When familiar with the concept of an occupancy grid, it would appear that adding a dimension to the occupancy grid would solve the problem of 3 dimensional representation. \newline
+Using an occupancy grid in such an use case would be called a voxel grid. Hereby the environment isn't subdivided into 2 dimensional planes, also referred to as cells, but into cubes. The basic principle of the occupancy grid stays the same. Adding this additional dimension makes an drawback that accompanies the concept of occupancy grids becomes obvious. Occupancy grids by dividing everything the cells in a grid isn't space efficient. Now using it in a 3 dimensional context makes larger scans hard to maintain and inefficient to work with especially in a real-time navigation scenario.  
 
 \subsection{Point Cloud}
 
