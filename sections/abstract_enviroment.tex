@@ -12,9 +12,19 @@ With this approach to let the of letting the algorithm perceive the environment 
 
 \section{Representation in Autumn}
 To be able to utilize the information provided, there need to be the capability of bundling data into a tried and tested format, that enables easy access and reliable accuracy.\newline
-Autumn uses the occupancy grid and point cloud as means to represent the data acquired in the mapping stage. The occupancy grid serves its purpose in a 2 dimensional environment, where as on the contrary the point cloud is utilized in 3 dimensional use cases.  
+Autumn uses the occupancy grid and point cloud as means to represent the data acquired in the mapping stage. The occupancy grid serves its purpose in a 2 dimensional environment, where as on the contrary the point cloud is utilized in 3 dimensional use cases.
 
 \subsection{Occupancy Grid}
+An occupancy grid is used for a 2-dimensional representation of the environment. Hereby in case of an occupancy grid, a grid structure is being overlaid over the environment. Therefor it is possible to discretize the world into cells. Each cell contains information about the probability of being occupied. In this context the assumption is made, that cells can either one of the two states. Thus it allows for a simplification of algorithms needed to update such data structures, because with this assumption it allows for the use of binary random variables. Grid cells which are for certain occupied are represented by 1, which relates to the 100 percent probability of being occupied. Contrary free cells are described by a 0 percent probability of being occupied. Visually these features are displayed by coloring the cells black and white and every probability in between.\footcite{OccupancyGridMaps2020}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/OccupancyGridCells}
+	\caption{Visual depiction of probability values in an occupancy grid map.}
+	\label{fig:abstract_environments_occupancyCells}
+\end{figure}
+
+To add to the simplicity of the data structure and lower the time needed to update, two additional assumptions are made. The occupancy grid as well as many other assume a static world, which entails that occupied cells stay that way as well as their unoccupied equivalent. Secondly cells are viewed as individuals with know influence to their neighboring cells. This simplifies the calculations of probabilities, because of it the probability is the product of probability of single sensor readings.     
 
 \subsection{Point Cloud}
 
