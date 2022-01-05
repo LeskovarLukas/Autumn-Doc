@@ -34,10 +34,10 @@ Using an occupancy grid in such an use case would be called a voxel grid. Hereby
 \subsection{Point Cloud}
 The most wide spread data structure for storing 3 dimensional environments is the Point Cloud. In contrast to its adversaries, it stores only information that is known. The drawback of the voxel grid is hereby minimized. Point Clouds store points in 3 dimensional space, these points represent an estimation of a point on a surface of an object, derived from sensor readings and the position these readings took place. Therefor a Point Cloud is a accumulation of various points that together represent the boundaries in which collision free navigation can take place.
 Additionally to the positional information stored in these points, they can also contain color information and luminescence values.\footcite{tech27PointCloud2018}\newline
-By discarding a strict grid structure, which intern decreases the spacial requirements, also increases the complexity in working with this kind of data structure. Almost always are point clouds nowadays used along with the point cloud library.
+By discarding a strict grid structure, which intern decreases the spacial requirements, also increases the complexity in working with this kind of data structure. Almost always are point clouds in conjunction with robotics used along with the point cloud library.
 
 \subsubsection{PCL}
-
+The Point Cloud Library simplifies working with a point cloud data structure. PCL is an free library supporting point clouds of any dimension. It is written for optimal performance and offers a variety of 3d processing functionality. These include filtering, segmentation, feature estimation, etc. Furthermore PCL is fully integrated into ROS, which means specific functionalities are packages into nodelets which can be added to fit the underlying use case.\footcite{ConselhoNacionaldeDesenvolvimentoCientificoeTecnologico1995}
 
 \subsection{ROS Types}
 
