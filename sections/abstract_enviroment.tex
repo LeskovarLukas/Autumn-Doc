@@ -40,16 +40,19 @@ By discarding a strict grid structure, which intern decreases the spacial requir
 The Point Cloud Library simplifies working with a point cloud data structure. PCL is an free library supporting point clouds of any dimension. It is written for optimal performance and offers a variety of 3d processing functionality. These include filtering, segmentation, feature estimation, etc. Furthermore PCL is fully integrated into ROS, which means specific functionalities are packages into nodelets which can be added to fit the underlying use case.\footcite{ConselhoNacionaldeDesenvolvimentoCientificoeTecnologico1995}
 
 \section{Abstracted Environments in Autumn}
-Autumn contains two different path planning packages for different dimensional environments. When using a drone 3 dimensional path planning is necessary to benefit from the usage of an aerial vehicle. Therefor the "autumn\_pathfinding" is used, based on a point cloud. Additionally the package "autumn\_pathfinding\_2D" uses an occupancy grid and thus is appropriate for situations where the third dimension can't be utilized.\newline
+Autumn contains two different path planning packages catering to different dimensional environments. When using a drone 3 dimensional path planning is necessary to benefit from the usage of an aerial vehicle. Therefor the "autumn\_pathfinding" is used, based on a point cloud. Additionally the package "autumn\_pathfinding\_2D" uses an occupancy grid and thus is appropriate for situations where the third dimension can't be utilized.\newline
 Through the use of ROS, explained in detail in chapter \ref{chapter:ros}, this modular approach is made possible. The Point Cloud and Occupancy Grid data type are integrated into ROS and as such universally applicable.   
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/EnvironmentTransfer}
-	\caption{Life span of point cloud and occupancy grid. Created in the SLAM stage, published as a topic and used in the navigation stage.}
+	\caption{Excerpt of the Autumn-Life-Cycle. Lifespan of point cloud and occupancy grid. Created in the SLAM stage, published as a topic and used in the navigation stage.}
 	\label{fig:abstract_environments_enviromentTransfer}
 \end{figure}
 
 \subsection{autumn\_pathfinding\_2D}
+The package "autumn\_pathfinding\_2D" subscribes to an topic, published from the slam node, which carries a nav\_msgs/OccupancyGrid. This being a standardized data type for occupancy gird maps. It consists of an header of type std\_msgs/Header, which contains a sequence number, timestamp and frame id, that are used for identifying individual messages. Additionally meta data of the map along with the current data contained in an int8 array is transferred over this topic.\footcite{rosNavMsgsOccupancyGrid2021}\footcite{rosStdMsgsHeader2021}\newline
+Upon receiving a new map and goal point, given that now current calculations are ongoing, the algorithm aligns a Cartesian coordinate system relative to the current position of the drone. From this point onward the access to the occupancy grid which is represented by the int8 array, happens through a function which takes x and y coordinates and maps it to the one dimensional array. This is essential to guarantee usability alongside performance. The underlying path planning algorithm, explained in detail in chapter \ref{chapter:path_planning}, isn't effected by the input data structure.       
+The data array, holding occupancy information, contains per index a value between 0 and 100 or if the cell is unknown the value -1. The path planning algorithm works in a way that unknown cells with value -1 are taken as free cells. With this "free until proven occupied" mentality it allows for a more efficient exploration of a space.
 
 \subsection{autumn\_pathfinding}
