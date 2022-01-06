@@ -39,10 +39,17 @@ By discarding a strict grid structure, which intern decreases the spacial requir
 \subsubsection{PCL}
 The Point Cloud Library simplifies working with a point cloud data structure. PCL is an free library supporting point clouds of any dimension. It is written for optimal performance and offers a variety of 3d processing functionality. These include filtering, segmentation, feature estimation, etc. Furthermore PCL is fully integrated into ROS, which means specific functionalities are packages into nodelets which can be added to fit the underlying use case.\footcite{ConselhoNacionaldeDesenvolvimentoCientificoeTecnologico1995}
 
-\subsection{ROS Types}
-
 \section{Abstracted Environments in Autumn}
+Autumn contains two different path planning packages for different dimensional environments. When using a drone 3 dimensional path planning is necessary to benefit from the usage of an aerial vehicle. Therefor the "autumn\_pathfinding" is used, based on a point cloud. Additionally the package "autumn\_pathfinding\_2D" uses an occupancy grid and thus is appropriate for situations where the third dimension can't be utilized.\newline
+Through the use of ROS, explained in detail in chapter \ref{chapter:ros}, this modular approach is made possible. The Point Cloud and Occupancy Grid data type are integrated into ROS and as such universally applicable.   
 
-\subsection{autumn$\_$pathfinding$\_$2D}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/EnvironmentTransfer}
+	\caption{Life span of point cloud and occupancy grid. Created in the SLAM stage, published as a topic and used in the navigation stage.}
+	\label{fig:abstract_environments_enviromentTransfer}
+\end{figure}
 
-\subsection{autumn$\_$pathfinding}
+\subsection{autumn\_pathfinding\_2D}
+
+\subsection{autumn\_pathfinding}
