@@ -13,15 +13,39 @@ In Autumn this step of collision detection happens alongside with path planning.
 The principle of the collision detection is very simple, due to the organized and semi organized data structures the algorithm works with. To check for collisions a function can be called that takes Cartesian coordinates as parameters and returns a value that indicates if an obstacle is present or not. All the collision detection algorithm has to do is to check if there are any collisions between two points sampled by the path planning algorithm. In order two accomplish this task the Bresenham's Algorithm will be used.\newline
 
 \subsubsection{Bresenham's Algorithm} 
-The Bresenham's Algorithm is a solution to the problem of rasterizing curves. Rasterizing being the process of converting a curves or lines into cells on a grid, representing the same shape. The Algorithm covers many different shapes, but because of the nature of the path planning algorithm used only a straight line will be necessary.\newline
-The algorithm works by calculating an error for each candidate cell. The formula for this error being: $e=(y-y_0)dx-(x-x_0)dy$. Hereby $x$ and $y$ are the coordinates of the cell the error is calculated for, which are being subtracted by the coordinates of the starting point. $dx$ and $dy$ are the differences between the first and last point of the line. By calculating the errors for each cell, it is made possible to choose cells best representing the original line.\footcite{Zingl2012}
+The Bresenham's Algorithm is a solution to the problem of rasterizing curves. Rasterizing being the process of converting a curves or lines into cells on a grid, representing the same shape. The Algorithm covers many different shapes, but because of the nature of the path planning algorithm used only a straight line will be necessary.
+The algorithm works by calculating an error for each candidate cell. The formula for this error being: $e=(y-y_0)dx-(x-x_0)dy$. Hereby $x$ and $y$ are the coordinates of the cell the error is calculated for, which are being subtracted by the coordinates of the starting point. $dx$ and $dy$ are the differences between the first and last point of the line.
+The error symbolizes the deviation from the original line. By calculating the errors for each cell, it is made possible to choose cells best representing the original line.\footcite{Zingl2012}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{img/Bresenhams}
-	\caption{Application of Bresenham's Algorithm to a straight line, with visible errors. \cite{Zingl2012}}
-	\label{fig:collision_detection_bresenham}
-\end{figure}
+\begin{algorithm}[]
+	\caption{Bresenham's Line Algorithm\footcite{Zingl2012}}
+	\SetKwFunction{Fabs}{abs}
+	\SetKwFunction{FUsePixel}{UsePixel}
+	$dx \gets \Fabs(x_1-x_0)$\;
+	$dy \gets \Fabs(y_1-y_0)$\;
+	$sx \gets x_0<x_1 ? 1 : -1$\;
+	$sy \gets y_0<y_1 ? 1 : -1$\;
+	$error \gets dx + dy$\;
+	\While{$x_0==x_1 and y_0==y_1$}{
+		$\FUsePixel(x_0, y_0)$\;
+		$e_2 \gets error * 2$\;
+		\If{$e_2 >= dy$}{
+			$error \gets error + dy$\;
+			$x_0 \gets x_0 + sx$\;
+		}\If{$e_2 <= dx$}{
+			$error \gets error + dx$\;
+			$y_0 \gets y_0 + sy$\;
+		}
+	}
+\end{algorithm}
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.5\linewidth]{img/Bresenhams}
+%	\caption{Application of Bresenham's Algorithm to a straight line, %with visible errors. \cite{Zingl2012}}
+%	\label{fig:collision_detection_bresenham}
+%\end{figure}
+
 
 \section{Implementation}
 
