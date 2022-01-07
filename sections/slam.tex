@@ -15,7 +15,7 @@ As one major topic of this thesis is robot navigation in a GPS-denied area as we
 Localization or state-Estimation aims to reconstruct the state of a system using interoceptive measurements (e.g. acceleration, velocity, etc.) as well as an exteroceptive model (e.g. position and orientation) of the system. \footcite{barfootStateEstimation2017}
 Put into the context of mobile robotics this means that in order to perform comprehensive localization of a mobile robot a sensor fusion between on-board sensors and an external coordinate system or map ought to be performed as solely relying on incremental sensors for odometry would quickly result in large accumulated errors.
 %Exemplary for such a robot would be a drone utilizing a Inertial Measurement Units (IMU) odometry as well as GPS positional data to estimate its current position.
-An for this exemplary system would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
+An exemplary system for this would be an industrial robot utilizing a construction plan to correct errors by wheel-encoded odometry as well as to navigate through a factory. 
 
 \section{Mapping}
 Contrary to localization or state-estimation, in mapping problems the current pose of the system is known while its environment remains uncharted.
@@ -62,7 +62,9 @@ The goal is that, for any time instant $ t $, the robots state vector
 	y \\
 	\theta \\
 \end{pmatrix}
-\] describing its position and orientation as well as a time invariant set of all absolute landmark positions 
+\] as well as a time invariant set of all absolute landmark positions 
+% describing its position and orientation as well as a time invariant set of all absolute landmark positions 
+% umformulieren dass es nicht heißt der state vector beschreibt die landmarks
 $ m = \{ m_{1}, m_{2}, ..., m_{i} \}$ 
 is computed, given uncertain relative landmark observations $ Z_{0:t} = \{z_{0}, z_{1}, ..., z_{t}\}$, controls $ U_{0:t} = \{u_{0}, u_{1}, ..., u_{t}\}$ and known initial location $ x_{0} $. Fig. \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
 
@@ -173,17 +175,24 @@ To still calculate the state transition as well as measurement update these func
 
 This allows for the functions to be incorporated in the vanilla Kalman Filter Algorithm which consists of the following five step procedure:
 
-\begin{lstlisting}[mathescape=true, caption={Pseudo-Code describing the filter cycle of a Extenden Kalman Filter},captionpos=b,label={lst:kalman_filter}]
-	def extended_kalman_filter($\mu_{t-1}$, $\Sigma_{t-1}$, $u_{t}$, $z_{t}$):
-	$\overline{\mu}_{t} = g(u_{t}, \mu_{t-1})$				# state-prediction given newest control measurements
-	$\overline{\Sigma}_{t} = G_{t}\Sigma_{t-1}G_{t-1}^{T} + R_{t}$				# measurement prediction 	 		
+\begin{algorithm}[H]
+	\caption{Pseudo-Code describing the filter cycle of a Extenden Kalman Filter}
+	\SetKwFunction{FMain}{ExtendedKalmanFilter}
+	\SetKwProg{Fn}{Function}{:}{}
 	
-	$K_{t} = \overline{\Sigma}_{t}H_{t}^{T}(H_{t}\overline{\Sigma}_{t}H_{t}^{T} + Q_{t})^{-1}$				# measurement of actual landmark position
-	$\mu_{t} = \overline{\mu}_{t} + K_{t}(z_{t}-h(\overline{\mu}_{t}))$				# data association 
-	$\Sigma_{t} = (I - K_{t}H_{t})\overline{\Sigma}_{t}$				# update of state-space vector as well as covariance matrix 
+	\Fn{ \FMain{ $\mu_{t - 1}$, $\Sigma_{t-1}$, $u_{t}$, $z_{t}$ } } 
+	{
+		$ \overline{\mu}_{t} \gets g( u_{t}, \mu_{t - 1} ) $\;
+		$ \overline{\Sigma}_{t} \gets G_{t} \Sigma_{t-1} G^{T}_{t-1} + R{t} $\;
 	
-	return $\mu_{t}, \Sigma_{t}$
-\end{lstlisting}
+		$ K_{t} \gets \overline{\Sigma}_{t} H^{T}_{t} ( H_{t} \overline{\Sigma}_{t} H^{T}_{t} + Q_{t} )^{-1} $\;
+		$ \mu_{t} \gets \overline{\mu}_{t} + K_{t} ( z_{t} - h( \overline{\mu}_{t} ) ) $\;
+		$ \overline{\Sigma}_{t} \gets ( I - K_{t} H_{t} ) \overline{\Sigma}_{t} $\;
+		
+		\Return $\mu_{t}$, $\Sigma_{t}$\;
+	}
+	\textbf{End Function}	
+\end{algorithm}
 
 Notice that the Jacobian matrices $G_{t}$ and $H_{t}$ containing all partial derivatives of $g$ and $h$ are utilized describing the transformation of robot state as well as observations based on the pose.
 

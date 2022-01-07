@@ -165,7 +165,7 @@ The two core principles introduced with the RT-RRT*, are tree expansion and tree
 At first, the Algorithm starts by initializing a root node. After each following iterations, the tree expands and rewires. This sampling lasts for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the number of steps the path consists of. In this phase, the agent is moved gradually towards the tree root. Thereafter, when path planning is finished and the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. This approach enables the agent to move without the time needed to compute the whole path.
 Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
 The rewiring is done in the default scenario done because newly added nodes have a smaller cost-to-reach than the parent of a certain node. In the second case, rewiring is needed if the environment changes. Therefore a larger portion of the tree has to change. Hereby two different modes are utilized. The first one consists of rewiring the tree in a circle centered around the tree node. For the second option, both focused and uniform sampling is used, with the difference that it is not done for one node, but instead concentrates on patches.
-\footcite{Naderi2015}
+%\footcite{Naderi2015}
 
 \subsubsection{RT-RRT* in Autumn}
 
