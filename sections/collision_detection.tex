@@ -26,13 +26,13 @@ The error symbolizes the deviation from the original line. By calculating the er
 	$sx \gets x_0<x_1 ? 1 : -1$\;
 	$sy \gets y_0<y_1 ? 1 : -1$\;
 	$error \gets dx + dy$\;
-	\While{$x_0==x_1 and y_0==y_1$}{
+	\While{$x_0 \neq x_1$ and $y_0 \neq y_1$}{
 		$\FUsePixel(x_0, y_0)$\;
 		$e_2 \gets error * 2$\;
-		\If{$e_2 >= dy$}{
+		\If{$e_2 \geq dy$}{
 			$error \gets error + dy$\;
 			$x_0 \gets x_0 + sx$\;
-		}\If{$e_2 <= dx$}{
+		}\If{$e_2 \leq dx$}{
 			$error \gets error + dx$\;
 			$y_0 \gets y_0 + sy$\;
 		}
@@ -48,8 +48,18 @@ The error symbolizes the deviation from the original line. By calculating the er
 
 
 \section{Implementation}
+The collision detection logic is in effect every time a new point is going to be added into the graph. The path planning algorithm samples a random point and calculates its nearest neighbor. After that a function is called which takes two points and checks for collision on a straight line path between these two points.\newline
+A problem that arises when using it this way is the not accounted for dimensions of the drone. For that the function takes a third parameter defining the search radius. Using that method paths can be generated suitable for the physical drone. This is accompanied by a increase in computational time. The factor of the increase amounts to $3.274r$. This stems from the way this radius, $r$, is used. For every cell that isn't the first an last cell, $2r$ neighboring cells in a line opposite to the direction of the line get checked. For the first an last cell, the radius translates to the circle where cells get checked. In order to not overlap validation areas, on the first and last cell only a semicircle is being covered. 
 
-\subsection{2 dimensional space}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/CheckedPixels}
+	\caption{Visualization of checked pixel in paths. Green being start/end points, red the lines calculated by the Bresenham's Algorithm and yellow the additionally checked cells with $r = 2$}
+	\label{fig:collision_detection_checkedPixels}
+\end{figure}
+
+Therefor the to be checked cells can be calculated in dependency of the line length $l$ and radius $r$. $l$ hereby being the amount of cells present in the line calculated by the Bresenham's Algorithm. 
+\[C=l+(l-2)2r+r\pi^2\]
 
 \subsection{3 dimensional space}
-
+When using this concept in an 3 dimensional environment, it only requires adding the new third dimension. The Bresenham's Algorithm is easy to translate into the third dimension. The problem that arises is performance. When adding the radial search, it increases the total cells checked by \(C^2 - l\).  
