@@ -23,22 +23,22 @@ Other systems however utilize wheel encoders to count the number of wheel rotati
 
 With non-linear motion the distances $d_{l}$ and $d_{r}$ moved by the left and right wheel are unequal which requires the calculation of both updated position and bearing of the robot. 
 Lets suppose a robot moved from position $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$ to $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$ with a slight left turn caused by the right wheel turning faster than the left one. 
-This scenario is depicted in Fig. \ref{fig:odom} with $\phi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and center to point $P$, the origin of the turn. 
+This scenario is depicted in Fig. \ref{fig:odom} with $\varphi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and center to point $P$, the origin of the turn. 
 
 For small angles these radii are approximately the same length as the distances $d_{l}, d_{c}$ and $d_{r}$, which allows for the turn angle to be calculated as follows:
 \begin{align*}
-	\phi &= \frac{d_{i}}{r_{i}}, & i &= l, r, c  
+	\varphi &= \frac{d_{i}}{r_{i}}, & i &= l, r, c  
 \end{align*}
 
-However in practical scenarios where these radii and the point P are unknown, $\phi$ has to be calculated only using $d_{l}$, $d_{r}$ and $b$ which corresponds to the distance between both robot wheels.
+However in practical scenarios where these radii and the point P are unknown, $\varphi$ has to be calculated only using $d_{l}$, $d_{r}$ and $b$ which corresponds to the distance between both robot wheels.
 
 \begin{equation*}
 	\begin{split}
-		\phi r_{r} = d_{r} \\
-		\phi r_{l} = d_{l} \\
-		\phi r_{r} - \phi r_{l} = d_{r} - d_{l} \\
-		\phi = \frac{d_{r} - d_{l}}{r_{r} - r_{l}} \\ 
-		\phi = \frac{d_{r} - d_{l}}{b} \\
+		\varphi r_{r} = d_{r} \\
+		\varphi r_{l} = d_{l} \\
+		\varphi r_{r} - \varphi r_{l} = d_{r} - d_{l} \\
+		\varphi = \frac{d_{r} - d_{l}}{r_{r} - r_{l}} \\ 
+		\varphi = \frac{d_{r} - d_{l}}{b} \\
 	\end{split}
 \end{equation*}
 
@@ -57,9 +57,9 @@ The final pose is calculated as follows:
 	\end{pmatrix}
 	= 
 	\begin{pmatrix}
-		-d_{c} \sin \phi \\
-		d_{c} \cos \phi \\ 
-		\theta + \phi
+		-d_{c} \sin \varphi \\
+		d_{c} \cos \varphi \\ 
+		\theta + \varphi
 	\end{pmatrix}
 \end{equation*}
 
@@ -159,7 +159,7 @@ As 3D-LiDAR sensors applied in many commercial mapping solution are very expensi
 	\centering
 	\includegraphics[width=0.8\linewidth]{img/activeTriangulation}
 	\caption{
-		This diagram depicts how a ToF sensor utilizes the phase-shift $\phi$ between the emitted IR-Light (red) and received signal (blue). 
+		This diagram depicts how a ToF sensor utilizes the phase-shift $\varphi$ between the emitted IR-Light (red) and received signal (blue). 
 		% noch mehr schreiben
 	}
 	\label{fig:activeTriangulatoin}
@@ -167,15 +167,55 @@ As 3D-LiDAR sensors applied in many commercial mapping solution are very expensi
 
 
 \subsection{Stereo Vision}
-The last and most significant approach to Autumn performs passive triangulation using two cameras. Although this eliminates the need for any light to be emitted however the problem of correspondence is introduced, which deals with associating the different projections to the same point in the real world. There are multiple approaches to this problem which are generally divided into global and local matching methods with the latter being more computationally efficient while sacrificing quality.\footcite{do2019review}
+The last and most significant approach to Autumn performs passive triangulation using two cameras setup as seen in Fig. \ref{fig:passiveTriangulation}. Although this eliminates the need for any light to be emitted however the problem of correspondence is introduced, which deals with associating the different projections to the same point in the real world. There are multiple approaches to this problem which are generally divided into global and local matching methods with the latter being more computationally efficient while sacrificing quality.\footcite{do2019review}
 
 In Autumn this approach was pursued using a Stereolabs ZED depth camera as it was superior to any competitors such as the Microsoft Kinect or Intel Realsense concerning availability and cost-effectiveness. 
 
-\subsubsection{ZED 1 vs ZED 2}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/PassiveTriangulation}
+	\caption{
+		This diagram describes the camera setup found in passive triangulation systems. Using stereo-photogrammetry the distance to the perceived scene is calculated. 
+	}
+	\label{fig:passiveTriangulation}
+\end{figure}
+
+\subsection{ZED 1 vs ZED 2}
 %As mentioned in Chapter \ref{chapter:architecture} the Stereolabs ZED 1 was used in a first prototype and later replaced with a 
+Chapter \ref{chapter:architecture} mentions that the Stereolabs ZED 1 used in early prototypes was quickly replaced with the ZED 2. This change was due to processing limitations and additional features provided by the newer product version.
+This section aims to benchmark the two cameras from a depth-performance standpoint to review if the upgrade enhanced depth perception thus improving the system output or if no changes were necessary when only considering depth-perception.
+
+\subsubsection{Experiment}
+To answer this question the cameras measured the vertical distance enclosed by two points mounted $1m$ above each other on a stationary structure with the bottom one at a height $1m$ above the ground. 
+The cameras was paced on a movable rig normal to the stationary structure and 1m above the ground.  The aforementioned gap was measured by the cameras at $1m$ increments between $3m$ and $10m$ horizontal distance measured amongst each structures base. 
+
+The usage of ARUCO markers allowed for precisely tracking the position of each point within the camera coordinate system thus ensuring the points remain fixed even though the camera rig is moved. 
+% über ARUCO schreiben
+% reference zu ARUCO 
+ARUCO markers are squared-based markers popular in many robotic and augmented reality applications as they provide a fast and robust solution for estimating a cameras pose. Each marker has a unique, identifiable pattern which allows for precisely determining and tracking its position.\footcite{jurado2015} 
+
+\subsubsection{Results}
+Fig. \ref{plot:zedBenchmark} depicts the mean depth-perception error measured thus indicating how well each camera performed. 
+When comparing both linear regression functions it is apparent that the slope of the ZED 1 with $0.03m/m$ is more than twice as large compared to the ZED 2 at $0.01m/m$. This indicates that with increasing distance the depth-perception error increases dramatically. 
+Another interesting finding are the minima and maxima of the mean depth-perception error found in Tab. \ref{tab:errorMinimaMaxima}.
+As illustrated the ZED 1 inherits a substantially large minimal and maximal error of  $0.07m$ and $0.31m$.
+Compared to this the ZED 2 performed much better with a almost non existent base error and a maximal error of $0.1m$.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& \textbf{Minimal Mean Error} & \textbf{Maximal Mean Error} \\ \hline
+		\textbf{ZED 1}  & 0.07m 					  & 0.31m                      \\ \hline
+		\textbf{ZED 2} & 0.01m                      & 0.10m                      \\ \hline
+	\end{tabular}
+	\caption{Table containing the minimal and maximal mean errors of both the ZED 1 and ZED 2.}
+	\label{tab:errorMinimaMaxima}
+\end{table}
+
+\input{sections/zedBenchmark}
 
 
-
-
+Considering all of the aforementioned findings it is apparent that the ZED 2 produced much better depth-perception results compared to the ZED 1. This justifies the upgrade not only from a feature focused standpoint but also quality wise as this greatly effects the final 3D point cloud utilized by components discussed later in this thesis. 
 
 \filbreak
