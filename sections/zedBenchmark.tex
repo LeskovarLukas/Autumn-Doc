@@ -1,0 +1,88 @@
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.8\linewidth, % Scale the plot to \linewidth
+				grid=major, 
+				grid style={dashed,gray!30},
+				xlabel={Distance [m]}, % Set the labels
+				ylabel={Mean Error [m]},
+				legend pos=north west,
+				xtick={3, 4, 5, 6, 7, 8, 9, 10},
+				xmin=2,
+				xmax=11,
+				ymin=0,
+				ymax=0.35,
+				]
+				
+				
+				%zed1 data
+				\addplot[only marks, color=blue]
+				table[row sep=crcr]{
+					distance error \\
+					0 0 \\
+					3 0.072842 \\
+					4 0.084444 \\
+					5 0.090908 \\
+					6 0.082350515 \\
+					7 0.091252505 \\
+					8 0.136357778 \\
+					9 0.170380567 \\
+					10 0.306662651 \\
+				}; 
+				\addlegendentry{ZED1}
+				
+				%zed1 regression
+				\addplot[no marks, color=cyan, style=dashed]
+				table[row sep=crcr, y={create col/linear regression={y=error}}]{
+					distance error \\
+					0 0 \\
+					3 0.072842 \\
+					4 0.084444 \\
+					5 0.090908 \\
+					6 0.082350515 \\
+					7 0.091252505 \\
+					8 0.136357778 \\
+					9 0.170380567 \\
+					10 0.306662651 \\
+				};
+				\addlegendentry{$y = 0.03x + 0.04; R^2 =  0.67$} 
+				
+				%zed2 data
+				\addplot[only marks, color=red]
+				table[row sep=crcr]{
+					distance error \\
+					0 0 \\
+					3 0.005048 \\
+					4 0.010964 \\
+					5 0.058536585 \\
+					6 0.080308 \\
+					7 0.045865731 \\
+					8 0.040048 \\
+					9 0.102566462 \\
+					10 0.081332636 \\
+				}; 
+				\addlegendentry{ZED2}
+				
+				%zed2 regression
+				\addplot[no marks, color=orange, style=dashed]
+				table[row sep=crcr, y={create col/linear regression={y=error}}]{
+					distance error \\
+					0 0 \\
+					3 0.005048 \\
+					4 0.010964 \\
+					5 0.058536585 \\
+					6 0.080308 \\
+					7 0.045865731 \\
+					8 0.040048 \\
+					9 0.102566462 \\
+					10 0.081332636 \\
+				}; 
+				\addlegendentry{$y = 0.01x + 0.02; R^2 =  0.58$}
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This plot describes how the mean depth-performance error of both the ZED 1 (blue) and ZED 2 (red) Stereo Camera changes with increasing distance to an object. Furthermore the linear regression function for both the ZED 1 (cyan) and ZED 2 (orange) are plotted. 
+		 }
+	 	\label{plot:zedBenchmark}
+	\end{center}
+\end{figure}

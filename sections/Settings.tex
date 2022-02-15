@@ -25,9 +25,12 @@ style=authortitle-ibid
 \usepackage{listings}
 \usepackage{color}
 \usepackage{footnote}
-
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{mathtools}
+
 
 \usepackage[
 ruled,
@@ -162,3 +165,8 @@ titlenumbered
 \AtEveryCitekey{\clearfield{urlyear}}
 \AtEveryCitekey{\clearfield{url}}
 \AtEveryCitekey{\clearfield{year}}
+
+
+%pgfplots settings
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{units}
