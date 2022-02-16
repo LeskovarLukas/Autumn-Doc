@@ -255,19 +255,19 @@ The final algorithm functions exactly as described with the exception that it in
 \end{figure}
 
 \subsection{Graph-based}
-The newest paradigm to solve the offline SLAM problem are graph-based methods that essentially use a (non-linear) least-squares approach to compute the graph of poses best fitting the measurements. 
-To this end the SLAM posterior is described as a graph of robot poses $ x_{i} $ at time $ t_{i} $ as nodes connected by soft constraints that correspond to spatial measurements between two states.
+The newest paradigm to solve the offline SLAM problem are graph-based methods that essentially use a non-linear least-squares approach to compute the graph of poses best fitting the measurements. 
+To this end the SLAM posterior is described as a graph of robot poses $ x_{i} $ at time $ t_{i} $ as nodes connected by soft constraints that correspond to spatial measurements $z_{ij}$ between two states.
 These edges are generated in the following two cases:
 
 \begin{equation}\label{odometryEdge}
-	(X{i}^{-1}X_{i+1})
+	(X_{i}^{-1}X_{i+1})
 \end{equation}
 
 \begin{equation}\label{observationEdge}
 	(X_{i}^{-1}X_{j})
 \end{equation}
 
-Here \ref{odometryEdge} corresponds to a edge based on odometry transformations by moving the robot from state $X_{i}$ to $X_{i+1}$, both of which are described as transformation matrices relative to the coordinate origin.
+Here \ref{odometryEdge} corresponds to a edge based on odometry transformations by moving the robot from state $X_{i}$ to $X_{i+1}$, both of which are represented as vectors relative to the coordinate origin.
 These transformations are illustrated in more detail in Fig. \ref{fig:poseGraphTransformation}.
 The more interesting case is when an observation of a previously captured area occurs and a virtual measurement \ref{observationEdge} is computed, describing how the states $X_{j}$ and $X_{i}$ relate to each other according to the displacement between their observations, see Fig. \ref{fig:poseGraphOptimization}.
 
@@ -282,7 +282,7 @@ The more interesting case is when an observation of a previously captured area o
 
 
 
-This approach marginalizes any data about the map other than the correspondence of poses to primarily focus on solving the robot path.  
+This approach marginalizes any data about the map other than the correspondence of poses to primarily focus on solving the robot path. 
 Given the pose-graph the goal is to compute the node configuration that minimizes the error between predicted edges, see \ref{observationEdge}, and actual measurements 
 $
 \langle
