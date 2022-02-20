@@ -79,3 +79,61 @@ For each radius the mean time of all 100 data point is calculated. This results 
 \subsection{Two-dimensional Algorithm}
 
 For autumn\_pathplanning\_2d radii starting from zero, resulting in disabling collision detection functionality, up two 2000, with a step size of 100, have been tested. 
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.8\linewidth, % Scale the plot to \linewidth
+				grid=major, 
+				grid style={dashed,gray!30},
+				xlabel={Radius}, % Set the labels
+				ylabel={Computational Time [ms]},
+				legend pos=north west,
+				xmin=0,
+				xmax=2000,
+				ymin=0,
+				ymax=2000,
+				]
+				
+				
+				%zed1 data
+				\addplot[only marks, color=blue]
+				table[row sep=crcr]{
+					distance error \\
+					0 98.853165 \\
+					100 193.98699\\
+					200 283.95058\\
+					300 373.10144\\
+					400 465.5869\\
+					500 558.11993\\
+					600 647.20301\\
+					700 729.78178\\
+					800 824.24182\\
+					900 912.9868\\
+					1000 1007.04737\\
+					1100 1090.12372\\
+					1200 1169.9529\\
+					1300 1260.2584\\
+					1400 1348.2436\\
+					1500 1442.4541\\
+					1600 1530.6858\\
+					1700 1624.6226\\
+					1800 1711.6543\\
+					1900 1793.4719\\
+					2000 1885.9677\\
+				}; 
+				\addlegendentry{2D Path planning}
+				
+				%zed1 regression
+				\addplot[no marks, color=cyan, style=dashed]
+				table[row sep=crcr, y={create col/linear regression={y=error}}]
+				{0.8899x + 107.79};
+				\addlegendentry{$y = 0.8899x + 107.79; R^2 =  0.9999$} 
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This plot describes how the mean depth-performance error of both the ZED 1 (blue) and ZED 2 (red) Stereo Camera changes with increasing distance to an object. Furthermore the linear regression function for both the ZED 1 (cyan) and ZED 2 (orange) are plotted. 
+		}
+		\label{plot:2dCollisionExp}
+	\end{center}
+\end{figure}

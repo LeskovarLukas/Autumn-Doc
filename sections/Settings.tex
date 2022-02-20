@@ -25,9 +25,12 @@ style=authortitle-ibid
 \usepackage{listings}
 \usepackage{color}
 \usepackage{footnote}
-
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{mathtools}
+
 
 \usepackage[
 ruled,
@@ -64,11 +67,11 @@ titlenumbered
 \setlength{\headheight}{45pt}
 
 \lhead{
-  \includegraphics[width=3cm]{img/htlwrn_logo}  
+	\includegraphics[width=3cm]{img/htlwrn_logo}  
 }
 \chead{\Large HTBLuVA Wiener Neustadt \\ \normalsize Höhere Lehranstalt für Informatik}
 \rhead{
-  \includegraphics[width=3cm]{img/htlwrn_logo2}
+	\includegraphics[width=3cm]{img/htlwrn_logo2}
 }
 
 \newcommand{\parseauthor}[3]{\makecell{#1 \\ #2} & & #3}
@@ -78,17 +81,17 @@ titlenumbered
 \setlength{\parindent}{0em}
 
 \geometry{
- a4paper,
- left=30mm,
- top=50mm,
- }
- 
+	a4paper,
+	left=30mm,
+	top=50mm,
+}
+
 \graphicspath{ {img/} }
 
 \makeindex[title=Index]
 \makeindex[name=allgemein, title=Common Index]
 \makeindex[name=name,title={Authors Index}]
-	% do not even think about changing this from name to author
+% do not even think about changing this from name to author
 \makeindex[name=title,columns=1,title={Literature Index}]
 \indexsetup{level=\subsection*, toclevel=subsection, noclearpage}
 
@@ -139,13 +142,13 @@ titlenumbered
 \newcommand{\Messbox}[2]{% Parameters: #1=Breite, #2=Hoehe
 	\setlength{\unitlength}{1.0mm}%
 	\begin{picture}(#1,#2)%
-	\linethickness{0.05mm}%
-	\put(0,0){\dashbox{0.2}(#1,#2)%
-		{\parbox{#1mm}{%
-				\centering\footnotesize 
-				%{\bf MESSBOX}\\ 
-				Breite $ = #1 {\rm\ mm}$\\
-				H\"ohe $ = #2 {\rm\ mm}$
+		\linethickness{0.05mm}%
+		\put(0,0){\dashbox{0.2}(#1,#2)%
+			{\parbox{#1mm}{%
+					\centering\footnotesize 
+					%{\bf MESSBOX}\\ 
+					Breite $ = #1 {\rm\ mm}$\\
+					H\"ohe $ = #2 {\rm\ mm}$
 	}}}\end{picture}
 }
 
@@ -162,3 +165,8 @@ titlenumbered
 \AtEveryCitekey{\clearfield{urlyear}}
 \AtEveryCitekey{\clearfield{url}}
 \AtEveryCitekey{\clearfield{year}}
+
+
+%pgfplots settings
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{units}
