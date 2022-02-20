@@ -63,3 +63,15 @@ Therefor the to be checked cells can be calculated in dependency of the line len
 
 \subsection{3 dimensional space}
 When using this concept in an 3 dimensional environment, it only requires adding the new third dimension. The Bresenham's Algorithm is easy to translate into the third dimension. The problem that arises is performance. When adding the radial search, it increases the total cells checked by \(C^2 - l\).  
+
+\section{Experiment}
+
+In order to be able to asses the practical impact of the collision detection performed by the autumn pathfinding algorithm, an experiment was conducted, which illustrates the computational time needed, to guarantee no collisions from happening.
+
+\subsection{Experimental Setup}
+
+The experiment is split into two parts, these being the impact of collision detection on the computational time of two-dimensional and three-dimensional path-finding.
+To get significant data, which is able to represent various scenarios in which the algorithm has to perform, a setup was selected to cover all aspects of the algorithm. The experiment works by planning a path through a static environment. This environment stays the same for all iterations of one algorithm, as well as the two different variations of the algorithm. To be able to get conclusive evidence concerning the collision detection which isn't polluted, by the random nature of the algorithm, has been set to 100. One sample refers hereby to a path planning with consistent parameters. The parameters being the amount of iterations of the RRT* algorithm($i$), the distance between the start and end node($d$), and the spacing of the nodes of the expanding tree($D$). These three parameters stay constant throughout the entire duration of the experiment, the reason being that these three Parameters affect the parts of the path planning algorithm that aren't of concern in this experiment. The Parameter controlling the behavior of the collision detection is the radius($r$).
+For each radius 100 paths are being generated and each execution of the algorithm is being timed from the point of the function call till the return of the calculated path. 
+The set of radii to be tested depends on the space that paths are generated in.
+For each radius the mean time of all 100 data point is calculated. This results in data representing how collision detection impacts the computational time of the autumn pathplanning algorithm.
