@@ -15,7 +15,7 @@
 				]
 				
 				
-				%zed1 data
+				%2d test data
 				\addplot[only marks, color=blue]
 				table[row sep=crcr]{
 					distance error \\
@@ -43,10 +43,9 @@
 				}; 
 				\addlegendentry{2D Path planning}
 				
-				%zed1 regression
-				\addplot[no marks, color=cyan, style=dashed]
-				table[row sep=crcr, y={create col/linear regression={y=error}}]
-				{0.8899x + 107.79};
+				%2d test regression
+				\addplot[domain=0:2000, samples=100,no marks, color=cyan, style=dashed]
+				{0.8899*x + 107.79};
 				\addlegendentry{$y = 0.8899x + 107.79; R^2 =  0.9999$} 
 			\end{axis}
 		\end{tikzpicture}
