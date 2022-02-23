@@ -49,7 +49,7 @@ The error symbolizes the deviation from the original line. By calculating the er
 
 \section{Implementation}
 The collision detection logic is in effect every time a new point is going to be added into the graph. The path planning algorithm samples a random point and calculates its nearest neighbor. After that a function is called which takes two points and checks for collision on a straight line path between these two points.\newline
-A problem that arises when using it this way is the not accounted for dimensions of the drone. For that the function takes a third parameter defining the search radius. Using that method paths can be generated suitable for the physical drone. This is accompanied by a increase in computational time. The factor of the increase amounts to $3.274r$. This stems from the way this radius, $r$, is used. For every cell that isn't the first an last cell, $2r$ neighboring cells in a line opposite to the direction of the line get checked. For the first an last cell, the radius translates to the circle where cells get checked. In order to not overlap validation areas, on the first and last cell only a semicircle is being covered. 
+A problem that arises when using it this way, is the not accounted for dimensions of the drone. For that the function takes a third parameter defining the search radius. Using that method paths can be generated suitable for the physical drone. This is accompanied by a increase in computational time. This stems from the way this radius, $r$, is used. For every cell that isn't the first an last cell, $2r$ neighboring cells in a line opposite to the direction of the line get checked. For the first an last cell, the radius translates to the circle where cells get checked. In order to not overlap validation areas, on the first and last cell only a semicircle is being covered. 
 
 \begin{figure}[h]
 	\centering
@@ -59,16 +59,16 @@ A problem that arises when using it this way is the not accounted for dimensions
 \end{figure}
 
 Therefor the to be checked cells can be calculated in dependency of the line length $l$ and radius $r$. $l$ hereby being the amount of cells present in the line calculated by the Bresenham's Algorithm. 
-\[C=l+(l-2)2r+r\pi^2\]
+\[C=r^2+(l-2)*2r\]
 
 \subsection{3 dimensional space}
-When using this concept in an 3 dimensional environment, it only requires adding the new third dimension. The Bresenham's Algorithm is easy to translate into the third dimension. The problem that arises is performance. When adding the radial search, it increases the total cells checked by \(C^2 - l\).  
+When using this concept in an 3 dimensional environment, it only requires adding the new third dimension. The Bresenham's Algorithm is easy to translate into the third¹2 dimension. The problem that arises is performance. When adding the radial search, it increases the total cells checked by \(C^2 - l\).  
 
 \section{Experiment}
 
 In order to be able to asses the practical impact of the collision detection performed by the autumn pathfinding algorithm, an experiment was conducted, which illustrates the computational time needed, to guarantee no collisions from happening.
 
-\subsection{Experimental Setup}
+\subsection{Experiment Setup}
 
 The experiment is split into two parts, these being the impact of collision detection on the computational time of two-dimensional and three-dimensional path-finding.
 To get significant data, which is able to represent various scenarios in which the algorithm has to perform, a setup was selected to cover all aspects of the algorithm. The experiment works by planning a path through a static environment. This environment stays the same for all iterations of one algorithm, as well as the two different variations of the algorithm. To be able to get conclusive evidence concerning the collision detection which isn't polluted, by the random nature of the algorithm, has been set to 100. One sample refers hereby to a path planning with consistent parameters. The parameters being the amount of iterations of the RRT* algorithm($i$), the distance between the start and end node($d$), and the spacing of the nodes of the expanding tree($D$). These three parameters stay constant throughout the entire duration of the experiment, the reason being that these three Parameters affect the parts of the path planning algorithm that aren't of concern in this experiment. The Parameter controlling the behavior of the collision detection is the radius($r$).
@@ -78,10 +78,12 @@ For each radius the mean time of all 100 data point is calculated. This results 
 
 \subsection{Two-dimensional Algorithm}
 
-For autumn\_pathplanning\_2d radii starting from zero, resulting in disabling collision detection functionality, up two 2000, with a step size of 100, have been tested. 
+For autumn\_pathplanning\_2d radii starting from zero, resulting in disabling collision detection functionality, up two 2000, with a step size of 100, have been tested. In figure \ref{plot:2dCollisionExp} the linear relationship between collision detection and the computational time can be observed. Furthermore it can be derived from this plot that the two dimensional path planning algorithm can handle high amounts of collision checks without making the path calculation unusable. On average an additional 100 in radius results in a 90ms longer runtime. Hereby should be pointed out that the radii chosen in this experiment are not in relation to radii used in practical application. For a 0.05 resolution of the occupancy grid that is being used radii in a range from 15 to 50 are practical. Nevertheless this accentuated representation with a correlation coefficient of nearly 1 can also be applied to the practical values.    
 
 \input{sections/2dCollisionExp}
 
 \subsection{Three-dimensional Algorithm}
+
+The three-dimensional algorithm was tested with values ranging from $10$ to $320$, with an increment of $2^n * 10$. Figure \ref{plot:3dCollisionExp} illustrates the result of the experiment performed using the autumn\_pathplanning algorithm. The exponential relationship between the amount of collision checks and computational time is made obvious. With a block size of the point cloud of 0.01, radii used in practice would range from 20 up to 150.
 
 \input{sections/3dCollisionExp}
