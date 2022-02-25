@@ -161,10 +161,12 @@ $X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{
 \subsubsection{autumn\_pathplanning\_2d Benchmark}
 
 \begin{table}[!ht]
+	
 	\centering
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
 		\hline
-		Iterations & 1000 & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 \\ \hline
+		Iterations & 1000 & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 \\ \hline\hline
 		Mean time[ms] & 36,61 & 80,50 & 139,92 & 215,50 & 306,20 & 413,48 & 533,78 & 671,13 \\ \hline
 		Mean cost & 118,52 & 98,95 & 91,71 & 85,69 & 82,43 & 79,85 & 78,72 & 76,82 \\ \hline
 		Failed[\%] & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
@@ -172,6 +174,44 @@ $X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{
 		$\sigma$ cost & 38,72 & 20,04 & 14,58 & 11,21 & 7,24 & 5,62 & 4,63 & 3,22 \\ \hline
 		Min Time[ms] & 33,37 & 74,57 & 130,07 & 201,16 & 286,27 & 387,67 & 498,46 & 624,21 \\ \hline
 	\end{tabular}
+	\label{tab:pp_precision1}
+	\caption{n 100 map testmap}
+\end{table}
+
+\input{sections/plots/PathPlanningPrec1}
+
+\begin{table}[!ht]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+		\hline
+		Iterations & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 & 9000 \\ \hline\hline
+		Mean time[ms] & 8,36  & 13,66  & 19,54  & 25,36  & 32,31  & 38,73  & 46,33  & 53,84  \\ \hline
+		Mean cost & 179,53  & 180,06  & 179,48  & 179,28  & 179,01  & 178,90  & 178,18  & 178,03  \\ \hline
+		Failed[\%] & 36  & 25  & 16  & 16  & 12  & 12  & 9  & 8  \\ \hline
+		$\sigma$ time[ms] & 4,60  & 6,63  & 7,98  & 10,06  & 11,51  & 14,04  & 14,57  & 16,23  \\ \hline
+		$\sigma$ cost & 88,21  & 79,14  & 67,38  & 66,64  & 58,74  & 60,41  & 52,78  & 49,56  \\ \hline
+		Min time[ms] & 4,92  & 4,21  & 7,00  & 7,05  & 7,71  & 11,07  & 17,20  & 18,30  \\ \hline
+	\end{tabular}
+	\label{tab:pp_precision2}
+	\caption{n 100 map komplexmap}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+		\hline
+		Iterations & 10000 & 15000 & 20000 & 25000 & 30000 & 40000 & 50000 & 60000 \\ \hline\hline
+		Mean time[ms] & 62,82 & 104,38 & 154,11 & 209,10 & 270,03  & 402,54 & 550,08  & 711,46  \\ \hline
+		Mean cost & 178,94 & 177,62 & 176,98 & 175,83 & 174,67  & 172,91 & 171,64  & 170,56  \\ \hline
+		Failed[\%] & 13 & 6 & 5 & 3 & 2  & 0 & 0  & 0  \\ \hline
+		$\sigma$ time[ms] & 17,44 & 19,14 & 29,69 & 33,12 & 35,75  & 38,85 & 48,35  & 59,24  \\ \hline
+		$\sigma$ cost & 46,37 & 25,51 & 27,18 & 18,23 & 17,98  & 4,25 & 3,92  & 4,16  \\ \hline
+		Min time[ms] & 86,37 & 131,90 & 195,33 & 257,41 & 318,41  & 533,31 & 805,10  & 825,63  \\ \hline
+	\end{tabular}
+	\label{tab:pp_precision3}
+	\caption{n 200 map komplexmap}
 \end{table}
 
 \section{RRT* Variants}

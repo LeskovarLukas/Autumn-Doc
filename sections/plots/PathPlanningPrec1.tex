@@ -1,0 +1,77 @@
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.8\linewidth, % Scale the plot to \linewidth
+				grid=major, 
+				grid style={dashed,gray!30},
+				xlabel={Radius}, % Set the labels
+				ylabel={Computational Time [ms]},
+				legend pos=north west,
+				xmin=0,
+				xmax=8000,
+				ymin=0,
+				ymax=2100,
+				]
+				
+				
+				%time data
+				\addplot[only marks, color=blue]
+				table[row sep=crcr]{
+					500 9.65  \\
+					1000 36.61  \\
+					1500 80.50  \\
+					2000 139.92  \\
+					2500 215.50  \\
+					3000 306.20  \\
+					3500 413.48  \\
+					4000 533.78  \\
+					4500 671.13  \\
+					5000 818.56  \\
+					5500 987.26  \\
+					6000 1165.98  \\
+					6500 1353.06  \\
+					7000 1563.83  \\
+					7500 1778.76  \\
+					8000 2018.33  \\
+				}; 
+				\addlegendentry{Time}
+				
+				%time regression
+				\addplot[domain=0:8000, samples=100,no marks, color=cyan, style=dashed]
+				{(0.00003*x^2+0.0197*x-13.26)};
+				\addlegendentry{$y = 3E-5x^2 + 0.0197x - 13.26; R^2 = 1$} 
+				
+				
+				%cost data
+				\addplot[only marks, color=blue]
+				table[row sep=crcr]{
+					500 146.73  \\
+					1000 118.52  \\
+					1500 98.95  \\
+					2000 91.71  \\
+					2500 85.69  \\
+					3000 82.43  \\
+					3500 79.85  \\
+					4000 78.72  \\
+					4500 76.82  \\
+					5000 76.37  \\
+					5500 76.33  \\
+					6000 75.49  \\
+					6500 74.98  \\
+					7000 74.58  \\
+					7500 74.38  \\
+					8000 74.27  \\
+				}; 
+				\addlegendentry{Cost}
+				
+				%cost regression
+				\addplot[domain=0:8000, samples=100,no marks, color=cyan, style=dashed]
+				{-23.78*ln(x)+280.01};
+				\addlegendentry{$y = 3E-5x^2 + 0.0197x - 13.26; R^2 = 1$} 
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Path-Planning 2D Map1}
+		\label{plot:PathPlanning2dPrec1}
+	\end{center}
+\end{figure}
