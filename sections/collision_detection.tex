@@ -80,10 +80,10 @@ For each radius the mean time of all 100 data point is calculated. This results 
 
 For autumn\_pathplanning\_2d radii starting from zero, resulting in disabling collision detection functionality, up two 2000, with a step size of 100, have been tested. In figure \ref{plot:2dCollisionExp} the linear relationship between collision detection and the computational time can be observed. Furthermore it can be derived from this plot that the two dimensional path planning algorithm can handle high amounts of collision checks without making the path calculation unusable. On average an additional 100 in radius results in a 90ms longer runtime. Hereby should be pointed out that the radii chosen in this experiment are not in relation to radii used in practical application. For a 0.05 resolution of the occupancy grid that is being used radii in a range from 15 to 50 are practical. Nevertheless this accentuated representation with a correlation coefficient of nearly 1 can also be applied to the practical values.    
 
-\input{sections/2dCollisionExp}
+\input{sections/plots/2dCollisionExp}
 
 \subsection{Three-dimensional Algorithm}
 
 The three-dimensional algorithm was tested with values ranging from $10$ to $320$, with an increment of $2^n * 10$. Figure \ref{plot:3dCollisionExp} illustrates the result of the experiment performed using the autumn\_pathplanning algorithm. The exponential relationship between the amount of collision checks and computational time is made obvious. With a block size of the point cloud of 0.01, radii used in practice would range from 20 up to 150.
 
-\input{sections/3dCollisionExp}
+\input{sections/plots/3dCollisionExp}
