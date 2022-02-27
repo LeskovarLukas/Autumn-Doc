@@ -1,0 +1,131 @@
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=0.7\linewidth, % Scale the plot to \linewidth
+				grid=major, 
+				grid style={dashed,gray!30},
+				xlabel={Iterations}, % Set the labels
+				ylabel={Path length},
+				legend pos= south east,
+				xmin=500,
+				xmax=8000,
+				ymin = 175,
+				ymax=185,
+				]				
+				%cost map1 data
+%				\addplot[only marks, color=blue]
+%				table[row sep=crcr]{
+%					500 146.73  \\
+%					1000 118.52  \\
+%					1500 98.95  \\
+%					2000 91.71  \\
+%					2500 85.69  \\
+%					3000 82.43  \\
+%					3500 79.85  \\
+%					4000 78.72  \\
+%					4500 76.82  \\
+%					5000 76.37  \\
+%					5500 76.33  \\
+%					6000 75.49  \\
+%					6500 74.98  \\
+%					7000 74.58  \\
+%					7500 74.38  \\
+%					8000 74.27  \\
+%				}; 
+%				\addlegendentry{Map1}
+%				
+%				%cost map1 regression
+%				\addplot[domain=0:8000, samples=100,no marks, color=cyan, style=dashed]
+%				{-23.78*ln(x)+280.01};
+%				\addlegendentry{$y = 3E-5x^2 + 0.0197x - 13.26; R^2 = 1$} 
+				
+				%cost map2 1 data
+				\addplot[only marks, color=orange]
+				table[row sep=crcr]{500 172.56  \\
+					700 175.78  \\
+					900 176.81  \\
+					1100 177.67  \\
+					1300 178.56  \\
+					1500 179.07  \\
+					1700 179.33  \\
+					1900 179.53  \\
+					2100 179.62  \\
+					2300 179.89  \\
+					2500 179.46  \\
+					2700 180.24  \\
+					2900 180.06  \\
+					3100 180.09  \\
+					3300 180.17  \\
+					3500 180.20  \\
+					3700 180.08  \\
+					3900 179.48  \\
+					4100 179.56  \\
+					4300 179.76  \\
+					4500 179.18  \\
+					4700 179.63  \\
+					4900 179.28  \\
+					5100 179.52  \\
+					5300 178.96  \\
+					5500 179.08  \\
+					5700 178.81  \\
+					5900 179.01  \\
+					6100 179.35  \\
+					6300 179.22  \\
+					6500 179.14  \\
+					6700 178.83  \\
+					6900 178.90  \\
+					7100 178.67  \\
+					7300 178.90  \\
+					7500 178.70  \\
+					7700 178.31  \\
+					7900 178.18  \\
+					8100 178.27  \\
+					8300 178.66  \\
+					8500 178.36  \\
+					8700 178.66  \\
+					8900 178.03  \\
+					9100 177.76  \\
+					9300 177.88  \\
+					9500 177.67  \\
+					9700 177.87  \\
+					9900 178.16  \\
+				}; 
+				\addlegendentry{Map2 Run 1} 
+				
+				%cost map2 2 data
+				\addplot[only marks, color=cardinal]
+				table[row sep=crcr]{
+					500 181.92  \\
+					1000 181.39  \\
+					1500 181.70  \\
+					2000 181.89  \\
+					2500 182.01  \\
+					3000 182.17  \\
+					3500 181.78  \\
+					4000 181.47  \\
+					4500 181.59  \\
+					5000 181.50  \\
+					5500 181.40  \\
+					6000 181.45  \\
+					6500 180.50  \\
+					7000 180.28  \\
+					7500 180.58  \\
+					8000 180.02  \\
+					8500 180.20  \\
+					9000 180.12  \\
+					9500 179.73  \\
+					10000 180.07  \\
+				}; 
+				\addlegendentry{Map2 Run2}
+				
+				%cost map2 2 regression
+				\addplot[domain=0:8000, samples=100,no marks, color=carmine, style=dashed]
+				{-(2*10^-4)*x+182.36};
+				\addlegendentry{$y = -2E-4x + 182.36; R^2 = 0.8055$} 
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Path-Planning 2D Map2}
+		\label{plot:PathPlanning2dPrecCost}
+	\end{center}
+\end{figure}

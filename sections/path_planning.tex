@@ -156,9 +156,37 @@ $X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{
 	\Return G = (V, E);
 \end{algorithm}
 
-\subsection{Autumn RRT*}
+\section{RRT* Variants}
 
-\subsubsection{autumn\_pathplanning\_2d Benchmark}
+\subsection{RT-RRT*}
+
+The RT-RRT* takes focus on real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy makes it possible to keep the previously sampled tree.
+The two core principles introduced with the RT-RRT*, are tree expansion and tree rewiring. 
+At first, the Algorithm starts by initializing a root node. After each following iterations, the tree expands and rewires. This sampling lasts for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the number of steps the path consists of. In this phase, the agent is moved gradually towards the tree root. Thereafter, when path planning is finished and the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. This approach enables the agent to move without the time needed to compute the whole path.
+Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
+The rewiring is done in the default scenario done because newly added nodes have a smaller cost-to-reach than the parent of a certain node. In the second case, rewiring is needed if the environment changes. Therefore a larger portion of the tree has to change. Hereby two different modes are utilized. The first one consists of rewiring the tree in a circle centered around the tree node. For the second option, both focused and uniform sampling is used, with the difference that it is not done for one node, but instead concentrates on patches.
+%\footcite{Naderi2015}
+
+\subsubsection{RT-RRT* in Autumn}
+
+When applying the concept of the RT-RRT* to Autumn it would seem a good idea. Taking a closer look uncovers that the proposed RT-RRT* only works efficiently in environments with limited changes. Rewiring the tree, done in the case of a dynamic obstacle changing, doesn't make sense when the obstacle referred to covers a large portion of the space. This being the case in Autumn, because contrary to the examples in the paper covering the RT-RRT* is the algorithm not educated about the environment. Only while moving are obstacles and boundaries discovered In general the RT-RRT* is using concepts of road-maps like the one generated in the PRM algorithm and applying it to the RRT* algorithm.  
+
+\subsection{Smart-RRT*}
+
+Smart-RRT* focuses on solving the problem imposed when using the RRT* algorithm. With the slow convergence rate of the RRT* towards an ideal path, it takes up to an infinite amount of time to reach the most optimal path. Therefore Smart-RRT* utilizes two techniques, path optimization and intelligent sampling, in an effort of accelerating the rate of convergence. 
+It works the same as the base algorithm till the first path is found. From there on out it applies path optimization and intelligent sampling. Path optimization works by interconnecting nodes in the found path that are directly visible. This leads based on triangular inequality to a shorter path. The reconnected nodes are then used as biased points for intelligent sampling. Intelligent sampling samples new points based on a bias generated from finding a shorter path. The result is a greater node density in the area of critical points on the path, mostly located around obstacles. 
+\footcite{Islam2012}
+
+\subsubsection{Smart-RRT* in Autumn}
+Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
+
+\section{Autumn RRT*}
+
+\subsection{autumn\_pathplanning\_2d Benchmark}
+
+\subsection{Experimental Setup}
+
+\subsection{Results}
 
 \begin{table}[!ht]
 	
@@ -170,15 +198,13 @@ $X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{
 		Mean time[ms] & 36,61 & 80,50 & 139,92 & 215,50 & 306,20 & 413,48 & 533,78 & 671,13 \\ \hline
 		Mean cost & 118,52 & 98,95 & 91,71 & 85,69 & 82,43 & 79,85 & 78,72 & 76,82 \\ \hline
 		Failed[\%] & 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-		$\sigma$ time & 3,70 & 6,91 & 10,24 & 12,98 & 17,40 & 25,26 & 24,41 & 29,80 \\ \hline
+		$\sigma$ time[ms] & 3,70 & 6,91 & 10,24 & 12,98 & 17,40 & 25,26 & 24,41 & 29,80 \\ \hline
 		$\sigma$ cost & 38,72 & 20,04 & 14,58 & 11,21 & 7,24 & 5,62 & 4,63 & 3,22 \\ \hline
 		Min Time[ms] & 33,37 & 74,57 & 130,07 & 201,16 & 286,27 & 387,67 & 498,46 & 624,21 \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision1}
 	\caption{n 100 map testmap}
 \end{table}
-
-\input{sections/plots/PathPlanningPrec1}
 
 \begin{table}[!ht]
 	\centering
@@ -203,37 +229,19 @@ $X_{near}$ consist of nodes in the tree with a distance $D$, in relation to $x_{
 	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
 		\hline
 		Iterations & 10000 & 15000 & 20000 & 25000 & 30000 & 40000 & 50000 & 60000 \\ \hline\hline
-		Mean time[ms] & 62,82 & 104,38 & 154,11 & 209,10 & 270,03  & 402,54 & 550,08  & 711,46  \\ \hline
-		Mean cost & 178,94 & 177,62 & 176,98 & 175,83 & 174,67  & 172,91 & 171,64  & 170,56  \\ \hline
-		Failed[\%] & 13 & 6 & 5 & 3 & 2  & 0 & 0  & 0  \\ \hline
-		$\sigma$ time[ms] & 17,44 & 19,14 & 29,69 & 33,12 & 35,75  & 38,85 & 48,35  & 59,24  \\ \hline
-		$\sigma$ cost & 46,37 & 25,51 & 27,18 & 18,23 & 17,98  & 4,25 & 3,92  & 4,16  \\ \hline
-		Min time[ms] & 86,37 & 131,90 & 195,33 & 257,41 & 318,41  & 533,31 & 805,10  & 825,63  \\ \hline
+		Mean time[ms] & 62,82 & 104,38 & 154,11 & 209,10 & 270,03 & 331,99 & 402,54 & 474,47 \\ \hline
+		Mean cost & 178,94 & 177,62 & 176,98 & 175,83 & 174,67 & 173,84 & 172,91 & 171,84 \\ \hline
+		Failed[\%] & 7 & 6 & 5 & 3 & 2 & 1 & 0 & 0 \\ \hline
+		$\sigma$ time[ms] & 17,44 & 19,14 & 29,69 & 33,12 & 35,75 & 43,58 & 38,85 & 55,24 \\ \hline
+		$\sigma$ cost & 46,37 & 25,51 & 27,18 & 18,23 & 17,98 & 11,13 & 4,25 & 10,74 \\ \hline
+		Min time[ms] & 11,86 & 18,52 & 40,63 & 29,98 & 98,91 & 58,04 & 107,33 & 137,13 \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision3}
 	\caption{n 200 map komplexmap}
 \end{table}
 
-\section{RRT* Variants}
+\input{sections/plots/PathPlanningPrecTime}
 
-\subsection{RT-RRT*}
+\input{sections/plots/PathPlanningPrecCost}
 
-The RT-RRT* takes focus on real-time path planning. RT-RRT* makes it possible to reposition the root node. Using this online tree rewiring strategy makes it possible to keep the previously sampled tree.
-The two core principles introduced with the RT-RRT*, are tree expansion and tree rewiring. 
-At first, the Algorithm starts by initializing a root node. After each following iterations, the tree expands and rewires. This sampling lasts for a user-defined time and is followed by planning a path from the root. The length of this path is controlled by the user, by defining the number of steps the path consists of. In this phase, the agent is moved gradually towards the tree root. Thereafter, when path planning is finished and the agent is located at the position of the tree root, the position of the root is changed to the next node in the generated path. This approach enables the agent to move without the time needed to compute the whole path.
-Expansion in the RT-RRT* is done similar to the base algorithm, by sampling a random node, finding its neighbor with the minimum cost-to-reach and connecting them.
-The rewiring is done in the default scenario done because newly added nodes have a smaller cost-to-reach than the parent of a certain node. In the second case, rewiring is needed if the environment changes. Therefore a larger portion of the tree has to change. Hereby two different modes are utilized. The first one consists of rewiring the tree in a circle centered around the tree node. For the second option, both focused and uniform sampling is used, with the difference that it is not done for one node, but instead concentrates on patches.
-%\footcite{Naderi2015}
-
-\subsubsection{RT-RRT* in Autumn}
-
-When applying the concept of the RT-RRT* to Autumn it would seem a good idea. Taking a closer look uncovers that the proposed RT-RRT* only works efficiently in environments with limited changes. Rewiring the tree, done in the case of a dynamic obstacle changing, doesn't make sense when the obstacle referred to covers a large portion of the space. This being the case in Autumn, because contrary to the examples in the paper covering the RT-RRT* is the algorithm not educated about the environment. Only while moving are obstacles and boundaries discovered In general the RT-RRT* is using concepts of road-maps like the one generated in the PRM algorithm and applying it to the RRT* algorithm.  
-
-\subsection{Smart-RRT*}
-
-Smart-RRT* focuses on solving the problem imposed when using the RRT* algorithm. With the slow convergence rate of the RRT* towards an ideal path, it takes up to an infinite amount of time to reach the most optimal path. Therefore Smart-RRT* utilizes two techniques, path optimization and intelligent sampling, in an effort of accelerating the rate of convergence. 
-It works the same as the base algorithm till the first path is found. From there on out it applies path optimization and intelligent sampling. Path optimization works by interconnecting nodes in the found path that are directly visible. This leads based on triangular inequality to a shorter path. The reconnected nodes are then used as biased points for intelligent sampling. Intelligent sampling samples new points based on a bias generated from finding a shorter path. The result is a greater node density in the area of critical points on the path, mostly located around obstacles. 
-\footcite{Islam2012}
-
-\subsubsection{Smart-RRT* in Autumn}
-Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
+\input{sections/plots/PathPlanningFailed}
