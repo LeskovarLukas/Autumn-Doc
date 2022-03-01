@@ -180,16 +180,34 @@ It works the same as the base algorithm till the first path is found. From there
 \subsubsection{Smart-RRT* in Autumn}
 Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
 
-\section{Autumn RRT*}
+\section{autumn\_pathplanning\_2d Benchmark}
 
-\subsection{autumn\_pathplanning\_2d Benchmark}
+This section is going to concern itself with the performance of the autumn\_pathplanning\_2d Algorithm. The main aspects of these tests are, reliability, computational time requirement and path length. That being the most significant values in case of the Autumn use case.
 
 \subsection{Experimental Setup}
+The experiment is divided into three different parts. Each of these test scenarios contains data for a range of varying amounts of iterations. By the nature of the RRT* algorithm, the amount of iterations define the quality of the resulting path. Under quality in this context can be understood, the length of the generated path. By this means, the higher the iteration count, the higher the probability of getting a shorter path. These iteration samples, range from 1000 to 10000. 
+
+\subsubsection{Test Environments}
+
+The three test were conducted in two different environments. Test 1 was carried out on Map 1, to be seen in figure \ref{fig:PrecisionTestMaps}. Defining characteristics of Map 1 are an open environment, with very little obstacles. These open style environments without any borders present a challenge for the algorithm closer described in the section \ref{sec:PrecisionTestEval}. Test two and three were performed on Map 2, that can be seen in figure \ref{fig:PrecisionTestMaps}. Map 2 is a closed environment, with a higher complexity then Map 1.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\linewidth]{img/ppTestMaps}
+	\caption{a) showing map 1 for test 1. Map 1 consist of an rectangular obstacle in the center. b) is displaying map 2 used for test 2 and test 3. It compromises a three path design, these can be seen by three distinct paths to the goal, bottom, top and through the middle.}
+	\label{fig:PrecisionTestMaps}
+\end{figure}
+
 
 \subsection{Results}
+\label{sec:PrecisionTestResults}
+The following will present the results of tests conducted to measure reliability, computational time requirement and path cost.
+
+\subsubsection{Test 1}
+\label{sec:test1}
+Test 1 was conducted on map 1, with iterations between 1000 and 8000, with an increment of 1000. To minimize the impact of the random nature of the RRT algorithm every configuration generated 100 paths and the time and cost present in table \ref{tab:pp_precision1} are the average of all 100 runs. In the same table, it shows how many of the runs failed, which means they couldn't get to the goal and no path was found. Additionally to demonstrate the data coherence of the individual runs the standard deviation of the measured time as well, as the standard deviation of the path cost are listed.   
 
 \begin{table}[!ht]
-	
 	\centering
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
@@ -203,8 +221,12 @@ Using Smart-RRT* improves the rate of convergence and time to reach an optimal p
 		Min Time[ms] & 33,37 & 74,57 & 130,07 & 201,16 & 286,27 & 387,67 & 498,46 & 624,21 \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision1}
-	\caption{n 100 map testmap}
+	\caption{Wrong data!Results of test 1 conducted on map1}
 \end{table}
+
+\subsubsection{Test 2}
+\label{sec:test2}
+Test 2 uses the same principle as test 1, while being performed on map 2. Furthermore test 2 uses a sample size of 500 paths per iteration configuration. Additionally nodes in test 2 are closer together, due to the node spacing parameter being smaller. 
 
 \begin{table}[!ht]
 	\centering
@@ -220,8 +242,12 @@ Using Smart-RRT* improves the rate of convergence and time to reach an optimal p
 		Min time[ms] & 4,92  & 4,21  & 7,00  & 7,05  & 7,71  & 11,07  & 17,20  & 18,30  \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision2}
-	\caption{n 100 map komplexmap}
+	\caption{Wrong data!Results of test 2 conducted on map2}
 \end{table}
+
+\subsubsection{Test 3}
+\label{sec:test3}
+Test 3 works with the same principle as the aforementioned tests. Test 3 was also performed on map 2 and serves as a control run to test the significance of the results of test 2. Test 3 is a replica of test 2.
 
 \begin{table}[!ht]
 	\centering
@@ -237,11 +263,22 @@ Using Smart-RRT* improves the rate of convergence and time to reach an optimal p
 		Min time[ms] & 11,86 & 18,52 & 40,63 & 29,98 & 98,91 & 58,04 & 107,33 & 137,13 \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision3}
-	\caption{n 200 map komplexmap}
+	\caption{Wrong data!Results of test 3 conducted on Map2}
 \end{table}
+
+\subsection{Evaluation}
+\label{sec:PrecisionTestEval}
+Comparing the results from section \ref{sec:PrecisionTestResults}, it is made obvious that test 1 has an much higher time requirement then test 2 and 3. This can be observed in figure \ref{plot:PathPlanning2dPrec1}. It has do mentioned that this plot uses a logarithmic y-axis. The behavior can be ascribed to the fundamental difference between map 1 and map 2. This being that map 2 has borders containing the algorithm, while map 1 doesn't. The reason why enclosed environments are better suited is because if the algorithm encounters an obstacle or in this case a wall, it will start to propagate along it. Resulting in less nodes being placed in the wrong direction to the goal. 
+Another important fact to account is, that test 2 and 3 use a smaller node spacing parameter. By this means, newly generated nodes are closer to their nearest neighbor, which results in less elaborate collision detection. 
+An observation made looking at figure \ref{plot:PathPlanning2dPrec1}, that was already anticipated, is that with an increasing number of iterations the time to compute a path also increases. 
 
 \input{sections/plots/PathPlanningPrecTime}
 
+Now looking at figure \ref{plot:PathPlanning2dPrecCost} the way the cost of generated paths is affected by varying the amount of iterations can be observed. Hereby only data from test 2 and 3 are present, due to the fact that test 1 uses a map with a different minimal path length and thus can not be compared with paths from test 2 and 3. The different data point vary strongly, which is mostly due to the fact that the range of iterations is quite small for this use case. The average time needed to compute a path using 8000 iterations only amounts to 53ms, which is slower then 8ms for 2000 iterations but still quite fast. In order to have more consistency in the decline of the path cost with increasing iterations, a higher iteration count would be needed.
+
 \input{sections/plots/PathPlanningPrecCost}
+
+The last important aspect of this path planning algorithm being its reliability, which can be observed in figure \ref{plot:PathPlanning2dPrecFailed}. Test 1 being ahead of both test 2 and 3, with a maximum of about 20\% failed. This is due to the fact that test 2 as well as test 3 are performed in a complex environment, were as test 1 was conducted in an environment presenting hardly any challenges. Furthermore in test 1 the goal is closer then in test 2 and 3. With 1500 iterations test 1 has a 100\% success rate. What also needs to be taken into account is that test 2 and 3 are by a multiple faster then test 1. Hereby it would be no problem to lower the failure rate by increasing the amount of iterations, while still being faster then comparable results from test 1.
+
 
 \input{sections/plots/PathPlanningFailed}
