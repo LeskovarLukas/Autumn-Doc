@@ -65,17 +65,17 @@ The goal of this thesis is to document the challenges encountered and experience
 %noch besser formulieren nicht nur abschreiben vom Projektantrag
 In order to declare the project as successful the following criteria have to be implemented:
 \begin{itemize}
-	\item The system is capable of generating a 3D Point-cloud of its surroundings
+	\item The system is capable of generating a 3D map of its surroundings
 	\item All required hardware (e.g. sensors, computing boards, etc.) is mounted onto a drone-platform 
-	\item All calculations concerning the map-generation are run on a external server in direct communication with the drone
-	\item The drone utilizes the Point-cloud to orientate in its surroundings and navigate one or multiple waypoints
-	\item The drone is capable of avoiding obstacles as it is moving through a unknown environment
+%	\item All calculations concerning the map-generation are run on a external server in direct communication with the drone
+	\item The drone utilizes the map to orientate in its surroundings and navigate one or multiple waypoints
+	\item The path planning is capable of avoiding obstacles as it is moving through a unknown environment
 \end{itemize}
 
 The following criteria can be implemented but have no direct correlation to the success of the project:
 \begin{itemize}
-	\item A Web-App facilitating the usage of the system and enabling the user to create waypoints, monitor the drone and mapping algorithm as well as evaluate the Point-cloud
-	\item The system is replicated within the gazebo simulator to simplify future development without direct access to its hardware
+	\item A user interface facilitating the usage of the system and enabling the user to create waypoints, monitor the drone and mapping algorithm as well as evaluate the resulting point-cloud
+	\item The system is replicated within the gazebo simulator (see Section \ref{section:gazebo}) to simplify future development without direct access to its hardware
 \end{itemize}
 
 
