@@ -2,12 +2,13 @@
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[
+				height=0.6\linewidth,
 				width=0.8\linewidth, % Scale the plot to \linewidth
 				grid=major, 
 				grid style={dashed,gray!30},
 				xlabel={Iterations}, % Set the labels
 				ylabel={Computational Time [ms]},
-				legend style={nodes={scale=0.8, transform shape}},
+				legend style={nodes={scale=0.6, transform shape}},
 				legend pos=south east,
 				xmin=500,
 				xmax=8000,
@@ -133,7 +134,8 @@
 				\addlegendentry{$y = 2E-7x^2 + 0.0056x - 1.557; R^2 = 0.9997$}
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Path-Planning 2D Map1}
-		\label{plot:PathPlanning2dPrec1}
+		\caption{This plot displays time data from test 1(blue), test 2(orange)
+		and test 3(red).}
+		\label{plot:PathPlanning2dPrecTime}
 	\end{center}
 \end{figure}

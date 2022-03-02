@@ -3,10 +3,12 @@
 		\begin{tikzpicture}
 			\begin{axis}[
 				ybar,
+				height=6cm,
 				width=0.8\linewidth, % Scale the plot to \linewidth
 				grid=major,
 				bar width = 4pt, 
 				grid style={dashed,gray!30},
+				legend style={nodes={scale=0.8, transform shape}},
 				xlabel={Iterations}, % Set the labels
 				ylabel={Failed[\%]},
 				xmin=0,
@@ -84,7 +86,7 @@
 				\addlegendentry{Map2 Run 2}
 			\end{axis}
 		\end{tikzpicture}
-		\caption{Path-Planning 2D Map2}
+		\caption{This plot visualized the failure rate of paths planned for the same iteration configuration, for test 1(blue), test 2(orange) and test 3(red). The values in this plot refer to the percentage of failed path planning attempts at the respective iteration count.}
 		\label{plot:PathPlanning2dPrecFailed}
 	\end{center}
 \end{figure}
