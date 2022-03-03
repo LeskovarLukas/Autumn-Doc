@@ -178,14 +178,14 @@ It works the same as the base algorithm till the first path is found. From there
 \footcite{Islam2012}
 
 \subsubsection{Smart-RRT* in Autumn}
-Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
+Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This leaves the question why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
 
 \section{autumn\_pathplanning\_2d Benchmark}
 
 This section is going to concern itself with the performance of the autumn\_pathplanning\_2d Algorithm. The main aspects of these tests are, reliability, computational time requirement and path length. That being the most significant values in case of the Autumn use case.
 
 \subsection{Experimental Setup}
-The experiment is divided into three different parts. Each of these test scenarios contains data for a range of varying amounts of iterations. By the nature of the RRT* algorithm, the amount of iterations define the quality of the resulting path. Under quality in this context can be understood, the length of the generated path. By this means, the higher the iteration count, the higher the probability of getting a shorter path. These iteration samples, range from 1000 to 10000. 
+The experiment is divided into three different parts. Each of these test scenarios contains data for a range of varying amounts of iterations. By the nature of the RRT* algorithm, the amount of iterations define the quality of the resulting path. Quality in this context refers to the length of the generated path. By this means, the higher the iteration count, the higher the probability of getting a shorter path. These iteration samples, range from 1000 to 10000. 
 
 \subsubsection{Test Environments}
 
