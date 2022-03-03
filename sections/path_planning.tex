@@ -178,4 +178,107 @@ It works the same as the base algorithm till the first path is found. From there
 \footcite{Islam2012}
 
 \subsubsection{Smart-RRT* in Autumn}
-Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This makes one wonder why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
+Using Smart-RRT* improves the rate of convergence and time to reach an optimal path drastically. This leaves the question why not use this improved version of the implemented algorithm in the project. When looking at this it is important to keep the goal in mind the autumn project aims to reach. Which is, to capture an environment in form of a 3-dimensional model. Therefore it is unnecessary to compute an optimal path. The whole space is going to be covered eventually which would only be a waste of computational power to invest in additional path optimization. 
+
+\section{autumn\_pathplanning\_2d Benchmark}
+
+This section is going to concern itself with the performance of the autumn\_pathplanning\_2d Algorithm. The main aspects of these tests are, reliability, computational time requirement and path length. That being the most significant values in case of the Autumn use case.
+
+\subsection{Experimental Setup}
+The experiment is divided into three different parts. Each of these test scenarios contains data for a range of varying amounts of iterations. By the nature of the RRT* algorithm, the amount of iterations define the quality of the resulting path. Quality in this context refers to the length of the generated path. By this means, the higher the iteration count, the higher the probability of getting a shorter path. These iteration samples, range from 1000 to 10000. 
+
+\subsubsection{Test Environments}
+
+The three test were conducted in two different environments. Test 1 was carried out on Map 1, to be seen in figure \ref{fig:PrecisionTestMaps}. Defining characteristics of Map 1 are an open environment, with very little obstacles. These open style environments without any borders present a challenge for the algorithm closer described in the section \ref{sec:PrecisionTestEval}. Test two and three were performed on Map 2, that can be seen in figure \ref{fig:PrecisionTestMaps}. Map 2 is a closed environment, with a higher complexity then Map 1.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\linewidth]{img/ppTestMaps}
+	\caption{a) showing map 1 for test 1. Map 1 consist of an rectangular obstacle in the center. b) is displaying map 2 used for test 2 and test 3. It compromises a three path design, these can be seen by three distinct paths to the goal, bottom, top and through the middle.}
+	\label{fig:PrecisionTestMaps}
+\end{figure}
+
+
+\subsection{Results}
+\label{sec:PrecisionTestResults}
+The following will present the results of tests conducted to measure reliability, computational time requirement and path cost.
+
+\subsubsection{Test 1}
+\label{sec:test1}
+Test 1 was conducted on map 1, with iterations between 1000 and 8000, with an increment of 1000. To minimize the impact of the random nature of the RRT algorithm every configuration generated 100 paths and the time and cost present in table \ref{tab:pp_precision1} are the average of all 100 runs. In the same table, it shows how many of the runs failed, which means they couldn't get to the goal and no path was found. Additionally to demonstrate the data coherence of the individual runs the standard deviation of the measured time as well, as the standard deviation of the path cost are listed.   
+
+\begin{table}[!ht]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+		\hline
+		Iterations & 1000 & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 \\ \hline\hline
+		Mean time[ms] & 36,61  & 139,92  & 306,20  & 533,78  & 818,56  & 1165,98  & 1563,83  & 2018,33  \\ \hline
+		Mean cost & 118,52  & 91,71  & 82,43  & 78,72  & 76,37  & 75,49  & 74,58  & 74,27  \\ \hline
+		Failed[\%] & 2  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+		$\sigma$ time[ms] & 3,70  & 10,24  & 17,40  & 24,41  & 30,08  & 40,22  & 47,50  & 51,73  \\ \hline
+		$\sigma$ cost & 38,72  & 14,58  & 7,24  & 4,63  & 3,59  & 2,85  & 1,96  & 1,69  \\ \hline
+		Min time[ms] & 33,37  & 130,07  & 286,27  & 498,46  & 771,62  & 1101,18  & 1481,98  & 1909,52  \\ \hline
+	\end{tabular}
+	\label{tab:pp_precision1}
+	\caption{Results of test 1 conducted on map1}
+\end{table}
+
+\subsubsection{Test 2}
+\label{sec:test2}
+Test 2 uses the same principle as test 1, while being performed on map 2. Furthermore test 2 uses a sample size of 500 paths per iteration configuration. Additionally nodes in test 2 are closer together, due to the node spacing parameter being smaller. 
+
+\begin{table}[!ht]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+		\hline
+		Iterations & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 & 9000 \\ \hline\hline
+		Mean time[ms] & 8,36  & 13,66  & 19,54  & 25,36  & 32,31  & 38,73  & 46,33  & 53,84  \\ \hline
+		Mean cost & 181,82  & 181,99  & 181,21  & 181,00  & 180,65  & 180,55  & 179,77  & 179,59  \\ \hline
+		Failed[\%] & 36  & 25  & 16  & 16  & 12  & 12  & 9  & 8  \\ \hline
+		$\sigma$ time[ms] & 4,60  & 6,63  & 7,98  & 10,06  & 11,51  & 14,04  & 14,57  & 16,23  \\ \hline
+		$\sigma$ cost & 88,21  & 79,14  & 67,38  & 66,64  & 58,74  & 60,41  & 52,78  & 49,56  \\ \hline
+		Min time[ms] & 4,92  & 4,21  & 7,00  & 7,05  & 7,71  & 11,07  & 17,20  & 18,30  \\ \hline
+	\end{tabular}
+	\label{tab:pp_precision2}
+	\caption{Results of test 2 conducted on map2}
+\end{table}
+
+\subsubsection{Test 3}
+\label{sec:test3}
+Test 3 works with the same principle as the aforementioned tests. Test 3 was also performed on map 2 and serves as a control run to test the significance of the results of test 2. Test 3 is a replica of test 2.
+
+\begin{table}[!ht]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+		\hline
+		Iterations & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 & 9000 \\ \hline\hline
+		Mean time[ms] & 10,93  & 17,47  & 24,96  & 32,66  & 41,13  & 49,07  & 58,34  & 69,14  \\ \hline
+		Mean cost & 181,89  & 182,17  & 181,47  & 181,50  & 181,45  & 180,28  & 180,02  & 180,12  \\ \hline
+		Failed[\%] & 39  & 23  & 15  & 11  & 11  & 7  & 9  & 8  \\ \hline
+		$\sigma$ time[ms] & 5,97  & 8,06  & 9,56  & 11,30  & 14,17  & 14,49  & 19,15  & 20,57  \\ \hline
+		$\sigma$ cost & 89,29  & 77,21  & 64,72  & 57,30  & 58,05  & 47,50  & 52,91  & 50,36  \\ \hline
+		Min time[ms] & 4,17  & 5,85  & 10,42  & 14,81  & 9,69  & 12,41  & 13,51  & 15,87  \\ \hline
+	\end{tabular}
+	\label{tab:pp_precision3}
+	\caption{Results of test 3 conducted on Map2}
+\end{table}
+
+\subsection{Evaluation}
+\label{sec:PrecisionTestEval}
+Comparing the results from section \ref{sec:PrecisionTestResults}, it is made obvious that test 1 has an much higher time requirement then test 2 and 3. This can be observed in figure \ref{plot:PathPlanning2dPrecTime}. It has do mentioned that this plot uses a logarithmic y-axis. The behavior can be ascribed to the fundamental difference between map 1 and map 2. This being that map 2 has borders containing the algorithm, while map 1 doesn't. The reason why enclosed environments are better suited is because if the algorithm encounters an obstacle or in this case a wall, it will start to propagate along it. Resulting in less nodes being placed in the wrong direction to the goal. 
+Another important fact to account is, that test 2 and 3 use a smaller node spacing parameter. By this means, newly generated nodes are closer to their nearest neighbor, which results in less elaborate collision detection. 
+An observation made looking at figure \ref{plot:PathPlanning2dPrecTime}, that was already anticipated, is that with an increasing number of iterations the time to compute a path also increases. 
+
+\input{sections/plots/PathPlanningPrecTime}
+
+Now looking at figure \ref{plot:PathPlanning2dPrecCost} the way the cost of generated paths is affected by varying the amount of iterations can be observed. Hereby only data from test 2 and 3 are present, due to the fact that test 1 uses a map with a different minimal path length and thus can not be compared with paths from test 2 and 3. The different data point vary strongly, which is mostly due to the fact that the range of iterations is quite small for this use case. The average time needed to compute a path using 8000 iterations only amounts to 53ms, which is slower then 8ms for 2000 iterations but still quite fast. In order to have more consistency in the decline of the path cost with increasing iterations, a higher iteration count would be needed.
+
+\input{sections/plots/PathPlanningPrecCost}
+
+The last important aspect of this path planning algorithm being its reliability, which can be observed in figure \ref{plot:PathPlanning2dPrecFailed}. Test 1 being ahead of both test 2 and 3, with a maximum of about 20\% failed. This is due to the fact that test 2 as well as test 3 are performed in a complex environment, were as test 1 was conducted in an environment presenting hardly any challenges. Furthermore in test 1 the goal is closer then in test 2 and 3. With 1500 iterations test 1 has a 100\% success rate. What also needs to be taken into account is that test 2 and 3 are by a multiple faster then test 1. Hereby it would be no problem to lower the failure rate by increasing the amount of iterations, while still being faster then comparable results from test 1.
+
+
+\input{sections/plots/PathPlanningFailed}

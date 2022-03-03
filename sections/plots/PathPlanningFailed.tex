@@ -1,0 +1,92 @@
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				ybar,
+				height=6cm,
+				width=0.8\linewidth, % Scale the plot to \linewidth
+				grid=major,
+				bar width = 4pt, 
+				grid style={dashed,gray!30},
+				legend style={nodes={scale=0.8, transform shape}},
+				xlabel={Iterations}, % Set the labels
+				ylabel={Failed[\%]},
+				xmin=0,
+				xmax=8400,
+				ymin = 0,
+				ymax = 100,
+				legend pos= north east,
+				] 
+				
+				%map 1 data
+				\addplot[fill=blue] coordinates {
+					( 500 , 22 )
+					( 1000 , 2 )
+					( 1500 , 0 )
+					( 2000 , 0 )
+					( 2500 , 0 )
+					( 3000 , 0 )
+					( 3500 , 0 )
+					( 4000 , 0 )
+					( 4500 , 0 )
+					( 5000 , 0 )
+					( 5500 , 0 )
+					( 6000 , 0 )
+					( 6500 , 0 )
+					( 7000 , 0 )
+					( 7500 , 0 )
+					( 8000 , 0 )
+				};
+				\addlegendentry{Map1}
+				
+				%map 2 1 data
+				\addplot[fill=orange] coordinates {
+					( 500 , 82 )
+					( 1000 , 68 )
+					( 1500 , 49 )
+					( 2000 , 36 )
+					( 2500 , 32 )
+					( 3000 , 25 )
+					( 3500 , 20 )
+					( 4000 , 16 )
+					( 4500 , 16 )
+					( 5000 , 16 )
+					( 5500 , 12 )
+					( 6000 , 12 )
+					( 6500 , 12 )
+					( 7000 , 12 )
+					( 7500 , 11 )
+					( 8000 , 9 )
+					( 8500 , 8 )
+					( 9000 , 8 )
+					( 9500 , 8 )
+					( 10000 , 5 )
+				};
+				\addlegendentry{Map2 Run 1}
+				
+				%map 2 2 data
+				\addplot[fill=cardinal] coordinates {
+					( 500 , 83 )
+					( 1000 , 64 )
+					( 1500 , 48 )
+					( 2000 , 39 )
+					( 2500 , 33 )
+					( 3000 , 23 )
+					( 3500 , 22 )
+					( 4000 , 15 )
+					( 4500 , 19 )
+					( 5000 , 11 )
+					( 5500 , 12 )
+					( 6000 , 11 )
+					( 6500 , 13 )
+					( 7000 , 7 )
+					( 7500 , 9 )
+					( 8000 , 9 )
+				};
+				\addlegendentry{Map2 Run 2}
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This plot visualized the failure rate of paths planned for the same iteration configuration, for test 1(blue), test 2(orange) and test 3(red). The values in this plot refer to the percentage of failed path planning attempts at the respective iteration count.}
+		\label{plot:PathPlanning2dPrecFailed}
+	\end{center}
+\end{figure}
