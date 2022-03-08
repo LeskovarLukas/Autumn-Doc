@@ -43,6 +43,7 @@ This approach was tested in the following two forms:
 \end{itemize}
 
 \section{Final Product}
+\label{sec:finalProduct}
 Following the aforementioned approach the main causes of performance issues where eliminated by replacing non optimized hardware components and distributing non-critical computations such as user interaction or path planning to a remote host as impairing these aspects of the system by latency would not pose less of a problem. 
 With these adjustments the Autumn drones final version consisted of the following altered components:
 \begin{itemize}
@@ -62,7 +63,27 @@ With these adjustments the Autumn drones final version consisted of the followin
 
 
 \section{Autumn Lifecycle}
-\textbf{Author: Marton Kempfú} 
+\textbf{Author: Fabian Kleinrad} 
+
+This section is going to go in depth about how different modules in the autumn project interoperate. Hereby an overview will be given, that will illustrate how the autumn project works. The theoretical approach in this project is closely represented by the techniques explained in detail in section 
+!!!UNCOMMENT!!!%\ref{autumnControlLoop}
+. In contrast this section concerns itself with the practical realization of these concepts
+
+\subsection{Modules}
+
+Autumn contains four modules delimited from one another. Like the name suggests these fundamental building blocks of the project are modular. By that means, it is made possible to change or improve certain parts without the need to integrate the changes into all other aspects present in autumn.
+
+\begin{itemize}
+	\item [Drone] This component represents the physical drone and sensory equipment installed on the autumn drone, described in section \ref{sec:finalProduct}.  
+	\item [SLAM] The SLAM component converts the sensor data, provided from the drone into a digital representation. Chapter \ref{chapter:slam} goes into detail how this is realized.
+	\item [Navigation] The module navigation is used to plan routes through the abstracted environment explained in chapter \ref{chapter:abstract_env}.. Hereby the functionality of this module is divided into two components.
+	\begin{itemize}
+		\item Explorer
+		\item Path-Planning - chapter \ref{chapter:path_planning}
+	\end{itemize}
+	\item [Drone control]
+\end{itemize}
+
 
 
 \filbreak
