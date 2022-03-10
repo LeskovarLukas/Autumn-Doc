@@ -189,17 +189,17 @@ This section aims to benchmark the two cameras from a depth-performance standpoi
 To answer this question the cameras measured the vertical distance enclosed by two points mounted 1 m above each other on a stationary structure with the bottom one at a height 1 m above the ground. 
 The cameras was paced on a movable rig normal to the stationary structure and 1m above the ground.  The aforementioned gap was measured by the cameras at 1 m increments between 3 m and 10 m horizontal distance measured amongst each structures base. 
 
-The usage of ARUCO markers allowed for precisely tracking the position of each point within the camera coordinate system thus ensuring the points remain fixed even though the camera rig is moved. 
+The usage of ARUCO tags allowed for precisely tracking the position of each point within the camera coordinate system thus ensuring the points remain fixed even though the camera rig is moved. 
 % über ARUCO schreiben
 % reference zu ARUCO 
-ARUCO markers are squared-based markers popular in many robotic and augmented reality applications as they provide a fast and robust solution for estimating a cameras pose. Each marker has a unique, identifiable pattern which allows for precisely determining and tracking its position.\footcite{jurado2015} 
+ARUCO tags are squared-based markers popular in many robotic and augmented reality applications as they provide a fast and robust solution for estimating a cameras pose relative to one or multiple markers. Each marker has a unique, identifiable pattern which allows for precisely determining and tracking its position.\footcite{jurado2015} 
 
-\subsubsection{Results}
+\subsubsection{Results - ZED1}
 %Fig. \ref{plot:zedBenchmark} depicts the mean depth-perception error measured thus indicating how well each camera performed. 
-
-The mean depth-perception error dependant on the camera distance for the ZED 1 (blue) is plotted in Fig. \ref{plot:zedBenchmark}. To illustrate the positive tendency a linear regression (cyan) is superimposed. The trend line indicates a relatively steep slope with the mean error adding up by 0.03 m at increasing distances from the rig. Additionally the error range listed in Tab. \ref{tab:errorMinimaMaxima} shows a base error of 0.7\% and a maximum mean error of 3\%, which is similar to the error stated by the cameras data sheet\footcite{zed1Datasheet}.
-
-The data for the ZED 2 (red) and its corresponding trend line (orange) indicate a much more shallow slope with 0.01 m per meter distance to the rig. Looking at the error range the ZED 2 lies below 1\% mean error at all distances which also corresponds to the data sheets specifications \footcite{zed2Datasheet}.
+%
+%The mean depth-perception error dependant on the camera distance for the ZED 1 (blue) is plotted in Fig. \ref{plot:zedBenchmark}. To illustrate the positive tendency a linear regression (cyan) is superimposed. The trend line indicates a relatively steep slope with the mean error adding up by 0.03 m at increasing distances from the rig. Additionally the error range listed in Tab. \ref{tab:errorMinimaMaxima} shows a base error of 0.7\% and a maximum mean error of 3\%, which is similar to the error stated by the cameras data sheet\footcite{zed1Datasheet}.
+%
+%The data for the ZED 2 (red) and its corresponding trend line (orange) indicate a much more shallow slope with 0.01 m per meter distance to the rig. Looking at the error range the ZED 2 lies below 1\% mean error at all distances which also corresponds to the data sheets specifications \footcite{zed2Datasheet}.
 
 
 %When comparing each trend line for each camera it is apparent that the slope of the ZED 1 with $0.03m/m$ is more than twice as large compared to the ZED 2 at $0.01m/m$. This indicates that with increasing distance the depth-perception error increases dramatically. 
@@ -207,19 +207,50 @@ The data for the ZED 2 (red) and its corresponding trend line (orange) indicate 
 %As illustrated the ZED 1 inherits a substantially large minimal and maximal error of  $0.07m$ and $0.31m$.
 %Compared to this the ZED 2 performed much better with a almost non existent base error and a maximal error of $0.1m$.
 
+%\begin{table}[h]
+%	\centering
+%	\begin{tabular}{|l|l|l|}
+%		\hline
+%		& \textbf{Minimal Mean Error} & \textbf{Maximal Mean Error} \\ \hline
+%		\textbf{ZED 1}  & 0.07 m 					  & 0.31 m                      \\ \hline
+%		\textbf{ZED 2} & 0.01 m                      & 0.10 m                      \\ \hline
+%	\end{tabular}
+%	\caption{Table containing the minimal and maximal mean error of both the ZED 1 and ZED 2.}
+%	\label{tab:errorMinimaMaxima}
+%\end{table}
+
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|l|l|l|}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
 		\hline
-		& \textbf{Minimal Mean Error} & \textbf{Maximal Mean Error} \\ \hline
-		\textbf{ZED 1}  & 0.07 m 					  & 0.31 m                      \\ \hline
-		\textbf{ZED 2} & 0.01 m                      & 0.10 m                      \\ \hline
+		\textbf{Distances {[}m{]}}      & 3    & 4    & 5    & 6    & 7    & 8    & 9    & 10   & {\ul Total} \\ \hline
+		\textbf{Mean Deviation {[}m{]}} & 0.07 & 0.08 & 0.09 & 0.08 & 0.09 & 0.14 & 0.17 & 0.31 & {\ul 0.13}  \\ \hline
+		\textbf{Min Deviation {[}m{]}}  & 0.07 & 0.04 & 0.04 & 0.00 & 0.00 & 0.00 & 0.01 & 0.01 & {\ul 0.00}  \\ \hline
+		\textbf{Max Deviation {[}m{]}}  & 0.08 & 0.11 & 0.13 & 0.45 & 0.67 & 0.18 & 0.24 & 0.84 & {\ul 0.84}  \\ \hline
 	\end{tabular}
-	\caption{Table containing the minimal and maximal mean error of both the ZED 1 and ZED 2.}
-	\label{tab:errorMinimaMaxima}
+	\caption{x}
+	\label{tab:resultsZed1}
 \end{table}
 
-\input{sections/plots/zedBenchmark}
+\input{sections/plots/zed1Benchmark}
+
+
+\subsection{Results - Zed 2}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		\textbf{Distances {[}m{]}}      & 3    & 4    & 5    & 6    & 7    & 8    & 9    & 10   & {\ul Total} \\ \hline
+		\textbf{Mean Deviation {[}m{]}} & 0.01 & 0.01 & 0.06 & 0.08 & 0.05 & 0.04 & 0.10 & 0.08 & {\ul 0.05}  \\ \hline
+		\textbf{Min Deviation {[}m{]}}  & 0.00 & 0.00 & 0.01 & 0.02 & 0.00 & 0.00 & 0.02 & 0.02 & {\ul 0.00}  \\ \hline
+		\textbf{Max Deviation {[}m{]}}  & 0.03 & 0.11 & 0.26 & 0.24 & 0.42 & 0.35 & 0.43 & 0.41 & {\ul 0.43}  \\ \hline
+	\end{tabular}
+	\caption{y}
+	\label{tab:resultsZed2}
+\end{table}
+
+\input{sections/plots/zed2Benchmark}
 
 Comparing both trend lines and mean error range the ZED 1 clearly shows a much more aggressive upwards trend and higher base error compared to the ZED 2. However as the coefficient of determination $R^{2}$ for each trend line indicate a mediocre fit the aforementioned assumptions should not be solely taken into consideration when comparing the two camera systems. 
 Having said this, in combination with the data sheets, the overall trend on depth-performance meets the initial assumption and justifies the upgrade to the ZED 2.
