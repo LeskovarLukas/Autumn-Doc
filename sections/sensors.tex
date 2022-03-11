@@ -68,7 +68,7 @@ This drift can be corrected using techniques discussed in Chapter \ref{chapter:s
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/odom}
+	\includesvg[width=0.8\linewidth]{img/svg/odom}
 	\caption{
 		This diagram shows the geometry of how a slight turning motion can be calculated only using the distances $d_{l}$, $d_{r}$ and wheel offset $b$.
 		The robot pose 
@@ -131,7 +131,7 @@ Despite incapable of calculating movements in advance, odometry ought to be pref
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{img/inertial}
+	\includesvg[width=0.5\linewidth]{img/svg/inertial}
 	\caption{
 		In this diagram a slight turning motion of the robot is described by the translational velocity $v$ and angular velocity $\omega$. These velocities if consistent render the robot to move in a perfect circle with center $P$ and radius $r = | \frac{v}{\omega}|$. Even if the angular velocity remains 0 the motion is still described as a circle with an infinite radius.
 	}
@@ -157,7 +157,7 @@ As 3D-LiDAR sensors applied in many commercial mapping solution are very expensi
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/activeTriangulation}
+	\includesvg[width=0.8\linewidth]{img/svg/activeTriangulation}
 	\caption{
 		This diagram depicts a ToF depth camera emitting IR-light (red) onto a surface. The camera sensor then utilizes the phase-shift $\varphi$ between the emitted (red) and received signal (blue) to calculate the distance between the scene and sensor. \footcite{altuntas2021triangulation}
 		% noch mehr schreiben
@@ -173,7 +173,7 @@ In Autumn this approach was pursued using a Stereolabs ZED depth camera as it wa
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/PassiveTriangulation}
+	\includesvg[width=0.8\linewidth]{img/svg/PassiveTriangulation}
 	\caption{
 		This diagram describes the camera setup found in passive triangulation systems. Using stereo-photogrammetry the distance to the perceived scene is calculated.\footcite{altuntas2021triangulation}
 	}
