@@ -69,7 +69,7 @@ This section is going to go in depth about how different modules in the autumn p
 !!!UNCOMMENT!!!%\ref{autumnControlLoop}
 . In contrast this section concerns itself with the practical realization of these concepts
 
-\subsection{Lifecycle Components}
+\subsection{Lifecycle Modules}
 
 Autumn contains four modules delimited from one another. Like the name suggests these fundamental building blocks of the project are modular. By that means, it is made possible to change or improve certain parts without the need to integrate the changes into all other aspects present in autumn.
 
@@ -83,18 +83,16 @@ Autumn contains four modules delimited from one another. Like the name suggests 
 \subsubsection{Drone Control}
 Drone control acts as the intermediary between the physical drone and virtual instruction stemming from the navigation component. Drone control can be realized autonomous or semi-autonomous. Semi-autonomous hereby refers to, the user providing flight instructions depended on the navigation output.
 
-\subsection{title}
+\subsection{Module cooperation}
 
-From a process oriented standpoint the autumn lifecycle begins with the drone perceiving its environment. The data captured by the sensor equipment the drone is equipped, are stereo images and data from an inertial measurement unit. This data in succession allows an SLAM algorithm to perform its localization and mapping. Upon finishing SLAM provides a digital representation of the space the drone has been able to observe. These abstractions and how such a SLAM algorithm works are covered in chapter slam(\ref{chapter:slam}) and chapter abstract environments (\ref{chapter:abstract_env}). Using this representation of the environment, an path planning algorithm is used, along with an algorithm determining where the drone should move next. This choosing of the next waypoint is realized in autumn via the explorer. For autumn the user provides the point for the explorer. The final step in the navigation component is using the a path planning algorithm, described in chapter \ref{chapter:path_planning}, to calculate a path to the goal point. Based on this path drone control is able to send flight instructions using the dji-sdk to control the movements of the drone.
+From a process oriented standpoint the autumn lifecycle begins with the drone perceiving its environment. The data captured by the sensor equipment the drone is equipped, are stereo images and data from an inertial measurement unit. This data in succession allows an SLAM algorithm to perform its localization and mapping. Upon finishing SLAM provides a digital representation of the space the drone has been able to observe. These abstractions and how such a SLAM algorithm works are covered in chapter slam(\ref{chapter:slam}) and chapter abstract environments(\ref{chapter:abstract_env}). Using this representation of the environment, an path planning algorithm is used, along with an algorithm determining where the drone should move next. This choosing of the next waypoint is realized in autumn via the explorer. For autumn the user provides the point for the explorer. The final step in the navigation component is using the a path planning algorithm, described in chapter \ref{chapter:path_planning}, to calculate a path to the goal point. Based on this path drone control is able to send flight instructions using the dji-sdk to control the movements of the drone.
 
 \begin{figure}
 	\centering
 	\includesvg[width=.8\linewidth]{img/svg/AutumnLifeCycle}
-	\caption{Depiction of the autumn lifecycle, with its four components.}
+	\caption{Depiction of the autumn lifecycle, with its four components and the communication between them}
 	\label{fig:autumnLifecycle}
 \end{figure}
-
-
 
 
 \filbreak
