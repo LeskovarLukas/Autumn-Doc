@@ -8,8 +8,9 @@ This chapter is going to concern itself with the critical intersection of physic
 \section{Abstract Environments}
 
 Abstraction being the process of reducing an Object to the information needed for further processing. In conjunction with autonomous navigation this principle is ubiquitous. Due to restriction in terms of computational space and time, a simplification of complex compounds is needed. Such a loss of information naturally happens when using equivalent hardware to process ones surroundings.\newline
-In order for autonomous navigation to work it is necessary for the computer to know the existence and position of objects surrounding the to be navigated vessel. This information can be provided or in case of using a SLAM algorithm self-taught. SLAM reduces the environment to positions in a 2 or 3 dimensional space. The algorithm is then left with an assortment of positions relative to the starting point, which is represented by the coordinate origin. To make use of this information is imperative to know the position of the robot in this abstracted space.\newline
-With this approach to let the of letting the algorithm perceive the environment it guarantees an efficient and cost effective computation. By reducing obstacles to only the properties needed to avoid them unnecessary complexity is being circumvented.      
+In order for autonomous navigation to work it is necessary for the computer to know the existence and position of objects surrounding the to be navigated vessel. This information can be provided or in case of using a SLAM algorithm, self-taught. SLAM reduces the environment to positions in a 2 or 3 dimensional space. The algorithm is then left with an assortment of positions relative to the starting point, which is represented by the coordinate origin. To make use of this information is imperative to know the position of the robot in this abstracted space.\newline
+With this approach of letting the algorithm perceive the environment, it guarantees an efficient and cost effective computation. By reducing obstacles to only the properties needed, unnecessary complexity is being circumvented.      
+The Kalman Filter described in section \ref{sec:ExtendedKalmanFilter}, reflects this principle.
 
 \section{Representation in Autumn}
 To be able to utilize the information provided, there need to be the capability of bundling data into a tried and tested format, that enables easy access and reliable accuracy.\newline
@@ -20,7 +21,7 @@ An occupancy grid is used for a 2-dimensional representation of the environment.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\linewidth]{img/OccupancyGridCells}
+	\includesvg[width=0.5\linewidth]{img/svg/OccupancyGridCells}
 	\caption{Visual depiction of probability values in an occupancy grid map.}
 	\label{fig:abstract_environments_occupancyCells}
 \end{figure}
@@ -46,13 +47,13 @@ Through the use of ROS, explained in detail in chapter \ref{chapter:ros}, this m
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/EnvironmentTransfer}
+	\includesvg[width=0.8\linewidth]{img/svg/EnvironmentTransfer}
 	\caption{Excerpt of the Autumn-Life-Cycle. Lifespan of point cloud and occupancy grid. Created in the SLAM stage, published as a topic and used in the navigation stage.}
 	\label{fig:abstract_environments_enviromentTransfer}
 \end{figure}
 
 \subsection{autumn\_pathfinding\_2D}
-The package "autumn\_pathfinding\_2D" subscribes to an topic, published from the slam node, which carries a nav\_msgs/OccupancyGrid. This being a standardized data type for occupancy gird maps. It consists of an header of type std\_msgs/Header, which contains a sequence number, timestamp and frame id, that are used for identifying individual messages. Additionally meta data of the map along with the current data contained in an int8 array is transferred over this topic.\footcite{rosNavMsgsOccupancyGrid2021}\footcite{rosStdMsgsHeader2021}\newline
+The package "autumn\_pathfinding\_2D" subscribes to an topic, published from the slam node, which carries a nav\_msgs/OccupancyGrid. This being a standardized data type for occupancy maps. It consists of an header of type std\_msgs/Header, which contains a sequence number, timestamp and frame id, that are used for identifying individual messages. Additionally meta data of the map along with the current data contained in an int8 array is transferred over this topic.\footcite{rosNavMsgsOccupancyGrid2021}\footcite{rosStdMsgsHeader2021}\newline
 Upon receiving a new map and goal point, given that now current calculations are ongoing, the algorithm aligns a Cartesian coordinate system relative to the current position of the drone. From this point onward the access to the occupancy grid which is represented by the int8 array, happens through a function which takes x and y coordinates and maps it to the one dimensional array. This is essential to guarantee usability alongside performance.\newline
 The coordinates get also adjusted based on the occupancy grid resolution. Benefits gained from such a procedure are that it is easy to check duplicate cells, because only whole cells can be represented. Another reason for it is the use of the cantor pairing function\footcite{Szudzik2017} which only works with natural numbers. The reason for using such a pairing function is to efficiently store and search for points.  
 The underlying path planning algorithm, explained in detail in chapter \ref{chapter:path_planning}, isn't effected by the input data structure.       
@@ -60,6 +61,6 @@ The data array, holding occupancy information, contains per index a value betwee
 
 \subsection{autumn\_pathfinding}
 The 3 dimensional equivalent to the two dimensional path planning packages uses a point cloud in order to navigate the environment. This point cloud is published as a sensor\_msgs/PointCloud message type. This universal point cloud type contains a header with message specific information as well as an array of geometry\_msgs/Point32, which represent the individual points of the point cloud. The Point32 contains x, y and z attributes which represent the Cartesian coordinates.\footcite{rosGeometryMsgsPoint322021}\footcite{rosSensorMsgsPointCloud2021}\newline
-Because of the difficulty of working with a three dimensional space represented by a one dimensional array, the point cloud library will be used. Same as the two dimensional variant, the algorithm of the three dimensional path planning accesses the data of the point cloud through a function which takes three coordinates and returns if an object exists at this position.\newline
+Because of the difficulty of working with a three dimensional space represented by a one dimensional array, the point cloud library will be used. Same as the two dimensional model, the algorithm of the three dimensional path planning accesses the data of the point cloud through a function which takes three coordinates and returns if an object exists at this position.\newline
 Similar to the 2d solution, point coordinates get adjusted to a certain resolution. In this case it is not bound to the data type itself, because of the lack of structure in a point cloud. Instead the point resolution is chosen to guarantee best performance while retaining a high level of flexibility. This process of adjusting the resolution, can be understood as altering the size of cubes covering the space, like cells in an occupancy grid. This way there is a structure added to the otherwise unstructured set of points, which allows for the same implementation of the algorithm as in the two dimensional solution. 
 

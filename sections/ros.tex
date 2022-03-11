@@ -110,7 +110,7 @@ One of the most important components of ROS is the Master. It tracks publishers 
 Besides registration and name resolution, the ROS Master also provides a Parameter Server used for globally storing static system parameters.\footcite{openSourceRoboticsFoundationParameterServerNodate}
 \begin{figure}[]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/ros_master_registration}
+	\includesvg[width=0.8\linewidth]{img/svg/ros_master_registration}
 	\caption{Diagram of the topic registration process in ROS at which the publishing node registers its topic before the subscriber tells the master its interest in the point-cloud topic. However a node can be registered as a subscriber to a specific topic without the topic existing yet.}
 		\label{fig:ros_master_reg}
 \end{figure}

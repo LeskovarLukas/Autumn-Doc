@@ -31,7 +31,8 @@ style=authortitle-ibid
 \usepackage{amsmath}
 \usepackage{mathtools}
 
-
+\usepackage{svg}
+\usepackage[off]{svg-extract}
 \usepackage[
 ruled,
 linesnumbered,
@@ -44,6 +45,9 @@ titlenumbered
 \definecolor{orange}{RGB}{255,143,0}
 \definecolor{dkblue}{rgb}{0.14, 0.13, 0.35}
 \definecolor{brown}{rgb}{0.321, 0.105, 0.113}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
+\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
 
 \lstset{frame=tb,
 	language=python,
@@ -171,7 +175,6 @@ titlenumbered
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{units}
 
-%colors
-\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
-\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
-\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
+%svg
+\svgsetup{clean=true}
+\pdfsuppresswarningpagegroup=1
