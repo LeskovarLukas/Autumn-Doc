@@ -6,7 +6,7 @@
 				grid=major, 
 				grid style={dashed,gray!30},
 				xlabel={Distance [m]}, % Set the labels
-				ylabel={Mean Error [m]},
+				ylabel={Error [m]},
 				legend pos=north west,
 				xtick={3, 4, 5, 6, 7, 8, 9, 10},
 				xmin=2,
@@ -83,7 +83,8 @@
 				
 			\end{axis}
 		\end{tikzpicture}
-		\caption{This plot describes how the mean depth-performance error of both the ZED 1 (blue) and ZED 2 (red) Stereo Camera changes with increasing distance to an object. Furthermore the linear regression function for both the ZED 1 (cyan) and ZED 2 (orange) are plotted. 
+		\caption{
+			This plot describes how increasing distances to a stationary object affect the mean (red), as well as minimal and maximal (grey) depth-performance error of the ZED 2. The model describing this data is approximated using a cubic regression (orange).
 		}
 		\label{plot:zed2Benchmark}
 	\end{center}

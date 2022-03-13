@@ -180,9 +180,9 @@ In Autumn this approach was pursued using a Stereolabs ZED depth camera as it wa
 	\label{fig:passiveTriangulation}
 \end{figure}
 
-\subsection{ZED 1 vs ZED 2}
+\subsection{ZED 1 vs ZED 2i}
 %As mentioned in Chapter \ref{chapter:architecture} the Stereolabs ZED 1 was used in a first prototype and later replaced with a 
-Chapter \ref{chapter:architecture} mentions that the Stereolabs ZED 1 used in early prototypes was quickly replaced with the ZED 2. This change was due to processing limitations and additional features provided by the newer product version.
+Chapter \ref{chapter:architecture} mentions that the Stereolabs ZED 1 used in early prototypes was quickly replaced with the ZED 2i. This change was due to processing limitations and additional features provided by the newer product version.
 This section aims to benchmark the two cameras from a depth-performance standpoint to review if the upgrade enhanced depth perception thus improving the system output or if no changes were necessary when only considering depth-perception.
 
 \subsubsection{Experiment}
@@ -195,7 +195,13 @@ The usage of ARUCO tags allowed for precisely tracking the position of each poin
 ARUCO tags are squared-based markers popular in many robotic and augmented reality applications as they provide a fast and robust solution for estimating a cameras pose relative to one or multiple markers. Each marker has a unique, identifiable pattern which allows for precisely determining and tracking its position.\footcite{jurado2015} 
 
 \subsubsection{Results - ZED1}
-%Fig. \ref{plot:zedBenchmark} depicts the mean depth-perception error measured thus indicating how well each camera performed. 
+
+Fig. \ref{plot:zed1Benchmark} depicts the mean, minimal and maximal depth-perception error measured thus indicating how well the camera performed.
+To illustrate the underlying model of this data, a cubic regression is superimposed. This well fitted model indicates a relatively steady error just under 0.1 m which increases drastically after a local minima at a distance of 5.6 m. 
+While the mean error increases, the minimal deviation declines to 0 m between distances of 6 m to 8 m, which would indicate a optimal interval for measurements. Although the maximal error thrives within this range it generally remains close to the mean at all other distances.
+Tab. \ref{tab:resultsZed1} shows the data these findings are based on as well as a total mean, minimal and maximal deviation over all distances. 
+In total the ZED 1 has a mean error of 13\% which is drastically above what the cameras data sheet states\footcite{zed1Datasheet}.
+
 %
 %The mean depth-perception error dependant on the camera distance for the ZED 1 (blue) is plotted in Fig. \ref{plot:zedBenchmark}. To illustrate the positive tendency a linear regression (cyan) is superimposed. The trend line indicates a relatively steep slope with the mean error adding up by 0.03 m at increasing distances from the rig. Additionally the error range listed in Tab. \ref{tab:errorMinimaMaxima} shows a base error of 0.7\% and a maximum mean error of 3\%, which is similar to the error stated by the cameras data sheet\footcite{zed1Datasheet}.
 %
@@ -228,14 +234,23 @@ ARUCO tags are squared-based markers popular in many robotic and augmented reali
 		\textbf{Min Deviation {[}m{]}}  & 0.07 & 0.04 & 0.04 & 0.00 & 0.00 & 0.00 & 0.01 & 0.01 & {\ul 0.00}  \\ \hline
 		\textbf{Max Deviation {[}m{]}}  & 0.08 & 0.11 & 0.13 & 0.45 & 0.67 & 0.18 & 0.24 & 0.84 & {\ul 0.84}  \\ \hline
 	\end{tabular}
-	\caption{x}
+	\caption{Summarized data of mean, minimal and maximal deviation for the ZED 1 camera at increasing distances.}
 	\label{tab:resultsZed1}
 \end{table}
 
 \input{sections/plots/zed1Benchmark}
 
 
-\subsection{Results - Zed 2}
+\subsubsection{Results - ZED 2i}
+
+Data for the mean, minimal and maximal depth-perception error of the ZED 2i is plotted in Fig. \ref{plot:zed2Benchmark}.
+%The cubic regression model for this camera indicates a coherently low mean error which decreases after a local maxima at a distance of 8.6 m. 
+The cubic regression model for this camera indicates a slight negative trend with a coherently low mean error, peaking at a local maxima at 8.6 m. However the initial believe suggests that with increasing distances the error thrives correspondingly. According to the coefficient of determination $R^{2}$, indicating that the cubic regression function does not fully match the data, a different regression model may result in more accurate assertions supporting the initial believe. 
+Considering the overall error range, the minimal error remains below 0.02 m for all distances while the maximal error grows to approximately 0.4 m. 
+A optimal measurement zone due to moderate mean and non-existent minimal deviation can be observed between a distance of 7 m and 8 m. 
+Tab \ref{tab:resultsZed2} indicates a overall mean error of 5\% which does correspond to the statement of the ZED 2i data sheet\footcite{zed2Datasheet}.
+
+
 
 \begin{table}[h]
 	\centering
@@ -246,14 +261,24 @@ ARUCO tags are squared-based markers popular in many robotic and augmented reali
 		\textbf{Min Deviation {[}m{]}}  & 0.00 & 0.00 & 0.01 & 0.02 & 0.00 & 0.00 & 0.02 & 0.02 & {\ul 0.00}  \\ \hline
 		\textbf{Max Deviation {[}m{]}}  & 0.03 & 0.11 & 0.26 & 0.24 & 0.42 & 0.35 & 0.43 & 0.41 & {\ul 0.43}  \\ \hline
 	\end{tabular}
-	\caption{y}
+	\caption{The mean, minimal and maximal depth-perception deviation measured by the ZED 2i}
 	\label{tab:resultsZed2}
 \end{table}
 
 \input{sections/plots/zed2Benchmark}
 
-Comparing both trend lines and mean error range the ZED 1 clearly shows a much more aggressive upwards trend and higher base error compared to the ZED 2. However as the coefficient of determination $R^{2}$ for each trend line indicate a mediocre fit the aforementioned assumptions should not be solely taken into consideration when comparing the two camera systems. 
-Having said this, in combination with the data sheets, the overall trend on depth-performance meets the initial assumption and justifies the upgrade to the ZED 2.
+
+\subsubsection{Comparison}
+
+Comparing both models the ZED 1 clearly shows a much more aggressive upwards trend than the ZED 2i which has a relatively monotonic mean error. 
+
+However both cameras share a commonly low minimal error indicating that both are able to correctly and precisely take depth measurements within the tested distances. 
+Although the ZED 2i generally outperforms its predecessor concerning mean deviation its maximal depth-perception error strays drastically further from the mean when compared to the ZED 1. 
+
+
+%Comparing both trend lines and mean error range the ZED 1 clearly shows a much more aggressive upwards trend and higher base error compared to the ZED 2. However as the coefficient of determination $R^{2}$ for each trend line indicate a mediocre fit the aforementioned assumptions should not be solely taken into consideration when comparing the two camera systems. 
+
+Having said this, in combination with the data sheets, the overall trend on depth-performance meets the initial assumption and justifies the upgrade to the ZED 2i.
 
 %Considering all of the aforementioned findings it is apparent that the ZED 2 produced much better depth-perception results compared to the ZED 1. This justifies the upgrade not only from a feature focused standpoint but also quality wise as this greatly effects the final 3D point cloud utilized by components discussed later in this thesis. 
 
