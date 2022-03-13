@@ -42,9 +42,10 @@ This approach was tested in the following two forms:
 	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and to provide odometry using a much more performant visual-inertial odometry algorithm. To this end, the drone was equipped with a Stereolabs ZED 2i stereo-camera which is benchmarked against other sensors in section \ref{chapter:sensors}%, which performed hardware-accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. %Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
 \end{itemize}
 
-\section{Final Product}
-Following the approach mentioned above, the leading causes of performance issues were eliminated by replacing non-optimized hardware components and distributing non-critical computations such as user interaction or path planning to a remote host. As impairing these aspects of the system by latency poses less of a problem. 
-With these adjustments, the Autumn drones final version consisted of the following altered components:
+\section{Final Product}\label{sec:finalProduct}
+Following the aforementioned approach the main causes of performance issues where eliminated by replacing non-optimized hardware components and distributing non-critical computations such as user interaction or path planning to a remote host as impairing these aspects of the system by latency would not pose less of a problem. 
+With these adjustments the Autumn drones final version consisted of the following altered components:
+
 \begin{itemize}
 	\item As already mentioned, the Stereolabs ZED 1 was replaced by its successor, the Stereolabs ZED 2i. With its additional sensors and out of the box sensor fusion available, it significantly reduced the amount of computations performed on the NVIDIA Jetson TX2. 
 	\item In order to establish a connection to a remote host and perform computations the Dual Band 2.4GHz and 5GHz Antennas of the NVIDIA Jetson TX2 where utilized. 
@@ -63,6 +64,35 @@ With these adjustments, the Autumn drones final version consisted of the followi
 
 \section{Autumn Lifecycle}
 \textbf{Author: Fabian Kleinrad} 
+
+This section is going to go in depth about how different modules in the autumn project interoperate. Hereby an overview will be given, that will illustrate how the autumn project works. The theoretical approach in this project is closely represented by the techniques explained in detail in section 
+\ref{autumnControlLoop}
+. In contrast this section concerns itself with the practical realization of these concepts
+
+\subsection{Lifecycle Modules}
+
+Autumn contains four modules delimited from one another. Like the name suggests these fundamental building blocks of the project are modular. By that means, it is made possible to change or improve certain parts without the need to integrate the changes into all other aspects present in autumn.
+
+\subsubsection{Drone} This component represents the physical drone and sensory equipment installed on the autumn drone, described in section \ref{sec:finalProduct}.  
+\subsubsection{SLAM} The SLAM component converts the sensor data, provided from the drone into a digital representation. Chapter \ref{chapter:slam} goes into detail how this is realized.
+\subsubsection{Navigation} The module navigation is used to plan routes through the abstracted environment explained in chapter \ref{chapter:abstract_env}.. Hereby the functionality of this module is divided into two components.
+	\begin{itemize}
+		\item Explorer - decides next waypoint
+		\item Path-Planning - Plans path to new waypoint, explained in chapter \ref{chapter:path_planning}
+	\end{itemize}
+\subsubsection{Drone Control}
+Drone control acts as the intermediary between the physical drone and virtual instruction stemming from the navigation component. Drone control can be realized autonomous or semi-autonomous. Semi-autonomous hereby refers to, the user providing flight instructions depended on the navigation output.
+
+\subsection{Module cooperation}
+
+From a process oriented standpoint the autumn lifecycle begins with the drone perceiving its environment. The data captured by the sensor equipment the drone is equipped, are stereo images and data from an inertial measurement unit. This data in succession allows an SLAM algorithm to perform its localization and mapping. Upon finishing SLAM provides a digital representation of the space the drone has been able to observe. These abstractions and how such a SLAM algorithm works are covered in chapter slam(\ref{chapter:slam}) and chapter abstract environments(\ref{chapter:abstract_env}). Using this representation of the environment, an path planning algorithm is used, along with an algorithm determining where the drone should move next. This choosing of the next waypoint is realized in autumn via the explorer. For autumn the user provides the point for the explorer. The final step in the navigation component is using the a path planning algorithm, described in chapter \ref{chapter:path_planning}, to calculate a path to the goal point. Based on this path drone control is able to send flight instructions using the dji-sdk to control the movements of the drone.
+
+\begin{figure}[h]
+	\centering
+	\includesvg[width=.8\linewidth]{img/svg/AutumnLifeCycle}
+	\caption{Depiction of the autumn lifecycle, with its four components and the communication between them}
+	\label{fig:autumnLifecycle}
+\end{figure}
 
 
 \filbreak

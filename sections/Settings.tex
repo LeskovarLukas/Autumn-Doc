@@ -33,7 +33,8 @@ style=authortitle-ibid
  \usepackage[normalem]{ulem}
  \useunder{\uline}{\ul}{}
 
-
+\usepackage{svg}
+\usepackage[off]{svg-extract}
 \usepackage[
 ruled,
 linesnumbered,
@@ -48,6 +49,9 @@ titlenumbered
 \definecolor{brown}{rgb}{0.321, 0.105, 0.113}
 \definecolor{green}{rgb}{0.55, 0.71, 0.0}
 \definecolor{blue-violet}{rgb}{0.54, 0.17, 0.89}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
+\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
 
 \lstset{frame=tb,
 	language=python,
@@ -175,7 +179,6 @@ titlenumbered
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{units}
 
-%colors
-\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
-\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
-\definecolor{carmine}{rgb}{0.59, 0.0, 0.09}
+%svg
+\svgsetup{clean=true}
+\pdfsuppresswarningpagegroup=1
