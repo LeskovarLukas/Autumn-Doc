@@ -398,7 +398,7 @@ ORB-SLAM2 and S-PTAM where not selected as both approaches do not provide online
 The algorithm chosen to be used for Autumn was RTAB-Map as incorporating stereo-images and external odometry is supported out-of-the-box and a variety of outputs such as 2D and 3D occupancy grids as well as a dense point cloud are offered. 
 As loop-closure detection algorithm with memory management was the primary goal of RTAB-Map, it qualifies for usage in large-scale environments during long mapping sessions.
 Since its publication in 2013 this algorithm has been extended and improved to support stereo- or RGBD-footage, 2D as well as 3D Lidar data and provides nodes for processing visual or lidar based odometry if no other external topic is available. 
-For Autumn this approach was implemented by providing the stereo-image stream as well as visual odometry data from the Stereolabs ZED2 thus yielding in multiple occupancy grids, robot paths as visualized in Fig. \ref{fig:AirLABmap}.
+For Autumn this approach was implemented by providing the stereo-image stream as well as visual odometry data from the Stereolabs ZED 2i, thus yielding in multiple occupancy grids, robot paths as visualized in Fig. \ref{fig:AirLABmap}.
 
 Although RGBDSLAMv2 does not fully qualify to be considered in this project as it only works with RGBD-Cameras like the XBOX Kinect or Intel RealSense it is worth mentioning as it provides a 3D occupancy grid and a dense point-cloud similar to RTAB-Map.\footcite{labbe2019rtab}
 

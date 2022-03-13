@@ -3,16 +3,16 @@
 
 \textbf{Author: Lukas Leskovar} 
 
-This chapter aims to provide a thorough overview of Autumns system architecture by describing its construction as well as logical and computational  structure. To this end, the difficulties faced during development and decisions made that affected the overall project are described.
+This chapter provides a thorough overview of Autumns' system architecture by describing its construction and logical and computational structure. To this end, the difficulties faced during development and decisions made that affected the overall project are described.
 
 \section{First Prototype}
 The first version of the Autumn drone consisted of three main components:
 \begin{itemize}
-	\item A DJI Matrice 100 functioning as the base of the system powering all external components.
-	\item To perform 3D mapping a Stereolabs ZED 1 was mounted onto the lower front part of the drone
+	\item A DJI Matrice 100 functioning as the system's base powering all external components.
+	\item To perform 3D mapping, a Stereolabs ZED 1 was mounted onto the lower front part of the drone
 	\item As the main component used to compute 3D mapping and control the drone a NVIDIA Jetson TX2 was mounted onto the drones expansion bay.
 \end{itemize}
-This prototype quickly demonstrated which part of the system needed to be improved where as the main issues were the lack of computational power and usage of non optimal hardware. A detailed explanation as well as a multitude of solutions to this problem are discussed in the following sections.
+This prototype quickly demonstrated which part of the system needed improvement, whereas the main issues were the lack of computational power and usage of non-optimal hardware. A detailed explanation and a multitude of solutions to this problem are discussed in the following sections.
 
 
 \section{Processing and power management}
@@ -21,33 +21,33 @@ This prototype quickly demonstrated which part of the system needed to be improv
 %In the past decades research has pushed the limits of computational performance of processors further to its limits, all while performing a trade off concerning power requirements. Modern circuits can execute complex algorithms with high speed calculations but therefore have high energy requirements. 
 %This confrontation of performance and power is a major issue faced in most robotic applications and therefore affected the implementation of this diploma thesis. In order to perform 3D mapping and local navigation, Autumn requires to execute complex and load heavy algorithms that will be discussed in further detail in later sections. 
 
-In the past decades research has made vast improvements concerning the performance of processors whether they are used as stand-alone microprocessors, microcontrollers, embedded processors or digital signal processors. However these improvements come at the cost of higher power requirements. This trade-off is a major concern in many robotic applications that are powered by batteries or are restricted to low power inputs. Since Autumn is powered only by a drone battery this issue is groundbreaking during the development of this diploma thesis. 
+In the past decades, research has made vast improvements concerning the performance of processors, whether they are used as stand-alone microprocessors, microcontrollers, embedded processors or digital signal processors. However, these improvements come at the cost of higher power requirements. This trade-off is significant in many robotic applications powered by batteries or restricted to low power inputs. Since Autumn is powered only by a drone battery, this issue was groundbreaking during the development of this diploma thesis. 
 
-The central component of the system is a NVIDIA Jetson TX2 board equipped with a 2GHz NVIDIA Denver2 dual-core and a 2GHz Arm Cortex-A57 quad-core processor. \footcite{jetsonHardwarePageNoDate}
+The system's central component is an NVIDIA Jetson TX2 board equipped with a 2GHz NVIDIA Denver2 dual-core and a 2GHz Arm Cortex-A57 quad-core processor. \footcite{jetsonHardwarePageNoDate}
 
-Using NVIDIA tegrastats \footcite{nvidiaTegrastatsNoDate} the average power consumption of the system at an idle state was measured at 2.7W. However while performing non optimized 3D mapping and navigation algorithms (Chapter \ref{chapter:slam}) with both processors fully utilized and Max-N power mode activated the average power consumption reached 7.9W. \footcite{jetsonPowerModesNoDate} 
+Using NVIDIA tegrastats \footcite{nvidiaTegrastatsNoDate} the average power consumption of the system at an idle state was measured at 2.7W. However, while performing non-optimized 3D mapping and navigation algorithms (Chapter \ref{chapter:slam}) with both processors fully utilized and Max-N power mode activated, the average power consumption reached 7.9W. \footcite{jetsonPowerModesNoDate} 
 %schreib drüber dass diese zahlen bedeuten dass das system komplett ausgelaset ist
-Operating the system at such high stress does not only quickly drain the drones battery but also impairs the quality of the resulting 3D map as well as operating the drone.
+Operating the system at such high stress does not only quickly drain the drone's battery but also impairs the quality of the resulting 3D map and operating the drone.
 
 
 \section{Solving processing limitations}
-When dealing with load heavy computations one way to solve quality issues is to use higher performance hardware, however due to aforementioned power constraints and drone payload requirements this approach is not suitable for this project. 
-Another possible solution is to lower the computational load of the processors therefore improving result quality and lowering power consumption. 
+When dealing with heavy load computations, one way to solve quality issues is to use higher performance hardware. However, this approach is not suitable for this project due to the aforementioned power constraints and drone payload requirements. 
+Another possible solution is to lower the processors' computational load, therefore improving result quality and lowering power consumption. 
 This approach was tested in the following two forms:
 \begin{itemize}
-%	\item Distributing high power computations to a remote host. For most applications out- sourcing computation to a cloud would be the optimal solution however the work en- vironment of Autumn does not allow for a sufficient internet connection. The only possible way to implement this approach was to bring a powerful computer on site and have it wirelessly communicate with the Autumn drone.
+	%	\item Distributing high power computations to a remote host. Out-sourcing computation to a cloud would be the optimal solution for most applications. However, Autumn's work environment does not allow a sufficient internet connection. Therefore, the only possible way to implement this approach was to bring a powerful computer on-site and wirelessly communicate with the Autumn drone.
 	
-	\item Distributing high power computations to a remote host. This approach loweres the amount of computation on the drone but requires to use a high performance computer on site to wirelessly communicate with the drone. Furthermore the wifi-range becomes another limiting factor since with increasing range the latency increased thus impairing the result quality again.
+	\item Distributing high power computations to a remote host. This approach lowers the amount of computation on the drone but requires using a high-performance computer on site to communicate with the drone wirelessly. Furthermore, the wifi range becomes another limiting factor since the latency grows with increasing range, thus impairing the resulting quality.
 	
-	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and providing odometry using a much more performant visual inertial odometry algorithm. To this end the drone was equipped with a Stereolabs ZED 2i stereo-camera which is benchmarked against other sensors in section \ref{chapter:sensors}%which performed a hardware accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. %Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
+	\item The second approach was to disable visual odometry using feature extraction and pattern matching as the most complex part of the algorithm and to provide odometry using a much more performant visual-inertial odometry algorithm. To this end, the drone was equipped with a Stereolabs ZED 2i stereo-camera which is benchmarked against other sensors in section \ref{chapter:sensors}%, which performed hardware-accelerated sensor-fusion of Inertial Measurement Unit (IMU) Data and visual odometry. %Furthermore the overall mapping quality compared to the Stereolabs ZED 1 was improved due to better depth sensing technology. 
 \end{itemize}
 
-\section{Final Product}
-\label{sec:finalProduct}
-Following the aforementioned approach the main causes of performance issues where eliminated by replacing non optimized hardware components and distributing non-critical computations such as user interaction or path planning to a remote host as impairing these aspects of the system by latency would not pose less of a problem. 
+\section{Final Product}\label{sec:finalProduct}
+Following the aforementioned approach the main causes of performance issues where eliminated by replacing non-optimized hardware components and distributing non-critical computations such as user interaction or path planning to a remote host as impairing these aspects of the system by latency would not pose less of a problem. 
 With these adjustments the Autumn drones final version consisted of the following altered components:
+
 \begin{itemize}
-	\item As already mentioned the Stereolabs ZED 1 was replaced by its successor the Stereolabs ZED 2i. With its additional sensors and out of the box sensor fusion available it greatly reduced the amount of computations performed on the NVIDIA Jetson TX2. 
+	\item As already mentioned, the Stereolabs ZED 1 was replaced by its successor, the Stereolabs ZED 2i. With its additional sensors and out of the box sensor fusion available, it significantly reduced the amount of computations performed on the NVIDIA Jetson TX2. 
 	\item In order to establish a connection to a remote host and perform computations the Dual Band 2.4GHz and 5GHz Antennas of the NVIDIA Jetson TX2 where utilized. 
 	\item A laptop serving as the remote host was added to the system performing non-critical computations.
 \end{itemize}
@@ -56,7 +56,7 @@ With these adjustments the Autumn drones final version consisted of the followin
 	\centering
 	\includegraphics[width=0.9\linewidth]{img/autumnDrone}
 	\caption{
-		The Autumn drone with the NVIDIA Jetson TX2 on top as well as the Stereolabs ZED 2i mounted onto the drones Gimbal mounting plate using a custom 3D printed frame. 
+		The Autumn drone with the NVIDIA Jetson TX2 on top and the Stereolabs ZED 2i mounted onto the drone's Gimbal mounting plate using a custom 3D printed frame. 
 	}
 	\label{fig:autumn}
 \end{figure}
