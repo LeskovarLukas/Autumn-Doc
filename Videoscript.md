@@ -9,7 +9,7 @@ all while creating a 3d point-cloud for further usage.
 
 ## Mapping
 The UAV is equipped with a stereo-camera feeding depth-imagery and odometry data
-into a SLAM algorithm abstracting a model of its surroundings as well as the drones current pose.
+into a SLAM algorithm abstracting a model of its surroundings as well as assesing the drones current pose.
 
 ## Path-Planning
 
