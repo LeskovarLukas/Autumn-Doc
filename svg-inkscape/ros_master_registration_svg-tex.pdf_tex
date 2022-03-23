@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% Creator: Inkscape 1.1.2 (b8e25be8, 2022-02-05), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'ros_master_registration_svg-tex.pdf' (pdf, eps, ps)
 %%
@@ -69,6 +69,5 @@
     \put(0.82924528,0.38962264){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}3. Register as topic subscriber\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{ros_master_registration_svg-tex.pdf}}%
     \put(0.8009434,0.01226415){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}4. Connect to topic and receive data\end{tabular}}}}%
-    \put(0.5009434,0.00754717){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Viewer does not support full SVG 1.1\end{tabular}}}}%
   \end{picture}%
 \endgroup%

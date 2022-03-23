@@ -12,7 +12,7 @@ To navigate a robot through its environment autonomously, it is necessary to dev
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{img/reactive}
+	\includesvg[width=0.9\linewidth]{img/svg/reactive}
 	\caption{
 		A reactive control cycle, matching sensor inputs directly to actions.
 	}
@@ -47,7 +47,7 @@ While this approach can introduce many difficulties concerning real-world repres
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{img/hierarchical}
+	\includesvg[width=0.9\linewidth]{img/svg/hierarchical}
 	\caption{
 		A hierarchical control system executing the sense, plan, act cycle sequentially.
 	}
@@ -58,7 +58,7 @@ While this approach can introduce many difficulties concerning real-world repres
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{img/hybrid}
+	\includesvg[width=0.9\linewidth]{img/svg/hybrid}
 	\caption{
 		A hybrid control system with a planning module supervising a reactive structure. 
 	}
@@ -86,7 +86,7 @@ The individual interchangeable components the system consists of are described i
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{img/AutumnControlCycle}
+	\includesvg[width=0.9\linewidth]{img/svg/AutumnControlCycle}
 	\caption{
 		This diagram depicts how a hierarchical control system is implemented within Autumn. Using the data provided by a Stereolabs ZED 2 stereo camera, an abstracted model of the drone's environment is created. This model is utilized by path planning and collision avoidance algorithms to propose the best possible path to a given waypoint. Given this path, a drone pilot can navigate the quadrocopter through a hazardous environment. 
 	}

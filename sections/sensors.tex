@@ -1,12 +1,13 @@
-\chapter{Sensors and measurements}
+\chapter{Sensors and measurements}\label{chapter:sensors}
 
 \textbf{Author: Lukas Leskovar} 
 
-The means of perceiving ones surrounding environment are a crucial part of any robotic system. This chapter aims to describe the need for interoceptive measurements aiding the different algorithms used within Autumn as well as any sensory equipment supporting such data acquisition. To this end the underlying principles and concepts behind the measurement techniques and  are illustrated.
+The means of perceiving ones surrounding environment are a crucial part of any robotic system. This chapter aims to describe the need for interoceptive measurements aiding the different algorithms used within Autumn as well as any sensory equipment supporting such data acquisition. To this end, the underlying principles and concepts behind the measurement techniques are illustrated.
 
 \section{Motion Models}
-Kinematic models in robotics are used for describing and planning state-transitions between consecutive robot poses. While Chapter \ref{chapter:slam} focuses on the theoretic basics of such models and how to build upon them, this section is going to focus on the practical concepts used in robot localization. To this end classical odometry as well as velocity based motion models are described.
-To facilitate any equations later in this section the robot pose is described by its state vector 
+Kinematic models in robotics are used for describing and planning state-transitions between consecutive robot poses. While Chapter \ref{chapter:slam} focuses on the theoretic basics of such models and how to build upon them, this section is going to focus on the practical concepts used in robot localization. To this end, classical odometry and velocity-based motion models are described.
+
+To facilitate any equations later in this section, the robot's pose is described by its state vector 
 \[
 \begin{pmatrix}
 	x \\
@@ -14,23 +15,23 @@ To facilitate any equations later in this section the robot pose is described by
 	\theta \\
 \end{pmatrix}
 \] 
-which defines its position as Cartesian coordinates and bearing as angular orientation $\theta$ in 2 dimensional space. 
+which defines its position as Cartesian coordinates and bearing as angular orientation $\theta$ in 2-dimensional space. 
 
 \subsection{Odometry}
 Ben-Ari and Mondada define this topic as follows: "Odometry—the measurement of distance—is a fundamental method used by robots for navigation.". \footcite[Page 69]{ben2017elements} 
-When performing linear odometry, e.g. without taking orientation changes into consideration, this distance is calculated rather trivially by inferring it through measured time elapsed and the velocity of the robot proportionally to the motor power. 
-Other systems however utilize wheel encoders to count the number of wheel rotations thus allowing for rather precise estimation of distance. 
+When performing linear odometry, e.g. without considering orientation changes, this distance is calculated rather trivially by inferring it through measured time elapsed and the robot's velocity proportionally to the motor power. 
+Other systems utilize wheel encoders to count the number of wheel rotations, thus allowing for a rather precise estimation of distance. 
 
-With non-linear motion the distances $d_{l}$ and $d_{r}$ moved by the left and right wheel are unequal which requires the calculation of both updated position and bearing of the robot. 
+With non-linear motion, the distances $d_{l}$ and $d_{r}$ moved by the left and right wheel are unequal, which requires the calculation of both updated position and bearing of the robot. 
 Lets suppose a robot moved from position $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$ to $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$ with a slight left turn caused by the right wheel turning faster than the left one. 
-This scenario is depicted in Fig. \ref{fig:odom} with $\varphi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and center to point $P$, the origin of the turn. 
+This scenario is depicted in Fig. \ref{fig:odom} with $\varphi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and centre to point $P$, the origin of the turn. 
 
-For small angles these radii are approximately the same length as the distances $d_{l}, d_{c}$ and $d_{r}$, which allows for the turn angle to be calculated as follows:
+For small angles, these radii are approximately the same length as the distances $d_{l}, d_{c}$ and $d_{r}$, which allows for the turn angle to be calculated as follows:
 \begin{align*}
 	\varphi &= \frac{d_{i}}{r_{i}}, & i &= l, r, c  
 \end{align*}
 
-However in practical scenarios where these radii and the point P are unknown, $\varphi$ has to be calculated only using $d_{l}$, $d_{r}$ and $b$ which corresponds to the distance between both robot wheels.
+However, in practical scenarios where these radii and the point P are unknown, $\varphi$ has to be calculated only using $d_{l}$, $d_{r}$ and $b$, which corresponds to the distance between both robot wheels.
 
 \begin{equation*}
 	\begin{split}
@@ -63,7 +64,7 @@ The final pose is calculated as follows:
 	\end{pmatrix}
 \end{equation*}
 
-Because the assumptions above only apply for small distances in any real-world systems such computations ought to be performed continuously. However due to uncertain measurements these calculations inherit some margin of error which is integrated up over multiple iterations thus causing a slight drift in the output.\footcite[Pages 69 - 77]{ben2017elements} 
+Because the assumptions above only apply for small distances, such computations should be performed continuously in any real-world system. However, due to uncertain measurements, these calculations inherit some margin of error integrated up over multiple iterations, thus causing a slight drift in the output.\footcite[Pages 69 - 77]{ben2017elements} 
 This drift can be corrected using techniques discussed in Chapter \ref{chapter:slam}.
 
 \begin{figure}
@@ -86,10 +87,10 @@ This drift can be corrected using techniques discussed in Chapter \ref{chapter:s
 
 
 \subsection{Inertial Measurement}
-Another way of modelling motion usually utilized when a robot is not equipped with wheel encoder nor wheels is based on velocities influencing the vehicle. Typically the inputs of velocity based motion models are measured used Inertial Measurement Units (IMU), Gyroscopes and Accelerometers. 
+Another way of modelling motion usually utilized when a robot is not equipped with wheel encoders or wheels is based on the vehicle's velocities. Typically the inputs of velocity-based motion models are measured using Inertial Measurement Units (IMU), Gyroscopes and Accelerometers. 
 
-These velocities $v$ and $\omega$ denote the linear and angular velocity and are referred to as controls for the system. 
-In contrast to odometry which can only be calculated after a movement has been performed these controls allow for prior motion planning. \footcite[Pages 92 - 99]{thrun2002probabilisticRobotics}
+The variables $v$ and $\omega$ denote the linear and angular velocities and are referred to as controls for the system. 
+In contrast to odometry, which can only be calculated after a movement has been performed, these controls allow for prior motion planning. \footcite[Pages 92 - 99]{thrun2002probabilisticRobotics}
 
 If these velocities stay fixed for the entire duration $\Delta t$ of the motion from 
 $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$
@@ -127,13 +128,13 @@ This allows for the new position to be calculated:
 	\end{pmatrix}
 \end{equation}
 
-Despite incapable of calculating movements in advance, odometry ought to be preferred over velocity motion models as they pose higher accuracy in localization. \footcite[Page 107]{thrun2002probabilisticRobotics}
+Despite being incapable of calculating movements in advance, odometry should be preferred over velocity motion models as they pose higher localization accuracy. \footcite[Page 107]{thrun2002probabilisticRobotics}
 
 \begin{figure}
 	\centering
 	\includesvg[width=0.5\linewidth]{img/svg/inertial}
 	\caption{
-		In this diagram a slight turning motion of the robot is described by the translational velocity $v$ and angular velocity $\omega$. These velocities, if remaining unchanged, render the robot to move in a perfect circle with the center point $P$ and radius $r = | \frac{v}{\omega}|$. Even if the angular velocity remains 0 the motion is still described as a circle with an infinite radius. \footcite[Pages 95 - 107]{thrun2002probabilisticRobotics}
+		In this diagram, a slight turning motion of the robot is described by the translational velocity $v$ and angular velocity $\omega$. These velocities, if remaining unchanged, render the robot to move in a perfect circle with the centre point $P$ and radius $r = | \frac{v}{\omega}|$. Even if the angular velocity remains 0, the motion is still described as a circle with an infinite radius. \footcite[Pages 95 - 107]{thrun2002probabilisticRobotics}
 	}
 	\label{fig:inertial}
 \end{figure}
@@ -141,19 +142,19 @@ Despite incapable of calculating movements in advance, odometry ought to be pref
 
 
 \section{Depth Sensing}
-Similar to motion models contributing to robot localization in Autumn, Depth Sensing is utilized to perceive and map the drones environment. 
-The technologies in this section focus on mapping distance information to each point in the cameras field of view thus providing 3D-Imaging.
+Similar to motion models contributing to robot localization in Autumn, Depth-Sensing is utilized to perceive and map the drone's environment. 
+The technologies in this section focus on mapping distance information to each point in the camera's field of view, thus providing 3D-Imaging.
 
 \subsection{Structured Light}
-One approach uses active illumination to project a varying intensity pattern onto the perceived scene thus allowing for a camera to extract 3D-information from the distorted pattern as the surface of the scene is non-planar. \footcite{geng2011StructuredLight}
+One approach uses active illumination to project a varying intensity pattern onto the perceived scene, thus allowing a camera to extract 3D information from the distorted pattern as the scene's surface is non-planar. \footcite{geng2011StructuredLight}
 
 \subsection{Time-of-Flight}
-Time-of-Flight (ToF) sensors perform active triangulation, which is performed by emitting modulated light to be reflected by a scene, as described in Fig. \ref{fig:activeTriangulation}. The distance to the scene is determined using the time difference between emission and detection of singular rays (more prominent with ToF Laser-Scanners like LiDAR) or the phase shift of light reflected by the whole scene. The latter allows for mapping depth information to the entire Field-of-View (FoV) of a camera. 
+Time-of-Flight (ToF) sensors perform active triangulation, which is performed by emitting modulated light to be reflected by a scene, as described in Fig. \ref{fig:activeTriangulation}. The distance to the scene is determined using the time difference between emission and detection of singular rays (more prominent with ToF Laser-Scanners like LiDAR) or the phase shift of light reflected by the whole scene. The latter allows for mapping depth information to the entire Field-of-View (FoV). 
 %It may be necessary to differentiate mapping using depth perception sensors from LiDAR technologies which pose an alternative solution. 
-Although LiDAR sensors fall under the category of ToF sensors they perceive the distance to an object using pulsed lasers thus outputting
-the distance to singular points in the sensors environment rather than depth information mapped to an image. \footcite{gokturk2004time} \footcite{velodyne2021LiDAR}
+Although LiDAR sensors fall under the category of ToF sensors, they perceive the distance to an object using pulsed lasers, thus outputting
+the distance to singular points in the sensor's surroundings rather than depth information mapped to an image. \footcite{gokturk2004time} \footcite{velodyne2021LiDAR}
 % LiDAR verwenden die Zeitdifferenz und berechnen mittels Trigonometrie die Distanz
-As 3D-LiDAR sensors applied in many commercial mapping solution are very expensive they disqualify for use in Autumn as it focuses on performing with approximate precision using relatively inexpensive camera based equipment. 
+As 3D-LiDAR sensors applied in many commercial mapping solutions are very expensive, they disqualify for use in Autumn. Instead, the project focuses on performing with approximate precision using relatively inexpensive camera-based equipment. 
 
 \begin{figure}
 	\centering
@@ -167,9 +168,9 @@ As 3D-LiDAR sensors applied in many commercial mapping solution are very expensi
 
 
 \subsection{Stereo Vision}
-The last and most significant approach to Autumn performs passive triangulation using two cameras setup as seen in Fig. \ref{fig:passiveTriangulation}. Although this eliminates the need for any light to be emitted, however the problem of correspondence is introduced, which deals with associating the different projections to the same point in the real world\footcite{ng2019StereoCorrespondence}. There are multiple approaches to this problem which are generally divided into global and local matching methods with the latter being more computationally efficient while sacrificing quality. \footcite{do2019review}
+The last and most significant approach to Autumn performs passive triangulation using two cameras setup as seen in Fig. \ref{fig:passiveTriangulation}. Although this eliminates the need for any light to be emitted, the problem of correspondence is introduced. Which deals with associating the different projections to the same point in the real world\footcite{ng2019StereoCorrespondence}. There are multiple approaches to this problem which are generally divided into global and local matching methods, with the latter being more computationally efficient while sacrificing quality. \footcite{do2019review}
 
-In Autumn this approach was pursued using a Stereolabs ZED depth camera as it was superior to any competitors such as the Microsoft Kinect or Intel Realsense concerning availability and cost-effectiveness. 
+In Autumn, this approach was pursued using a Stereolabs ZED depth camera as it was superior to any competitors such as the Microsoft Kinect or Intel Realsense concerning availability and cost-effectiveness. 
 
 \begin{figure}
 	\centering
@@ -183,24 +184,24 @@ In Autumn this approach was pursued using a Stereolabs ZED depth camera as it wa
 \subsection{ZED 1 vs ZED 2i}
 %As mentioned in Chapter \ref{chapter:architecture} the Stereolabs ZED 1 was used in a first prototype and later replaced with a 
 Chapter \ref{chapter:architecture} mentions that the Stereolabs ZED 1 used in early prototypes was quickly replaced with the ZED 2i. This change was due to processing limitations and additional features provided by the newer product version.
-This section aims to benchmark the two cameras from a depth-performance standpoint to review if the upgrade enhanced depth perception thus improving the system output or if no changes were necessary when only considering depth-perception.
+This section aims to benchmark the two cameras from a depth-performance standpoint to review if the upgrade enhanced depth perception, thus improving the system output or if no changes were necessary when only considering depth-perception.
 
 \subsubsection{Experiment}
-To answer this question the cameras measured the vertical distance enclosed by two points mounted 1 m above each other on a stationary structure with the bottom one at a height 1 m above the ground. 
-The cameras was paced on a movable rig normal to the stationary structure and 1m above the ground.  The aforementioned gap was measured by the cameras at 1 m increments between 3 m and 10 m horizontal distance measured amongst each structures base. 
+To answer this question the cameras measured the vertical distance enclosed by two points mounted 1 m above each other on a stationary structure, with the bottom one at a height 1 m above the ground. 
+The cameras were placed on a movable rig perpendicular to the stationary structure and 1m above the ground.  The cameras measured the aforementioned gap at 1 m increments between 3 m and 10 m horizontal distance measured amongst each structure's base. 
 
-The usage of ARUCO tags allowed for precisely tracking the position of each point within the camera coordinate system thus ensuring the points remain fixed even though the camera rig is moved. 
+The usage of ARUCO tags allowed for precisely tracking the position of each point within the camera coordinate system, thus ensuring the points remain fixed even though the camera rig is moved. 
 % über ARUCO schreiben
 % reference zu ARUCO 
-ARUCO tags are squared-based markers popular in many robotic and augmented reality applications as they provide a fast and robust solution for estimating a cameras pose relative to one or multiple markers. Each marker has a unique, identifiable pattern which allows for precisely determining and tracking its position.\footcite{jurado2015} 
+ARUCO tags are square-based markers popular in many robotic and augmented reality applications. They provide a fast and robust solution for estimating a camera's pose relative to one or multiple markers. Each marker has a unique, identifiable pattern that allows for precisely determines and tracks its position.\footcite{jurado2015} 
 
 \subsubsection{Results - ZED1}
 
-Fig. \ref{plot:zed1Benchmark} depicts the mean, minimal and maximal depth-perception error measured thus indicating how well the camera performed.
-To illustrate the underlying model of this data, a cubic regression is superimposed. This well fitted model indicates a relatively steady error just under 0.1 m which increases drastically after a local minima at a distance of 5.6 m. 
-While the mean error increases, the minimal deviation declines to 0 m between distances of 6 m to 8 m, which would indicate a optimal interval for measurements. Although the maximal error thrives within this range it generally remains close to the mean at all other distances.
+Fig. \ref{plot:zed1Benchmark} depicts the mean, minimal and maximal depth-perception error measured, thus indicating how well the camera performed.
+To illustrate the underlying model of this data, a cubic regression is superimposed. This well-fitted model indicates a relatively steady error just under 0.1 m which increases drastically after a local minimum at a distance of 5.6 m. 
+While the mean error increases, the minimal deviation declines to 0 m between distances of 6 m to 8 m, indicating an optimal interval for measurements. Although the maximal error thrives within this range, it generally remains close to the mean at all other distances.
 Tab. \ref{tab:resultsZed1} shows the data these findings are based on as well as a total mean, minimal and maximal deviation over all distances. 
-In total the ZED 1 has a mean error of 13\% which is drastically above what the cameras data sheet states\footcite{zed1Datasheet}.
+In total, the ZED 1 has a mean error of 13\%, which is drastically above what the cameras data sheet states\footcite{zed1Datasheet}.
 
 %
 %The mean depth-perception error dependant on the camera distance for the ZED 1 (blue) is plotted in Fig. \ref{plot:zedBenchmark}. To illustrate the positive tendency a linear regression (cyan) is superimposed. The trend line indicates a relatively steep slope with the mean error adding up by 0.03 m at increasing distances from the rig. Additionally the error range listed in Tab. \ref{tab:errorMinimaMaxima} shows a base error of 0.7\% and a maximum mean error of 3\%, which is similar to the error stated by the cameras data sheet\footcite{zed1Datasheet}.
@@ -244,11 +245,11 @@ In total the ZED 1 has a mean error of 13\% which is drastically above what the 
 \subsubsection{Results - ZED 2i}
 
 Data for the mean, minimal and maximal depth-perception error of the ZED 2i is plotted in Fig. \ref{plot:zed2Benchmark}.
-%The cubic regression model for this camera indicates a coherently low mean error which decreases after a local maxima at a distance of 8.6 m. 
-The cubic regression model for this camera indicates a slight negative trend with a coherently low mean error, peaking at a local maxima at 8.6 m. However the initial believe suggests that with increasing distances the error thrives correspondingly. According to the coefficient of determination $R^{2}$, indicating that the cubic regression function does not fully match the data, a different regression model may result in more accurate assertions supporting the initial believe. 
+%The cubic regression model for this camera indicates a coherently low mean error which decreases after a local maximum at a distance of 8.6 m. 
+The cubic regression model for this camera indicates a slight negative trend with a coherently low mean error, peaking at a local maximum at 8.6 m. However, the initial belief suggests that with increasing distances, the error thrives correspondingly. According to the coefficient of determination $R^{2}$, indicating that the cubic regression function does not fully match the data, a different regression model may result in more accurate assertions supporting the initial belief. 
 Considering the overall error range, the minimal error remains below 0.02 m for all distances while the maximal error grows to approximately 0.4 m. 
-A optimal measurement zone due to moderate mean and non-existent minimal deviation can be observed between a distance of 7 m and 8 m. 
-Tab \ref{tab:resultsZed2} indicates a overall mean error of 5\% which does correspond to the statement of the ZED 2i data sheet\footcite{zed2Datasheet}.
+An optimal measurement zone due to moderate mean and non-existent minimal deviation can be observed between 7 m and 8 m. 
+Tab \ref{tab:resultsZed2} indicates an overall mean error of 5\%, which does correspond to the statement of the ZED 2i data sheet\footcite{zed2Datasheet}.
 
 
 
@@ -270,10 +271,10 @@ Tab \ref{tab:resultsZed2} indicates a overall mean error of 5\% which does corre
 
 \subsubsection{Comparison}
 
-Comparing both models the ZED 1 clearly shows a much more aggressive upwards trend than the ZED 2i which has a relatively monotonic mean error. 
+Comparing both models, the ZED 1 clearly shows a much more aggressive upwards trend than the ZED 2i, which has a relatively monotonic mean error. 
 
-However both cameras share a commonly low minimal error indicating that both are able to correctly and precisely take depth measurements within the tested distances. 
-Although the ZED 2i generally outperforms its predecessor concerning mean deviation its maximal depth-perception error strays drastically further from the mean when compared to the ZED 1. 
+However, both cameras share a commonly low minimal error indicating that both can correctly and precisely take depth measurements within the tested distances. 
+Although the ZED 2i generally outperforms its predecessor concerning mean deviation, its maximal depth-perception error strays drastically further from the mean compared to the ZED 1. 
 
 
 %Comparing both trend lines and mean error range the ZED 1 clearly shows a much more aggressive upwards trend and higher base error compared to the ZED 2. However as the coefficient of determination $R^{2}$ for each trend line indicate a mediocre fit the aforementioned assumptions should not be solely taken into consideration when comparing the two camera systems. 
