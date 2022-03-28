@@ -1,0 +1,197 @@
+Mon, 28 Mar 2022 09:39:02 +0200,eeeeadf,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,removed 'non-professional' sentences
+Mon, 28 Mar 2022 09:31:35 +0200,dbf90b7,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added my acknowledgement
+Sat, 26 Mar 2022 14:41:52 -0700,5543f44,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #22 from F-WuTS/abstract
+Sat, 26 Mar 2022 11:29:16 -0700,c035fec,Kleinrad,fabiankleinrad.fk@gmail.com,added technology description
+Sat, 26 Mar 2022 18:28:56 +0100,0c7d77f,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #21 from F-WuTS/leskovarRefactor
+Wed, 23 Mar 2022 23:30:01 +0100,ba1b922,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge branch 'master' into leskovarRefactor
+Wed, 23 Mar 2022 23:27:17 +0100,dea849c,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,slam refactor
+Wed, 23 Mar 2022 10:40:21 -0700,23d95f5,Kleinrad,fabiankleinrad.fk@gmail.com,first draft abstract
+Wed, 23 Mar 2022 07:36:14 -0700,3a5a7d5,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #20 from F-WuTS/kleinradRefactor
+Wed, 23 Mar 2022 07:32:24 -0700,25a57c9,Kleinrad,fabiankleinrad.fk@gmail.com,removed file entries in bib
+Wed, 23 Mar 2022 07:27:14 -0700,c0f4844,Kleinrad,fabiankleinrad.fk@gmail.com,refactored pathplanning
+Wed, 23 Mar 2022 06:43:23 -0700,94295e3,Kleinrad,fabiankleinrad.fk@gmail.com,refactored custom parts
+Wed, 23 Mar 2022 06:12:48 -0700,f43c0d2,Kleinrad,fabiankleinrad.fk@gmail.com,refactored collision detection
+Wed, 23 Mar 2022 02:41:48 -0700,2fcaa9d,Kleinrad,fabiankleinrad.fk@gmail.com,.
+Wed, 23 Mar 2022 02:41:24 -0700,f8f4e59,Kleinrad,fabiankleinrad.fk@gmail.com,refactor collision detection
+Wed, 23 Mar 2022 09:42:05 +0100,788fd34,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,refactoring sensors chapter
+Wed, 23 Mar 2022 01:13:16 -0700,1f90480,Kleinrad,fabiankleinrad.fk@gmail.com,refactor abstract environments
+Mon, 21 Mar 2022 09:15:38 +0100,40f6747,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #19 from F-WuTS/conclusio
+Sat, 19 Mar 2022 08:44:24 -0700,d61ae54,Kleinrad,fabiankleinrad.fk@gmail.com,refactor abstract enviroments
+Sat, 19 Mar 2022 04:53:10 -0700,85d83e9,Kleinrad,fabiankleinrad.fk@gmail.com,implemented feedback
+Fri, 18 Mar 2022 12:57:50 +0100,e9f2fa4,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Update Videoscript.md
+Fri, 18 Mar 2022 12:34:44 +0100,901b7a3,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Update Videoscript.md
+Fri, 18 Mar 2022 12:31:21 +0100,6b29941,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Create Videoscript.md
+Thu, 17 Mar 2022 10:50:04 -0700,6448a32,Kleinrad,fabiankleinrad.fk@gmail.com,conclusio draft 2
+Wed, 16 Mar 2022 11:38:04 -0700,ab7d55d,Kleinrad,fabiankleinrad.fk@gmail.com,conclusio first draft
+Tue, 15 Mar 2022 13:35:31 -0700,4d36c70,Kleinrad,fabiankleinrad.fk@gmail.com,conclusio structure
+Sun, 13 Mar 2022 12:45:09 +0100,db17400,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #18 from F-WuTS/ZedExperimentRefactor
+Sun, 13 Mar 2022 11:45:50 +0100,f34cfa9,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge branch 'master' into ZedExperimentRefactor
+Sun, 13 Mar 2022 11:42:07 +0100,0d00fe8,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,refactoring a lot
+Fri, 11 Mar 2022 03:48:46 -0800,78f368b,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #17 from F-WuTS/AutumnLifeCycle
+Fri, 11 Mar 2022 02:55:28 -0800,de75049,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge branch 'master' into AutumnLifeCycle
+Fri, 11 Mar 2022 02:53:46 -0800,938e68f,Kleinrad,fabiankleinrad.fk@gmail.com,changed all graphics to svg
+Fri, 11 Mar 2022 02:27:37 -0800,a0fd2f6,Kleinrad,fabiankleinrad.fk@gmail.com,finished autumn lifecycle
+Fri, 11 Mar 2022 00:10:16 -0800,a69bc8a,Kleinrad,fabiankleinrad.fk@gmail.com,added process section and svg package
+Thu, 10 Mar 2022 22:04:27 +0100,153b463,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,adding better diagrams
+Wed, 9 Mar 2022 07:56:28 +0100,b4c1776,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #16 from F-WuTS/Autonomy
+Wed, 9 Mar 2022 07:44:31 +0100,67af37b,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished Autonomy chapter
+Tue, 8 Mar 2022 04:59:43 -0800,5ba7897,Kleinrad,fabiankleinrad.fk@gmail.com,adding intro and starting modules
+Sun, 6 Mar 2022 10:00:05 -0800,a30fa9f,Kleinrad,fabiankleinrad.fk@gmail.com,.
+Sun, 6 Mar 2022 09:59:36 -0800,82d0b42,Kleinrad,fabiankleinrad.fk@gmail.com,revised parts & implemented feedback
+Sun, 6 Mar 2022 18:44:53 +0100,b1bd1ee,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added stuff about autonomy and fixed issues in sensor chapter
+Thu, 3 Mar 2022 23:52:05 +0100,94a63f4,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,add Meetingprotocols
+Thu, 3 Mar 2022 19:47:46 +0100,cea9a58,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,adding introduction
+Thu, 3 Mar 2022 07:43:30 +0100,8bed0c1,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #15 from F-WuTS/PathPlanningPrecisionExperiment
+Thu, 3 Mar 2022 07:43:09 +0100,3e6a6a4,Kleinrad,50015410+Kleinrad@users.noreply.github.com,lessi feedback
+Wed, 2 Mar 2022 01:42:26 -0800,609d7e9,Kleinrad,fabiankleinrad.fk@gmail.com,corrected data & ajusted sizing
+Tue, 1 Mar 2022 14:47:16 -0800,0e900c2,Kleinrad,fabiankleinrad.fk@gmail.com,added section text
+Tue, 1 Mar 2022 08:32:54 +0100,f2d83fd,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #14 from F-WuTS/sensorRefactor
+Tue, 1 Mar 2022 08:11:44 +0100,f2a2237,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge branch 'master' into sensorRefactor
+Sun, 27 Feb 2022 07:30:27 -0800,68389a7,Kleinrad,fabiankleinrad.fk@gmail.com,added exp result tables & plots
+Fri, 25 Feb 2022 04:19:01 -0800,140aec0,Kleinrad,fabiankleinrad.fk@gmail.com,added prec exp plots & tables
+Fri, 25 Feb 2022 03:12:37 -0800,953bc5e,Kleinrad,fabiankleinrad.fk@gmail.com,moved plots into own folder
+Fri, 25 Feb 2022 03:03:43 -0800,c3219dc,Kleinrad,fabiankleinrad.fk@gmail.com,added precision exp section
+Thu, 24 Feb 2022 09:52:42 +0100,3a4e73d,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #13 from F-WuTS/collision_detection
+Thu, 24 Feb 2022 09:52:11 +0100,236b27f,Kleinrad,50015410+Kleinrad@users.noreply.github.com,paraphrasieren subsection
+Thu, 24 Feb 2022 09:42:21 +0100,506dbb0,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added minor adjustments
+Wed, 23 Feb 2022 18:08:45 +0100,a0020e1,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge branch 'master' into collision_detection
+Wed, 23 Feb 2022 09:06:06 -0800,5aa0d7c,Kleinrad,fabiankleinrad.fk@gmail.com,finsihed collision detection
+Tue, 22 Feb 2022 22:01:50 +0100,c01e23f,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,refactored pretty much anything obvious
+Tue, 22 Feb 2022 08:00:40 -0800,b981f33,Kleinrad,fabiankleinrad.fk@gmail.com,added 3d plot
+Tue, 22 Feb 2022 15:37:37 +0100,069044c,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #12 from F-WuTS/slamRefactor
+Mon, 21 Feb 2022 02:36:10 -0800,b5d91da,Kleinrad,fabiankleinrad.fk@gmail.com,fixed 2d plot
+Sun, 20 Feb 2022 08:41:26 -0800,824457c,Kleinrad,fabiankleinrad.fk@gmail.com,added 2d plot
+Sun, 20 Feb 2022 07:54:44 -0800,a586f37,Kleinrad,fabiankleinrad.fk@gmail.com,starting 2d tests
+Sun, 20 Feb 2022 07:50:57 -0800,61df2f2,Kleinrad,fabiankleinrad.fk@gmail.com,added experiment setup
+Wed, 16 Feb 2022 20:17:31 +0100,b593f1a,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,fixed minor issues with graph slam
+Tue, 15 Feb 2022 18:27:27 +0100,36fd541,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,refactored slam
+Tue, 15 Feb 2022 16:13:00 +0100,05d6de3,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #11 from F-WuTS/sensors
+Thu, 10 Feb 2022 11:58:35 +0100,7226a95,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge branch 'master' into sensors
+Thu, 10 Feb 2022 11:44:06 +0100,c8c356e,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,reworked experiment interpretation
+Wed, 2 Feb 2022 20:19:14 +0100,f24ffb5,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished sensors chapter
+Fri, 21 Jan 2022 12:00:04 +0100,93dfb67,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added image about active triangulation
+Sat, 8 Jan 2022 10:03:19 -0800,aff74b8,Kleinrad,fabiankleinrad.fk@gmail.com,added implementation section
+Fri, 7 Jan 2022 14:21:05 -0800,054c9ad,Kleinrad,fabiankleinrad.fk@gmail.com,added pseudo code
+Fri, 7 Jan 2022 10:03:04 -0800,1636fb9,Kleinrad,fabiankleinrad.fk@gmail.com,started collision detection chapter
+Fri, 7 Jan 2022 16:30:19 +0100,cc7c24a,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #10 from F-WuTS/abstractRepresentationOfEnvironments
+Fri, 7 Jan 2022 06:07:19 -0800,e58073e,Kleinrad,fabiankleinrad.fk@gmail.com,fixed merge conflict in maint.tex
+Fri, 7 Jan 2022 14:54:06 +0100,a1fd452,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge branch 'master' into abstractRepresentationOfEnvironments
+Thu, 6 Jan 2022 16:03:28 -0800,1a0d870,Kleinrad,fabiankleinrad.fk@gmail.com,finished abstract env in autumn sec
+Thu, 6 Jan 2022 10:24:22 -0800,7001bc5,Kleinrad,fabiankleinrad.fk@gmail.com,adding autumn pathfinding 2d sub sec
+Thu, 6 Jan 2022 05:30:09 -0800,94ed6b9,Kleinrad,fabiankleinrad.fk@gmail.com,startet abstract env in autumn section
+Wed, 5 Jan 2022 15:15:54 -0800,a451fe1,Kleinrad,fabiankleinrad.fk@gmail.com,pcl sub section
+Wed, 5 Jan 2022 05:22:08 -0800,d37a72f,Kleinrad,fabiankleinrad.fk@gmail.com,point cloud section
+Tue, 4 Jan 2022 11:07:53 -0800,9269b3a,Kleinrad,fabiankleinrad.fk@gmail.com,Voxel grid sub section
+Tue, 4 Jan 2022 08:41:07 -0800,9c862af,Kleinrad,fabiankleinrad.fk@gmail.com,occupancy grid section
+Sun, 2 Jan 2022 16:25:02 -0800,2e2991c,Kleinrad,fabiankleinrad.fk@gmail.com,abstract env
+Sun, 2 Jan 2022 15:43:00 +0100,1889ff0,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished section about depth vision
+Wed, 29 Dec 2021 16:47:49 +0100,75a2ac8,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about inertial measurements
+Tue, 28 Dec 2021 12:17:41 +0100,ea0ffb6,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about wheel odom
+Tue, 28 Dec 2021 12:16:56 +0100,c28e7b6,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about wheel odom
+Mon, 20 Dec 2021 12:05:02 -0800,f1179d7,Kleinrad,fabiankleinrad.fk@gmail.com,.
+Mon, 20 Dec 2021 12:03:40 -0800,97043c2,Kleinrad,fabiankleinrad.fk@gmail.com,starting abstract env section
+Mon, 20 Dec 2021 11:02:37 +0100,cb2f2b6,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #9 from F-WuTS/LeskovarLukas-patch-1
+Mon, 20 Dec 2021 10:52:20 +0100,3b903aa,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Updated Introduction
+Sun, 19 Dec 2021 05:39:22 -0800,98997ae,Kleinrad,fabiankleinrad.fk@gmail.com,chapter intro
+Sat, 18 Dec 2021 14:36:46 -0800,d081792,Kleinrad,fabiankleinrad.fk@gmail.com,rough outline of abstract env.
+Sat, 18 Dec 2021 12:17:20 -0800,7c5ed9a,Kleinrad,fabiankleinrad.fk@gmail.com,path planning quick fix
+Sun, 12 Dec 2021 13:15:35 +0100,c2ef323,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #8 from F-WuTS/customParts
+Sat, 11 Dec 2021 05:20:37 -0800,7964031,Kleinrad,fabiankleinrad.fk@gmail.com,Merge branch 'customParts' of https://github.com/F-WuTS/Autumn-Doc into customParts
+Sat, 11 Dec 2021 05:20:24 -0800,90b5a6b,Kleinrad,fabiankleinrad.fk@gmail.com,deleted file attribute in main.bib
+Sat, 11 Dec 2021 14:19:09 +0100,1280f7d,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge branch 'master' into customParts
+Sat, 11 Dec 2021 04:42:50 -0800,89167a1,Kleinrad,fabiankleinrad.fk@gmail.com,changing citations
+Tue, 7 Dec 2021 06:54:42 -0800,f5449bb,Kleinrad,fabiankleinrad.fk@gmail.com,correcting chapter
+Tue, 7 Dec 2021 03:18:03 -0800,077560b,Kleinrad,fabiankleinrad.fk@gmail.com,starting chapter corrections
+Tue, 7 Dec 2021 11:58:23 +0100,ab17281,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #7 from F-WuTS/slam
+Mon, 6 Dec 2021 07:50:28 +0100,a613845,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge branch 'master' into slam
+Mon, 6 Dec 2021 07:48:49 +0100,58b6a7a,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,removed main.pdf
+Sun, 5 Dec 2021 02:09:50 -0800,28acbb0,Kleinrad,fabiankleinrad.fk@gmail.com,finishing custom Parts chapter
+Sat, 4 Dec 2021 08:11:40 -0800,2a13d01,Kleinrad,fabiankleinrad.fk@gmail.com,starting 3d printing conclusio
+Tue, 30 Nov 2021 05:07:36 -0800,273c8cc,Kleinrad,fabiankleinrad.fk@gmail.com,fixed wrong cite
+Tue, 30 Nov 2021 05:00:36 -0800,1871f24,Kleinrad,fabiankleinrad.fk@gmail.com,adding citation
+Tue, 30 Nov 2021 03:23:11 -0800,29f6b2a,Kleinrad,fabiankleinrad.fk@gmail.com,adding design variants/printing process
+Sun, 28 Nov 2021 06:55:34 -0800,e22eef3,Kleinrad,fabiankleinrad.fk@gmail.com,changing sla section
+Sun, 28 Nov 2021 06:51:44 -0800,fbe1930,Kleinrad,fabiankleinrad.fk@gmail.com,adding setreolithography section
+Sun, 28 Nov 2021 05:46:51 -0800,64e86e6,Kleinrad,fabiankleinrad.fk@gmail.com,refactoring
+Fri, 26 Nov 2021 06:13:30 -0800,6c57248,Kleinrad,fabiankleinrad.fk@gmail.com,adding FDM printing section
+Thu, 25 Nov 2021 18:25:00 +0100,d89f9f2,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,slam
+Tue, 23 Nov 2021 07:53:47 -0800,04dd077,Kleinrad,fabiankleinrad.fk@gmail.com,adding manufacturing section
+Fri, 19 Nov 2021 07:37:42 +0100,6d0bd2a,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,adding section about slam in autumn
+Sun, 14 Nov 2021 05:37:04 -0800,c7c5ec9,Kleinrad,fabiankleinrad.fk@gmail.com,adding cad software chapter
+Wed, 10 Nov 2021 21:30:25 +0100,a339724,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added comparison of slam approaches
+Wed, 10 Nov 2021 00:50:45 -0800,4061d5f,Kleinrad,fabiankleinrad.fk@gmail.com,CAD Software section intro
+Mon, 8 Nov 2021 21:44:32 +0100,47e8dcf,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,adding summary of paradigms
+Sun, 7 Nov 2021 18:04:21 +0100,e784f64,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,fixed plagiarism
+Tue, 2 Nov 2021 22:22:55 +0100,26747b1,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,refrased data-association section
+Thu, 28 Oct 2021 09:42:04 -0700,f15af0e,Kleinrad,fabiankleinrad.fk@gmail.com,adding manufacturing section
+Thu, 28 Oct 2021 04:00:06 -0700,97a4ae5,Kleinrad,fabiankleinrad.fk@gmail.com,adding design process section to camera mount with graphics
+Tue, 26 Oct 2021 23:02:24 +0200,092e06a,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished section about graph slam
+Mon, 25 Oct 2021 07:52:35 -0700,0bc1fb6,Kleinrad,fabiankleinrad.fk@gmail.com,continuing no mount porblems & added misaligned odom graphic
+Mon, 25 Oct 2021 05:52:52 -0700,84a8380,Kleinrad,fabiankleinrad.fk@gmail.com,starting no mount problems section & added fov graphic
+Sun, 24 Oct 2021 16:13:20 -0700,bd12fe9,Kleinrad,fabiankleinrad.fk@gmail.com,structuring chapter and intro & starting reasons section
+Sun, 24 Oct 2021 20:40:32 +0200,8fe35f6,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished section about particle filters
+Fri, 22 Oct 2021 11:43:30 +0200,0119891,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #6 from F-WuTS/pathplanning
+Fri, 22 Oct 2021 02:41:46 -0700,ad4731b,Kleinrad,fabiankleinrad.fk@gmail.com,improved wording
+Fri, 22 Oct 2021 01:53:26 -0700,922090b,Kleinrad,fabiankleinrad.fk@gmail.com,corrected word repetition
+Fri, 22 Oct 2021 10:24:08 +0200,cd0915d,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #5 from F-WuTS/pathplanning
+Fri, 22 Oct 2021 08:35:43 +0200,7ac2d58,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge branch 'master' into pathplanning
+Thu, 21 Oct 2021 23:34:26 -0700,5d4fe84,Kleinrad,fabiankleinrad.fk@gmail.com,ignore cleanup
+Fri, 22 Oct 2021 08:33:55 +0200,5dd8671,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,removing main.pdf
+Thu, 21 Oct 2021 23:33:03 -0700,6594c4e,Kleinrad,fabiankleinrad.fk@gmail.com,.
+Thu, 21 Oct 2021 23:29:36 -0700,2bdd3b1,Kleinrad,fabiankleinrad.fk@gmail.com,removed compiled pdf
+Thu, 21 Oct 2021 23:17:34 -0700,e02f78c,Kleinrad,fabiankleinrad.fk@gmail.com,corrected chapter
+Thu, 21 Oct 2021 10:57:34 -0700,ee0fa38,Kleinrad,fabiankleinrad.fk@gmail.com,added high dimension comparison  & evaluation conclusion
+Sun, 17 Oct 2021 08:22:55 -0700,cc45b2c,Kleinrad,fabiankleinrad.fk@gmail.com,rewrote evaluation section & added time comparison
+Sat, 16 Oct 2021 12:18:55 -0700,4941528,Kleinrad,fabiankleinrad.fk@gmail.com,added RRT* section & pseudo code
+Sat, 16 Oct 2021 01:19:13 +0200,7b1cf37,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,updated EKF section - now explaining normal Kalman filter
+Thu, 14 Oct 2021 23:31:18 -0700,4b56282,Kleinrad,fabiankleinrad.fk@gmail.com,.
+Mon, 11 Oct 2021 21:06:17 +0200,6ee4938,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,started section about EKF
+Tue, 5 Oct 2021 20:33:50 +0200,2754949,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added basic formulations to slam definition
+Sun, 3 Oct 2021 09:41:35 -0700,b73d9df,Kleinrad,fabiankleinrad.fk@gmail.com,added smart-rrt section
+Sun, 3 Oct 2021 16:00:53 +0200,a58c54d,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about map representation
+Thu, 30 Sep 2021 11:14:36 -0700,44de2f5,Kleinrad,fabiankleinrad.fk@gmail.com,added rt-rrt section
+Thu, 30 Sep 2021 19:52:32 +0200,4ebab8c,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about slam
+Wed, 29 Sep 2021 19:52:31 +0200,2578063,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added mapping section
+Mon, 27 Sep 2021 21:48:58 +0200,ac5962f,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,add section about standalone localization
+Sun, 26 Sep 2021 13:18:28 +0200,7f959cd,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,adding section headers and structuring the chapter
+Sat, 25 Sep 2021 05:24:05 -0700,8fd182a,Kleinrad,fabiankleinrad.fk@gmail.com,started evaluation section
+Sat, 25 Sep 2021 11:42:12 +0200,5d54c30,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #4 from F-WuTS/system-architecture
+Sat, 25 Sep 2021 02:21:30 -0700,48f1bb7,Kleinrad,fabiankleinrad.fk@gmail.com,added Astar section & graphic
+Sat, 25 Sep 2021 09:34:41 +0200,abd67d0,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,minor improvements
+Thu, 23 Sep 2021 10:27:46 -0700,237b532,Kleinrad,fabiankleinrad.fk@gmail.com,added rrt section & graphic
+Wed, 22 Sep 2021 10:29:07 -0700,1ff4588,Kleinrad,fabiankleinrad.fk@gmail.com,changed PRM section
+Wed, 22 Sep 2021 09:54:57 -0700,f26f4a2,Kleinrad,fabiankleinrad.fk@gmail.com,added PRM section and graphic
+Mon, 20 Sep 2021 10:56:29 -0700,ec38281,Kleinrad,fabiankleinrad.fk@gmail.com,added citation to MultiSingleQuery
+Mon, 20 Sep 2021 10:49:03 -0700,db5dd79,Kleinrad,fabiankleinrad.fk@gmail.com,added SamlingBasedAlgo. & Single/MutliQuery
+Mon, 20 Sep 2021 10:06:32 -0700,efc1e81,Kleinrad,fabiankleinrad.fk@gmail.com,added Section introduction
+Sun, 19 Sep 2021 18:47:21 +0200,8111749,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,finished system architecture chapter
+Sat, 18 Sep 2021 22:52:14 +0200,ff56d10,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added processing sections of system architecture chapter
+Sat, 18 Sep 2021 01:33:14 -0700,7b0b47c,Kleinrad,fabiankleinrad.fk@gmail.com,added Path planning introduction
+Wed, 15 Sep 2021 11:10:11 -0700,c0a344c,Kleinrad,fabiankleinrad.fk@gmail.com,Rough outline of Pathplanning Chapter
+Tue, 14 Sep 2021 02:56:50 -0700,9f77da7,Kleinrad,50015410+Kleinrad@users.noreply.github.com,Merge pull request #3 from F-WuTS/ros
+Wed, 28 Jul 2021 18:12:12 +0200,3cea659,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,ros section finished
+Tue, 27 Jul 2021 22:48:50 +0200,d9f5874,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added transform library section
+Thu, 22 Jul 2021 18:59:07 +0200,39f6685,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added section about ros master
+Wed, 14 Jul 2021 12:19:23 +0200,c11d7f1,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,problem with biber fixed
+Mon, 12 Jul 2021 17:18:03 +0200,6514da0,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,did something with main.bib
+Mon, 12 Jul 2021 17:03:15 +0200,9af8ba1,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added messages and topics and stuff
+Fri, 9 Jul 2021 21:44:53 +0200,9bf0e6d,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,section about nodes and services
+Thu, 8 Jul 2021 16:36:01 +0200,15b29b8,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added Packages section
+Wed, 7 Jul 2021 13:28:40 +0200,dd50f5c,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added intro to ros chapter
+Tue, 6 Jul 2021 13:09:25 +0200,4215d64,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #2 from F-WuTS/introduction
+Tue, 6 Jul 2021 13:06:20 +0200,bc8325c,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,introductions v1 partly finished
+Sun, 4 Jul 2021 13:13:03 +0200,9156aaf,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added 3D mapping and goals section
+Sun, 4 Jul 2021 10:22:46 +0200,9e12b72,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added chapter about automation
+Wed, 30 Jun 2021 21:13:54 +0200,56acbcb,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added to introduction
+Sat, 26 Jun 2021 22:22:45 +0200,9dd0725,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,workaround for footcite in image caption
+Sat, 26 Jun 2021 21:08:29 +0200,3713dfd,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,pushing faulty changes
+Thu, 17 Jun 2021 20:57:42 +0200,aa19216,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added first section of introduction
+Thu, 17 Jun 2021 19:27:45 +0200,2e7e3cc,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Merge pull request #1 from F-WuTS/organize-thesis
+Thu, 17 Jun 2021 19:26:17 +0200,696e84d,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,idk
+Thu, 3 Jun 2021 20:42:51 +0200,abe3bce,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,setting structure for introduction
+Mon, 31 May 2021 20:16:29 +0200,6f21b49,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,added a little topic overview
+Mon, 31 May 2021 19:32:03 +0200,f5bee57,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Update README.md
+Tue, 25 May 2021 19:11:20 +0200,76574bf,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,Remove .DS_Store from everywhere
+Tue, 25 May 2021 19:08:41 +0200,09e93a7,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Create README.md
+Tue, 25 May 2021 19:08:29 +0200,96a77c6,Lessi,44904007+LeskovarLukas@users.noreply.github.com,Delete README.md
+Tue, 25 May 2021 19:06:25 +0200,3da885c,LeskovarLukas,leskovar.lukas@student.htlwrn.ac.at,initial commit
