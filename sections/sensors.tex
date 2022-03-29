@@ -24,7 +24,7 @@ Other systems utilize wheel encoders to count the number of wheel rotations, thu
 
 With non-linear motion, the distances $d_{l}$ and $d_{r}$ moved by the left and right wheel are unequal, which requires the calculation of both updated position and bearing of the robot. 
 Lets suppose a robot moved from position $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$ to $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$ with a slight left turn caused by the right wheel turning faster than the left one. 
-This scenario is depicted in Fig. \ref{fig:odom} with $\varphi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and centre to point $P$, the origin of the turn. 
+This scenario is depicted in Figure \ref{fig:odom} with $\varphi$ corresponding to the turn angle in radians, the radii $r_{l}, r_{c}, r_{r}$ describing the distance from the new position of the wheels and centre to point $P$, the origin of the turn. 
 
 For small angles, these radii are approximately the same length as the distances $d_{l}, d_{c}$ and $d_{r}$, which allows for the turn angle to be calculated as follows:
 \begin{align*}
@@ -96,7 +96,7 @@ If these velocities stay fixed for the entire duration $\Delta t$ of the motion 
 $\begin{pmatrix} x & y & \theta \end{pmatrix}^{T}$
 to
 $\begin{pmatrix} x' & y' & \theta' \end{pmatrix}^{T}$
-the robot moves in a circle with radius $r$ as seen in Fig. \ref{fig:inertial}. The center $P$ of this circle with coordinates 
+the robot moves in a circle with radius $r$ as seen in Figure \ref{fig:inertial}. The center $P$ of this circle with coordinates 
 $
 \begin{pmatrix}
 	x_{P} & y_{P}
@@ -149,7 +149,7 @@ The technologies in this section focus on mapping distance information to each p
 One approach uses active illumination to project a varying intensity pattern onto the perceived scene, thus allowing a camera to extract 3D information from the distorted pattern as the scene's surface is non-planar. \footcite{geng2011StructuredLight}
 
 \subsection{Time-of-Flight}
-Time-of-Flight (ToF) sensors perform active triangulation, which is performed by emitting modulated light to be reflected by a scene, as described in Fig. \ref{fig:activeTriangulation}. The distance to the scene is determined using the time difference between emission and detection of singular rays (more prominent with ToF Laser-Scanners like LiDAR) or the phase shift of light reflected by the whole scene. The latter allows for mapping depth information to the entire Field-of-View (FoV). 
+Time-of-Flight (ToF) sensors perform active triangulation, which is performed by emitting modulated light to be reflected by a scene, as described in Figure \ref{fig:activeTriangulation}. The distance to the scene is determined using the time difference between emission and detection of singular rays (more prominent with ToF Laser-Scanners like LiDAR) or the phase shift of light reflected by the whole scene. The latter allows for mapping depth information to the entire Field-of-View (FoV). 
 %It may be necessary to differentiate mapping using depth perception sensors from LiDAR technologies which pose an alternative solution. 
 Although LiDAR sensors fall under the category of ToF sensors, they perceive the distance to an object using pulsed lasers, thus outputting
 the distance to singular points in the sensor's surroundings rather than depth information mapped to an image. \footcite{gokturk2004time} \footcite{velodyne2021LiDAR}
@@ -168,7 +168,7 @@ As 3D-LiDAR sensors applied in many commercial mapping solutions are very expens
 
 
 \subsection{Stereo Vision}
-The last and most significant approach to Autumn performs passive triangulation using two cameras setup as seen in Fig. \ref{fig:passiveTriangulation}. Although this eliminates the need for any light to be emitted, the problem of correspondence is introduced. Which deals with associating the different projections to the same point in the real world\footcite{ng2019StereoCorrespondence}. There are multiple approaches to this problem which are generally divided into global and local matching methods, with the latter being more computationally efficient while sacrificing quality. \footcite{do2019review}
+The last and most significant approach to Autumn performs passive triangulation using two cameras setup as seen in Figure \ref{fig:passiveTriangulation}. Although this eliminates the need for any light to be emitted, the problem of correspondence is introduced. Which deals with associating the different projections to the same point in the real world\footcite{ng2019StereoCorrespondence}. There are multiple approaches to this problem which are generally divided into global and local matching methods, with the latter being more computationally efficient while sacrificing quality. \footcite{do2019review}
 
 In Autumn, this approach was pursued using a Stereolabs ZED depth camera as it was superior to any competitors such as the Microsoft Kinect or Intel Realsense concerning availability and cost-effectiveness. 
 
@@ -197,10 +197,10 @@ ARUCO tags are square-based markers popular in many robotic and augmented realit
 
 \subsubsection{Results - ZED1}
 
-Fig. \ref{plot:zed1Benchmark} depicts the mean, minimal and maximal depth-perception error measured, thus indicating how well the camera performed.
+Figure \ref{plot:zed1Benchmark} depicts the mean, minimal and maximal depth-perception error measured, thus indicating how well the camera performed.
 To illustrate the underlying model of this data, a cubic regression is superimposed. This well-fitted model indicates a relatively steady error just under 0.1 m which increases drastically after a local minimum at a distance of 5.6 m. 
 While the mean error increases, the minimal deviation declines to 0 m between distances of 6 m to 8 m, indicating an optimal interval for measurements. Although the maximal error thrives within this range, it generally remains close to the mean at all other distances.
-Tab. \ref{tab:resultsZed1} shows the data these findings are based on as well as a total mean, minimal and maximal deviation over all distances. 
+Table \ref{tab:resultsZed1} shows the data these findings are based on as well as a total mean, minimal and maximal deviation over all distances. 
 In total, the ZED 1 has a mean error of 13\%, which is drastically above what the cameras data sheet states\footcite{zed1Datasheet}.
 
 %
@@ -244,12 +244,12 @@ In total, the ZED 1 has a mean error of 13\%, which is drastically above what th
 
 \subsubsection{Results - ZED 2i}
 
-Data for the mean, minimal and maximal depth-perception error of the ZED 2i is plotted in Fig. \ref{plot:zed2Benchmark}.
+Data for the mean, minimal and maximal depth-perception error of the ZED 2i is plotted in Figure \ref{plot:zed2Benchmark}.
 %The cubic regression model for this camera indicates a coherently low mean error which decreases after a local maximum at a distance of 8.6 m. 
 The cubic regression model for this camera indicates a slight negative trend with a coherently low mean error, peaking at a local maximum at 8.6 m. However, the initial belief suggests that with increasing distances, the error thrives correspondingly. According to the coefficient of determination $R^{2}$, indicating that the cubic regression function does not fully match the data, a different regression model may result in more accurate assertions supporting the initial belief. 
 Considering the overall error range, the minimal error remains below 0.02 m for all distances while the maximal error grows to approximately 0.4 m. 
 An optimal measurement zone due to moderate mean and non-existent minimal deviation can be observed between 7 m and 8 m. 
-Tab \ref{tab:resultsZed2} indicates an overall mean error of 5\%, which does correspond to the statement of the ZED 2i data sheet\footcite{zed2Datasheet}.
+Table \ref{tab:resultsZed2} indicates an overall mean error of 5\%, which does correspond to the statement of the ZED 2i data sheet\footcite{zed2Datasheet}.
 
 
 
@@ -262,7 +262,7 @@ Tab \ref{tab:resultsZed2} indicates an overall mean error of 5\%, which does cor
 		\textbf{Min Deviation {[}m{]}}  & 0.00 & 0.00 & 0.01 & 0.02 & 0.00 & 0.00 & 0.02 & 0.02 & {\ul 0.00}  \\ \hline
 		\textbf{Max Deviation {[}m{]}}  & 0.03 & 0.11 & 0.26 & 0.24 & 0.42 & 0.35 & 0.43 & 0.41 & {\ul 0.43}  \\ \hline
 	\end{tabular}
-	\caption{The mean, minimal and maximal depth-perception deviation measured by the ZED 2i}
+	\caption{The mean, minimal and maximal depth-perception deviation measured by the ZED 2i.}
 	\label{tab:resultsZed2}
 \end{table}
 

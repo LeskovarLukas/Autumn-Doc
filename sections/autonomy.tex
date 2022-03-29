@@ -21,13 +21,13 @@ To navigate a robot through its environment autonomously, it is necessary to dev
 
 One way to autonomously control a robot is to define simple behavioural rules that directly act upon sensory input without needing a sophisticated model of its environment. 
 This approach can be associated with bionic robotics as its concepts are inspired by relatively simple life forms performing intelligent behaviour without having a brain. 
-A control cycle following this approach can be seen in Fig. \ref{fig:reactiveApproach}
+A control cycle following this approach can be seen in Figure \ref{fig:reactiveApproach}.
 
 These behaviours match sensory input to movement and can be categorized into three levels of complexity:
 \begin{itemize}
-	\item Reflexes - pre-programmed direct connections between stimuli and actions
-	\item Reactions - learned behaviours that execute without the need of complex logic 
-	\item Consciousness - sequences of reactive behaviours ruled by a logical architecture
+	\item Reflexes - pre-programmed direct connections between stimuli and actions.
+	\item Reactions - learned behaviours that execute without the need of complex logic.
+	\item Consciousness - sequences of reactive behaviours ruled by a logical architecture.
 \end{itemize}
 
 Within a reactive system, different behaviours are stacked without any knowledge of one another. This allows for layers to build upon functionality implemented by lower layers while maintaining decoupling of modules, thus promoting task dissection and facilitating independent testing \footcite{faigl2017controlParadigms}.
@@ -36,7 +36,7 @@ Within a reactive system, different behaviours are stacked without any knowledge
 
 \subsection{Hierarchical Approach}
 Unlike reactive systems, robots representing the hierarchical approach require a much more complex implementation as world modelling and sophisticated reasoning are needed. 
-Any such system, as seen in Fig. \ref{fig:hierarchicalApproach}, can be divided into three components that are executed sequentially:
+Any such system, as seen in Figure \ref{fig:hierarchicalApproach}, can be divided into three components that are executed sequentially:
 \begin{itemize}
 	\item Sense - the robot perceives its environment and creates an abstracted model of it (e.g. create an occupancy grid using a LiDAR sensor)
 	\item Plan - using a model of the environment (e.g. find the shortest path to a given waypoint)
@@ -66,7 +66,7 @@ While this approach can introduce many difficulties concerning real-world repres
 \end{figure}
 
 
-One way to combine the reactive paradigms simplicity with the intricate prevision of tasks as seen in hierarchical systems can be implemented using a hybrid approach, which is depicted in Fig. \ref{fig:hybridApproach}. 
+One way to combine the reactive paradigms simplicity with the intricate prevision of tasks as seen in hierarchical systems can be implemented using a hybrid approach, which is depicted in Figure \ref{fig:hybridApproach}. 
 This concept uses deliberate planning algorithms to determine which reactive behaviour should be executed using a global world model, all while monitoring the success of each behaviour to determine if it is beneficial to achieve a set goal (e.g. find out if the robot moves to a waypoint or is stuck) \footcite{faigl2017controlParadigms}.
 %Robotic Paradigms and Control Architectures Jan Faigl
 
@@ -76,12 +76,12 @@ While, in theory, many approaches are applicable to a robot, achieving autonomy 
 \begin{itemize}
 	\item Sensing Inaccuracy - Sensors are inherently inaccurate, which can significantly affect how the robot observes its environment and the thereby resulting model. Means of improving sensory measurements usually employ data or sensor fusion methods \footcite[Page 585]{siciliano2008springer}.
 	\item Dynamic Environments - It is relatively easy for a robot to locate itself within a static environment as its pose is the only variable. However, many difficulties may arise when irregularities such as people, movable objects and doors are introduced. These dynamic properties may be treated as noise and thus be filtered \footcite[Pages 159 - 162]{thrun2002probabilisticRobotics}.
-	\item Predictability of Motion - The actuators robots are equipped with do not exactly perform motion as in any predicted model. This may be due to inaccuracies in actuator fabrication, uneven terrain or changing wind conditions. To counteract such tendencies, motion control paradigms can be applied \footcite[Page 133]{siciliano2008springer}
+	\item Predictability of Motion - The actuators robots are equipped with do not exactly perform motion as in any predicted model. This may be due to inaccuracies in actuator fabrication, uneven terrain or changing wind conditions. To counteract such tendencies, motion control paradigms can be applied \footcite[Page 133]{siciliano2008springer}.
 \end{itemize}
 
 \section{Autonomous Navigation in Autumn}\label{autumnControlLoop}
 The preceding sections described how a mobile robot can achieve autonomous navigation and which difficulties may hinder the development of such a system. Autumn and its use-case do not differ from any such system, which rendered the question of how autonomy is achieved a central concern during the development phase. 
-In order to achieve the best possible product with the available hardware, a semi-autonomous approach was chosen, whose control structure is described in Fig. \ref{fig:autumnControlLoop}.
+In order to achieve the best possible product with the available hardware, a semi-autonomous approach was chosen, whose control structure is described in Figure \ref{fig:autumnControlLoop}.
 The individual interchangeable components the system consists of are described in further chapters.
 
 \begin{figure}
