@@ -105,7 +105,7 @@ Services enable communication over RPC by defining a pair of messages, one for r
 
 
 \section{Master}
-One of the most important components of ROS is the Master. It tracks publishers and subscribers of topics and services and provides registration and name resolution to nodes. This means whenever a node wants to publish or subscribe to a specific topic or service, it contacts the Master first using XML-RPC. When a topic has at least one subscriber and publisher, the Master negotiates between the nodes to establish a peer-to-peer connection using a Slave API provided by the nodes XML-RPC Server.\footcite{openSourceRoboticsFoundationMasterNodate} A simplified version of this procedure can be seen in Fig. \ref{fig:ros_master_reg}
+One of the most important components of ROS is the Master. It tracks publishers and subscribers of topics and services and provides registration and name resolution to nodes. This means whenever a node wants to publish or subscribe to a specific topic or service, it contacts the Master first using XML-RPC. When a topic has at least one subscriber and publisher, the Master negotiates between the nodes to establish a peer-to-peer connection using a Slave API provided by the nodes XML-RPC Server.\footcite{openSourceRoboticsFoundationMasterNodate} A simplified version of this procedure can be seen in Figure \ref{fig:ros_master_reg}
 
 Besides registration and name resolution, the ROS Master also provides a Parameter Server used for globally storing static system parameters.\footcite{openSourceRoboticsFoundationParameterServerNodate}
 \begin{figure}[]

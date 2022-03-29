@@ -26,7 +26,7 @@ An example of such a system would be a drone computing camera images and GPS pos
 
 \section{Localization and Mapping}
 On their own, the technologies mentioned above are considered rather simplistic problems as either the environments map is given or a reliable pose-estimation can be provided. However, while most applications meet either of these criteria with pre-built maps or GPS being available, some environments such as buildings, mineshafts or outer space, both the systems pose and environment remain uncertain and need to be determined simultaneously hence the name Simultaneous Localization and Mapping. 
-To summarize, the crux of the SLAM problem, as described in Fig. \ref{fig:slamOverview}, is that localizations requires a map, and mapping depends on pose estimates however, neither are certain. 
+To summarize, the crux of the SLAM problem, as described in Figure \ref{fig:slamOverview}, is that localizations requires a map, and mapping depends on pose estimates however, neither are certain. 
 
 %The following sections will mainly focus on the SLAM back-end and dissect the problem by reviewing different probabilistic approaches. 
 
@@ -65,7 +65,7 @@ The goal is that, for any time instant $ t $, the robots state vector
 % describing its position and orientation as well as a time invariant set of all absolute landmark positions 
 % umformulieren dass es nicht heißt der state vector beschreibt die landmarks
 $ m = \{ m_{1}, m_{2}, ..., m_{i} \}$ 
-is computed, given uncertain relative landmark observations $ z_{0:t} = \{z_{0}, z_{1}, ..., z_{t}\}$, controls $ u_{0:t} = \{u_{0}, u_{1}, ..., u_{t}\}$ and known initial location $ x_{0} $. Fig. \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
+is computed, given uncertain relative landmark observations $ z_{0:t} = \{z_{0}, z_{1}, ..., z_{t}\}$, controls $ u_{0:t} = \{u_{0}, u_{1}, ..., u_{t}\}$ and known initial location $ x_{0} $. Figure \ref{fig:slamGraphical} depicts this process and illustrates the relationships between the variables important in any SLAM system. 
 
 \begin{equation}\label{fullSLAM}
 	P(x_{0:t}, m | z_{0:t}, u_{0:t}, x_{0})
@@ -235,7 +235,7 @@ Particle filtering for SLAM with algorithms like Fast-SLAM is based on Monte-Car
 
 %nur kleiner satz der mir eingefallen ist
 Because the number of particles greatly affects the performance of a particle filter, such approaches perform best in low dimension spaces. To this end, the Fast-SLAM algorithm utilizes Rao-Blackwellization, see Equation \ref{RaoBlackwellization}, to separate the joint probability of robot state and map into individual distributions, which can be computed with much more ease.
-This means that given the robot's poses, all landmarks are independent, which is described in Fig. \ref{fig:fastSlamGraphical}.
+This means that given the robot's poses, all landmarks are independent, which is described in Figure \ref{fig:fastSlamGraphical}.
 
 \begin{equation}\label{RaoBlackwellization}
 	P(x_{0:t}, m | z_{0:t}, u_{0:t}) = P(x_{0:t} | z_{0:t}, u_{0:t}) P(m | x_{0:t}, z_{0:t})
@@ -269,8 +269,8 @@ These edges are generated in the following two cases:
 \end{equation}
 
 Here \ref{odometryEdge} corresponds to an edge based on odometry transformations by moving the robot from state $X_{i}$ to $X_{i+1}$, both of which are represented as vectors relative to the coordinate origin.
-These transformations are illustrated in more detail in Fig. \ref{fig:poseGraphTransformation}.
-The more interesting case is when an observation of a previously captured area occurs, and a virtual measurement \ref{observationEdge} is computed, describing how the states $X_{j}$ and $X_{i}$ relate to each other according to the displacement between their observations, see Fig. \ref{fig:poseGraphOptimization}.
+These transformations are illustrated in more detail in Figure \ref{fig:poseGraphTransformation}.
+The more interesting case is when an observation of a previously captured area occurs, and a virtual measurement \ref{observationEdge} is computed, describing how the states $X_{j}$ and $X_{i}$ relate to each other according to the displacement between their observations, see Figure \ref{fig:poseGraphOptimization}.
 
 \begin{figure}
 	\centering
@@ -345,7 +345,7 @@ While building the pose-graph can be computed with relatively low effort, perfor
 %Although its basic implementation performs offline many newer approaches adjust the pose-graph in real-time which makes such solutions relatively similar to EKF-SLAM. 
 
 
-The Extended Kalman Filter is a mature approach to the SLAM problem and has been implemented many times in different applications. However, it does not only lack computational efficiency in its original implementation, see. Tab. \ref{tab:slamComparison}, but also has shown to be very problematic concerning consistency and robust data-association. 
+The Extended Kalman Filter is a mature approach to the SLAM problem and has been implemented many times in different applications. However, it does not only lack computational efficiency in its original implementation, see. Table \ref{tab:slamComparison}, but also has shown to be very problematic concerning consistency and robust data-association. 
 These problems stem from the algorithm definition itself. Firstly, local-linearization of non-linear problems impairs the system to reach complete convergence, e.g. all landmark uncertainties converging to zero. Secondly, the data-association model of EKF assumes all landmarks to be fully identifiable from any point of view, which cannot be guaranteed in most real-life scenarios and renders data-association very fragile.
 Fortunately, the EKF has been improved and optimized to address some of the aforementioned issues\footcite{bailey2006simultaneous}.
 
@@ -398,7 +398,7 @@ ORB-SLAM2 and S-PTAM were not selected as both approaches do not provide online 
 The algorithm chosen for Autumn was RTAB-Map as incorporating stereo-images, and external odometry is supported out-of-the-box. Furthermore a variety of outputs such as 2D and 3D occupancy grids and point clouds are offered. 
 As loop-closure detection algorithm with memory management was the primary goal of RTAB-Map, it qualifies for usage in large-scale environments during long mapping sessions.
 Since its publication in 2013, this algorithm has been extended and improved to support stereo- or RGBD-footage, 2D and 3D Lidar data and provides nodes for processing visual or lidar-based odometry if no other external topic is available. 
-For Autumn, this approach was implemented by providing the stereo-image stream as well as visual odometry data from the Stereolabs ZED 2i, thus yielding in multiple occupancy grids and robot paths as visualized in Fig. \ref{fig:AirLABmap}.
+For Autumn, this approach was implemented by providing the stereo-image stream as well as visual odometry data from the Stereolabs ZED 2i, thus yielding in multiple occupancy grids and robot paths as visualized in Figure \ref{fig:AirLABmap}.
 
 Although RGBDSLAMv2 does not fully qualify to be considered in this project as it only works with RGBD-Cameras like the XBOX Kinect or Intel RealSense, it is worth mentioning as it provides a 3D occupancy grid and a dense point-cloud similar to RTAB-Map.\footcite{labbe2019rtab}
 
@@ -439,11 +439,11 @@ Although RGBDSLAMv2 does not fully qualify to be considered in this project as i
 The SLAM problem is a highly diversified field of study with many different concepts not only concerning one paradigms adaption to other use cases than originally mentioned but also diving into the exact implementations of any of its components. Due to this abundance of concepts and algorithms, it would be infeasible to characterize every one of them. 
 However, for the intrigued reader, the author suggests the following topics and resources for further reading:
 \begin{itemize}
-	\item Particle Filtering for grid-based SLAM\footcite{grisetti2005ParticleGrid}
+	\item Particle Filtering for grid-based SLAM\footcite{grisetti2005ParticleGrid}.
 	\item Visual SLAM approaches. A wide range of literature on this topic is provided by the \href{https://vision.in.tum.de/research/vslam}{Technical University in Munich (TUM)}.
 	\item Graph-SLAM frontends using different data association approaches for visual SLAM such as feature-based matching like RANSAC\footcite{Jia2018FeatureMatching} or point-to-point matching like ICP\footcite{Horn1988ICP}. 
-	\item Mapping in dynamic environments capable of comprehending moving obstacles within the environment\footcite{wang2003dynSLAM}
-	\item SLAM with multiple robots\footcite{gutmann2003IncrMapping}
+	\item Mapping in dynamic environments capable of comprehending moving obstacles within the environment\footcite{wang2003dynSLAM}.
+	\item SLAM with multiple robots\footcite{gutmann2003IncrMapping}.
 \end{itemize} 
 
 
