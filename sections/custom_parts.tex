@@ -2,11 +2,11 @@
 
 \textbf{Author: Fabian Kleinrad} 
 
-This chapter will take a look at the practical side of the autumn project. There is an inevitable need for parts fit for the underlying application when working with hardware. In the case of autumn, with the Matrice 100 being in the centre of the project, the need arises to design and manufacture parts to make the hardware portion in autumn come together without any complication and potential weak points in the final product.
+This chapter will take a look at the practical side of the Autumn Project. There is an inevitable need for parts fit for the underlying application when working with hardware. In the case of Autumn, with the Matrice 100 being in the centre of the project, the need arises to design and manufacture parts to make the hardware portion in Autumn come together without any complication and potential weak points in the final product.
 
 \section{Reasons}
 
-The goal of the autumn project being as innovative and unique in terms of methods used in the realization of the project, parts needed are either not readily available or not compliant with the budget. Another difficulty is that parts are too specific for there to be any commercially available. Therefore to guarantee the reusability and reliability of the final product, methods to design and produce parts specifically tailored to the needs in the autumn project have to be utilized.
+The goal of the Autumn Project being as innovative and unique in terms of methods used in the realization of the project, parts needed are either not readily available or not compliant with the budget. Another difficulty is that parts are too specific for there to be any commercially available. Therefore to guarantee the reusability and reliability of the final product, methods to design and produce parts specifically tailored to the needs in the Autumn Project have to be utilized.
 
 \subsection{Camera Mount}
 
@@ -14,7 +14,7 @@ Autumn conquers the problem of mapping an environment with the use of a drone. T
 
 \subsubsection{First approach}
 
-When working under the principle of fast prototyping, the drawbacks of the first approach being incomplete is inherent. Following this principle led to attaching the ZED2i to the Matrice 100 with the help of zip ties. The rationale for this decision was the reliability and strength of zip ties which allowed the camera to be secured tightly. This was important because of the need to test segments of the autumn project, worked on separately and isolated from one another. Taking simple and easy to realize steps enables the project to progress more smoothly without requiring other sub-areas to be set on hold because of long, tedious planning and manufacturing periods of parts like a custom camera mount for a drone.
+When working under the principle of fast prototyping, the drawbacks of the first approach being incomplete is inherent. Following this principle led to attaching the ZED2i to the Matrice 100 with the help of zip ties. The rationale for this decision was the reliability and strength of zip ties which allowed the camera to be secured tightly. This was important because of the need to test segments of the Autumn Project, worked on separately and isolated from one another. Taking simple and easy to realize steps enables the project to progress more smoothly without requiring other sub-areas to be set on hold because of long, tedious planning and manufacturing periods of parts like a custom camera mount for a drone.
 
 \subsubsection{Problems without a Mount}
 
@@ -30,7 +30,7 @@ After a period of testing with a prototype, problems arise with the need for cor
 
 Using zip ties results in the camera being mounted parallel to the ground. This leads to overlooking obstacles located below the field of view. This can be seen in figure \ref{fig:custom_parts_FOV} A. Adjust the angle to be able to see as much as needed, directly in front of the drone and the more significant portion of what is below the drone. Having the ability to capture obstacles directly in front of the drone is necessary when wanting to let the drone autonomously navigate an environment successfully. Therefore is, a zip-tie solution valid but far from optimal. A result of having a camera mounted parallel to the ground is the need to hover closer to the ground, which is potentially dangerous considering that we cannot capture obstacles directly below the drone in autumn.
 
-The second problem that arises when not using a mount fitted for use with autumn the ZED2i is that the camera is not parallel to the ground. This portrays a significant flaw when using an uneven camera combined with a slam algorithm. Slam uses odometry data for localization and alignment of the ground plane. If the camera is slightly tilted when starting the algorithm and without any manual adjustment, the ground plane will be offset on one or multiple rotational axes. This results in the 3D model being a false representation of reality. This phenomenon can be observed in Figure \ref{fig:custom_parts_misalignedOdom}.
+The second problem that arises when not using a mount fitted for use with Autumn the ZED 2i is that the camera is not parallel to the ground. This portrays a significant flaw when using an uneven camera combined with a SLAM Algorithm. SLAM uses odometry data for localization and alignment of the ground plane. If the camera is slightly tilted when starting the algorithm and without any manual adjustment, the ground plane will be offset on one or multiple rotational axes. This results in the 3D model being a false representation of reality. This phenomenon can be observed in Figure \ref{fig:custom_parts_misalignedOdom}.
 
 \begin{figure}[h]
 	\centering
@@ -42,17 +42,17 @@ The second problem that arises when not using a mount fitted for use with autumn
 \subsubsection{Design Process}
 
 The solution to the aforementioned problems is a mount securing the ZED2i to the Matrice 100. Additionally to the specific characteristics the mount must fulfil, the ZED2i is the newest model, with commercial products like mounts not being available. Therefore, to attain this custom mount design, manufacturing methods must be used. 
-The design portion is done with the help of CAD Software. CAD stands for Computer-Aided Design, meaning that rather complex designs can be realized in a short amount of time and less effort than doing it the traditional way. The software used in the autumn project is Fusion360 due to its option for a free license and previously acquired knowledge working with this software. 
+The design portion is done with the help of CAD Software. CAD stands for Computer-Aided Design, meaning that rather complex designs can be realized in a short amount of time and less effort than doing it the traditional way. The software used in the Autumn Project is Fusion360 due to its option for a free license and previously acquired knowledge working with this software. 
 The mount had to perfectly fit the camera to ensure the safety of the camera and drone. Therefore it is necessary to take measurements, which then are used to shape the design of the 3D model. In Fusion360, this can be best realized using parameterized design.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/Parameter}
-	\caption{Excerpt of parameters used for the autumn camera mount design.}
+	\caption{Excerpt of parameters used for the Autumn camera mount design.}
 	\label{fig:custom_parts_parameter}
 \end{figure}
 
-Figure \ref{fig:custom_parts_parameter} depicts this concept of making the design dependent on parameters that can be easily adjusted. This allows for corrections to be made after the design process is finished. Without linking, sketches to parameter alterations would be time-consuming and result in a model clouded with sketches overriding previous adjustments. Furthermore, changes affecting complex areas in the part lead to artefacts, which, when removed, take more time than redesigning the part, in the context of simple, one-component models, like the mount in autumn. An important property in the case of the autumn camera mount is the angle of the camera relative to the drone. This design principle makes it possible that changing the angle only implies changing a number in a text field, which implies the change of several different dimensions of the part. 
+Figure \ref{fig:custom_parts_parameter} depicts this concept of making the design dependent on parameters that can be easily adjusted. This allows for corrections to be made after the design process is finished. Without linking, sketches to parameter alterations would be time-consuming and result in a model clouded with sketches overriding previous adjustments. Furthermore, changes affecting complex areas in the part lead to artefacts, which, when removed, take more time than redesigning the part, in the context of simple, one-component models, like the mount in autumn. An important property in the case of the Autumn camera mount is the angle of the camera relative to the drone. This design principle makes it possible that changing the angle only implies changing a number in a text field, which implies the change of several different dimensions of the part. 
 Fusion 360 additionally comes with the capability of rendering the resulting model to get a feel for how it would look in physical form.
 
 \begin{figure}[h]
@@ -64,7 +64,7 @@ Fusion 360 additionally comes with the capability of rendering the resulting mod
 
 \subsubsection{Manufacturing}
 
-For the purpose of converting the 3D model to a physical object, the most straightforward and most time-efficient method is to utilize 3D printing. Nowadays, 3D printing is a widespread technique to make ideas reality with little time and money. Therefore it is an optimal solution for the autumn project. 
+For the purpose of converting the 3D model to a physical object, the most straightforward and most time-efficient method is to utilize 3D printing. Nowadays, 3D printing is a widespread technique to make ideas reality with little time and money. Therefore it is an optimal solution for the Autumn Project. 
 When going from a 3D-modeled design to a 3D print, a slicer is needed to convert the 3D object to code the printer understands. With most 3D printers printing in 2.5 dimensions, meaning that only the x and y-axis move freely while the z only adjusts its height once a layer is finished. This principle is reflected in the resulting file once a 3D model is sliced. The gcode consists of a header, defining settings for the print and a sequence of lines following it. A line of this gcode file would look like this: 
 \[G1\ X120.95\ Y101.653\ E1.17355\]
 The first part consists of the identifier $G$ and a number, marks which command should be executed. For example, in the case of $G1$, it is "move in a straight line". Following the command, specifiers are parameters; the x and y end position is needed to draw a line. Additionally marked with the identifier $E$ is the flow rate defining how much filament will be extruded when moving to the given position.
@@ -115,14 +115,14 @@ With Fusion 360 offering a non-commercial, free license option with limited func
 	\caption{An overview of Fusion 360 licenses with their respective capabilities and prices.\footcite{autodeskFusionPersonalNoDate}}
 \end{table}
 
-\subsection{Autumn choice}
-When comparing the two CAD solutions that are possibilities to be used in the autumn project, the most crucial characteristic is user-friendliness regarding the state of knowledge the user already has. Both SolidWorks and Fusion 360 offer more than enough functionality to fulfil the needs of autumn. Fusion has no competition with its free license for personal use when taking a look at the monetary dimension. Furthermore is, the Fusion 360 workflow tailored to the simple application, with a small number of components. SolidWorks follows an assembly based principle. In contrast, Fusion 360 is based on a multi-component architecture.\newline
-In conclusion, due to the limited functionality required from CAD software in the autumn project, Fusion 360 is being used.
+\subsection{Autumn Choice}
+When comparing the two CAD solutions that are possibilities to be used in the Autumn Project, the most crucial characteristic is user-friendliness regarding the state of knowledge the user already has. Both SolidWorks and Fusion 360 offer more than enough functionality to fulfil the needs of autumn. Fusion has no competition with its free license for personal use when taking a look at the monetary dimension. Furthermore is, the Fusion 360 workflow tailored to the simple application, with a small number of components. SolidWorks follows an assembly based principle. In contrast, Fusion 360 is based on a multi-component architecture.\newline
+In conclusion, due to the limited functionality required from CAD software in the Autumn Project, Fusion 360 is being used.
 
 \section{3D-Printing}
 
-This section will focus on manufacturing methods available in the autumn project and compare them. Nowadays, easy and fast prototyping is made possible using 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept to a widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.\newline
-Autumn having an area of competence, split between skills when working with soft- and hardware, it is vital to have the means to manufacture custom parts tailored to the project's needs. With 3D-Printing being an affordable and accurate technology, it is an obvious choice to use for autumn in terms of translating virtual concepts to a physical object.
+This section will focus on manufacturing methods available in the Autumn Project and compare them. Nowadays, easy and fast prototyping is made possible using 3D-printing technology. 3D-Printing has evolved over the years, away from a science fiction concept to a widely used tool in part manufacturing, filling the gap left open by the geometrical limitations of conventional methods.\newline
+Autumn having an area of competence, split between skills when working with soft- and hardware, it is vital to have the means to manufacture custom parts tailored to the project's needs. With 3D-Printing being an affordable and accurate technology, it is an obvious choice to use for Autumn in terms of translating virtual concepts to a physical object.
 When considering using 3D printing in any project, it is essential to consider which method is best fitted for the application.
 
 \subsection{Fused Deposition Modeling}
@@ -174,6 +174,6 @@ After the part is finished, it is in a still not fully cured state. To fully cur
 SLA printers are divided into two different designs. For desktop use, printers are built with a bottom-up architecture, which means the build-plate is attached to a so-called elevator. Therefore the light source is placed below the vat containing the resin. This design allows for affordable prices by sacrificing build volume.\newline
 In industrial applications, top-down designs are used. Placing the build plate into the vat enables larger build volumes.\footcite{hubsSLA3DPrintingNoDate}
 
-\subsection{Autumn choice}
+\subsection{Autumn Choice}
 
-In Autumn, parts are designed to be practical, which entails a simple geometry. Therefore in terms of accuracy, it wouldn't be advantageous to use an SLA printing method. Furthermore, concerning structural integrity, both parts printed with FDM and SLA printers are sufficient for the stresses parts are exposed to in the Autumn use case. With Autumn being focused on fast prototyping and fast iteration, SLA with its extensive curing process would be unfit with no benefits gained from using a Stereolithography style printer. 
+In Autumn, parts are designed to be practical, which entails a simple geometry. Therefore in terms of accuracy, it wouldn't be advantageous to use an SLA printing method. Furthermore, concerning structural integrity, both parts printed with FDM and SLA printers are sufficient for the stresses parts are exposed to in the Autumn Use Case. With Autumn being focused on fast prototyping and fast iteration, SLA with its extensive curing process would be unfit with no benefits gained from using a Stereolithography style printer. 
