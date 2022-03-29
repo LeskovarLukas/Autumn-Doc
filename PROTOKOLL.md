@@ -24,86 +24,83 @@ geometry: margin=2cm
 
 # 28.5.2021
 - Leskovar: Kamera/LiDAR testen + Mapping Algorithmen
-- Kleinrad
+- Kleinrad: Algorithmus für Pfadfindung auswählen
 
 # 10.6.2021
 - Leskovar: Remote Mapping auf Jetson Nano testen
-- Kleinrad:
+- Kleinrad: Umsetzung eines Occupancy grid basierenden RRT Algorithmus
 
 # 30.7.2021
 - Leskovar: Jetson TX2 konfigurieren
-- Kleinrad
+- Kleinrad: Fehlerbehebung der Umsetzung
 
 # 20.8.2021
 - Leskovar: Remote Mapping auf TX2
-- Kleinrad
+- Kleinrad: Implementierung von RRT* auf basis des RRT
 
 # 10.9.2021
 - Diplomschrift: Leskovar Introduction & ROS
+- Kleinrad: Problembehebung der RRT* Implementierung
 
 # 24.9.2021
 
 - Leskovar: Remote Mapping auf TX2
-- Kleinrad: Management Tool
-
+- Kleinrad: Collision Avoidance in der 2D RRT* Implementierung
 
 # 1.10.2021
 
 - Leskovar: Zed 2i zur verbesserung 
-- Kleinrad: 
-
-
+- Kleinrad: Refactor 2D Algorithmus um für 3D Umsetzung 
+- 
 # 15.10.2021
-- Leskovar: Performance Probleme lösen
-- Kleinrad: 
+- Leskovar: Performance Probleme lösen 
+- Kleinrad: Implementierung des Algorithmus auf basis einer Point-Cloud
 
 # 22.10.2021
 - Diplomschrift: System Architecture (Leskovar) + Pathplanning (Kleinrad)
 
-
 # 29.10.2021
 
 - Leskovar: Aufteilung Mapping (auf Drohne) & RVIZ (auf Computer)
-- Kleinrad:
-
+- Kleinrad: Collision Avoidance basierend auf Point-Cloud
 
 # 12.11.2021
 
 - Leskovar: Aufteilung Mapping (auf Drohne) & RVIZ (auf Computer)
-- Kleinrad:
-
+- Kleinrad: Aufteilung der Algorithmen in selbständige ROS Packages
 
 # 25.11.2021
 
 - Leskovar: Remote Verbindung (Hotspot von Jetson hosten) + testen/optimieren
-- Kleinrad: 
-- Diplomschrift: SLAM (Leskovar)
-
+- Kleinrad: Testen der 2D & 3D Algortihmen
+- Diplomschrift: SLAM (Leskovar) + Custom Parts (Kleinrad)
 
 # 3.12.2021
 - Leskovar: Remote Verbindung (Hotspot von Jetson hosten) + testen/optimieren
-
+- Kleinrad: Refactor/Fehlerbehebung 2D Algorithmus
 
 # 10.12.2021
 - Leskovar: TX2 + Drohne verbinden
-- Kleinrad:
+- Kleinrad: Fehlerbehebung 2D Algorithmus
 
 # 14.12.2021
-- Diplomschrift: Custom Parts (Kleinrad)
+- Diplomschrift: Representation of Environments (Kleinrad)
 
 # 21.1.2021
 - Leskovar: Experiment Mapping
-
+- Kleinrad: Refactor/Fehlerbehebung 3D Algorithmus
 
 # 11.2.2022
 - Leskovar: ZED Experiment
+- Kleinrad: RRT* Collision Avoidance Tests
 
 # 24.2.2022
-- Diplomschrift: Sensors (Leskovar) + Representation of Environments (Kleinrad)
+- Diplomschrift: Sensors (Leskovar) + Collision Avoidance (Kleinrad)
 
 # 4.3.2022
 - Leskovar: ZED Experiment 
+- Kleinrad: RRT* Genauigkeits/Laufzeit Tests
 
 # 27.3.2022
-- Diplomschrift: Abstract (Kleinrad) + Autonomous Navigation (Leskovar) + Collision Detection(Kleinrad) + Conclusion (Kleinrad)
+- Diplomschrift: Abstract (Kleinrad) + RRT* Tests (Kleinrad) + Conclusion (Kleinrad) + Autonomous Navigation (Leskovar) 
 
