@@ -1,16 +1,16 @@
-\chapter{Collision Detection}
+\chapter{Collision Avoidance}
 \label{chapter:collision_detection}
 
 \textbf{Author: Fabian Kleinrad} 
 
-This chapter will concern itself with the method of detecting collisions within the path planning phase. The needed information about the environment stems from the data structures covered in Chapter \ref{chapter:abstract_env}. 
+This chapter covers the method of detecting collisions within the path planning phase. The needed information about the environment stems from the data structures covered in chapter \ref{chapter:abstract_env}. 
 
 \section{Fundamental Principle}
 An essential part of autonomy in robotics is the aspect of collision avoidance. This is only possible if the robot has the means to identify and detect possible collisions and act suitably to circumvent collisions from happening.\newline
-In Autumn, this step of collision detection happens alongside path planning. With collision detection being a very cost-intensive process, it is essential to optimize the algorithm for better performance while simultaneously keeping a safety margin. This safety margin is especially important since the algorithm controls a UAV. 
+In Autumn, this step of collision detection happens alongside path planning. With collision detection and collision avoidance being a very cost-intensive process, it is essential to optimize the algorithm for better performance while simultaneously keeping a safety margin. This safety margin is especially important since the algorithm controls a UAV. 
 
 \subsection{Base Algorithm}
-The principle of collision detection is elementary due to the organized and semi-organized data structures the algorithm uses. A function can be called that checks for collisions. It takes Cartesian coordinates as parameters and returns a value that indicates if an obstacle is present or not. All the collision detection algorithm has to do is check if there are any collisions between two points sampled by the path planning algorithm. To accomplish this task, Bresenham's Algorithm will be used.\newline
+The principle of collision avoidance is elementary due to the organized and semi-organized data structures the algorithm uses. A function can be called that checks for collisions. It takes Cartesian coordinates as parameters and returns a value that indicates if an obstacle is present or not. All the collision detection algorithm has to do is check if there are any collisions between two points sampled by the path planning algorithm. To accomplish this task, Bresenham's Algorithm will be used.\newline
 
 \subsubsection{Bresenham's Algorithm} 
 Bresenham's Algorithm is a solution to the problem of rasterizing curves, rasterizing being the process of converting curves or lines into cells on a grid, representing the same shape. The Algorithm covers many different shapes, but only a straight line will be necessary because of the nature of the path planning algorithm.
@@ -48,7 +48,7 @@ The error symbolizes the deviation from the original line. Calculating the error
 
 
 \section{Implementation}
-The collision detection logic is in effect every time a new point is added to the graph. The path planning algorithm samples a random point and calculates its nearest neighbour. After that, a function is called, which takes two points and checks for collision on a straight-line path between these two points.\newline
+The collision avoidance logic is in effect every time a new point is added to the graph. The path planning algorithm samples a random point and calculates its nearest neighbour. After that, a function is called, which takes two points and checks for collision on a straight-line path between these two points.\newline
 A problem that arises when using it this way is the not accounted for dimensions of the drone. For that, the function takes a third parameter defining the search radius. Using this method, paths can be generated suitable for the physical drone. However, this is accompanied by an increase in computational time, which stems from how this radius, $r$, is used. For every cell that is not the first and last cell, $2r$ neighbouring cells in a line opposite the line's direction get checked. For the first and last cell, the radius translates to the circle where cells get checked. In order to not overlap validation areas, on the first and last cell, only a semicircle is being covered. 
 
 \begin{figure}[h]
@@ -66,12 +66,13 @@ Using this concept in a 3-dimensional environment only requires adding the new t
 
 \section{Experiment}
 
-In order to be able to assess the practical impact of the collision detection performed by the Autumn Pathfinding algorithm, an experiment was conducted, which illustrates the computational time needed to guarantee no collisions from happening.
+In order to be able to assess the practical impact of the collision avoidance performed by the Autumn Pathfinding algorithm, an experiment was conducted, which illustrates the computational time needed to guarantee no collisions from happening.
+
 
 \subsection{Experimental Setup}
 
-The experiment is split into two parts: the impact of collision detection on the computational time of two-dimensional and three-dimensional path-finding.
-To get significant data, which can represent various scenarios in which the algorithm has to perform, a setup was selected to cover all aspects of the algorithm. The experiment works by planning a path through a static environment. This environment stays the same for all iterations of one algorithm and the two different variations of the algorithm. To get conclusive evidence concerning the collision detection, which is not polluted by the random nature of the algorithm, the sample size has been set to 100. \newline One sample refers thereby to a path planning with consistent parameters. The parameters are
+The experiment is split into two parts: the impact of collision avoidance on the computational time of two-dimensional and three-dimensional path-finding.
+To get significant data, which can represent various scenarios in which the algorithm has to perform, a setup was selected to cover all aspects of the algorithm. The experiment works by planning a path through a static environment. This environment stays the same for all iterations of one algorithm and the two different variations of the algorithm. To get conclusive evidence concerning the collision avoidance, which is not polluted by the random nature of the algorithm, the sample size has been set to 100. \newline One sample refers thereby to a path planning with consistent parameters. The parameters are
 \begin{itemize}
 	\item the number of iterations of the RRT* algorithm($i$),
 	\item the distance between the start and end node($d$), and
@@ -80,11 +81,11 @@ To get significant data, which can represent various scenarios in which the algo
 These three parameters stay constant throughout the entire duration of the experiment, the reason being that these three Parameters affect the parts of the path planning algorithm that aren't of concern in this experiment. The Parameter controlling the collision detection behaviour is the radius($r$).
 For each radius, 100 paths are generated, and each execution of the algorithm is timed from the point of the function call till the return of the calculated path. 
 The set of radii to be tested depends on the space in which paths are generated.
-For each radius, the meantime of all 100 data points is calculated. This results in data representing how collision detection impacts the computational time of the Autumn Path-Planning algorithm.
+For each radius, the meantime of all 100 data points is calculated. This results in data representing how collision avoidance impacts the computational time of the Autumn Path-Planning algorithm.
 
 \subsection{Two-dimensional Algorithm}
 
-For autumn\_pathplanning\_2d, radii starting from zero, resulting in disabling collision detection functionality, up to two 2000, with a step size of 100, have been tested. In figure \ref{plot:2dCollisionExp} the linear relationship between collision detection and the computational time can be observed. Furthermore, it can be derived from this plot that the two-dimensional path planning algorithm can handle high amounts of collision checks without making the path calculation unusable. On average, an additional 100 in radius results in a 90ms longer runtime. In this context, it should be pointed out that the radii chosen in this experiment are not in relation to radii used in practical application. For a 0.05 resolution of the occupancy grid used, radii in a range from 15 to 50 are practical. Nevertheless, this accentuated representation with a correlation coefficient of nearly one can also be applied to the practical values.   
+For autumn\_pathplanning\_2d, radii starting from zero, resulting in disabling collision avoidance functionality, up to two 2000, with a step size of 100, have been tested. In figure \ref{plot:2dCollisionExp} the linear relationship between collision avoidance and the computational time can be observed. Furthermore, it can be derived from this plot that the two-dimensional path planning algorithm can handle high amounts of collision checks without making the path calculation unusable. On average, an additional 100 in radius results in a 90ms longer runtime. In this context, it should be pointed out that the radii chosen in this experiment are not in relation to radii used in practical application. For a 0.05 resolution of the occupancy grid used, radii in a range from 15 to 50 are practical. Nevertheless, this accentuated representation with a correlation coefficient of nearly one can also be applied to the practical values.   
 
 \input{sections/plots/2dCollisionExp}
 
