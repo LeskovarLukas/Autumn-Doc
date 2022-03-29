@@ -44,10 +44,10 @@ With the PRM focusing on a multi-query approach, it is possible to calculate an 
 
 \section{RRT Algorithm}
 
-Rapidly exploring random tree is a path planning algorithm that can be categorized as sampling-based and single-query. In the field of sampling-based path-finding algorithms, it is considered the most influential with the PRM. RRT works by constructing a tree of possible trajectories. Therefore it is first required to define an initial vertex, much like a root. After each following iteration, a random sample is taken from the space considered free from obstacles. After generating a random vertex, the nearest neighbouring point in the tree is searched for. The closest node is then used as a pivot point, and a new vertex is constructed a predefined distance away from the nearest node in the direction of the random sample. Thereafter it is attempted to connect the new vertex with the nearest. If this straight-line connection can exit without colliding with obstacles, it is added to the set of edges. This procedure is depicted in figure \ref{fig:path_planning_rrt}. The algorithm ends when a new node is within the predefined distance from the goal point. 
+Rapidly exploring random tree is a path planning algorithm that can be categorized as sampling-based and single-query. In the field of sampling-based path-finding algorithms, it is considered the most influential with the PRM. RRT works by constructing a tree of possible trajectories. Therefore it is first required to define an initial vertex, much like a root. After each following iteration, a random sample is taken from the space considered free from obstacles. After generating a random vertex, the nearest neighbouring point in the tree is searched for. The closest node is then used as a pivot point, and a new vertex is constructed a predefined distance away from the nearest node in the direction of the random sample. Thereafter it is attempted to connect the new vertex with the nearest. If this straight-line connection can exit without colliding with obstacles, it is added to the set of edges. This procedure is depicted in Figure \ref{fig:path_planning_rrt}. The algorithm ends when a new node is within the predefined distance from the goal point. 
 \footcite{Karaman2011}
 
-The name rapidly exploring random tree stems from the tree-like structure constructed, like the one depicted in figure \ref{fig:path_planning_rrt} when exploring spaces. This approach to path planning makes it possible to explore rapidly changing environments efficiently.
+The name rapidly exploring random tree stems from the tree-like structure constructed, like the one depicted in Figure \ref{fig:path_planning_rrt} when exploring spaces. This approach to path planning makes it possible to explore rapidly changing environments efficiently.
 
 
 \begin{figure}[h]
@@ -61,7 +61,7 @@ The name rapidly exploring random tree stems from the tree-like structure constr
 
 The A* algorithm is a simplistic and reliable method compared to other path-planning techniques. Therefore it is nowadays prevalently used in a variety of different applications.\footcite{Zammit2018}\newline
 It combines heuristic properties with the traditional virtues of Dijkstra's algorithm. Whereas a purely heuristic approach would not guarantee that a path can be found even if a possible solution existed, the A* guarantees that the shortest path is found.\footcite{Sathyaraj2008}
-A* works by trying all possible combinations like the Dijkstra algorithm in a grid or graph-based environment. With A* being based on the Dijkstra algorithm, it favours nodes closer to the current position. Additionally, it follows heuristic principles by putting a higher priority on nodes closer to the goal. An example of what an A* search algorithm looks like in a grid-based environment is depicted in figure\ref{fig:path_planning_Astar}.\footcite{standfordAStarComparison1997}\newline
+A* works by trying all possible combinations like the Dijkstra algorithm in a grid or graph-based environment. With A* being based on the Dijkstra algorithm, it favours nodes closer to the current position. Additionally, it follows heuristic principles by putting a higher priority on nodes closer to the goal. An example of what an A* search algorithm looks like in a grid-based environment is depicted in Figure \ref{fig:path_planning_Astar}.\footcite{standfordAStarComparison1997}\newline
 With these properties, it can be considered an informed Dijkstra search.
   
 \begin{figure}[h]
@@ -189,7 +189,7 @@ The experiment is divided into three different parts. Each of these test scenari
 
 \subsubsection{Test Environments}
 
-The three tests were conducted in two different environments. Test 1 was carried out on Map 1, to be seen in figure \ref{fig:PrecisionTestMaps}. Defining characteristics of Map 1 are an open environment with minimal obstacles. These open style environments without any borders present a challenge for the algorithm closer described in the section \ref{sec:PrecisionTestEval}. Tests two and three were performed on Map 2, which can be seen in figure \ref{fig:PrecisionTestMaps}. Map 2 is a closed environment with higher complexity than Map 1.  
+The three tests were conducted in two different environments. Test 1 was carried out on Map 1, to be seen in Figure \ref{fig:PrecisionTestMaps}. Defining characteristics of Map 1 are an open environment with minimal obstacles. These open style environments without any borders present a challenge for the algorithm closer described in the Section \ref{sec:PrecisionTestEval}. Tests two and three were performed on Map 2, which can be seen in Figure \ref{fig:PrecisionTestMaps}. Map 2 is a closed environment with higher complexity than Map 1.  
 
 \begin{figure}[h]
 	\centering
@@ -205,7 +205,7 @@ The following will present the results of tests conducted to measure reliability
 
 \subsubsection{Test 1}
 \label{sec:test1}
-Test 1 was conducted on map 1, with iterations between 1000 and 8000, with an increment of 1000. To minimize the impact of the random nature of the RRT algorithm, every configuration generated 100 paths, and the time and cost present in table \ref{tab:pp_precision1} is the average of all 100 runs. The same table shows how many of the runs failed, which means they could not get to the goal, and no path was found. Additionally, to demonstrate the data coherence of the individual runs the standard deviation of the measured time as well, as the standard deviation of the path cost is listed.   
+Test 1 was conducted on map 1, with iterations between 1000 and 8000, with an increment of 1000. To minimize the impact of the random nature of the RRT algorithm, every configuration generated 100 paths, and the time and cost present in Table \ref{tab:pp_precision1} is the average of all 100 runs. The same table shows how many of the runs failed, which means they could not get to the goal, and no path was found. Additionally, to demonstrate the data coherence of the individual runs the standard deviation of the measured time as well, as the standard deviation of the path cost is listed.   
 
 \begin{table}[!ht]
 	\centering
@@ -242,7 +242,7 @@ Test 2 uses the same principle as test 1, while being performed on map 2. Furthe
 		Min time[ms] & 4,92  & 4,21  & 7,00  & 7,05  & 7,71  & 11,07  & 17,20  & 18,30  \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision2}
-	\caption{Results of test 2 conducted on map2}
+	\caption{Results of test 2 conducted on Map2.}
 \end{table}
 
 \subsubsection{Test 3}
@@ -263,22 +263,22 @@ Test 3 works with the same principle as the aforementioned tests. Test 3 was als
 		Min time[ms] & 4,17  & 5,85  & 10,42  & 14,81  & 9,69  & 12,41  & 13,51  & 15,87  \\ \hline
 	\end{tabular}
 	\label{tab:pp_precision3}
-	\caption{Results of test 3 conducted on Map2}
+	\caption{Results of test 3 conducted on Map2.}
 \end{table}
 
 \subsection{Evaluation}
 \label{sec:PrecisionTestEval}
-Comparing the results from section \ref{sec:PrecisionTestResults}, it is made obvious that test 1 has a much higher time requirement than test 2 and 3. This can be observed in figure \ref{plot:PathPlanning2dPrecTime}. It has do mentioned that this plot uses a logarithmic y-axis. The behaviour can be ascribed to the fundamental difference between map 1 and map 2. Map 2 has borders containing the algorithm, while map 1 does not. The enclosed environments are better suited because if the algorithm encounters an obstacle or, in this case, a wall, it will start to propagate along with it, resulting in fewer nodes being placed in the wrong direction to the goal. 
+Comparing the results from Section \ref{sec:PrecisionTestResults}, it is made obvious that test 1 has a much higher time requirement than test 2 and 3. This can be observed in figure \ref{plot:PathPlanning2dPrecTime}. It has do mentioned that this plot uses a logarithmic y-axis. The behaviour can be ascribed to the fundamental difference between map 1 and map 2. Map 2 has borders containing the algorithm, while map 1 does not. The enclosed environments are better suited because if the algorithm encounters an obstacle or, in this case, a wall, it will start to propagate along with it, resulting in fewer nodes being placed in the wrong direction to the goal. 
 Another essential fact to take into account is that tests 2, and 3 use a smaller node spacing parameter. By this means, newly generated nodes are closer to their nearest neighbour, which results in less elaborate collision detection. 
-An observation made looking at figure \ref{plot:PathPlanning2dPrecTime}, that was already anticipated, is that with an increasing number of iterations, the time to compute a path also increases. 
+An observation made looking at Figure \ref{plot:PathPlanning2dPrecTime}, that was already anticipated, is that with an increasing number of iterations, the time to compute a path also increases. 
 
 \input{sections/plots/PathPlanningPrecTime}
 
-Now looking at figure \ref{plot:PathPlanning2dPrecCost} the way the cost of generated paths is affected by varying the number of iterations can be observed. Thereby only data from test 2 and 3 are present, due to the fact that test 1 uses a map with a different minimal path length and thus can not be compared with paths from test 2 and 3. The different data points vary strongly, which is primarily due to the fact that the range of iterations is relatively small for this use case. The average time needed to compute a path using 8000 iterations only amounts to 53ms, which is slower than 8ms for 2000 iterations but still quite fast. In order to have more consistency in the decline of the path cost with increasing iterations, a higher iteration count would be needed.
+Now looking at Figure \ref{plot:PathPlanning2dPrecCost} the way the cost of generated paths is affected by varying the number of iterations can be observed. Thereby only data from test 2 and 3 are present, due to the fact that test 1 uses a map with a different minimal path length and thus can not be compared with paths from test 2 and 3. The different data points vary strongly, which is primarily due to the fact that the range of iterations is relatively small for this use case. The average time needed to compute a path using 8000 iterations only amounts to 53ms, which is slower than 8ms for 2000 iterations but still quite fast. In order to have more consistency in the decline of the path cost with increasing iterations, a higher iteration count would be needed.
 
 \input{sections/plots/PathPlanningPrecCost}
 
-The last important aspect of this path planning algorithm being its reliability, which can be observed in figure \ref{plot:PathPlanning2dPrecFailed}. Test 1 being ahead of both test 2 and 3, with a maximum of about 20\% failed. This is due to the fact that test 2, as well as test 3, are performed in a complex environment, were as test 1 was conducted in an environment presenting hardly any challenges. Furthermore, in test 1, the goal is closer than in test 2 and 3. With 1500 iterations, test 1 has a 100\% success rate. What also needs to be taken into account is that tests 2 and 3 are by a multiple faster than test 1. Thereby, it would be no problem to lower the failure rate by increasing the number of iterations while still being faster than the comparable results from test 1.
+The last important aspect of this path planning algorithm being its reliability, which can be observed in Figure \ref{plot:PathPlanning2dPrecFailed}. Test 1 being ahead of both test 2 and 3, with a maximum of about 20\% failed. This is due to the fact that test 2, as well as test 3, are performed in a complex environment, were as test 1 was conducted in an environment presenting hardly any challenges. Furthermore, in test 1, the goal is closer than in test 2 and 3. With 1500 iterations, test 1 has a 100\% success rate. What also needs to be taken into account is that tests 2 and 3 are by a multiple faster than test 1. Thereby, it would be no problem to lower the failure rate by increasing the number of iterations while still being faster than the comparable results from test 1.
 
 
 \input{sections/plots/PathPlanningFailed}
