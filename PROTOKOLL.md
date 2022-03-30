@@ -4,15 +4,16 @@ subtitle: Autumn
 date: Oktober 2021
 author: Lukas Leskovar & Fabian Kleinrad
 toc: yes
-abstract: The list of meetings for the Autumn Diploma thesis
+abstract: Die Liste an Meetings für die Autumn Diplomarbeit und Projekt. \newpage
 geometry: margin=2cm
 ---
+
+\newpage
 
 # 2.4.2021
 - Entscheidung Thema
 - Recherche 
 - Organisation
-
 
 # 7.5.2021
 - Use-Cases (Tunnel, Brücken, Gebäude)
@@ -43,15 +44,13 @@ geometry: margin=2cm
 - Kleinrad: Problembehebung der RRT* Implementierung
 
 # 24.9.2021
-
 - Leskovar: Remote Mapping auf TX2
 - Kleinrad: Collision Avoidance in der 2D RRT* Implementierung
 
 # 1.10.2021
-
 - Leskovar: Zed 2i zur verbesserung 
 - Kleinrad: Refactor 2D Algorithmus um für 3D Umsetzung 
-- 
+
 # 15.10.2021
 - Leskovar: Performance Probleme lösen 
 - Kleinrad: Implementierung des Algorithmus auf basis einer Point-Cloud
@@ -60,17 +59,14 @@ geometry: margin=2cm
 - Diplomschrift: System Architecture (Leskovar) + Pathplanning (Kleinrad)
 
 # 29.10.2021
-
 - Leskovar: Aufteilung Mapping (auf Drohne) & RVIZ (auf Computer)
 - Kleinrad: Collision Avoidance basierend auf Point-Cloud
 
 # 12.11.2021
-
 - Leskovar: Aufteilung Mapping (auf Drohne) & RVIZ (auf Computer)
 - Kleinrad: Aufteilung der Algorithmen in selbständige ROS Packages
 
 # 25.11.2021
-
 - Leskovar: Remote Verbindung (Hotspot von Jetson hosten) + testen/optimieren
 - Kleinrad: Testen der 2D & 3D Algortihmen
 - Diplomschrift: SLAM (Leskovar) + Custom Parts (Kleinrad)
