@@ -7,12 +7,12 @@
 				grid style={dashed,gray!30},
 				xlabel={Distance [m]}, % Set the labels
 				ylabel={Error [m]},
-				legend pos=north west,
+				legend style={cells={align=left}},
 				xtick={3, 4, 5, 6, 7, 8, 9, 10},
 				xmin=2,
 				xmax=11,
 				ymin=0,
-				ymax=0.9,
+				ymax=1.3,
 				]
 				
 				
@@ -79,7 +79,7 @@
 %					10 0.31 \\
 %				};
 				\addplot[no marks, color=cyan, style=dashed, domain=0:10] (x, 0.0013*x*x*x - 0.0171*x*x + 0.0686*x - 0.0024);
-				\addlegendentry{$y = 0.001x^3 - 0.017x^2 + 0.069x - 0.002; R^2 =  0.987$} 
+				\addlegendentry{$y = 1.3\mathrm{E}{-3} x^3 - 1.71\mathrm{E}{-2} x^2 + 6.86\mathrm{E}{-2} x - 2.4\mathrm{E}{-3};$ \\ $R^2 =  0.987$} 
 				
 			\end{axis}
 		\end{tikzpicture}
