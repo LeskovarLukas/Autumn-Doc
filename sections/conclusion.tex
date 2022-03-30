@@ -5,19 +5,19 @@
 \section{Autumn Result}
 
 \subsection{Goal}
-The objective of the autumn project is developing a fully autonomous drone capable of generating 3D scans of inaccessible areas. Additionally, it is possible to deploy the drone in regions lacking external localization based on the technologies used. Technologies realizing these features are already available. In contrast to these commercially available solutions, the autumn project aims to accomplish these feats using a low budget approach. 
+The objective of the Autumn Project is developing a fully autonomous drone capable of generating 3D scans of inaccessible areas. Additionally, it is possible to deploy the drone in regions lacking external localization based on the technologies used. Technologies realizing these features are already available. In contrast to these commercially available solutions, the autumn project aims to accomplish these feats using a low budget approach. 
 
 \subsection{Design choices}
 Crucial to the whole operation are means to perceive objects surrounding the drone. To accomplish this, a stereo camera was chosen due the to low cost compared to sensors used for commercial autonomous solutions.\newline
-The drone used in the autumn project provides for a wide range of possible sensor configurations and a high payload capacity. This simplified prototyping and helped with the fast iterative approach used in this project. Using a smaller drone would have impeded tests due to the increased complexity of working with compact physical space and smaller weight margins.\newline
-To enable computation on the drone itself, an NVIDIA-Jetson TX2 is being employed. This solves the issue of latency problems, which are especially troublesome in processes that need to perform without interruption to guarantee the most optimal results. In the case of the autumn project, such a process would be the continuous mapping of the environment.
+The drone used in the Autumn Project provides for a wide range of possible sensor configurations and a high payload capacity. This simplified prototyping and helped with the fast iterative approach used in this project. Using a smaller drone would have impeded tests due to the increased complexity of working with compact physical space and smaller weight margins.\newline
+To enable computation on the drone itself, an NVIDIA-Jetson TX2 is being employed. This solves the issue of latency problems, which are especially troublesome in processes that need to perform without interruption to guarantee the most optimal results. In the case of the Autumn Project, such a process would be the continuous mapping of the environment.
 \pagebreak
 \subsection{Result}
-The autumn drone performs mapping using stereo images provided by the stereo camera mounted on the drone. An RRT*-based path-planning algorithm then uses these mapping results to calculate a path originating from the drone's position to an selected end-point. The current position is also provided by the SLAM algorithm in the mapping stage. Using this route information, the drone can be controlled accordingly.
+The Autumn Drone performs mapping using stereo images provided by the stereo camera mounted on the drone. An RRT*-based path-planning algorithm then uses these mapping results to calculate a path originating from the drone's position to an selected end-point. The current position is also provided by the SLAM algorithm in the mapping stage. Using this route information, the drone can be controlled accordingly.
 In the current version of the drone, only semi-autonomous flight is supported.Furthermore, due to the lack of testing possibilities and the risk that accompanies testing autonomous drones, flight capabilities were only assessed using user input.
 
 \subsection{Mapping}
-With the focus of autumn centring around creating 3D scans of environments, the aspect of mapping is a crucial factor upon which the quality of results depends on.\newline
+With the focus of Autumn centring around creating 3D scans of environments, the aspect of mapping is a crucial factor upon which the quality of results depends on.\newline
 Mapping was realized by implementing a 3D graph-based SLAM algorithm, supporting stereo imagery. The algorithm determines the current position of the device that provides the images. SLAM generates a point cloud representing the environment the drone explores based on this relative position. All mapping logic is computed on the drone using an NVIDIA-Jetson TX2, which provides enough computational power to ensure the most optimal results. In order to transfer the point cloud data, an access point is being hosted, over which a client may supervise the result. This enables the user to get a real-time view of the model and how it is being constructed. The resulting point-cloud can then be used as reference material in numerous applications.\newline
 An example of its utilization would be the basis of a detailed render. In this scenario, it would simplify the process of measuring and conveying the composition into modelling software. The defining structure is already present using a point cloud, and only a few adjustments have to be made.
 
@@ -30,12 +30,12 @@ The resulting path can be visualized for the user alongside the model generated 
 \section{Outlook}
 
 \subsection{Current problems}
-At current times, fully autonomous flight is not possible with the autumn drone. A significant risk factor in the design is the inability to monitor the space above the drone. This results in problems when using three-dimensional path-planning due to the uncertainty of what lies above. Without that information, the drone is unable to utilize the third dimension, which is the most crucial factor for using a UAV. In autumn, this was solved by focusing on a semi-autonomous approach.  
+At current times, fully autonomous flight is not possible with the Autumn Drone. A significant risk factor in the design is the inability to monitor the space above the drone. This results in problems when using three-dimensional path-planning due to the uncertainty of what lies above. Without that information, the drone is unable to utilize the third dimension, which is the most crucial factor for using a UAV. In autumn, this was solved by focusing on a semi-autonomous approach.  
 Another problem is the short battery life-time of the drone, which is due to the size of the drone used in the project. This leads to complications when scanning medium to large environments.  
 
 \subsection{Future solutions}
-The modular structure provided by ROS allows the autumn project to be easily implemented using different hardware. It is possible to realize fully autonomous flight using a smaller drone and a simpler two-dimensional lidar for future projects. This results in the loss of three-dimensional mapping capabilities but enables a more reliable and easier environment exploration.\newline 
-Furthermore, using ROS, every part of the autumn logic can be used in separate projects where needed.
+The modular structure provided by ROS allows the Autumn Project to be easily implemented using different hardware. It is possible to realize fully autonomous flight using a smaller drone and a simpler two-dimensional lidar for future projects. This results in the loss of three-dimensional mapping capabilities but enables a more reliable and easier environment exploration.\newline 
+Furthermore, using ROS, every part of the Autumn Logic can be used in separate projects where needed.
 An example would be using the two-dimensional path-planning algorithm to plan the movement of a ground vehicle. 
 
 \filbreak
