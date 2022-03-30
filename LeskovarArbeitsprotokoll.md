@@ -1,4 +1,15 @@
-| **Datum** | **Dauer** | **Aufgabe**                            | **Anmerkung**     |
+---
+title: Arbeitsprotokoll
+subtitle: Autumn
+date: Oktober 2021
+author: Lukas Leskovar
+toc: yes
+abstract: Die Liste an Arbeitsstunden für das Autumn Diplomarbeitsprojekt von Lukas Leskovar.
+geometry: margin=2cm
+---
+
+
+| **Datum** | **Dauer[h]** | **Aufgabe**                            | **Anmerkung**     |
 | -------- | ----- | ---------------------------------- | ------------- |
 | 18.05.21 | 4     | Projekterstellung                  |               |
 | 23.05.21 | 5     | Packages inkuldieren               |               |
