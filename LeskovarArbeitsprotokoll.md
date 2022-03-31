@@ -1,13 +1,45 @@
 ---
-title: Arbeitsprotokoll
-subtitle: Autumn
-date: Oktober 2021
-author: Lukas Leskovar
-toc: yes
-abstract: Die Liste an Arbeitsstunden für das Autumn Diplomarbeitsprojekt von Lukas Leskovar.
+title: Begleitprotokoll
+subtitle: Autumn - Autonomous universal Mapping and Navigation
+author: Lukas Andreios Leskovar
+toc: no
 geometry: margin=2cm
 ---
 
+# Individuelle Themenstellung 
+Modellierung der Umgebung, Autonome Steuerung der Drohne
+
+
+# Betreuerin/Betreuer
+MMag. Br. Michael Stifter
+
+sm@htlwrn.ac.at
+
++43 2622 27871
+
+
+# Kandidatin/Kandidat
+Lukas Andreios Leskovar
+
+leskovar.lukas@htlwrn.ac.at
+
++43 660 4568080
+
+
+# Kooperationspartnerin/Kooperationspartners und Ansprechperson
+F-WuTS
+
+MMag. Dr. Michael Stifter
+
+kontakt@robo4you.at
+
+
+# Teammitglieder
+Lukas Andreios Leskovar, Fabian Kleinrad
+
+\newpage
+
+# Arbeitsstunden
 
 | **Datum** | **Dauer[h]** | **Aufgabe**                            | **Anmerkung**     |
 | -------- | ----- | ---------------------------------- | ------------- |
@@ -69,3 +101,14 @@ geometry: margin=2cm
 | 22.03.2022 | 2     | Video über Projekt                 | Projektstunde |
 | 29.03.2022 | 2     | Video über Projekt                 | Projektstunde |
 | **Summe**    | **209**   |                                    |               |
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<div style="width:200px"><hr/></div>
+\noindent\rule{8cm}{0.4pt}
+Datum und Unterschrift des Schülers
