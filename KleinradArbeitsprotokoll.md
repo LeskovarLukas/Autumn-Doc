@@ -1,13 +1,45 @@
 ---
-title: Arbeitsprotokoll
-subtitle: Autumn
-date: Oktober 2021
+title: Begleitprotokoll
+subtitle: Autumn - Autonomous universal Mapping and Navigation
 author: Fabian Kleinrad
-toc: yes
-abstract: Die Liste an Arbeitsstunden für das Autumn Diplomarbeitsprojekt von Fabian Kleinrad.
+toc: no
 geometry: margin=2cm
 ---
 
+# Individuelle Themenstellung 
+Motion Planning, Collision Detection
+
+
+# Betreuerin/Betreuer
+MMag. Br. Michael Stifter
+
+sm@htlwrn.ac.at
+
++43 2622 27871
+
+
+# Kandidatin/Kandidat
+Fabian Kleinrad
+
+kleinrad.fabian@htlwrn.ac.at
+
++43 660 3765560
+
+
+# Kooperationspartnerin/Kooperationspartners und Ansprechperson
+F-WuTS
+
+MMag. Dr. Michael Stifter
+
+kontakt@robo4you.at
+
+
+# Teammitglieder
+Fabian Kleinrad, Lukas Andreios Leskovar
+
+\newpage
+
+# Arbeitsstunden
 
 | **Datum** | **Dauer[h]** | **Aufgabe**                            | **Anmerkung**     |
 | -------- | ----- | ---------------------------------- | ------------- |
@@ -76,3 +108,12 @@ geometry: margin=2cm
 | **Summe**    | **192:28**   |
 
 
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<div style="width:200px"><hr/></div>
+\noindent\rule{8cm}{0.4pt}
+Datum und Unterschrift des Schülers
