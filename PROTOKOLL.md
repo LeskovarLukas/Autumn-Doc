@@ -144,16 +144,6 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 
 <div style="width:200px"><hr/></div>
 \noindent\rule{8cm}{0.4pt}
-Datum und Unterschrift der Betreuerin/des Betreuers
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-<div style="width:200px"><hr/></div>
-\noindent\rule{8cm}{0.4pt}
 Datum und Unterschrift der Schülerin/des Schülers
 
 &nbsp;
