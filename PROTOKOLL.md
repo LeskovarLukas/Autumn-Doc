@@ -132,7 +132,7 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 - Leskovar: ZED Experiment 
 - Kleinrad: RRT* Genauigkeits/Laufzeit Tests
 
-## 27.3.2022
+## 25.3.2022
 - Diplomschrift: Abstract (Kleinrad) + RRT* Tests (Kleinrad) + Conclusion (Kleinrad) + Autonomous Navigation (Leskovar) 
 
 
