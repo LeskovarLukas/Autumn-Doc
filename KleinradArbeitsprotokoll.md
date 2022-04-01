@@ -2,8 +2,8 @@
 title: Begleitprotokoll
 subtitle: Autumn - Autonomous universal Mapping and Navigation
 author: Fabian Kleinrad
-toc: no
 geometry: margin=2cm
+documentclass: scrartcl
 ---
 
 # Individuelle Themenstellung 
