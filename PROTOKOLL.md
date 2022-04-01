@@ -30,7 +30,7 @@ kleinrad.fabian@student.htlwrn.ac.at
 +43 660 3765560
 
 
-# Kooperationspartnerin/Kooperationspartners und Ansprechperson
+# Kooperationspartnerin/Kooperationspartner und Ansprechperson
 F-WuTS
 
 MMag. Dr. Michael Stifter
@@ -135,3 +135,33 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 ## 27.3.2022
 - Diplomschrift: Abstract (Kleinrad) + RRT* Tests (Kleinrad) + Conclusion (Kleinrad) + Autonomous Navigation (Leskovar) 
 
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<div style="width:200px"><hr/></div>
+\noindent\rule{8cm}{0.4pt}
+Datum und Unterschrift der Betreuerin/des Betreuers
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<div style="width:200px"><hr/></div>
+\noindent\rule{8cm}{0.4pt}
+Datum und Unterschrift der Schülerin/des Schülers
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+<div style="width:200px"><hr/></div>
+\noindent\rule{8cm}{0.4pt}
+Datum und Unterschrift der Schülerin/des Schülers

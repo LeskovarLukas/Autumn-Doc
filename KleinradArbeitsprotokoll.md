@@ -26,7 +26,7 @@ kleinrad.fabian@htlwrn.ac.at
 +43 660 3765560
 
 
-# Kooperationspartnerin/Kooperationspartners und Ansprechperson
+# Kooperationspartnerin/Kooperationspartner und Ansprechperson
 F-WuTS
 
 MMag. Dr. Michael Stifter
@@ -116,4 +116,4 @@ Fabian Kleinrad, Lukas Andreios Leskovar
 
 <div style="width:200px"><hr/></div>
 \noindent\rule{8cm}{0.4pt}
-Datum und Unterschrift des Schülers
+Datum und Unterschrift der Schülerin/des Schülers
