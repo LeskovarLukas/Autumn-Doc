@@ -11,7 +11,7 @@ Motion Planning, Collision Detection
 
 
 # Betreuerin/Betreuer
-MMag. Br. Michael Stifter
+MMag. Dr. Michael Stifter
 
 sm@htlwrn.ac.at
 

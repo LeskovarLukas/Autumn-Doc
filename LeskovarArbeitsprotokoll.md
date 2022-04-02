@@ -11,7 +11,7 @@ Modellierung der Umgebung, Autonome Steuerung der Drohne
 
 
 # Betreuerin/Betreuer
-MMag. Br. Michael Stifter
+MMag. Dr. Michael Stifter
 
 sm@htlwrn.ac.at
 
