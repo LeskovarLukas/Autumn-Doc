@@ -21,7 +21,7 @@ sm@htlwrn.ac.at
 # Kandidatin/Kandidat
 Fabian Kleinrad
 
-kleinrad.fabian@htlwrn.ac.at
+kleinrad.fabian@student.htlwrn.ac.at
 
 +43 660 3765560
 

@@ -21,7 +21,7 @@ sm@htlwrn.ac.at
 # Kandidatin/Kandidat
 Lukas Andreios Leskovar
 
-leskovar.lukas@htlwrn.ac.at
+leskovar.lukas@student.htlwrn.ac.at
 
 +43 660 4568080
 
