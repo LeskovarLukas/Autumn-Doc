@@ -71,12 +71,15 @@
 	
 	% Index
 	\newpage
+	\addcontentsline{toc}{chapter}{Index}
 	\chapter*{Index}
 	\printindex[name]
 	\printindex[title]
 
+	\addcontentsline{toc}{chapter}{Bibliography}
 	\printbibliography
 	
+	\addcontentsline{toc}{chapter}{Appendix}
 	\input{sections/appendix}
 	
 	\input{sections/messbox}
