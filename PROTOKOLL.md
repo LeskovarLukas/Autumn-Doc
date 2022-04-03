@@ -6,7 +6,7 @@ geometry: margin=2cm
 ---
 
 
-# Betreuerin/Betreuer
+# Betreuer
 MMag. Dr. Michael Stifter
 
 sm@htlwrn.ac.at
@@ -14,7 +14,7 @@ sm@htlwrn.ac.at
 +43 2622 27871
 
 
-# Kandidatin/Kandidat
+# Kandidat
 Lukas Andreios Leskovar
 
 leskovar.lukas@student.htlwrn.ac.at
@@ -22,7 +22,7 @@ leskovar.lukas@student.htlwrn.ac.at
 +43 660 4568080
 
 
-# Kandidatin/Kandidat
+# Kandidat
 Fabian Kleinrad
 
 kleinrad.fabian@student.htlwrn.ac.at
@@ -30,7 +30,7 @@ kleinrad.fabian@student.htlwrn.ac.at
 +43 660 3765560
 
 
-# Kooperationspartnerin/Kooperationspartner und Ansprechperson
+# Kooperationspartner und Ansprechperson
 F-WuTS
 
 MMag. Dr. Michael Stifter
@@ -144,7 +144,7 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 
 <div style="width:200px"><hr/></div>
 \noindent\rule{8cm}{0.4pt}
-Datum und Unterschrift der Schülerin/des Schülers
+Datum und Unterschrift des Schülers
 
 &nbsp;
 
@@ -154,4 +154,4 @@ Datum und Unterschrift der Schülerin/des Schülers
 
 <div style="width:200px"><hr/></div>
 \noindent\rule{8cm}{0.4pt}
-Datum und Unterschrift der Schülerin/des Schülers
+Datum und Unterschrift des Schülers

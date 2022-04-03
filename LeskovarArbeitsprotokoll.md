@@ -10,7 +10,7 @@ geometry: margin=2cm
 Modellierung der Umgebung, Autonome Steuerung der Drohne
 
 
-# Betreuerin/Betreuer
+# Betreuer
 MMag. Dr. Michael Stifter
 
 sm@htlwrn.ac.at
@@ -18,7 +18,7 @@ sm@htlwrn.ac.at
 +43 2622 27871
 
 
-# Kandidatin/Kandidat
+# Kandidat
 Lukas Andreios Leskovar
 
 leskovar.lukas@student.htlwrn.ac.at
@@ -26,7 +26,7 @@ leskovar.lukas@student.htlwrn.ac.at
 +43 660 4568080
 
 
-# Kooperationspartnerin/Kooperationspartner und Ansprechperson
+# Kooperationspartner und Ansprechperson
 F-WuTS
 
 MMag. Dr. Michael Stifter
@@ -45,7 +45,7 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 | -------- | ----- | ---------------------------------- | 
 | 18.05.2021 | 4     | Projekterstellung                  |
 | 23.05.2021 | 5     | Packages inkuldieren               |
-| 24.05.2021 | 4     | Test ZED 1 maping                  |
+| 24.05.2021 | 4     | Test ZED 1 mapping                  |
 | 25.05.2021 | 2     | Netzerkerbndung kabelgebunden      |
 | 25.05.2021 | 4     | ROS Network communication          |
 | 26.05.2021 | 5     | Zed Topic throttle                 |
@@ -111,4 +111,4 @@ Lukas Andreios Leskovar, Fabian Kleinrad
 
 <div style="width:200px"><hr/></div>
 \noindent\rule{8cm}{0.4pt}
-Datum und Unterschrift der Schülerin/des Schülers
+Datum und Unterschrift des Schülers
