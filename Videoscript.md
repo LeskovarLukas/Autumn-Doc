@@ -21,7 +21,8 @@ user feedback is sourced to a client computer wirelessly connected to the drone.
 
 ## Outlook
 The system allows for exploring hazardous environments in an easy-to-use and safe manner.
-To test the system as close to its industrial competitors, we moved the drone through underground tunnels of the HTL.
+To test the system in a fashion as close to its industrial competitors as possible, we moved the drone through underground utility tunnels of the HTL.
+This does not only demonstrate the drones applicability, but the resulting 3D Model could be used to facilitate maintenance of the school. 
 
 ## Closing
 Finally, we want to thank the HTL Wiener Neustadt, robo4you and our supervisor Dr Mag Michael Stifter, for making this project possible.
